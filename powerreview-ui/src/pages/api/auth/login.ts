@@ -9,6 +9,16 @@ const USERS = {
     password: '$2a$10$xQqKjKBXYLHqHWvqEpHOh.gVxVqLw5HCrP1V.QjQqVqD7YKHNqHNm', // 'SecurePassword123!'
     role: 'developer',
     name: 'Ross Developer'
+  },
+  'admin@powerreview.com': {
+    password: '$2a$10$Qm7LJ2MVfKw5L2df1K0tLu9Cf2tz8wM4M9uFdCp.P0sue/0FXd0Ky', // 'PowerReview2024!'
+    role: 'admin',
+    name: 'Admin User'
+  },
+  'demo@powerreview.com': {
+    password: 'demo', // Plain text for demo only
+    role: 'admin',
+    name: 'Demo User'
   }
 };
 
@@ -26,7 +36,14 @@ export const POST: APIRoute = async ({ request }) => {
     }
     
     // Verify password
-    const isValid = await bcrypt.compare(password, user.password);
+    // For demo purposes, also accept plain text password 'demo'
+    let isValid = false;
+    if (password === 'demo' && email === 'demo@powerreview.com') {
+      isValid = true;
+    } else {
+      isValid = await bcrypt.compare(password, user.password);
+    }
+    
     if (!isValid) {
       return new Response(JSON.stringify({ error: 'Invalid credentials' }), {
         status: 401,
