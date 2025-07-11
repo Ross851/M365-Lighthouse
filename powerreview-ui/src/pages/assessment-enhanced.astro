@@ -1,0 +1,2048 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Telana Security Assessment - PowerReview">
+	<main>
+		<div class="container">
+			<div class="page-header">
+				<div class="telana-brand">
+					<h1>Telana Security Assessment</h1>
+					<p class="brand-subtitle">Powered by PowerReview Platform</p>
+				</div>
+				<p class="page-description">Comprehensive security assessment for Microsoft 365, Azure, and DevOps environments</p>
+			</div>
+
+			<!-- Assessment Form -->
+			<div class="assessment-wizard">
+				<div class="progress-bar">
+					<div class="progress-fill" style="width: 25%"></div>
+				</div>
+				<div class="step-indicators">
+					<div class="step active">1. Customer Info</div>
+					<div class="step">2. Environment</div>
+					<div class="step">3. AI Questions</div>
+					<div class="step">4. Execute</div>
+				</div>
+
+				<!-- Step 1: Customer Information -->
+				<div class="form-step active" data-step="1">
+					<h2>Customer Information</h2>
+					<p>Enter customer details for this assessment</p>
+					
+					<div class="customer-info">
+						<div class="input-group">
+							<label for="customer-name">Customer Name *</label>
+							<input type="text" id="customer-name" name="customerName" placeholder="e.g., Contoso Corporation" required>
+						</div>
+						<div class="input-group">
+							<label for="contact-person">Primary Contact</label>
+							<input type="text" id="contact-person" name="contactPerson" placeholder="John Smith, IT Director">
+						</div>
+						<div class="input-group">
+							<label for="assessment-purpose">Assessment Purpose</label>
+							<select id="assessment-purpose" name="assessmentPurpose">
+								<option value="compliance">Compliance Review</option>
+								<option value="security-audit">Security Audit</option>
+								<option value="pre-migration">Pre-Migration Assessment</option>
+								<option value="incident-response">Post-Incident Review</option>
+								<option value="annual-review">Annual Security Review</option>
+							</select>
+						</div>
+					</div>
+
+					<h3>Environment Scale</h3>
+					<div class="scale-selector">
+						<div class="scale-cards">
+							<label class="scale-card">
+								<input type="radio" name="tenantSize" value="small">
+								<div class="scale-content">
+									<h4>Small Business</h4>
+									<div class="scale-stats">
+										<span>1-500 users</span>
+										<span>~100 sites</span>
+										<span>~50 teams</span>
+									</div>
+									<div class="estimated-time">Est: 30-60 min</div>
+								</div>
+							</label>
+							<label class="scale-card">
+								<input type="radio" name="tenantSize" value="medium">
+								<div class="scale-content">
+									<h4>Medium Enterprise</h4>
+									<div class="scale-stats">
+										<span>500-5,000 users</span>
+										<span>~2,000 sites</span>
+										<span>~1,000 teams</span>
+									</div>
+									<div class="estimated-time">Est: 2-4 hours</div>
+								</div>
+							</label>
+							<label class="scale-card">
+								<input type="radio" name="tenantSize" value="large" checked>
+								<div class="scale-content">
+									<h4>Large Enterprise</h4>
+									<div class="scale-stats">
+										<span>5,000-25,000 users</span>
+										<span>~10,000 sites</span>
+										<span>~5,000 teams</span>
+									</div>
+									<div class="estimated-time">Est: 6-12 hours</div>
+								</div>
+							</label>
+							<label class="scale-card">
+								<input type="radio" name="tenantSize" value="enterprise">
+								<div class="scale-content">
+									<h4>Global Enterprise</h4>
+									<div class="scale-stats">
+										<span>25,000+ users</span>
+										<span>~50,000+ sites</span>
+										<span>~25,000+ teams</span>
+									</div>
+									<div class="estimated-time">Est: 1-3 days</div>
+								</div>
+							</label>
+						</div>
+					</div>
+
+					<div class="custom-scale">
+						<h4>Or specify exact numbers (if known):</h4>
+						<div class="scale-inputs">
+							<div class="input-group">
+								<label for="site-count">SharePoint Sites</label>
+								<input type="number" id="site-count" name="siteCount" placeholder="e.g., 10,000">
+							</div>
+							<div class="input-group">
+								<label for="teams-count">Teams & Channels</label>
+								<input type="number" id="teams-count" name="teamsCount" placeholder="e.g., 5,000">
+							</div>
+							<div class="input-group">
+								<label for="onedrive-count">OneDrive Accounts</label>
+								<input type="number" id="onedrive-count" name="onedriveCount" placeholder="e.g., 100,000">
+							</div>
+							<div class="input-group">
+								<label for="mailbox-count">Exchange Mailboxes</label>
+								<input type="number" id="mailbox-count" name="mailboxCount" placeholder="e.g., 25,000">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Step 2: Environment Selection -->
+				<div class="form-step" data-step="2">
+					<h2>Assessment Scope</h2>
+					<p>Select the services and depth of analysis</p>
+
+					<div class="service-selection">
+						<h3>Services to Assess</h3>
+						<div class="service-grid">
+							<label class="service-card">
+								<input type="checkbox" name="services" value="m365" checked>
+								<div class="service-icon m365">
+									<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+										<path d="M3 9h18"/>
+										<path d="M9 21V9"/>
+									</svg>
+								</div>
+								<h4>Microsoft 365</h4>
+								<p>Complete M365 security assessment</p>
+							</label>
+							<label class="service-card">
+								<input type="checkbox" name="services" value="azure">
+								<div class="service-icon azure">
+									<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<polygon points="12 2 2 7 12 12 22 7 12 2"/>
+										<polyline points="2 17 12 22 22 17"/>
+										<polyline points="2 12 12 17 22 12"/>
+									</svg>
+								</div>
+								<h4>Azure</h4>
+								<p>Infrastructure security review</p>
+							</label>
+							<label class="service-card">
+								<input type="checkbox" name="services" value="devops">
+								<div class="service-icon devops">
+									<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+										<polyline points="22 4 12 14.01 9 11.01"/>
+									</svg>
+								</div>
+								<h4>DevOps</h4>
+								<p>Pipeline and repository security</p>
+							</label>
+						</div>
+					</div>
+
+					<div class="assessment-depth">
+						<h3>Assessment Depth</h3>
+						<div class="depth-options">
+							<label class="depth-card">
+								<input type="radio" name="assessmentDepth" value="quick">
+								<div class="depth-content">
+									<h4>Quick Scan</h4>
+									<p class="duration-estimate">Duration: <span id="quick-duration">30 minutes</span></p>
+									<ul>
+										<li>Basic security controls</li>
+										<li>High-risk vulnerabilities</li>
+										<li>Compliance status</li>
+									</ul>
+								</div>
+							</label>
+							<label class="depth-card">
+								<input type="radio" name="assessmentDepth" value="standard" checked>
+								<div class="depth-content">
+									<h4>Standard Assessment</h4>
+									<p class="duration-estimate">Duration: <span id="standard-duration">2-4 hours</span></p>
+									<ul>
+										<li>Comprehensive security review</li>
+										<li>DLP and labeling analysis</li>
+										<li>Purview configuration</li>
+										<li>Detailed recommendations</li>
+									</ul>
+								</div>
+							</label>
+							<label class="depth-card">
+								<input type="radio" name="assessmentDepth" value="deep">
+								<div class="depth-content">
+									<h4>Deep Dive Analysis</h4>
+									<p class="duration-estimate">Duration: <span id="deep-duration">8-16 hours</span></p>
+									<ul>
+										<li>Complete forensic analysis</li>
+										<li>AI-powered threat detection</li>
+										<li>Custom policy recommendations</li>
+										<li>Executive risk assessment</li>
+									</ul>
+								</div>
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<!-- Step 3: AI-Powered Questions -->
+				<div class="form-step" data-step="3">
+					<h2>AI-Powered Assessment Questions</h2>
+					<p>Help us understand your customer's specific security concerns and compliance requirements</p>
+
+					<div class="questions-container">
+						<div class="question-section">
+							<h3>📂 File Plan & Information Architecture</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>Can you describe the current structure of your file plan?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="filePlanStructure" value="none">No single file plan exists</label>
+										<label><input type="radio" name="filePlanStructure" value="functional">Built around function/department</label>
+										<label><input type="radio" name="filePlanStructure" value="hybrid">Hybrid approach (function + teams)</label>
+										<label><input type="radio" name="filePlanStructure" value="record-type">Built around record types</label>
+										<label><input type="radio" name="filePlanStructure" value="development">Still under development</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>How are content types currently managed?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="contentTypes" value="decentralized">Each site collection manages its own</label>
+										<label><input type="radio" name="contentTypes" value="centralized">Centralized content type hub</label>
+										<label><input type="radio" name="contentTypes" value="mixed">Mix of centralized and local types</label>
+										<label><input type="radio" name="contentTypes" value="legacy">Legacy metadata from migration</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Is legacy metadata being used effectively?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="legacyMetadata" value="effective">Yes, drives automated actions</label>
+										<label><input type="radio" name="legacyMetadata" value="partial">Partially used for organization</label>
+										<label><input type="radio" name="legacyMetadata" value="unused">Not being used properly</label>
+										<label><input type="radio" name="legacyMetadata" value="none">No legacy metadata exists</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>🏷️ Retention Labels & Policies</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>How are retention labels currently applied?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="retentionLabels" value="none">No retention labels in use</label>
+										<label><input type="radio" name="retentionLabels" value="manual">Manual application only</label>
+										<label><input type="radio" name="retentionLabels" value="auto">Some auto-labeling</label>
+										<label><input type="radio" name="retentionLabels" value="policy">Policy-driven application</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Do retention labels reflect statutory requirements?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="statRequirements" value="public-records">Public Records Act</label>
+										<label><input type="checkbox" name="statRequirements" value="gdpr">GDPR</label>
+										<label><input type="checkbox" name="statRequirements" value="foia">Freedom of Information Act</label>
+										<label><input type="checkbox" name="statRequirements" value="limitation">Limitation Act</label>
+										<label><input type="checkbox" name="statRequirements" value="industry">Industry-specific regulations</label>
+										<label><input type="checkbox" name="statRequirements" value="none">No statutory requirements mapped</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Are there known gaps or overlaps in retention policies?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="retentionGaps" value="none">No gaps identified</label>
+										<label><input type="radio" name="retentionGaps" value="minor">Minor gaps exist</label>
+										<label><input type="radio" name="retentionGaps" value="major">Significant gaps and overlaps</label>
+										<label><input type="radio" name="retentionGaps" value="unknown">Need to assess</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>🔐 Sensitivity Labels & Information Protection</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What classification scheme does your organization use?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="classificationScheme" value="public">PUBLIC</label>
+										<label><input type="checkbox" name="classificationScheme" value="official">OFFICIAL</label>
+										<label><input type="checkbox" name="classificationScheme" value="official-sensitive">OFFICIAL-SENSITIVE</label>
+										<label><input type="checkbox" name="classificationScheme" value="personal">Personal</label>
+										<label><input type="checkbox" name="classificationScheme" value="lpp">Legal Professional Privilege</label>
+										<label><input type="checkbox" name="classificationScheme" value="commercial">Commercial</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Are sensitivity labels linked to your file plan?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="sensitivityLabels" value="linked">Yes, fully linked</label>
+										<label><input type="radio" name="sensitivityLabels" value="partial">Partially linked</label>
+										<label><input type="radio" name="sensitivityLabels" value="independent">Applied independently</label>
+										<label><input type="radio" name="sensitivityLabels" value="goal">This is a desired outcome</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Are all high-risk file types covered by labels?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="highRiskTypes" value="personal-data">Personal data/PII</label>
+										<label><input type="checkbox" name="highRiskTypes" value="financial">Financial records</label>
+										<label><input type="checkbox" name="highRiskTypes" value="legal">Legal documents</label>
+										<label><input type="checkbox" name="highRiskTypes" value="contracts">Commercial contracts</label>
+										<label><input type="checkbox" name="highRiskTypes" value="complaints">Complaints/investigations</label>
+										<label><input type="checkbox" name="highRiskTypes" value="none">Not currently covered</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>📋 Content Lifecycle & Record Management</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What are your organization's rules for archiving and disposing records?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="archivingRules" value="defined">Clearly defined retention schedules</label>
+										<label><input type="radio" name="archivingRules" value="basic">Basic rules in place</label>
+										<label><input type="radio" name="archivingRules" value="manual">Manual processes only</label>
+										<label><input type="radio" name="archivingRules" value="none">No formal rules</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Is there a formal process for appraisal before deletion?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="appraisalProcess" value="formal">Yes, formal multi-level approval</label>
+										<label><input type="radio" name="appraisalProcess" value="basic">Basic review process</label>
+										<label><input type="radio" name="appraisalProcess" value="informal">Informal review</label>
+										<label><input type="radio" name="appraisalProcess" value="none">No appraisal process</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What backup systems are currently in use?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="backupSystems" value="third-party">Third-party backup solution</label>
+										<label><input type="checkbox" name="backupSystems" value="native">Native M365 tools</label>
+										<label><input type="checkbox" name="backupSystems" value="on-premises">On-premises backup</label>
+										<label><input type="checkbox" name="backupSystems" value="physical">Physical/offsite storage</label>
+										<label><input type="checkbox" name="backupSystems" value="legacy">Legacy file shares</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>⚖️ Compliance, Risk & Audit Readiness</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>Are there known areas of non-compliance or audit concerns?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="complianceConcerns" value="none">No known concerns</label>
+										<label><input type="radio" name="complianceConcerns" value="minor">Minor compliance gaps</label>
+										<label><input type="radio" name="complianceConcerns" value="serious">Serious concerns identified</label>
+										<label><input type="radio" name="complianceConcerns" value="enforcement">Recent enforcement actions</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Are audit logs currently enabled and monitored?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="auditLogs" value="enabled">Fully enabled and monitored</label>
+										<label><input type="radio" name="auditLogs" value="partial">Partially enabled</label>
+										<label><input type="radio" name="auditLogs" value="disabled">Not enabled</label>
+										<label><input type="radio" name="auditLogs" value="unknown">Unknown status</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Do internal audits assess content governance effectiveness?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="internalAudits" value="regular">Yes, regularly assessed</label>
+										<label><input type="radio" name="internalAudits" value="informal">Informal assessment</label>
+										<label><input type="radio" name="internalAudits" value="planned">Needs to be formalized</label>
+										<label><input type="radio" name="internalAudits" value="none">No assessment</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>👥 Governance and Ownership</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>Who would own the retention/classification decisions?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="governanceOwner" value="info-governance">Information Governance team</label>
+										<label><input type="radio" name="governanceOwner" value="records-mgmt">Records Management team</label>
+										<label><input type="radio" name="governanceOwner" value="it-security">IT Security team</label>
+										<label><input type="radio" name="governanceOwner" value="compliance">Compliance team</label>
+										<label><input type="radio" name="governanceOwner" value="distributed">Distributed across departments</label>
+										<label><input type="radio" name="governanceOwner" value="undefined">Not yet defined</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>How many staff would be trained on Purview?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="trainingScope" value="small">1-10 key users</label>
+										<label><input type="radio" name="trainingScope" value="medium">11-50 users</label>
+										<label><input type="radio" name="trainingScope" value="large">51-200 users</label>
+										<label><input type="radio" name="trainingScope" value="enterprise">200+ users</label>
+										<label><input type="radio" name="trainingScope" value="all">All staff eventually</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Do you have designated Records Managers?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="recordsManagers" value="yes-dedicated">Yes, dedicated role</label>
+										<label><input type="radio" name="recordsManagers" value="yes-partial">Yes, part of broader role</label>
+										<label><input type="radio" name="recordsManagers" value="planned">Planning to appoint</label>
+										<label><input type="radio" name="recordsManagers" value="no">No designated managers</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>🎯 Strategic Goals and Needs</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What are your top priorities for Purview implementation?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="priorities" value="reduce-storage">Reduce storage costs</label>
+										<label><input type="checkbox" name="priorities" value="compliance">Meet compliance requirements</label>
+										<label><input type="checkbox" name="priorities" value="automate">Automate manual processes</label>
+										<label><input type="checkbox" name="priorities" value="risk-reduction">Reduce data breach risk</label>
+										<label><input type="checkbox" name="priorities" value="discovery">Improve eDiscovery capability</label>
+										<label><input type="checkbox" name="priorities" value="governance">Strengthen information governance</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Which Purview features are most important to you?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="features" value="retention">Retention policies</label>
+										<label><input type="checkbox" name="features" value="sensitivity">Sensitivity labels</label>
+										<label><input type="checkbox" name="features" value="dlp">Data Loss Prevention</label>
+										<label><input type="checkbox" name="features" value="insider-risk">Insider Risk Management</label>
+										<label><input type="checkbox" name="features" value="ediscovery">eDiscovery</label>
+										<label><input type="checkbox" name="features" value="compliance-manager">Compliance Manager</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What is your target state for information management?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="targetState" value="basic">Basic compliance only</label>
+										<label><input type="radio" name="targetState" value="moderate">Automated classification and retention</label>
+										<label><input type="radio" name="targetState" value="advanced">Full lifecycle automation</label>
+										<label><input type="radio" name="targetState" value="mature">AI-driven governance</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>⚙️ Technical Implementation Considerations</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>Are there any legacy systems that need integration?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="legacySystems" value="file-shares">Network file shares</label>
+										<label><input type="checkbox" name="legacySystems" value="sharepoint-onprem">SharePoint on-premises</label>
+										<label><input type="checkbox" name="legacySystems" value="ecm">Legacy ECM systems</label>
+										<label><input type="checkbox" name="legacySystems" value="email-archive">Email archive systems</label>
+										<label><input type="checkbox" name="legacySystems" value="databases">Database systems</label>
+										<label><input type="checkbox" name="legacySystems" value="none">No legacy systems</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What is your current state of Microsoft 365 adoption?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="m365Adoption" value="early">Early stages (< 25% migrated)</label>
+										<label><input type="radio" name="m365Adoption" value="partial">Partial adoption (25-75% migrated)</label>
+										<label><input type="radio" name="m365Adoption" value="mostly">Mostly complete (> 75% migrated)</label>
+										<label><input type="radio" name="m365Adoption" value="complete">Fully migrated to cloud</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Do you have any custom applications that create/manage content?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="customApps" value="none">No custom applications</label>
+										<label><input type="radio" name="customApps" value="few">Few applications (1-5)</label>
+										<label><input type="radio" name="customApps" value="moderate">Moderate number (6-20)</label>
+										<label><input type="radio" name="customApps" value="many">Many applications (20+)</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>📋 Compliance Requirements</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>Which compliance frameworks apply? (Select all that apply)</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="compliance" value="gdpr">GDPR</label>
+										<label><input type="checkbox" name="compliance" value="hipaa">HIPAA</label>
+										<label><input type="checkbox" name="compliance" value="sox">SOX</label>
+										<label><input type="checkbox" name="compliance" value="pci">PCI-DSS</label>
+										<label><input type="checkbox" name="compliance" value="iso27001">ISO 27001</label>
+										<label><input type="checkbox" name="compliance" value="nist">NIST</label>
+										<label><input type="checkbox" name="compliance" value="ccpa">CCPA</label>
+										<label><input type="checkbox" name="compliance" value="fedramp">FedRAMP</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Industry sector?</label>
+									<select name="industry">
+										<option value="">Select industry...</option>
+										<option value="healthcare">Healthcare</option>
+										<option value="financial">Financial Services</option>
+										<option value="government">Government</option>
+										<option value="education">Education</option>
+										<option value="manufacturing">Manufacturing</option>
+										<option value="retail">Retail</option>
+										<option value="technology">Technology</option>
+										<option value="other">Other</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>🚨 Security Concerns</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>Primary security concerns? (Select up to 3)</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="concerns" value="data-loss">Data loss/leakage</label>
+										<label><input type="checkbox" name="concerns" value="insider-threats">Insider threats</label>
+										<label><input type="checkbox" name="concerns" value="external-sharing">External sharing risks</label>
+										<label><input type="checkbox" name="concerns" value="phishing">Phishing attacks</label>
+										<label><input type="checkbox" name="concerns" value="ransomware">Ransomware</label>
+										<label><input type="checkbox" name="concerns" value="compliance">Compliance violations</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Has the organization experienced any security incidents in the past 12 months?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="incidents" value="none">No incidents</label>
+										<label><input type="radio" name="incidents" value="minor">Minor incidents</label>
+										<label><input type="radio" name="incidents" value="major">Major incidents</label>
+										<label><input type="radio" name="incidents" value="confidential">Prefer not to disclose</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>🏢 Business Context</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What is driving this assessment?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="driver" value="compliance">Compliance requirement</label>
+										<label><input type="radio" name="driver" value="audit">Internal/external audit</label>
+										<label><input type="radio" name="driver" value="incident">Recent security incident</label>
+										<label><input type="radio" name="driver" value="proactive">Proactive security review</label>
+										<label><input type="radio" name="driver" value="migration">Cloud migration</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Timeline for implementing recommendations?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="timeline" value="immediate">Immediate (< 30 days)</label>
+										<label><input type="radio" name="timeline" value="short">Short term (1-3 months)</label>
+										<label><input type="radio" name="timeline" value="medium">Medium term (3-6 months)</label>
+										<label><input type="radio" name="timeline" value="long">Long term (6+ months)</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Step 4: Execution -->
+				<div class="form-step" data-step="4">
+					<h2>Assessment Execution</h2>
+					<div class="execution-summary">
+						<div class="summary-card">
+							<h3>Assessment Summary</h3>
+							<div class="summary-details">
+								<div class="detail-row">
+									<span>Customer:</span>
+									<span id="summary-customer">--</span>
+								</div>
+								<div class="detail-row">
+									<span>Services:</span>
+									<span id="summary-services">--</span>
+								</div>
+								<div class="detail-row">
+									<span>Estimated Duration:</span>
+									<span id="summary-duration">--</span>
+								</div>
+								<div class="detail-row">
+									<span>Assessment ID:</span>
+									<span id="assessment-id">TLNA-2025-0001</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="pre-flight-checks">
+						<h3>Pre-flight Checklist</h3>
+						<div class="checklist">
+							<div class="check-item" id="check-auth">
+								<div class="check-icon pending">⏳</div>
+								<div class="check-text">
+									<strong>Authentication</strong>
+									<span>Checking credentials...</span>
+								</div>
+							</div>
+							<div class="check-item" id="check-permissions">
+								<div class="check-icon pending">⏳</div>
+								<div class="check-text">
+									<strong>Permissions</strong>
+									<span>Verifying access levels...</span>
+								</div>
+							</div>
+							<div class="check-item" id="check-connectivity">
+								<div class="check-icon pending">⏳</div>
+								<div class="check-text">
+									<strong>Connectivity</strong>
+									<span>Testing service connections...</span>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="start-section">
+						<button class="btn-start" id="start-assessment" disabled>
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<polygon points="5 3 19 12 5 21 5 3"/>
+							</svg>
+							Start Assessment
+						</button>
+						<p class="start-note">Assessment will begin immediately after clicking start</p>
+					</div>
+				</div>
+
+				<!-- Navigation -->
+				<div class="form-navigation">
+					<button type="button" id="prev-btn" class="btn btn-secondary" style="display: none;">Previous</button>
+					<button type="button" id="next-btn" class="btn btn-primary">Next</button>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	/* Variables and base styles */
+	:root {
+		--telana-primary: #2563eb;
+		--telana-secondary: #1e40af;
+		--telana-accent: #3b82f6;
+	}
+
+	main {
+		min-height: calc(100vh - 200px);
+		background: var(--color-bg);
+		padding: 2rem;
+	}
+
+	.container {
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	/* Header */
+	.page-header {
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+
+	.telana-brand h1 {
+		font-size: 2.5rem;
+		font-weight: 800;
+		color: var(--telana-primary);
+		margin-bottom: 0.5rem;
+	}
+
+	.brand-subtitle {
+		font-size: 1rem;
+		color: var(--color-gray);
+		font-weight: 500;
+		margin-bottom: 1rem;
+	}
+
+	.page-description {
+		font-size: 1.25rem;
+		color: var(--color-gray);
+		max-width: 600px;
+		margin: 0 auto;
+	}
+
+	/* Assessment Wizard */
+	.assessment-wizard {
+		background: white;
+		border-radius: 16px;
+		box-shadow: var(--shadow-lg);
+		padding: 2rem;
+	}
+
+	.progress-bar {
+		height: 8px;
+		background: var(--color-light-gray);
+		border-radius: 4px;
+		margin-bottom: 1rem;
+		overflow: hidden;
+	}
+
+	.progress-fill {
+		height: 100%;
+		background: linear-gradient(90deg, var(--telana-primary), var(--telana-accent));
+		transition: width 0.3s ease;
+	}
+
+	.step-indicators {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 3rem;
+	}
+
+	.step {
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: var(--color-gray);
+		text-align: center;
+		flex: 1;
+	}
+
+	.step.active {
+		color: var(--telana-primary);
+	}
+
+	/* Form Steps */
+	.form-step {
+		display: none;
+		animation: fadeIn 0.3s ease;
+	}
+
+	.form-step.active {
+		display: block;
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(10px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	.form-step h2 {
+		font-size: 2rem;
+		font-weight: 700;
+		color: var(--color-dark);
+		margin-bottom: 0.5rem;
+	}
+
+	.form-step > p {
+		color: var(--color-gray);
+		margin-bottom: 2rem;
+	}
+
+	/* Customer Information */
+	.customer-info {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+	}
+
+	.input-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.input-group label {
+		font-weight: 600;
+		color: var(--color-dark);
+	}
+
+	.input-group input,
+	.input-group select {
+		padding: 0.75rem;
+		border: 2px solid var(--color-light-gray);
+		border-radius: 8px;
+		font-size: 1rem;
+		transition: border-color 0.3s ease;
+	}
+
+	.input-group input:focus,
+	.input-group select:focus {
+		outline: none;
+		border-color: var(--telana-primary);
+	}
+
+	/* Scale Selector */
+	.scale-selector {
+		margin: 2rem 0;
+	}
+
+	.scale-cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+		margin-bottom: 2rem;
+	}
+
+	.scale-card {
+		cursor: pointer;
+	}
+
+	.scale-card input {
+		display: none;
+	}
+
+	.scale-content {
+		padding: 1.5rem;
+		border: 2px solid var(--color-light-gray);
+		border-radius: 12px;
+		text-align: center;
+		transition: all 0.3s ease;
+		background: white;
+	}
+
+	.scale-card input:checked ~ .scale-content {
+		border-color: var(--telana-primary);
+		background: rgba(37, 99, 235, 0.05);
+	}
+
+	.scale-content h4 {
+		font-size: 1.125rem;
+		font-weight: 600;
+		color: var(--color-dark);
+		margin-bottom: 0.75rem;
+	}
+
+	.scale-stats {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		font-size: 0.875rem;
+		color: var(--color-gray);
+		margin-bottom: 0.75rem;
+	}
+
+	.estimated-time {
+		font-size: 0.875rem;
+		font-weight: 600;
+		color: var(--telana-primary);
+	}
+
+	.custom-scale {
+		background: var(--color-bg);
+		padding: 1.5rem;
+		border-radius: 12px;
+	}
+
+	.scale-inputs {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+
+	/* Service Selection */
+	.service-selection {
+		margin-bottom: 2rem;
+	}
+
+	.service-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+	}
+
+	.service-card {
+		cursor: pointer;
+		display: block;
+	}
+
+	.service-card input {
+		display: none;
+	}
+
+	.service-card {
+		padding: 1.5rem;
+		border: 2px solid var(--color-light-gray);
+		border-radius: 12px;
+		text-align: center;
+		transition: all 0.3s ease;
+		background: white;
+	}
+
+	.service-card input:checked ~ .service-icon,
+	.service-card input:checked ~ .service-icon ~ h4,
+	.service-card input:checked ~ .service-icon ~ h4 ~ p {
+		border-color: var(--telana-primary);
+	}
+
+	.service-card:has(input:checked) {
+		border-color: var(--telana-primary);
+		background: rgba(37, 99, 235, 0.05);
+	}
+
+	.service-icon {
+		width: 64px;
+		height: 64px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 12px;
+		margin: 0 auto 1rem;
+		color: white;
+	}
+
+	.service-icon.m365 {
+		background: linear-gradient(135deg, #0078d4, #00bcf2);
+	}
+
+	.service-icon.azure {
+		background: linear-gradient(135deg, #0062ad, #00a4ef);
+	}
+
+	.service-icon.devops {
+		background: linear-gradient(135deg, #0078d4, #68217a);
+	}
+
+	/* Assessment Depth */
+	.assessment-depth {
+		margin-top: 2rem;
+	}
+
+	.depth-options {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1rem;
+	}
+
+	.depth-card {
+		cursor: pointer;
+	}
+
+	.depth-card input {
+		display: none;
+	}
+
+	.depth-content {
+		padding: 1.5rem;
+		border: 2px solid var(--color-light-gray);
+		border-radius: 12px;
+		transition: all 0.3s ease;
+		background: white;
+	}
+
+	.depth-card input:checked ~ .depth-content {
+		border-color: var(--telana-primary);
+		background: rgba(37, 99, 235, 0.05);
+	}
+
+	.depth-content h4 {
+		font-size: 1.125rem;
+		font-weight: 600;
+		color: var(--color-dark);
+		margin-bottom: 0.5rem;
+	}
+
+	.duration-estimate {
+		font-weight: 600;
+		color: var(--telana-primary);
+		margin-bottom: 1rem;
+	}
+
+	.depth-content ul {
+		list-style: none;
+		padding: 0;
+		font-size: 0.875rem;
+		color: var(--color-gray);
+	}
+
+	.depth-content ul li {
+		padding: 0.25rem 0;
+		position: relative;
+		padding-left: 1rem;
+	}
+
+	.depth-content ul li:before {
+		content: "✓";
+		position: absolute;
+		left: 0;
+		color: var(--telana-primary);
+	}
+
+	/* Questions */
+	.questions-container {
+		max-width: 800px;
+	}
+
+	.question-section {
+		margin-bottom: 2rem;
+		padding: 1.5rem;
+		background: var(--color-bg);
+		border-radius: 12px;
+	}
+
+	.question-section h3 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: var(--color-dark);
+		margin-bottom: 1rem;
+	}
+
+	.question {
+		margin-bottom: 1.5rem;
+	}
+
+	.question label {
+		display: block;
+		font-weight: 600;
+		color: var(--color-dark);
+		margin-bottom: 0.75rem;
+	}
+
+	.checkbox-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 0.5rem;
+	}
+
+	.checkbox-grid label,
+	.radio-options label {
+		font-weight: normal;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-bottom: 0.5rem;
+		cursor: pointer;
+	}
+
+	.radio-options {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	/* Execution */
+	.execution-summary {
+		margin-bottom: 2rem;
+	}
+
+	.summary-card {
+		background: var(--color-bg);
+		padding: 1.5rem;
+		border-radius: 12px;
+	}
+
+	.summary-details {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+	}
+
+	.detail-row {
+		display: flex;
+		justify-content: space-between;
+		padding: 0.5rem 0;
+		border-bottom: 1px solid var(--color-light-gray);
+	}
+
+	.detail-row span:first-child {
+		font-weight: 600;
+		color: var(--color-dark);
+	}
+
+	.detail-row span:last-child {
+		color: var(--color-gray);
+	}
+
+	/* Pre-flight Checks */
+	.pre-flight-checks {
+		margin-bottom: 2rem;
+	}
+
+	.checklist {
+		background: white;
+		border: 1px solid var(--color-light-gray);
+		border-radius: 12px;
+		padding: 1rem;
+	}
+
+	.check-item {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1rem;
+		border-bottom: 1px solid var(--color-light-gray);
+	}
+
+	.check-item:last-child {
+		border-bottom: none;
+	}
+
+	.check-icon {
+		width: 32px;
+		height: 32px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		font-size: 1.25rem;
+	}
+
+	.check-icon.pending {
+		background: var(--color-light-gray);
+	}
+
+	.check-icon.success {
+		background: rgba(34, 197, 94, 0.1);
+		color: #22c55e;
+	}
+
+	.check-text strong {
+		display: block;
+		font-weight: 600;
+		color: var(--color-dark);
+	}
+
+	.check-text span {
+		font-size: 0.875rem;
+		color: var(--color-gray);
+	}
+
+	/* Start Section */
+	.start-section {
+		text-align: center;
+	}
+
+	.btn-start {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 1rem 2rem;
+		background: var(--telana-primary);
+		color: white;
+		border: none;
+		border-radius: 12px;
+		font-size: 1.125rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.btn-start:hover:not(:disabled) {
+		background: var(--telana-secondary);
+		transform: translateY(-2px);
+	}
+
+	.btn-start:disabled {
+		background: var(--color-gray);
+		cursor: not-allowed;
+	}
+
+	.start-note {
+		margin-top: 1rem;
+		font-size: 0.875rem;
+		color: var(--color-gray);
+	}
+
+	/* Navigation */
+	.form-navigation {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 3rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--color-light-gray);
+	}
+
+	.btn {
+		padding: 0.75rem 1.5rem;
+		border-radius: 8px;
+		font-weight: 600;
+		border: none;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.btn-primary {
+		background: var(--telana-primary);
+		color: white;
+	}
+
+	.btn-primary:hover {
+		background: var(--telana-secondary);
+	}
+
+	.btn-secondary {
+		background: white;
+		color: var(--telana-primary);
+		border: 2px solid var(--telana-primary);
+	}
+
+	.btn-secondary:hover {
+		background: var(--telana-primary);
+		color: white;
+	}
+
+	/* Validation and error states */
+	.error-highlight {
+		border-color: #ef4444 !important;
+		animation: shake 0.3s ease-in-out;
+	}
+
+	@keyframes shake {
+		0%, 100% { transform: translateX(0); }
+		25% { transform: translateX(-5px); }
+		75% { transform: translateX(5px); }
+	}
+
+	.field-error {
+		color: #ef4444;
+		font-size: 0.875rem;
+		margin-top: 0.25rem;
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+
+	.field-error::before {
+		content: "⚠️";
+		font-size: 1rem;
+	}
+
+	/* Save indicator */
+	.save-indicator {
+		position: fixed;
+		top: 1rem;
+		right: 1rem;
+		background: #22c55e;
+		color: white;
+		padding: 0.75rem 1.5rem;
+		border-radius: 8px;
+		font-weight: 600;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		animation: slideIn 0.3s ease-out;
+		z-index: 1000;
+	}
+
+	@keyframes slideIn {
+		from {
+			transform: translateX(100%);
+			opacity: 0;
+		}
+		to {
+			transform: translateX(0);
+			opacity: 1;
+		}
+	}
+
+	/* Accessibility */
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border-width: 0;
+	}
+
+	/* Skip link */
+	.skip-link {
+		position: absolute;
+		top: -40px;
+		left: 0;
+		background: var(--telana-primary);
+		color: white;
+		padding: 0.5rem 1rem;
+		text-decoration: none;
+		border-radius: 0 0 8px 0;
+		z-index: 100;
+		transition: top 0.3s;
+	}
+
+	.skip-link:focus {
+		top: 0;
+	}
+
+	/* Focus states */
+	*:focus-visible {
+		outline: 2px solid var(--telana-primary);
+		outline-offset: 2px;
+	}
+
+	/* Conditional sections */
+	[data-conditional] {
+		transition: all 0.3s ease;
+	}
+
+	/* Progress tracking per section */
+	.question-section {
+		position: relative;
+		transition: all 0.3s ease;
+	}
+
+	.question-section.completed {
+		background: #f0fdf4;
+		border-color: #22c55e;
+	}
+
+	.question-section.completed::before {
+		content: "✅";
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		font-size: 1.5rem;
+	}
+
+	/* Enhanced mobile styles */
+	@media (max-width: 768px) {
+		.customer-info {
+			grid-template-columns: 1fr;
+		}
+
+		.scale-cards {
+			display: flex;
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+			-webkit-overflow-scrolling: touch;
+			gap: 1rem;
+			padding-bottom: 1rem;
+		}
+
+		.scale-card {
+			flex: 0 0 280px;
+			scroll-snap-align: center;
+		}
+
+		.service-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.depth-options {
+			grid-template-columns: 1fr;
+		}
+
+		.checkbox-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.summary-details {
+			grid-template-columns: 1fr;
+		}
+
+		/* Touch-friendly targets */
+		input[type="radio"],
+		input[type="checkbox"] {
+			min-width: 44px;
+			min-height: 44px;
+			margin-right: 0.75rem;
+		}
+
+		/* Fixed navigation on mobile */
+		.form-navigation {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: white;
+			box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+			padding: 1rem;
+			z-index: 100;
+		}
+
+		/* Account for fixed navigation */
+		main {
+			padding-bottom: 5rem;
+		}
+
+		/* Collapsible question sections on mobile */
+		.question-section h3 {
+			cursor: pointer;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.question-section h3::after {
+			content: "▼";
+			transition: transform 0.3s;
+		}
+
+		.question-section.collapsed h3::after {
+			transform: rotate(-90deg);
+		}
+
+		.question-section.collapsed .question-group {
+			display: none;
+		}
+	}
+
+	/* High contrast mode */
+	@media (prefers-contrast: high) {
+		.scale-card input:checked ~ .scale-content,
+		.service-card:has(input:checked),
+		.depth-card input:checked ~ .depth-content {
+			outline: 3px solid var(--telana-primary);
+		}
+	}
+
+	/* Reduced motion */
+	@media (prefers-reduced-motion: reduce) {
+		* {
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			transition-duration: 0.01ms !important;
+		}
+	}
+</style>
+
+<script>
+	let currentStep = 1;
+	const totalSteps = 4;
+	let assessmentConfig = {};
+
+	// Duration calculations based on environment size
+	const durationCalculator = {
+		calculateDuration: function(tenantSize, services, depth, customSizes = {}) {
+			const baseMultipliers = {
+				small: 1,
+				medium: 3,
+				large: 8,
+				enterprise: 20
+			};
+
+			const serviceMultipliers = {
+				m365: 1,
+				azure: 1.5,
+				devops: 0.8
+			};
+
+			const depthMultipliers = {
+				quick: 1,
+				standard: 3,
+				deep: 8
+			};
+
+			let baseTime = 30; // minutes
+			let multiplier = baseMultipliers[tenantSize] || 1;
+
+			// Adjust for custom sizes if provided
+			if (customSizes.siteCount > 0) {
+				const siteMultiplier = Math.max(1, Math.log10(customSizes.siteCount / 100));
+				multiplier *= siteMultiplier;
+			}
+
+			// Apply service multipliers
+			let serviceMultiplier = 0;
+			services.forEach(service => {
+				serviceMultiplier += serviceMultipliers[service] || 1;
+			});
+
+			const totalMinutes = baseTime * multiplier * serviceMultiplier * depthMultipliers[depth];
+			
+			return this.formatDuration(totalMinutes);
+		},
+
+		formatDuration: function(minutes) {
+			if (minutes < 60) {
+				return `${Math.round(minutes)} minutes`;
+			} else if (minutes < 1440) {
+				const hours = Math.round(minutes / 60);
+				return `${hours} hour${hours > 1 ? 's' : ''}`;
+			} else {
+				const days = Math.round(minutes / 1440);
+				return `${days} day${days > 1 ? 's' : ''}`;
+			}
+		}
+	};
+
+	// Initialize
+	document.addEventListener('DOMContentLoaded', function() {
+		updateStep(currentStep);
+		setupEventListeners();
+		generateAssessmentId();
+		loadDraft();
+		setupAutoSave();
+		enhanceAccessibility();
+		setupKeyboardShortcuts();
+	});
+
+	function setupEventListeners() {
+		// Tenant size changes
+		document.querySelectorAll('input[name="tenantSize"]').forEach(radio => {
+			radio.addEventListener('change', updateDurationEstimates);
+		});
+
+		// Service changes
+		document.querySelectorAll('input[name="services"]').forEach(checkbox => {
+			checkbox.addEventListener('change', updateDurationEstimates);
+		});
+
+		// Depth changes
+		document.querySelectorAll('input[name="assessmentDepth"]').forEach(radio => {
+			radio.addEventListener('change', updateDurationEstimates);
+		});
+
+		// Custom size inputs
+		document.querySelectorAll('.scale-inputs input').forEach(input => {
+			input.addEventListener('input', updateDurationEstimates);
+		});
+
+		// Navigation
+		document.getElementById('next-btn').addEventListener('click', nextStep);
+		document.getElementById('prev-btn').addEventListener('click', prevStep);
+
+		// Start assessment
+		document.getElementById('start-assessment').addEventListener('click', startAssessment);
+	}
+
+	function updateDurationEstimates() {
+		const tenantSize = document.querySelector('input[name="tenantSize"]:checked')?.value || 'medium';
+		const services = Array.from(document.querySelectorAll('input[name="services"]:checked')).map(cb => cb.value);
+		const depth = document.querySelector('input[name="assessmentDepth"]:checked')?.value || 'standard';
+		
+		const customSizes = {
+			siteCount: parseInt(document.getElementById('site-count').value) || 0,
+			teamsCount: parseInt(document.getElementById('teams-count').value) || 0,
+			onedriveCount: parseInt(document.getElementById('onedrive-count').value) || 0,
+			mailboxCount: parseInt(document.getElementById('mailbox-count').value) || 0
+		};
+
+		// Update duration estimates
+		const quickDuration = durationCalculator.calculateDuration(tenantSize, services, 'quick', customSizes);
+		const standardDuration = durationCalculator.calculateDuration(tenantSize, services, 'standard', customSizes);
+		const deepDuration = durationCalculator.calculateDuration(tenantSize, services, 'deep', customSizes);
+
+		document.getElementById('quick-duration').textContent = quickDuration;
+		document.getElementById('standard-duration').textContent = standardDuration;
+		document.getElementById('deep-duration').textContent = deepDuration;
+	}
+
+	function generateAssessmentId() {
+		const date = new Date();
+		const year = date.getFullYear();
+		const month = String(date.getMonth() + 1).padStart(2, '0');
+		const day = String(date.getDate()).padStart(2, '0');
+		const time = String(date.getHours()).padStart(2, '0') + String(date.getMinutes()).padStart(2, '0');
+		
+		const assessmentId = `TLNA-${year}${month}${day}-${time}`;
+		document.getElementById('assessment-id').textContent = assessmentId;
+	}
+
+	// Auto-save functionality
+	let autoSaveTimer;
+	function setupAutoSave() {
+		// Save on input change
+		document.querySelectorAll('input, select, textarea').forEach(element => {
+			element.addEventListener('change', () => {
+				clearTimeout(autoSaveTimer);
+				autoSaveTimer = setTimeout(saveDraft, 2000);
+			});
+		});
+
+		// Periodic save every 30 seconds
+		setInterval(saveDraft, 30000);
+
+		// Save before page unload
+		window.addEventListener('beforeunload', (e) => {
+			saveDraft();
+			if (hasUnsavedChanges()) {
+				e.preventDefault();
+				e.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
+			}
+		});
+	}
+
+	function saveDraft() {
+		const formData = collectFormData();
+		const draft = {
+			id: document.getElementById('assessment-id').textContent,
+			timestamp: Date.now(),
+			currentStep: currentStep,
+			data: formData
+		};
+		
+		localStorage.setItem('telana-assessment-draft', JSON.stringify(draft));
+		showSaveIndicator('Draft saved');
+	}
+
+	function loadDraft() {
+		const draftStr = localStorage.getItem('telana-assessment-draft');
+		if (draftStr) {
+			const draft = JSON.parse(draftStr);
+			const hoursSinceSave = (Date.now() - draft.timestamp) / (1000 * 60 * 60);
+			
+			if (hoursSinceSave < 24 && confirm('Would you like to continue your previous assessment?')) {
+				restoreDraft(draft);
+			}
+		}
+	}
+
+	function showSaveIndicator(message) {
+		const indicator = document.createElement('div');
+		indicator.className = 'save-indicator';
+		indicator.textContent = message;
+		document.body.appendChild(indicator);
+		
+		setTimeout(() => {
+			indicator.remove();
+		}, 3000);
+	}
+
+	function hasUnsavedChanges() {
+		const currentData = JSON.stringify(collectFormData());
+		const savedData = localStorage.getItem('telana-assessment-draft');
+		return currentData !== savedData;
+	}
+
+	function collectFormData() {
+		// Collect all form data
+		return {
+			customer: {
+				name: document.getElementById('customer-name')?.value || '',
+				contact: document.getElementById('contact-person')?.value || '',
+				purpose: document.getElementById('assessment-purpose')?.value || ''
+			},
+			environment: {
+				size: document.querySelector('input[name="tenantSize"]:checked')?.value || '',
+				customSizes: {
+					sites: document.getElementById('site-count')?.value || '',
+					teams: document.getElementById('teams-count')?.value || '',
+					onedrive: document.getElementById('onedrive-count')?.value || '',
+					mailboxes: document.getElementById('mailbox-count')?.value || ''
+				}
+			},
+			// Add all other form fields...
+		};
+	}
+
+	function updateStep(step) {
+		// Update progress
+		const progress = (step / totalSteps) * 100;
+		document.querySelector('.progress-fill').style.width = `${progress}%`;
+
+		// Update step indicators
+		document.querySelectorAll('.step').forEach((s, index) => {
+			s.classList.toggle('active', index < step);
+		});
+
+		// Show/hide form steps
+		document.querySelectorAll('.form-step').forEach((fs, index) => {
+			fs.classList.toggle('active', index === step - 1);
+		});
+
+		// Update navigation
+		document.getElementById('prev-btn').style.display = step === 1 ? 'none' : 'block';
+		
+		if (step === totalSteps) {
+			document.getElementById('next-btn').style.display = 'none';
+			updateSummary();
+			runPreFlightChecks();
+		} else {
+			document.getElementById('next-btn').style.display = 'block';
+			document.getElementById('next-btn').textContent = 'Next';
+		}
+	}
+
+	function nextStep() {
+		if (validateCurrentStep()) {
+			if (currentStep < totalSteps) {
+				currentStep++;
+				updateStep(currentStep);
+			}
+		}
+	}
+
+	function prevStep() {
+		if (currentStep > 1) {
+			currentStep--;
+			updateStep(currentStep);
+		}
+	}
+
+	function validateCurrentStep() {
+		const step = currentStep;
+		const errors = [];
+		
+		if (step === 1) {
+			const customerName = document.getElementById('customer-name').value.trim();
+			if (!customerName) {
+				errors.push({ field: 'customer-name', message: 'Customer name is required' });
+			} else if (customerName.length < 3) {
+				errors.push({ field: 'customer-name', message: 'Customer name must be at least 3 characters' });
+			}
+			
+			const tenantSize = document.querySelector('input[name="tenantSize"]:checked');
+			if (!tenantSize) {
+				errors.push({ field: 'tenantSize', message: 'Please select the tenant size' });
+			}
+
+			// Validate custom sizes if provided
+			const siteCount = parseInt(document.getElementById('site-count').value) || 0;
+			if (siteCount > 0 && siteCount > 100000) {
+				errors.push({ field: 'site-count', message: 'Site count seems unusually high. Please verify.' });
+			}
+		}
+		
+		if (step === 2) {
+			const services = document.querySelectorAll('input[name="services"]:checked');
+			if (services.length === 0) {
+				errors.push({ field: 'services', message: 'Please select at least one service to assess' });
+			}
+		}
+		
+		if (errors.length > 0) {
+			showValidationErrors(errors);
+			return false;
+		}
+		
+		return true;
+	}
+
+	function showValidationErrors(errors) {
+		// Clear previous errors
+		document.querySelectorAll('.field-error').forEach(el => el.remove());
+		document.querySelectorAll('.error-highlight').forEach(el => el.classList.remove('error-highlight'));
+		
+		// Show new errors
+		errors.forEach(error => {
+			const field = document.getElementById(error.field) || document.querySelector(`[name="${error.field}"]`);
+			if (field) {
+				field.classList.add('error-highlight');
+				
+				const errorMsg = document.createElement('div');
+				errorMsg.className = 'field-error';
+				errorMsg.textContent = error.message;
+				errorMsg.setAttribute('role', 'alert');
+				
+				field.parentElement.appendChild(errorMsg);
+			}
+		});
+		
+		// Focus first error field
+		if (errors.length > 0) {
+			const firstError = document.getElementById(errors[0].field) || document.querySelector(`[name="${errors[0].field}"]`);
+			if (firstError) {
+				firstError.focus();
+			}
+		}
+	}
+
+	function updateSummary() {
+		const customerName = document.getElementById('customer-name').value || 'Unknown Customer';
+		const services = Array.from(document.querySelectorAll('input[name="services"]:checked')).map(cb => cb.value);
+		const tenantSize = document.querySelector('input[name="tenantSize"]:checked')?.value || 'medium';
+		const depth = document.querySelector('input[name="assessmentDepth"]:checked')?.value || 'standard';
+		
+		const customSizes = {
+			siteCount: parseInt(document.getElementById('site-count').value) || 0,
+			teamsCount: parseInt(document.getElementById('teams-count').value) || 0,
+			onedriveCount: parseInt(document.getElementById('onedrive-count').value) || 0,
+			mailboxCount: parseInt(document.getElementById('mailbox-count').value) || 0
+		};
+
+		const duration = durationCalculator.calculateDuration(tenantSize, services, depth, customSizes);
+
+		document.getElementById('summary-customer').textContent = customerName;
+		document.getElementById('summary-services').textContent = services.join(', ').toUpperCase();
+		document.getElementById('summary-duration').textContent = duration;
+	}
+
+	function runPreFlightChecks() {
+		// Simulate pre-flight checks
+		setTimeout(() => {
+			updateCheckStatus('check-auth', 'success', 'Authentication successful');
+		}, 1000);
+
+		setTimeout(() => {
+			updateCheckStatus('check-permissions', 'success', 'Required permissions verified');
+		}, 2000);
+
+		setTimeout(() => {
+			updateCheckStatus('check-connectivity', 'success', 'All services accessible');
+			document.getElementById('start-assessment').disabled = false;
+		}, 3000);
+	}
+
+	function updateCheckStatus(checkId, status, message) {
+		const checkItem = document.getElementById(checkId);
+		const icon = checkItem.querySelector('.check-icon');
+		const text = checkItem.querySelector('.check-text span');
+
+		if (status === 'success') {
+			icon.textContent = '✅';
+			icon.classList.remove('pending');
+			icon.classList.add('success');
+		}
+
+		text.textContent = message;
+	}
+
+	function startAssessment() {
+		// Collect all assessment data
+		assessmentConfig = {
+			customer: {
+				name: document.getElementById('customer-name').value,
+				contact: document.getElementById('contact-person').value,
+				purpose: document.getElementById('assessment-purpose').value
+			},
+			environment: {
+				size: document.querySelector('input[name="tenantSize"]:checked').value,
+				services: Array.from(document.querySelectorAll('input[name="services"]:checked')).map(cb => cb.value),
+				depth: document.querySelector('input[name="assessmentDepth"]:checked').value,
+				customSizes: {
+					sites: document.getElementById('site-count').value,
+					teams: document.getElementById('teams-count').value,
+					onedrive: document.getElementById('onedrive-count').value,
+					mailboxes: document.getElementById('mailbox-count').value
+				}
+			},
+			aiQuestions: {
+				// File Plan & Information Architecture
+				filePlanStructure: document.querySelector('input[name="filePlanStructure"]:checked')?.value,
+				contentTypes: document.querySelector('input[name="contentTypes"]:checked')?.value,
+				legacyMetadata: document.querySelector('input[name="legacyMetadata"]:checked')?.value,
+				
+				// Retention Labels & Policies
+				retentionLabels: document.querySelector('input[name="retentionLabels"]:checked')?.value,
+				statRequirements: Array.from(document.querySelectorAll('input[name="statRequirements"]:checked')).map(cb => cb.value),
+				retentionGaps: document.querySelector('input[name="retentionGaps"]:checked')?.value,
+				
+				// Sensitivity Labels & Information Protection
+				classificationScheme: Array.from(document.querySelectorAll('input[name="classificationScheme"]:checked')).map(cb => cb.value),
+				sensitivityLabels: document.querySelector('input[name="sensitivityLabels"]:checked')?.value,
+				highRiskTypes: Array.from(document.querySelectorAll('input[name="highRiskTypes"]:checked')).map(cb => cb.value),
+				
+				// Content Lifecycle & Record Management
+				archivingRules: document.querySelector('input[name="archivingRules"]:checked')?.value,
+				appraisalProcess: document.querySelector('input[name="appraisalProcess"]:checked')?.value,
+				backupSystems: Array.from(document.querySelectorAll('input[name="backupSystems"]:checked')).map(cb => cb.value),
+				
+				// Compliance, Risk & Audit Readiness
+				complianceConcerns: document.querySelector('input[name="complianceConcerns"]:checked')?.value,
+				auditLogs: document.querySelector('input[name="auditLogs"]:checked')?.value,
+				internalAudits: document.querySelector('input[name="internalAudits"]:checked')?.value,
+				
+				// Governance and Ownership
+				governanceOwner: document.querySelector('input[name="governanceOwner"]:checked')?.value,
+				trainingScope: document.querySelector('input[name="trainingScope"]:checked')?.value,
+				recordsManagers: document.querySelector('input[name="recordsManagers"]:checked')?.value,
+				
+				// Strategic Goals and Needs
+				priorities: Array.from(document.querySelectorAll('input[name="priorities"]:checked')).map(cb => cb.value),
+				features: Array.from(document.querySelectorAll('input[name="features"]:checked')).map(cb => cb.value),
+				targetState: document.querySelector('input[name="targetState"]:checked')?.value,
+				
+				// Technical Implementation Considerations
+				legacySystems: Array.from(document.querySelectorAll('input[name="legacySystems"]:checked')).map(cb => cb.value),
+				m365Adoption: document.querySelector('input[name="m365Adoption"]:checked')?.value,
+				customApps: document.querySelector('input[name="customApps"]:checked')?.value,
+				
+				// Compliance Requirements
+				compliance: Array.from(document.querySelectorAll('input[name="compliance"]:checked')).map(cb => cb.value),
+				industry: document.querySelector('select[name="industry"]').value,
+				
+				// Security Concerns
+				concerns: Array.from(document.querySelectorAll('input[name="concerns"]:checked')).map(cb => cb.value),
+				incidents: document.querySelector('input[name="incidents"]:checked')?.value,
+				
+				// Business Context
+				driver: document.querySelector('input[name="driver"]:checked')?.value,
+				timeline: document.querySelector('input[name="timeline"]:checked')?.value
+			},
+			assessmentId: document.getElementById('assessment-id').textContent
+		};
+
+		// Store configuration
+		localStorage.setItem('telana-assessment-config', JSON.stringify(assessmentConfig));
+		
+		// Redirect to execution page
+		window.location.href = '/execute';
+	}
+
+	// Accessibility enhancements
+	function enhanceAccessibility() {
+		// Add ARIA labels
+		document.querySelectorAll('.step').forEach((step, index) => {
+			step.setAttribute('aria-label', `Step ${index + 1} of ${totalSteps}`);
+		});
+
+		// Enhance form labels
+		document.querySelectorAll('input, select').forEach(input => {
+			if (!input.id) {
+				input.id = `field-${Math.random().toString(36).substr(2, 9)}`;
+			}
+			
+			const label = input.previousElementSibling;
+			if (label && label.tagName === 'LABEL' && !label.getAttribute('for')) {
+				label.setAttribute('for', input.id);
+			}
+		});
+
+		// Add keyboard navigation hints
+		const hints = document.createElement('div');
+		hints.className = 'keyboard-hints sr-only';
+		hints.setAttribute('aria-live', 'polite');
+		hints.textContent = 'Use Tab to navigate fields, Space to select options, and Enter to proceed';
+		document.querySelector('.assessment-wizard').prepend(hints);
+	}
+
+	// Keyboard shortcuts
+	function setupKeyboardShortcuts() {
+		document.addEventListener('keydown', (e) => {
+			// Alt + N for Next
+			if (e.altKey && e.key === 'n') {
+				e.preventDefault();
+				if (currentStep < totalSteps) {
+					nextStep();
+				}
+			}
+			
+			// Alt + P for Previous
+			if (e.altKey && e.key === 'p') {
+				e.preventDefault();
+				if (currentStep > 1) {
+					prevStep();
+				}
+			}
+			
+			// Alt + S for Save
+			if (e.altKey && e.key === 's') {
+				e.preventDefault();
+				saveDraft();
+			}
+		});
+	}
+
+	// Restore draft data
+	function restoreDraft(draft) {
+		// Restore step
+		currentStep = draft.currentStep;
+		updateStep(currentStep);
+		
+		// Restore form data
+		if (draft.data.customer) {
+			document.getElementById('customer-name').value = draft.data.customer.name || '';
+			document.getElementById('contact-person').value = draft.data.customer.contact || '';
+			document.getElementById('assessment-purpose').value = draft.data.customer.purpose || '';
+		}
+		
+		// Restore environment data
+		if (draft.data.environment) {
+			// Restore tenant size
+			const sizeRadio = document.querySelector(`input[name="tenantSize"][value="${draft.data.environment.size}"]`);
+			if (sizeRadio) sizeRadio.checked = true;
+			
+			// Restore custom sizes
+			if (draft.data.environment.customSizes) {
+				document.getElementById('site-count').value = draft.data.environment.customSizes.sites || '';
+				document.getElementById('teams-count').value = draft.data.environment.customSizes.teams || '';
+				document.getElementById('onedrive-count').value = draft.data.environment.customSizes.onedrive || '';
+				document.getElementById('mailbox-count').value = draft.data.environment.customSizes.mailboxes || '';
+			}
+		}
+		
+		showSaveIndicator('Draft restored');
+	}
+
+	// Conditional question logic
+	let questionRules = {
+		// Show legacy questions only if not fully migrated
+		showLegacyQuestions: () => {
+			const adoption = document.querySelector('input[name="m365Adoption"]:checked')?.value;
+			const legacySection = document.querySelector('[data-conditional="legacy"]');
+			if (legacySection) {
+				legacySection.style.display = adoption === 'complete' ? 'none' : 'block';
+			}
+		},
+		
+		// Show compliance-specific questions
+		showComplianceQuestions: () => {
+			const compliance = Array.from(document.querySelectorAll('input[name="compliance"]:checked')).map(cb => cb.value);
+			
+			// HIPAA-specific questions
+			const hipaaSection = document.querySelector('[data-conditional="hipaa"]');
+			if (hipaaSection) {
+				hipaaSection.style.display = compliance.includes('hipaa') ? 'block' : 'none';
+			}
+			
+			// GDPR-specific questions
+			const gdprSection = document.querySelector('[data-conditional="gdpr"]');
+			if (gdprSection) {
+				gdprSection.style.display = compliance.includes('gdpr') ? 'block' : 'none';
+			}
+		}
+	};
+
+	// Apply conditional logic
+	document.addEventListener('change', (e) => {
+		if (e.target.name === 'm365Adoption') {
+			questionRules.showLegacyQuestions();
+		}
+		if (e.target.name === 'compliance') {
+			questionRules.showComplianceQuestions();
+		}
+	});
+</script>

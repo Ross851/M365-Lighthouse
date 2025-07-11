@@ -41,7 +41,7 @@ import Layout from '../layouts/Layout.astro';
 					</ul>
 
 					<h3>Quick Start</h3>
-					<pre><code># Clone the repository
+					<pre><code class="language-bash"># Clone the repository
 git clone https://github.com/Ross851/M365-Lighthouse.git
 cd M365-Lighthouse
 
@@ -65,7 +65,7 @@ npm run dev</code></pre>
 
 					<h3>Microsoft 365 Authentication</h3>
 					<p>PowerReview uses modern authentication to connect to your Microsoft 365 tenant:</p>
-					<pre><code># Connect to Microsoft 365
+					<pre><code class="language-powershell"># Connect to Microsoft 365
 Connect-MsolService
 Connect-ExchangeOnline
 Connect-SPOService -Url https://yourtenant-admin.sharepoint.com
@@ -85,7 +85,7 @@ Connect-AzureAD</code></pre>
 					</ol>
 
 					<h3>PowerShell Direct</h3>
-					<pre><code># Run comprehensive assessment
+					<pre><code class="language-powershell"># Run comprehensive assessment
 ./Start-PowerReview-Enhanced.ps1
 
 # Run specific module
@@ -156,7 +156,7 @@ Connect-AzureAD</code></pre>
 				<section id="api">
 					<h2>API Reference</h2>
 					<h3>Authentication</h3>
-					<pre><code>POST /api/auth/login
+					<pre><code class="language-http">POST /api/auth/login
 Content-Type: application/json
 
 {
@@ -165,7 +165,7 @@ Content-Type: application/json
 }</code></pre>
 
 					<h3>Start Assessment</h3>
-					<pre><code>POST /api/assessment/start
+					<pre><code class="language-http">POST /api/assessment/start
 Authorization: Bearer YOUR_TOKEN
 Content-Type: application/json
 
@@ -175,11 +175,11 @@ Content-Type: application/json
 }</code></pre>
 
 					<h3>Get Results</h3>
-					<pre><code>GET /api/results/{sessionId}
+					<pre><code class="language-http">GET /api/results/{sessionId}
 Authorization: Bearer YOUR_TOKEN</code></pre>
 
 					<h3>Generate Report</h3>
-					<pre><code>POST /api/reports/executive
+					<pre><code class="language-http">POST /api/reports/executive
 Authorization: Bearer YOUR_TOKEN
 Content-Type: application/json
 
@@ -203,7 +203,7 @@ Content-Type: application/json
 					</ul>
 
 					<h4>Module Not Found</h4>
-					<pre><code># Install missing modules
+					<pre><code class="language-powershell"># Install missing modules
 Install-Module -Name MSOnline -Force
 Install-Module -Name ExchangeOnlineManagement -Force
 Install-Module -Name Microsoft.Online.SharePoint.PowerShell -Force</code></pre>
