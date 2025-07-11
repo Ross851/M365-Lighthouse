@@ -7,10 +7,8 @@ const isAuthenticated = false; // This would be checked server-side in productio
 
 <Layout title="PowerReview M365 Security Suite">
 	<script>
-		// Redirect to login if not authenticated
-		if (!localStorage.getItem('powerreview_auth')) {
-			window.location.href = '/login';
-		}
+		// Redirect to home page
+		window.location.href = '/home';
 	</script>
 	<main>
 		<div class="hero">

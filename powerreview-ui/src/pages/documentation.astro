@@ -1,0 +1,421 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Documentation - PowerReview">
+	<main>
+		<div class="docs-container">
+			<aside class="docs-sidebar">
+				<h2>Documentation</h2>
+				<nav>
+					<ul>
+						<li><a href="#getting-started">Getting Started</a></li>
+						<li><a href="#installation">Installation</a></li>
+						<li><a href="#authentication">Authentication</a></li>
+						<li><a href="#assessments">Running Assessments</a></li>
+						<li><a href="#reports">Understanding Reports</a></li>
+						<li><a href="#api">API Reference</a></li>
+						<li><a href="#troubleshooting">Troubleshooting</a></li>
+					</ul>
+				</nav>
+			</aside>
+			
+			<div class="docs-content">
+				<section id="getting-started">
+					<h1>PowerReview Documentation</h1>
+					<p class="lead">Welcome to PowerReview, the comprehensive security assessment platform for Microsoft 365, Azure, and DevOps environments.</p>
+					
+					<div class="alert alert-info">
+						<strong>Version 2.1.0</strong> - Now with AI-powered assessments and executive reporting!
+					</div>
+				</section>
+
+				<section id="installation">
+					<h2>Installation</h2>
+					<h3>Prerequisites</h3>
+					<ul>
+						<li>PowerShell 7.0 or higher</li>
+						<li>Azure AD Global Administrator or Security Administrator role</li>
+						<li>Microsoft 365 E3/E5 or equivalent licenses</li>
+						<li>Node.js 18+ (for web UI)</li>
+					</ul>
+
+					<h3>Quick Start</h3>
+					<pre><code># Clone the repository
+git clone https://github.com/Ross851/M365-Lighthouse.git
+cd M365-Lighthouse
+
+# Install PowerShell modules
+./Install-PowerReview.ps1
+
+# Start the web UI
+cd powerreview-ui
+npm install
+npm run dev</code></pre>
+				</section>
+
+				<section id="authentication">
+					<h2>Authentication</h2>
+					<h3>Web UI Login</h3>
+					<p>Access the web interface and log in with your credentials:</p>
+					<ul>
+						<li><strong>Demo Account:</strong> demo@powerreview.com / demo</li>
+						<li><strong>Admin Account:</strong> admin@powerreview.com / PowerReview2024!</li>
+					</ul>
+
+					<h3>Microsoft 365 Authentication</h3>
+					<p>PowerReview uses modern authentication to connect to your Microsoft 365 tenant:</p>
+					<pre><code># Connect to Microsoft 365
+Connect-MsolService
+Connect-ExchangeOnline
+Connect-SPOService -Url https://yourtenant-admin.sharepoint.com
+Connect-MicrosoftTeams
+Connect-AzureAD</code></pre>
+				</section>
+
+				<section id="assessments">
+					<h2>Running Assessments</h2>
+					<h3>Web Interface</h3>
+					<ol>
+						<li>Navigate to the Assessment page</li>
+						<li>Select the services to assess</li>
+						<li>Click "Start Assessment"</li>
+						<li>Monitor real-time progress</li>
+						<li>View results in the dashboard</li>
+					</ol>
+
+					<h3>PowerShell Direct</h3>
+					<pre><code># Run comprehensive assessment
+./Start-PowerReview-Enhanced.ps1
+
+# Run specific module
+./Start-PowerReview-Enhanced.ps1 -Module "AzureAD"</code></pre>
+
+					<h3>AI-Powered Assessment</h3>
+					<p>Use the AI Assistant for natural language queries:</p>
+					<ul>
+						<li>"Check MFA status for all users"</li>
+						<li>"Find security vulnerabilities in SharePoint"</li>
+						<li>"Generate remediation script for DLP policies"</li>
+					</ul>
+				</section>
+
+				<section id="reports">
+					<h2>Understanding Reports</h2>
+					<h3>Executive Dashboard</h3>
+					<p>The executive dashboard provides:</p>
+					<ul>
+						<li><strong>Risk Score:</strong> Overall security risk percentage</li>
+						<li><strong>Financial Exposure:</strong> Potential cost of security breaches</li>
+						<li><strong>Compliance Score:</strong> Alignment with regulatory requirements</li>
+						<li><strong>Protected Users:</strong> Percentage of users with security controls</li>
+					</ul>
+
+					<h3>Tiered Recommendations</h3>
+					<table>
+						<thead>
+							<tr>
+								<th>Tier</th>
+								<th>Investment</th>
+								<th>Timeline</th>
+								<th>Risk Reduction</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>🥇 Gold</td>
+								<td>$50,000 - $75,000</td>
+								<td>3-4 months</td>
+								<td>94%</td>
+							</tr>
+							<tr>
+								<td>🥈 Silver</td>
+								<td>$20,000 - $30,000</td>
+								<td>6-8 weeks</td>
+								<td>75%</td>
+							</tr>
+							<tr>
+								<td>🥉 Bronze</td>
+								<td>$5,000 - $10,000</td>
+								<td>2-3 weeks</td>
+								<td>50%</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<h3>Evidence Chain</h3>
+					<p>Every finding includes:</p>
+					<ul>
+						<li>Source data and queries used</li>
+						<li>Screenshots of configurations</li>
+						<li>Timestamp and collector information</li>
+						<li>SHA-256 hash for integrity</li>
+					</ul>
+				</section>
+
+				<section id="api">
+					<h2>API Reference</h2>
+					<h3>Authentication</h3>
+					<pre><code>POST /api/auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "password"
+}</code></pre>
+
+					<h3>Start Assessment</h3>
+					<pre><code>POST /api/assessment/start
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  "assessments": ["azuread", "exchange", "sharepoint"],
+  "outputFormat": "json"
+}</code></pre>
+
+					<h3>Get Results</h3>
+					<pre><code>GET /api/results/{sessionId}
+Authorization: Bearer YOUR_TOKEN</code></pre>
+
+					<h3>Generate Report</h3>
+					<pre><code>POST /api/reports/executive
+Authorization: Bearer YOUR_TOKEN
+Content-Type: application/json
+
+{
+  "format": "pdf",
+  "includeEvidence": true,
+  "clientName": "Organization Name"
+}</code></pre>
+				</section>
+
+				<section id="troubleshooting">
+					<h2>Troubleshooting</h2>
+					<h3>Common Issues</h3>
+					
+					<h4>Authentication Failed</h4>
+					<p>If you receive authentication errors:</p>
+					<ul>
+						<li>Ensure you have the correct permissions</li>
+						<li>Check if MFA is configured properly</li>
+						<li>Verify your tenant ID is correct</li>
+					</ul>
+
+					<h4>Module Not Found</h4>
+					<pre><code># Install missing modules
+Install-Module -Name MSOnline -Force
+Install-Module -Name ExchangeOnlineManagement -Force
+Install-Module -Name Microsoft.Online.SharePoint.PowerShell -Force</code></pre>
+
+					<h4>API Throttling</h4>
+					<p>If you encounter rate limiting:</p>
+					<ul>
+						<li>Reduce concurrent connections</li>
+						<li>Implement retry logic with exponential backoff</li>
+						<li>Use the -ThrottleLimit parameter</li>
+					</ul>
+
+					<h3>Support</h3>
+					<p>For additional support:</p>
+					<ul>
+						<li>GitHub Issues: <a href="https://github.com/Ross851/M365-Lighthouse/issues">Report Issues</a></li>
+						<li>Documentation: <a href="https://github.com/Ross851/M365-Lighthouse/wiki">Wiki</a></li>
+						<li>Email: support@powerreview.com</li>
+					</ul>
+				</section>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		min-height: calc(100vh - 200px);
+	}
+
+	.docs-container {
+		display: flex;
+		max-width: 1400px;
+		margin: 0 auto;
+		gap: 2rem;
+		padding: 2rem;
+	}
+
+	.docs-sidebar {
+		width: 250px;
+		position: sticky;
+		top: 80px;
+		height: fit-content;
+		background: white;
+		border-radius: 12px;
+		padding: 2rem;
+		box-shadow: var(--shadow-md);
+	}
+
+	.docs-sidebar h2 {
+		font-size: 1.25rem;
+		margin-bottom: 1rem;
+		color: var(--color-dark);
+	}
+
+	.docs-sidebar nav ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.docs-sidebar nav li {
+		margin-bottom: 0.5rem;
+	}
+
+	.docs-sidebar nav a {
+		color: var(--color-gray);
+		text-decoration: none;
+		display: block;
+		padding: 0.5rem 0.75rem;
+		border-radius: 6px;
+		transition: all 0.3s ease;
+	}
+
+	.docs-sidebar nav a:hover {
+		background: var(--color-bg);
+		color: var(--color-primary);
+		transform: translateX(5px);
+	}
+
+	.docs-content {
+		flex: 1;
+		background: white;
+		border-radius: 12px;
+		padding: 3rem;
+		box-shadow: var(--shadow-md);
+	}
+
+	.docs-content h1 {
+		font-size: 2.5rem;
+		font-weight: 700;
+		margin-bottom: 1rem;
+		color: var(--color-dark);
+	}
+
+	.docs-content h2 {
+		font-size: 2rem;
+		font-weight: 600;
+		margin: 3rem 0 1rem;
+		color: var(--color-dark);
+		padding-top: 2rem;
+		border-top: 1px solid var(--color-light-gray);
+	}
+
+	.docs-content h3 {
+		font-size: 1.5rem;
+		font-weight: 600;
+		margin: 2rem 0 1rem;
+		color: var(--color-dark);
+	}
+
+	.docs-content h4 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		margin: 1.5rem 0 0.75rem;
+		color: var(--color-dark);
+	}
+
+	.lead {
+		font-size: 1.25rem;
+		color: var(--color-gray);
+		margin-bottom: 2rem;
+		line-height: 1.6;
+	}
+
+	.alert {
+		padding: 1rem 1.5rem;
+		border-radius: 8px;
+		margin: 2rem 0;
+	}
+
+	.alert-info {
+		background: #e3f2fd;
+		border-left: 4px solid #2196f3;
+		color: #1565c0;
+	}
+
+	pre {
+		background: #f5f5f5;
+		border-radius: 8px;
+		padding: 1.5rem;
+		overflow-x: auto;
+		margin: 1rem 0;
+		border: 1px solid #e0e0e0;
+	}
+
+	code {
+		font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+		font-size: 0.9rem;
+		background: #f5f5f5;
+		padding: 0.2rem 0.4rem;
+		border-radius: 4px;
+	}
+
+	pre code {
+		background: none;
+		padding: 0;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 1rem 0;
+	}
+
+	th, td {
+		padding: 0.75rem;
+		text-align: left;
+		border-bottom: 1px solid var(--color-light-gray);
+	}
+
+	th {
+		background: var(--color-bg);
+		font-weight: 600;
+		color: var(--color-dark);
+	}
+
+	ul, ol {
+		margin: 1rem 0;
+		padding-left: 2rem;
+		line-height: 1.8;
+	}
+
+	li {
+		margin-bottom: 0.5rem;
+	}
+
+	section {
+		scroll-margin-top: 100px;
+	}
+
+	a {
+		color: var(--color-primary);
+		text-decoration: none;
+	}
+
+	a:hover {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 768px) {
+		.docs-container {
+			flex-direction: column;
+		}
+
+		.docs-sidebar {
+			width: 100%;
+			position: static;
+		}
+
+		.docs-content {
+			padding: 2rem;
+		}
+	}
+</style>

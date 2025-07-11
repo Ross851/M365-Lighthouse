@@ -27,6 +27,50 @@ import Layout from '../layouts/Layout.astro';
 						<h2>Select Assessment Scope</h2>
 						<p>Choose the assessment type and areas to analyze</p>
 
+						<div class="service-selection">
+							<h3>Select Services</h3>
+							<div class="service-cards">
+								<label class="service-checkbox">
+									<input type="checkbox" name="services" value="m365" checked>
+									<div class="service-content">
+										<div class="service-icon m365">
+											<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+												<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+												<path d="M3 9h18"/>
+												<path d="M9 21V9"/>
+											</svg>
+										</div>
+										<span>Microsoft 365</span>
+									</div>
+								</label>
+								<label class="service-checkbox">
+									<input type="checkbox" name="services" value="azure">
+									<div class="service-content">
+										<div class="service-icon azure">
+											<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+												<polygon points="12 2 2 7 12 12 22 7 12 2"/>
+												<polyline points="2 17 12 22 22 17"/>
+												<polyline points="2 12 12 17 22 12"/>
+											</svg>
+										</div>
+										<span>Azure</span>
+									</div>
+								</label>
+								<label class="service-checkbox">
+									<input type="checkbox" name="services" value="devops">
+									<div class="service-content">
+										<div class="service-icon devops">
+											<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+												<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+												<polyline points="22 4 12 14.01 9 11.01"/>
+											</svg>
+										</div>
+										<span>DevOps</span>
+									</div>
+								</label>
+							</div>
+						</div>
+
 						<div class="radio-group">
 							<label class="radio-card">
 								<input type="radio" name="scope" value="quick" checked>
@@ -63,39 +107,79 @@ import Layout from '../layouts/Layout.astro';
 
 						<div id="custom-areas" class="custom-areas" style="display: none;">
 							<h3>Select Areas to Assess</h3>
-							<div class="checkbox-group">
-								<label class="checkbox-item">
-									<input type="checkbox" name="areas" value="azuread">
-									<span>Azure AD & Identity</span>
-								</label>
-								<label class="checkbox-item">
-									<input type="checkbox" name="areas" value="exchange">
-									<span>Exchange & Email Security</span>
-								</label>
-								<label class="checkbox-item">
-									<input type="checkbox" name="areas" value="sharepoint">
-									<span>SharePoint & OneDrive</span>
-								</label>
-								<label class="checkbox-item">
-									<input type="checkbox" name="areas" value="teams">
-									<span>Microsoft Teams</span>
-								</label>
-								<label class="checkbox-item">
-									<input type="checkbox" name="areas" value="dlp">
-									<span>Data Loss Prevention</span>
-								</label>
-								<label class="checkbox-item">
-									<input type="checkbox" name="areas" value="defender">
-									<span>Microsoft Defender</span>
-								</label>
-								<label class="checkbox-item">
-									<input type="checkbox" name="areas" value="compliance">
-									<span>Compliance & Audit</span>
-								</label>
-								<label class="checkbox-item">
-									<input type="checkbox" name="areas" value="powerplatform">
-									<span>Power Platform</span>
-								</label>
+							
+							<div class="area-section">
+								<h4>Microsoft 365</h4>
+								<div class="checkbox-group">
+									<label class="checkbox-item">
+										<input type="checkbox" name="areas" value="azuread">
+										<span>Azure AD & Identity</span>
+									</label>
+									<label class="checkbox-item">
+										<input type="checkbox" name="areas" value="exchange">
+										<span>Exchange & Email Security</span>
+									</label>
+									<label class="checkbox-item">
+										<input type="checkbox" name="areas" value="sharepoint">
+										<span>SharePoint & OneDrive</span>
+									</label>
+									<label class="checkbox-item">
+										<input type="checkbox" name="areas" value="teams">
+										<span>Microsoft Teams</span>
+									</label>
+									<label class="checkbox-item">
+										<input type="checkbox" name="areas" value="dlp">
+										<span>Data Loss Prevention</span>
+									</label>
+									<label class="checkbox-item">
+										<input type="checkbox" name="areas" value="defender">
+										<span>Microsoft Defender</span>
+									</label>
+								</div>
+							</div>
+
+							<div class="area-section">
+								<h4>Azure</h4>
+								<div class="checkbox-group">
+									<label class="checkbox-item">
+										<input type="checkbox" name="areas" value="azure-network">
+										<span>Network Security</span>
+									</label>
+									<label class="checkbox-item">
+										<input type="checkbox" name="areas" value="azure-identity">
+										<span>Identity & Access</span>
+									</label>
+									<label class="checkbox-item">
+										<input type="checkbox" name="areas" value="azure-storage">
+										<span>Storage Security</span>
+									</label>
+									<label class="checkbox-item">
+										<input type="checkbox" name="areas" value="azure-keyvault">
+										<span>Key Vault</span>
+									</label>
+								</div>
+							</div>
+
+							<div class="area-section">
+								<h4>Azure DevOps</h4>
+								<div class="checkbox-group">
+									<label class="checkbox-item">
+										<input type="checkbox" name="areas" value="devops-repos">
+										<span>Repositories</span>
+									</label>
+									<label class="checkbox-item">
+										<input type="checkbox" name="areas" value="devops-pipelines">
+										<span>Pipelines</span>
+									</label>
+									<label class="checkbox-item">
+										<input type="checkbox" name="areas" value="devops-artifacts">
+										<span>Artifacts</span>
+									</label>
+									<label class="checkbox-item">
+										<input type="checkbox" name="areas" value="devops-access">
+										<span>Access Control</span>
+									</label>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -327,6 +411,81 @@ import Layout from '../layouts/Layout.astro';
 		width: 20px;
 		height: 20px;
 		cursor: pointer;
+	}
+
+	.service-selection {
+		margin-bottom: 2rem;
+	}
+
+	.service-selection h3 {
+		font-size: 1.2rem;
+		color: var(--color-dark);
+		margin-bottom: 1rem;
+	}
+
+	.service-cards {
+		display: flex;
+		gap: 1rem;
+		margin-bottom: 2rem;
+	}
+
+	.service-checkbox {
+		flex: 1;
+		cursor: pointer;
+	}
+
+	.service-checkbox input {
+		display: none;
+	}
+
+	.service-content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 1.5rem;
+		border: 2px solid var(--color-light-gray);
+		border-radius: 0.5rem;
+		transition: all 0.3s ease;
+		background: white;
+	}
+
+	.service-checkbox input:checked ~ .service-content {
+		border-color: var(--color-primary);
+		background: rgba(102, 126, 234, 0.1);
+	}
+
+	.service-icon {
+		width: 48px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 8px;
+		color: white;
+	}
+
+	.service-icon.m365 {
+		background: linear-gradient(135deg, #0078d4, #00bcf2);
+	}
+
+	.service-icon.azure {
+		background: linear-gradient(135deg, #0062ad, #00a4ef);
+	}
+
+	.service-icon.devops {
+		background: linear-gradient(135deg, #0078d4, #68217a);
+	}
+
+	.area-section {
+		margin-bottom: 1.5rem;
+	}
+
+	.area-section h4 {
+		font-size: 1rem;
+		color: var(--color-dark);
+		margin-bottom: 0.75rem;
+		font-weight: 600;
 	}
 
 	.connection-info {
