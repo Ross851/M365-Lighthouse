@@ -39,6 +39,8 @@ export default function PowerReviewDashboard() {
             <nav style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
               <a href="https://github.com/Ross851/M365-Lighthouse" target="_blank" rel="noopener noreferrer" 
                  style={{ color: '#666', textDecoration: 'none' }}>GitHub</a>
+              <a href="/login" 
+                 style={{ color: '#666', textDecoration: 'none' }}>Login</a>
               <button onClick={() => setShowDemo(!showDemo)} 
                       style={{ 
                         backgroundColor: '#2563eb', 
@@ -75,7 +77,7 @@ export default function PowerReviewDashboard() {
                         }}>
                   View Demo Dashboard
                 </button>
-                <a href="https://github.com/Ross851/M365-Lighthouse" 
+                <a href="/login" 
                    style={{ 
                      backgroundColor: 'transparent', 
                      color: 'white', 
@@ -86,7 +88,7 @@ export default function PowerReviewDashboard() {
                      textDecoration: 'none',
                      display: 'inline-block'
                    }}>
-                  Get Started
+                  Login to Dashboard
                 </a>
               </div>
             </div>
