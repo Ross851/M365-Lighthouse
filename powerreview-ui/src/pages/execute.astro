@@ -1,0 +1,781 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="PowerReview - Assessment in Progress">
+	<main class="execute-main">
+		<div class="container">
+			<div class="execution-header">
+				<h1>Security Assessment in Progress</h1>
+				<div class="execution-stats">
+					<div class="stat">
+						<span class="stat-label">Elapsed Time</span>
+						<span class="stat-value" id="elapsed-time">00:00</span>
+					</div>
+					<div class="stat">
+						<span class="stat-label">Progress</span>
+						<span class="stat-value" id="progress-percent">0%</span>
+					</div>
+					<div class="stat">
+						<span class="stat-label">Status</span>
+						<span class="stat-value status-running">Running</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="execution-container">
+				<div class="execution-sidebar">
+					<h2>Assessment Pipeline</h2>
+					<div class="pipeline-list" id="pipeline-list">
+						<!-- Pipeline items will be dynamically added -->
+					</div>
+				</div>
+
+				<div class="execution-main-content">
+					<div class="terminal-container">
+						<div class="terminal-header">
+							<div class="terminal-dots">
+								<span class="dot red"></span>
+								<span class="dot yellow"></span>
+								<span class="dot green"></span>
+							</div>
+							<span class="terminal-title">PowerShell Console Output</span>
+							<button class="terminal-action" id="toggle-autoscroll">
+								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+								</svg>
+								Auto-scroll
+							</button>
+						</div>
+						<div class="terminal-body" id="terminal-output">
+							<div class="terminal-line">
+								<span class="prompt">PS C:\PowerReview&gt;</span>
+								<span class="command">Initialize-PowerReviewAssessment</span>
+							</div>
+							<div class="terminal-line info">
+								[INFO] PowerReview Security Assessment Framework v2.0
+							</div>
+							<div class="terminal-line info">
+								[INFO] Initializing assessment pipeline...
+							</div>
+						</div>
+					</div>
+
+					<div class="metrics-container">
+						<h3>Live Metrics</h3>
+						<div class="metrics-grid">
+							<div class="metric-card">
+								<div class="metric-icon users">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+										<circle cx="9" cy="7" r="4"/>
+									</svg>
+								</div>
+								<div class="metric-info">
+									<span class="metric-value" id="users-scanned">0</span>
+									<span class="metric-label">Users Scanned</span>
+								</div>
+							</div>
+
+							<div class="metric-card">
+								<div class="metric-icon issues">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+										<line x1="12" y1="9" x2="12" y2="13"/>
+										<line x1="12" y1="17" x2="12.01" y2="17"/>
+									</svg>
+								</div>
+								<div class="metric-info">
+									<span class="metric-value" id="issues-found">0</span>
+									<span class="metric-label">Issues Found</span>
+								</div>
+							</div>
+
+							<div class="metric-card">
+								<div class="metric-icon policies">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<path d="M9 11l3 3L22 4"/>
+										<path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+									</svg>
+								</div>
+								<div class="metric-info">
+									<span class="metric-value" id="policies-checked">0</span>
+									<span class="metric-label">Policies Checked</span>
+								</div>
+							</div>
+
+							<div class="metric-card">
+								<div class="metric-icon score">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<circle cx="12" cy="12" r="10"/>
+										<path d="M12 6v6l4 2"/>
+									</svg>
+								</div>
+								<div class="metric-info">
+									<span class="metric-value" id="secure-score">--</span>
+									<span class="metric-label">Secure Score</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="execution-footer">
+				<button class="btn-secondary" id="pause-btn">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<rect x="6" y="4" width="4" height="16"/>
+						<rect x="14" y="4" width="4" height="16"/>
+					</svg>
+					Pause
+				</button>
+				<button class="btn-danger" id="stop-btn">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<rect x="4" y="4" width="16" height="16"/>
+					</svg>
+					Stop Assessment
+				</button>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.execute-main {
+		min-height: calc(100vh - 140px);
+		background: #0f1419;
+		color: #c9d1d9;
+		padding: 2rem 1rem;
+	}
+
+	.container {
+		max-width: 1400px;
+		margin: 0 auto;
+	}
+
+	.execution-header {
+		margin-bottom: 2rem;
+		animation: fadeInDown 0.6s ease-out;
+	}
+
+	@keyframes fadeInDown {
+		from { opacity: 0; transform: translateY(-20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	.execution-header h1 {
+		font-size: 2rem;
+		font-weight: 700;
+		margin: 0 0 1rem;
+		color: #f0f6fc;
+	}
+
+	.execution-stats {
+		display: flex;
+		gap: 3rem;
+		padding: 1rem 1.5rem;
+		background: #161b22;
+		border-radius: 12px;
+		border: 1px solid #30363d;
+	}
+
+	.stat {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.stat-label {
+		font-size: 0.875rem;
+		color: #8b949e;
+	}
+
+	.stat-value {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: #58a6ff;
+		font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+	}
+
+	.status-running {
+		color: #3fb950;
+		position: relative;
+	}
+
+	.status-running::before {
+		content: '';
+		position: absolute;
+		left: -20px;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 8px;
+		height: 8px;
+		background: #3fb950;
+		border-radius: 50%;
+		animation: pulse 2s ease-in-out infinite;
+	}
+
+	@keyframes pulse {
+		0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+		50% { opacity: 0.6; transform: translateY(-50%) scale(1.2); }
+	}
+
+	.execution-container {
+		display: grid;
+		grid-template-columns: 300px 1fr;
+		gap: 2rem;
+		margin-bottom: 2rem;
+	}
+
+	.execution-sidebar {
+		background: #161b22;
+		border-radius: 12px;
+		padding: 1.5rem;
+		border: 1px solid #30363d;
+		animation: slideInLeft 0.6s ease-out;
+	}
+
+	@keyframes slideInLeft {
+		from { opacity: 0; transform: translateX(-20px); }
+		to { opacity: 1; transform: translateX(0); }
+	}
+
+	.execution-sidebar h2 {
+		font-size: 1.1rem;
+		margin: 0 0 1rem;
+		color: #f0f6fc;
+	}
+
+	.pipeline-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.pipeline-item {
+		padding: 0.75rem 1rem;
+		background: #0d1117;
+		border-radius: 8px;
+		border: 1px solid #30363d;
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.pipeline-item::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 3px;
+		background: #30363d;
+		transition: background 0.3s ease;
+	}
+
+	.pipeline-item.active::before {
+		background: #58a6ff;
+	}
+
+	.pipeline-item.completed::before {
+		background: #3fb950;
+	}
+
+	.pipeline-item.error::before {
+		background: #f85149;
+	}
+
+	.pipeline-icon {
+		width: 20px;
+		height: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.pipeline-item.active .pipeline-icon {
+		animation: spin 2s linear infinite;
+	}
+
+	@keyframes spin {
+		to { transform: rotate(360deg); }
+	}
+
+	.pipeline-name {
+		flex: 1;
+		font-size: 0.9rem;
+	}
+
+	.pipeline-time {
+		font-size: 0.8rem;
+		color: #8b949e;
+		font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+	}
+
+	.execution-main-content {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		animation: fadeIn 0.6s ease-out;
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+
+	.terminal-container {
+		background: #0d1117;
+		border-radius: 12px;
+		border: 1px solid #30363d;
+		overflow: hidden;
+	}
+
+	.terminal-header {
+		background: #161b22;
+		padding: 1rem 1.5rem;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		border-bottom: 1px solid #30363d;
+	}
+
+	.terminal-dots {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.dot {
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+	}
+
+	.dot.red { background: #f85149; }
+	.dot.yellow { background: #f0c674; }
+	.dot.green { background: #3fb950; }
+
+	.terminal-title {
+		flex: 1;
+		font-size: 0.9rem;
+		color: #8b949e;
+	}
+
+	.terminal-action {
+		background: transparent;
+		border: 1px solid #30363d;
+		color: #8b949e;
+		padding: 0.25rem 0.75rem;
+		border-radius: 6px;
+		font-size: 0.8rem;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		transition: all 0.3s ease;
+	}
+
+	.terminal-action:hover {
+		border-color: #58a6ff;
+		color: #58a6ff;
+	}
+
+	.terminal-body {
+		padding: 1.5rem;
+		height: 400px;
+		overflow-y: auto;
+		font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+		font-size: 0.9rem;
+		line-height: 1.6;
+	}
+
+	.terminal-line {
+		margin-bottom: 0.5rem;
+		animation: slideIn 0.3s ease-out;
+	}
+
+	@keyframes slideIn {
+		from { opacity: 0; transform: translateX(-10px); }
+		to { opacity: 1; transform: translateX(0); }
+	}
+
+	.prompt {
+		color: #58a6ff;
+		margin-right: 0.5rem;
+	}
+
+	.command {
+		color: #f0c674;
+	}
+
+	.terminal-line.info {
+		color: #8b949e;
+	}
+
+	.terminal-line.success {
+		color: #3fb950;
+	}
+
+	.terminal-line.warning {
+		color: #f0c674;
+	}
+
+	.terminal-line.error {
+		color: #f85149;
+	}
+
+	.metrics-container {
+		background: #161b22;
+		border-radius: 12px;
+		padding: 1.5rem;
+		border: 1px solid #30363d;
+	}
+
+	.metrics-container h3 {
+		font-size: 1.1rem;
+		margin: 0 0 1rem;
+		color: #f0f6fc;
+	}
+
+	.metrics-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+	}
+
+	.metric-card {
+		background: #0d1117;
+		border-radius: 8px;
+		padding: 1.5rem;
+		border: 1px solid #30363d;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		transition: all 0.3s ease;
+	}
+
+	.metric-card:hover {
+		border-color: #58a6ff;
+		transform: translateY(-2px);
+	}
+
+	.metric-icon {
+		width: 48px;
+		height: 48px;
+		border-radius: 8px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+	}
+
+	.metric-icon.users { background: rgba(88, 166, 255, 0.1); color: #58a6ff; }
+	.metric-icon.issues { background: rgba(248, 81, 73, 0.1); color: #f85149; }
+	.metric-icon.policies { background: rgba(63, 185, 80, 0.1); color: #3fb950; }
+	.metric-icon.score { background: rgba(240, 198, 116, 0.1); color: #f0c674; }
+
+	.metric-info {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.metric-value {
+		font-size: 1.75rem;
+		font-weight: 700;
+		color: #f0f6fc;
+		font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+	}
+
+	.metric-label {
+		font-size: 0.875rem;
+		color: #8b949e;
+	}
+
+	.execution-footer {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		padding: 2rem 0;
+	}
+
+	.btn-secondary, .btn-danger {
+		padding: 0.75rem 1.5rem;
+		border-radius: 8px;
+		font-size: 0.95rem;
+		font-weight: 600;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		transition: all 0.3s ease;
+		border: none;
+	}
+
+	.btn-secondary {
+		background: #21262d;
+		color: #c9d1d9;
+		border: 1px solid #30363d;
+	}
+
+	.btn-secondary:hover {
+		background: #30363d;
+		border-color: #8b949e;
+	}
+
+	.btn-danger {
+		background: rgba(248, 81, 73, 0.1);
+		color: #f85149;
+		border: 1px solid rgba(248, 81, 73, 0.3);
+	}
+
+	.btn-danger:hover {
+		background: rgba(248, 81, 73, 0.2);
+		border-color: #f85149;
+	}
+
+	/* Scrollbar styling */
+	.terminal-body::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	.terminal-body::-webkit-scrollbar-track {
+		background: #161b22;
+	}
+
+	.terminal-body::-webkit-scrollbar-thumb {
+		background: #30363d;
+		border-radius: 4px;
+	}
+
+	.terminal-body::-webkit-scrollbar-thumb:hover {
+		background: #484f58;
+	}
+
+	@media (max-width: 1024px) {
+		.execution-container {
+			grid-template-columns: 1fr;
+		}
+		
+		.execution-sidebar {
+			order: 2;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.execution-stats {
+			flex-wrap: wrap;
+			gap: 1.5rem;
+		}
+		
+		.metrics-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+
+<script>
+	// Check auth
+	if (!localStorage.getItem('powerreview_auth')) {
+		window.location.href = '/login';
+	}
+
+	// Get selected assessments
+	const assessments = JSON.parse(localStorage.getItem('powerreview_assessments') || '[]');
+	
+	// Assessment details
+	const assessmentDetails = {
+		azuread: { name: 'Azure AD & Identity', icon: '👤', duration: 15 },
+		exchange: { name: 'Exchange Online', icon: '📧', duration: 20 },
+		defender: { name: 'Microsoft Defender', icon: '🛡️', duration: 10 },
+		sharepoint: { name: 'SharePoint & OneDrive', icon: '📁', duration: 25 },
+		teams: { name: 'Microsoft Teams', icon: '💬', duration: 15 },
+		dlp: { name: 'Data Loss Prevention', icon: '🔒', duration: 20 },
+		compliance: { name: 'Compliance & Audit', icon: '✅', duration: 15 },
+		powerplatform: { name: 'Power Platform', icon: '⚡', duration: 10 }
+	};
+
+	// Initialize pipeline
+	const pipelineList = document.getElementById('pipeline-list');
+	assessments.forEach((assessment, index) => {
+		const details = assessmentDetails[assessment];
+		if (!details) return;
+
+		const item = document.createElement('div');
+		item.className = 'pipeline-item';
+		item.id = `pipeline-${assessment}`;
+		item.innerHTML = `
+			<div class="pipeline-icon">${details.icon}</div>
+			<span class="pipeline-name">${details.name}</span>
+			<span class="pipeline-time">--:--</span>
+		`;
+		pipelineList.appendChild(item);
+	});
+
+	// Terminal output simulation
+	const terminalOutput = document.getElementById('terminal-output');
+	const elapsedTime = document.getElementById('elapsed-time');
+	const progressPercent = document.getElementById('progress-percent');
+	const usersScanned = document.getElementById('users-scanned');
+	const issuesFound = document.getElementById('issues-found');
+	const policiesChecked = document.getElementById('policies-checked');
+	const secureScore = document.getElementById('secure-score');
+
+	let startTime = Date.now();
+	let currentAssessmentIndex = 0;
+	let autoScroll = true;
+
+	// Terminal output messages
+	const terminalMessages = [
+		{ type: 'info', text: '[INFO] Establishing connection to Microsoft 365 tenant...' },
+		{ type: 'success', text: '[SUCCESS] Connected to tenant: contoso.onmicrosoft.com' },
+		{ type: 'info', text: '[INFO] Retrieving authentication tokens...' },
+		{ type: 'success', text: '[SUCCESS] Authentication successful' },
+		{ type: 'command', text: 'Get-MsolUser -All | Where-Object {$_.IsLicensed -eq $true}' },
+		{ type: 'info', text: '[INFO] Analyzing user accounts and permissions...' },
+		{ type: 'warning', text: '[WARN] Found 12 users without MFA enabled' },
+		{ type: 'command', text: 'Get-MsolRole | ForEach-Object { Get-MsolRoleMember -RoleObjectId $_.ObjectId }' },
+		{ type: 'info', text: '[INFO] Checking privileged role assignments...' },
+		{ type: 'error', text: '[CRITICAL] 3 Global Administrators detected (recommended: 2-4)' },
+		{ type: 'command', text: 'Get-AzureADDirectoryRole | Get-AzureADDirectoryRoleMember' },
+		{ type: 'info', text: '[INFO] Scanning conditional access policies...' },
+		{ type: 'success', text: '[SUCCESS] 15 conditional access policies active' },
+		{ type: 'command', text: 'Get-OrganizationConfig | Select *' },
+		{ type: 'info', text: '[INFO] Retrieving organization configuration...' },
+		{ type: 'command', text: 'Get-ATPProtectionPolicyRule | Test-ATPProtectionPolicy' },
+		{ type: 'info', text: '[INFO] Evaluating threat protection policies...' },
+		{ type: 'success', text: '[SUCCESS] ATP policies configured correctly' },
+		{ type: 'info', text: '[INFO] Generating security report...' }
+	];
+
+	let messageIndex = 0;
+
+	// Add terminal line
+	function addTerminalLine(type, text) {
+		const line = document.createElement('div');
+		line.className = `terminal-line ${type}`;
+		
+		if (type === 'command') {
+			line.innerHTML = `<span class="prompt">PS C:\\PowerReview&gt;</span> <span class="command">${text.replace('command:', '')}</span>`;
+		} else {
+			line.textContent = text;
+		}
+		
+		terminalOutput.appendChild(line);
+		
+		if (autoScroll) {
+			terminalOutput.scrollTop = terminalOutput.scrollHeight;
+		}
+	}
+
+	// Update metrics
+	function updateMetrics() {
+		usersScanned.textContent = Math.floor(Math.random() * 500 + 100).toString();
+		issuesFound.textContent = Math.floor(Math.random() * 50 + 10).toString();
+		policiesChecked.textContent = Math.floor(Math.random() * 100 + 50).toString();
+		secureScore.textContent = Math.floor(Math.random() * 30 + 60).toString() + '/100';
+	}
+
+	// Update elapsed time
+	setInterval(() => {
+		const elapsed = Math.floor((Date.now() - startTime) / 1000);
+		const minutes = Math.floor(elapsed / 60);
+		const seconds = elapsed % 60;
+		elapsedTime.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+	}, 1000);
+
+	// Simulate assessment execution
+	function runAssessment() {
+		if (currentAssessmentIndex >= assessments.length) {
+			// All assessments complete
+			addTerminalLine('success', '[SUCCESS] All assessments completed successfully!');
+			addTerminalLine('info', '[INFO] Generating comprehensive security report...');
+			progressPercent.textContent = '100%';
+			
+			// Redirect to results after delay
+			setTimeout(() => {
+				window.location.href = '/results';
+			}, 3000);
+			return;
+		}
+
+		const assessment = assessments[currentAssessmentIndex];
+		const details = assessmentDetails[assessment];
+		const pipelineItem = document.getElementById(`pipeline-${assessment}`);
+		
+		// Update pipeline UI
+		document.querySelectorAll('.pipeline-item').forEach(item => {
+			item.classList.remove('active');
+		});
+		pipelineItem.classList.add('active');
+		
+		// Add terminal output
+		addTerminalLine('info', `[INFO] Starting ${details.name} assessment...`);
+		
+		// Simulate assessment progress
+		const assessmentStartTime = Date.now();
+		const messageInterval = setInterval(() => {
+			if (messageIndex < terminalMessages.length) {
+				const msg = terminalMessages[messageIndex];
+				addTerminalLine(msg.type, msg.text);
+				messageIndex++;
+				
+				// Update metrics occasionally
+				if (Math.random() > 0.7) {
+					updateMetrics();
+				}
+			}
+		}, 800);
+
+		// Complete assessment after duration
+		setTimeout(() => {
+			clearInterval(messageInterval);
+			
+			// Mark as completed
+			pipelineItem.classList.remove('active');
+			pipelineItem.classList.add('completed');
+			
+			// Update time
+			const duration = Math.floor((Date.now() - assessmentStartTime) / 1000);
+			const minutes = Math.floor(duration / 60);
+			const seconds = duration % 60;
+			pipelineItem.querySelector('.pipeline-time').textContent = 
+				`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+			
+			// Update progress
+			const progress = Math.floor(((currentAssessmentIndex + 1) / assessments.length) * 100);
+			progressPercent.textContent = `${progress}%`;
+			
+			// Move to next assessment
+			currentAssessmentIndex++;
+			messageIndex = 0;
+			runAssessment();
+		}, 5000); // Simulate faster for demo
+	}
+
+	// Start assessment
+	setTimeout(() => {
+		runAssessment();
+	}, 1000);
+
+	// Handle auto-scroll toggle
+	document.getElementById('toggle-autoscroll').addEventListener('click', (e) => {
+		autoScroll = !autoScroll;
+		e.target.style.opacity = autoScroll ? '1' : '0.5';
+	});
+
+	// Handle pause/stop
+	document.getElementById('pause-btn').addEventListener('click', () => {
+		// Implementation for pause
+		alert('Pause functionality would be implemented here');
+	});
+
+	document.getElementById('stop-btn').addEventListener('click', () => {
+		if (confirm('Are you sure you want to stop the assessment? Progress will be lost.')) {
+			window.location.href = '/assessment-select';
+		}
+	});
+</script>

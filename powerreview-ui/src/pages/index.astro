@@ -1,0 +1,307 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// Check if user is authenticated
+const isAuthenticated = false; // This would be checked server-side in production
+---
+
+<Layout title="PowerReview M365 Security Suite">
+	<script>
+		// Redirect to login if not authenticated
+		if (!localStorage.getItem('powerreview_auth')) {
+			window.location.href = '/login';
+		}
+	</script>
+	<main>
+		<div class="hero">
+			<h1>PowerReview <span class="accent">M365</span></h1>
+			<p class="tagline">Professional Security Assessment Framework</p>
+			
+			<div class="hero-actions">
+				<a href="/assessment" class="btn btn-primary">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+						<path d="M9 11l3 3L22 4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+					Start Assessment
+				</a>
+				<a href="/reports" class="btn btn-secondary">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+						<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<polyline points="14 2 14 8 20 8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<line x1="16" y1="13" x2="8" y2="13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<line x1="16" y1="17" x2="8" y2="17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+					View Reports
+				</a>
+			</div>
+		</div>
+
+		<section class="features">
+			<h2>Comprehensive Security Analysis</h2>
+			<div class="feature-grid">
+				<div class="feature-card">
+					<div class="feature-icon">
+						<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+						</svg>
+					</div>
+					<h3>Azure AD Security</h3>
+					<p>Analyze identity configurations, privileged users, and authentication policies</p>
+				</div>
+
+				<div class="feature-card">
+					<div class="feature-icon">
+						<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+							<path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
+						</svg>
+					</div>
+					<h3>Email Protection</h3>
+					<p>Evaluate Exchange Online security settings and anti-phishing measures</p>
+				</div>
+
+				<div class="feature-card">
+					<div class="feature-icon">
+						<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/>
+							<polyline points="13 2 13 9 20 9"/>
+						</svg>
+					</div>
+					<h3>SharePoint & OneDrive</h3>
+					<p>Review document security, sharing policies, and data governance</p>
+				</div>
+
+				<div class="feature-card">
+					<div class="feature-icon">
+						<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+						</svg>
+					</div>
+					<h3>Microsoft Teams</h3>
+					<p>Assess Teams security settings, guest access, and collaboration policies</p>
+				</div>
+
+				<div class="feature-card">
+					<div class="feature-icon">
+						<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M12 2L2 7l10 5 10-5-10-5z"/>
+							<path d="M2 17l10 5 10-5"/>
+							<path d="M2 12l10 5 10-5"/>
+						</svg>
+					</div>
+					<h3>Data Protection</h3>
+					<p>Examine DLP policies, sensitivity labels, and information protection</p>
+				</div>
+
+				<div class="feature-card">
+					<div class="feature-icon">
+						<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<circle cx="12" cy="12" r="10"/>
+							<path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+							<line x1="9" y1="9" x2="9.01" y2="9"/>
+							<line x1="15" y1="9" x2="15.01" y2="9"/>
+						</svg>
+					</div>
+					<h3>Microsoft Defender</h3>
+					<p>Check threat protection status and security recommendations</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="stats">
+			<div class="stat">
+				<div class="stat-value">50+</div>
+				<div class="stat-label">Security Checks</div>
+			</div>
+			<div class="stat">
+				<div class="stat-value">8</div>
+				<div class="stat-label">Service Areas</div>
+			</div>
+			<div class="stat">
+				<div class="stat-value">100%</div>
+				<div class="stat-label">Automated</div>
+			</div>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	main {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+
+	.hero {
+		text-align: center;
+		padding: 6rem 2rem;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+	}
+
+	h1 {
+		font-size: 4rem;
+		font-weight: 800;
+		margin: 0;
+		line-height: 1.2;
+	}
+
+	.accent {
+		background: linear-gradient(45deg, #00dbde 0%, #fc00ff 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.tagline {
+		font-size: 1.5rem;
+		margin: 1rem 0 3rem;
+		opacity: 0.9;
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 1rem 2rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+		font-weight: 600;
+		transition: all 0.3s ease;
+		font-size: 1.1rem;
+	}
+
+	.btn-primary {
+		background: white;
+		color: #667eea;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.btn-primary:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+	}
+
+	.btn-secondary {
+		background: transparent;
+		color: white;
+		border: 2px solid white;
+	}
+
+	.btn-secondary:hover {
+		background: white;
+		color: #667eea;
+	}
+
+	.features {
+		padding: 5rem 2rem;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.features h2 {
+		text-align: center;
+		font-size: 2.5rem;
+		margin-bottom: 3rem;
+		color: #1a202c;
+	}
+
+	.feature-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		margin-bottom: 4rem;
+	}
+
+	.feature-card {
+		background: white;
+		padding: 2rem;
+		border-radius: 1rem;
+		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.feature-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+	}
+
+	.feature-icon {
+		width: 60px;
+		height: 60px;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		border-radius: 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 1rem;
+		color: white;
+	}
+
+	.feature-card h3 {
+		margin: 0 0 0.5rem;
+		font-size: 1.5rem;
+		color: #1a202c;
+	}
+
+	.feature-card p {
+		margin: 0;
+		color: #4a5568;
+		line-height: 1.6;
+	}
+
+	.stats {
+		display: flex;
+		justify-content: center;
+		gap: 4rem;
+		padding: 3rem 2rem;
+		background: #f7fafc;
+		flex-wrap: wrap;
+	}
+
+	.stat {
+		text-align: center;
+	}
+
+	.stat-value {
+		font-size: 3rem;
+		font-weight: 800;
+		color: #667eea;
+	}
+
+	.stat-label {
+		font-size: 1.2rem;
+		color: #4a5568;
+		margin-top: 0.5rem;
+	}
+
+	@media (max-width: 768px) {
+		h1 {
+			font-size: 3rem;
+		}
+		
+		.tagline {
+			font-size: 1.2rem;
+		}
+		
+		.hero {
+			padding: 4rem 1rem;
+		}
+		
+		.features {
+			padding: 3rem 1rem;
+		}
+		
+		.stats {
+			gap: 2rem;
+		}
+	}
+</style>

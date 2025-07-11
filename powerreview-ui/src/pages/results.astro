@@ -1,0 +1,901 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="PowerReview - Assessment Results">
+	<main class="results-main">
+		<div class="container">
+			<div class="results-header">
+				<div class="header-content">
+					<h1>Security Assessment Complete</h1>
+					<p>Comprehensive analysis of your Microsoft 365 environment</p>
+				</div>
+				<div class="header-actions">
+					<button class="btn-primary" onclick="window.print()">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<polyline points="6 9 6 2 18 2 18 9"/>
+							<path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
+							<rect x="6" y="14" width="12" height="8"/>
+						</svg>
+						Export PDF
+					</button>
+					<button class="btn-secondary" onclick="window.location.href='/share'">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/>
+							<polyline points="16 6 12 2 8 6"/>
+							<line x1="12" y1="2" x2="12" y2="15"/>
+						</svg>
+						Share Report
+					</button>
+				</div>
+			</div>
+
+			<div class="score-overview">
+				<div class="overall-score">
+					<div class="score-circle">
+						<svg width="200" height="200" viewBox="0 0 200 200">
+							<circle cx="100" cy="100" r="90" fill="none" stroke="#e5e7eb" stroke-width="20"/>
+							<circle cx="100" cy="100" r="90" fill="none" stroke="url(#scoreGradient)" stroke-width="20"
+								stroke-dasharray="565.48" stroke-dashoffset="141.37" stroke-linecap="round"
+								transform="rotate(-90 100 100)"/>
+							<defs>
+								<linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+									<stop offset="0%" style="stop-color:#667eea"/>
+									<stop offset="100%" style="stop-color:#764ba2"/>
+								</linearGradient>
+							</defs>
+						</svg>
+						<div class="score-text">
+							<span class="score-value">75</span>
+							<span class="score-label">Security Score</span>
+						</div>
+					</div>
+					<div class="score-details">
+						<h2>Overall Security Posture: <span class="posture-good">Good</span></h2>
+						<p>Your Microsoft 365 environment shows a strong security foundation with some areas for improvement.</p>
+						<div class="score-breakdown">
+							<div class="breakdown-item">
+								<span class="breakdown-label">Previous Score:</span>
+								<span class="breakdown-value">68</span>
+							</div>
+							<div class="breakdown-item">
+								<span class="breakdown-label">Improvement:</span>
+								<span class="breakdown-value improvement">+7 points</span>
+							</div>
+							<div class="breakdown-item">
+								<span class="breakdown-label">Industry Average:</span>
+								<span class="breakdown-value">62</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="findings-summary">
+				<h2>Key Findings Summary</h2>
+				<div class="findings-grid">
+					<div class="finding-card critical">
+						<div class="finding-header">
+							<div class="finding-icon">
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<circle cx="12" cy="12" r="10"/>
+									<line x1="12" y1="8" x2="12" y2="12"/>
+									<line x1="12" y1="16" x2="12.01" y2="16"/>
+								</svg>
+							</div>
+							<span class="finding-count">3</span>
+						</div>
+						<h3>Critical Issues</h3>
+						<ul>
+							<li>12 users without MFA enabled</li>
+							<li>Excessive global admin accounts</li>
+							<li>No DLP policies for credit cards</li>
+						</ul>
+					</div>
+
+					<div class="finding-card high">
+						<div class="finding-header">
+							<div class="finding-icon">
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+									<line x1="12" y1="9" x2="12" y2="13"/>
+								</svg>
+							</div>
+							<span class="finding-count">8</span>
+						</div>
+						<h3>High Priority</h3>
+						<ul>
+							<li>Weak password policy settings</li>
+							<li>External sharing unrestricted</li>
+							<li>Legacy authentication enabled</li>
+						</ul>
+					</div>
+
+					<div class="finding-card medium">
+						<div class="finding-header">
+							<div class="finding-icon">
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+								</svg>
+							</div>
+							<span class="finding-count">15</span>
+						</div>
+						<h3>Medium Priority</h3>
+						<ul>
+							<li>Audit logging incomplete</li>
+							<li>Teams guest access broad</li>
+							<li>Mailbox forwarding rules</li>
+						</ul>
+					</div>
+
+					<div class="finding-card low">
+						<div class="finding-header">
+							<div class="finding-icon">
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<circle cx="12" cy="12" r="10"/>
+									<path d="M8 12h8"/>
+								</svg>
+							</div>
+							<span class="finding-count">22</span>
+						</div>
+						<h3>Low Priority</h3>
+						<ul>
+							<li>Naming conventions</li>
+							<li>Group expiration policy</li>
+							<li>Archive settings</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="category-results">
+				<h2>Assessment Categories</h2>
+				<div class="category-list">
+					<div class="category-item">
+						<div class="category-header">
+							<div class="category-info">
+								<div class="category-icon azure">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+										<circle cx="8.5" cy="7" r="4"/>
+									</svg>
+								</div>
+								<h3>Azure AD & Identity</h3>
+							</div>
+							<div class="category-score">82/100</div>
+						</div>
+						<div class="category-progress">
+							<div class="progress-bar">
+								<div class="progress-fill" style="width: 82%; background: linear-gradient(90deg, #0078d4, #005a9e);"></div>
+							</div>
+						</div>
+						<div class="category-stats">
+							<span class="stat">✓ 245 users scanned</span>
+							<span class="stat">⚠️ 12 without MFA</span>
+							<span class="stat">✓ 15 conditional policies</span>
+						</div>
+					</div>
+
+					<div class="category-item">
+						<div class="category-header">
+							<div class="category-info">
+								<div class="category-icon exchange">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+										<path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
+									</svg>
+								</div>
+								<h3>Exchange Online</h3>
+							</div>
+							<div class="category-score">91/100</div>
+						</div>
+						<div class="category-progress">
+							<div class="progress-bar">
+								<div class="progress-fill" style="width: 91%; background: linear-gradient(90deg, #0f7938, #094d24);"></div>
+							</div>
+						</div>
+						<div class="category-stats">
+							<span class="stat">✓ ATP configured</span>
+							<span class="stat">✓ DKIM enabled</span>
+							<span class="stat">✓ Anti-phishing active</span>
+						</div>
+					</div>
+
+					<div class="category-item">
+						<div class="category-header">
+							<div class="category-info">
+								<div class="category-icon sharepoint">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/>
+										<polyline points="13 2 13 9 20 9"/>
+									</svg>
+								</div>
+								<h3>SharePoint & OneDrive</h3>
+							</div>
+							<div class="category-score">68/100</div>
+						</div>
+						<div class="category-progress">
+							<div class="progress-bar">
+								<div class="progress-fill" style="width: 68%; background: linear-gradient(90deg, #038387, #025d60);"></div>
+							</div>
+						</div>
+						<div class="category-stats">
+							<span class="stat">⚠️ External sharing open</span>
+							<span class="stat">✓ 156 sites reviewed</span>
+							<span class="stat">⚠️ 23 orphaned sites</span>
+						</div>
+					</div>
+
+					<div class="category-item">
+						<div class="category-header">
+							<div class="category-info">
+								<div class="category-icon teams">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+									</svg>
+								</div>
+								<h3>Microsoft Teams</h3>
+							</div>
+							<div class="category-score">77/100</div>
+						</div>
+						<div class="category-progress">
+							<div class="progress-bar">
+								<div class="progress-fill" style="width: 77%; background: linear-gradient(90deg, #5558af, #3d3e8e);"></div>
+							</div>
+						</div>
+						<div class="category-stats">
+							<span class="stat">✓ 89 teams analyzed</span>
+							<span class="stat">⚠️ Guest access broad</span>
+							<span class="stat">✓ Apps restricted</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="recommendations">
+				<h2>Top Recommendations</h2>
+				<div class="recommendation-list">
+					<div class="recommendation-item">
+						<div class="recommendation-number">1</div>
+						<div class="recommendation-content">
+							<h3>Enable MFA for all users</h3>
+							<p>Implement multi-factor authentication for the 12 users currently without it to significantly improve account security.</p>
+							<div class="recommendation-impact">
+								<span class="impact-label">Impact:</span>
+								<span class="impact-value high">High</span>
+								<span class="effort-label">Effort:</span>
+								<span class="effort-value low">Low</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="recommendation-item">
+						<div class="recommendation-number">2</div>
+						<div class="recommendation-content">
+							<h3>Reduce Global Administrator count</h3>
+							<p>Follow the principle of least privilege by reducing global admin accounts from 5 to 2-3 maximum.</p>
+							<div class="recommendation-impact">
+								<span class="impact-label">Impact:</span>
+								<span class="impact-value high">High</span>
+								<span class="effort-label">Effort:</span>
+								<span class="effort-value medium">Medium</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="recommendation-item">
+						<div class="recommendation-number">3</div>
+						<div class="recommendation-content">
+							<h3>Configure DLP policies</h3>
+							<p>Implement Data Loss Prevention policies for sensitive information types including credit cards and social security numbers.</p>
+							<div class="recommendation-impact">
+								<span class="impact-label">Impact:</span>
+								<span class="impact-value high">High</span>
+								<span class="effort-label">Effort:</span>
+								<span class="effort-value high">High</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="report-actions">
+				<button class="btn-primary large" onclick="window.location.href='/detailed-report'">
+					View Detailed Report
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M5 12h14M12 5l7 7-7 7"/>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.results-main {
+		min-height: calc(100vh - 140px);
+		background: linear-gradient(180deg, #fafbfc 0%, #f3f4f6 100%);
+		padding: 3rem 1rem;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.results-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 3rem;
+		animation: fadeInDown 0.6s ease-out;
+	}
+
+	@keyframes fadeInDown {
+		from { opacity: 0; transform: translateY(-20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	.header-content h1 {
+		font-size: 2.5rem;
+		font-weight: 800;
+		color: var(--color-dark);
+		margin: 0 0 0.5rem;
+	}
+
+	.header-content p {
+		font-size: 1.2rem;
+		color: var(--color-gray);
+	}
+
+	.header-actions {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.btn-primary, .btn-secondary {
+		padding: 0.75rem 1.5rem;
+		border-radius: 10px;
+		font-size: 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		transition: all 0.3s ease;
+		border: none;
+	}
+
+	.btn-primary {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+	}
+
+	.btn-primary:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+	}
+
+	.btn-secondary {
+		background: white;
+		color: var(--color-primary);
+		border: 2px solid var(--color-primary);
+	}
+
+	.btn-secondary:hover {
+		background: var(--color-primary);
+		color: white;
+	}
+
+	.score-overview {
+		background: white;
+		border-radius: 20px;
+		padding: 3rem;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+		margin-bottom: 3rem;
+		animation: fadeInUp 0.6s ease-out;
+		animation-delay: 0.1s;
+		animation-fill-mode: both;
+	}
+
+	@keyframes fadeInUp {
+		from { opacity: 0; transform: translateY(20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	.overall-score {
+		display: flex;
+		gap: 3rem;
+		align-items: center;
+	}
+
+	.score-circle {
+		position: relative;
+		flex-shrink: 0;
+	}
+
+	.score-text {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-align: center;
+	}
+
+	.score-value {
+		display: block;
+		font-size: 3.5rem;
+		font-weight: 800;
+		color: var(--color-primary);
+		line-height: 1;
+	}
+
+	.score-label {
+		display: block;
+		font-size: 0.9rem;
+		color: var(--color-gray);
+		margin-top: 0.5rem;
+	}
+
+	.score-details h2 {
+		font-size: 1.8rem;
+		margin: 0 0 1rem;
+		color: var(--color-dark);
+	}
+
+	.posture-good {
+		color: #10b981;
+	}
+
+	.score-details p {
+		color: var(--color-gray);
+		line-height: 1.6;
+		margin-bottom: 2rem;
+	}
+
+	.score-breakdown {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2rem;
+	}
+
+	.breakdown-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.breakdown-label {
+		font-size: 0.9rem;
+		color: var(--color-gray);
+	}
+
+	.breakdown-value {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: var(--color-dark);
+	}
+
+	.improvement {
+		color: #10b981;
+	}
+
+	.findings-summary {
+		margin-bottom: 3rem;
+		animation: fadeInUp 0.6s ease-out;
+		animation-delay: 0.2s;
+		animation-fill-mode: both;
+	}
+
+	.findings-summary h2 {
+		font-size: 1.8rem;
+		margin-bottom: 2rem;
+		color: var(--color-dark);
+	}
+
+	.findings-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1.5rem;
+	}
+
+	.finding-card {
+		background: white;
+		border-radius: 16px;
+		padding: 1.5rem;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+		border: 2px solid transparent;
+		transition: all 0.3s ease;
+	}
+
+	.finding-card.critical {
+		border-color: #fee;
+		background: linear-gradient(135deg, #fff 0%, #fee 100%);
+	}
+
+	.finding-card.high {
+		border-color: #fef3c7;
+		background: linear-gradient(135deg, #fff 0%, #fef3c7 100%);
+	}
+
+	.finding-card.medium {
+		border-color: #dbeafe;
+		background: linear-gradient(135deg, #fff 0%, #dbeafe 100%);
+	}
+
+	.finding-card.low {
+		border-color: #f3f4f6;
+		background: linear-gradient(135deg, #fff 0%, #f9fafb 100%);
+	}
+
+	.finding-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+	}
+
+	.finding-icon {
+		width: 40px;
+		height: 40px;
+		border-radius: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.finding-card.critical .finding-icon {
+		background: rgba(239, 68, 68, 0.1);
+		color: #ef4444;
+	}
+
+	.finding-card.high .finding-icon {
+		background: rgba(245, 158, 11, 0.1);
+		color: #f59e0b;
+	}
+
+	.finding-card.medium .finding-icon {
+		background: rgba(59, 130, 246, 0.1);
+		color: #3b82f6;
+	}
+
+	.finding-card.low .finding-icon {
+		background: rgba(107, 114, 128, 0.1);
+		color: #6b7280;
+	}
+
+	.finding-count {
+		font-size: 2rem;
+		font-weight: 800;
+	}
+
+	.finding-card.critical .finding-count { color: #ef4444; }
+	.finding-card.high .finding-count { color: #f59e0b; }
+	.finding-card.medium .finding-count { color: #3b82f6; }
+	.finding-card.low .finding-count { color: #6b7280; }
+
+	.finding-card h3 {
+		font-size: 1.1rem;
+		margin: 0 0 1rem;
+		color: var(--color-dark);
+	}
+
+	.finding-card ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.finding-card li {
+		padding: 0.5rem 0;
+		color: #4b5563;
+		font-size: 0.95rem;
+		border-bottom: 1px solid #f3f4f6;
+	}
+
+	.finding-card li:last-child {
+		border-bottom: none;
+	}
+
+	.category-results {
+		margin-bottom: 3rem;
+		animation: fadeInUp 0.6s ease-out;
+		animation-delay: 0.3s;
+		animation-fill-mode: both;
+	}
+
+	.category-results h2 {
+		font-size: 1.8rem;
+		margin-bottom: 2rem;
+		color: var(--color-dark);
+	}
+
+	.category-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.category-item {
+		background: white;
+		border-radius: 16px;
+		padding: 1.5rem;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+		transition: all 0.3s ease;
+	}
+
+	.category-item:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+	}
+
+	.category-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1rem;
+	}
+
+	.category-info {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.category-icon {
+		width: 48px;
+		height: 48px;
+		border-radius: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: white;
+	}
+
+	.category-icon.azure { background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%); }
+	.category-icon.exchange { background: linear-gradient(135deg, #0f7938 0%, #094d24 100%); }
+	.category-icon.sharepoint { background: linear-gradient(135deg, #038387 0%, #025d60 100%); }
+	.category-icon.teams { background: linear-gradient(135deg, #5558af 0%, #3d3e8e 100%); }
+
+	.category-info h3 {
+		font-size: 1.2rem;
+		margin: 0;
+		color: var(--color-dark);
+	}
+
+	.category-score {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: var(--color-primary);
+	}
+
+	.category-progress {
+		margin-bottom: 1rem;
+	}
+
+	.progress-bar {
+		height: 8px;
+		background: #f3f4f6;
+		border-radius: 4px;
+		overflow: hidden;
+	}
+
+	.progress-fill {
+		height: 100%;
+		border-radius: 4px;
+		transition: width 1s ease-out;
+		animation: progressAnimation 1s ease-out;
+	}
+
+	@keyframes progressAnimation {
+		from { width: 0; }
+	}
+
+	.category-stats {
+		display: flex;
+		gap: 1.5rem;
+		flex-wrap: wrap;
+	}
+
+	.stat {
+		font-size: 0.9rem;
+		color: #6b7280;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.recommendations {
+		background: white;
+		border-radius: 20px;
+		padding: 3rem;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+		margin-bottom: 3rem;
+		animation: fadeInUp 0.6s ease-out;
+		animation-delay: 0.4s;
+		animation-fill-mode: both;
+	}
+
+	.recommendations h2 {
+		font-size: 1.8rem;
+		margin-bottom: 2rem;
+		color: var(--color-dark);
+	}
+
+	.recommendation-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.recommendation-item {
+		display: flex;
+		gap: 1.5rem;
+		padding: 1.5rem;
+		background: #f9fafb;
+		border-radius: 12px;
+		transition: all 0.3s ease;
+	}
+
+	.recommendation-item:hover {
+		background: #f3f4f6;
+		transform: translateX(4px);
+	}
+
+	.recommendation-number {
+		width: 48px;
+		height: 48px;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		border-radius: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.5rem;
+		font-weight: 700;
+		flex-shrink: 0;
+	}
+
+	.recommendation-content {
+		flex: 1;
+	}
+
+	.recommendation-content h3 {
+		font-size: 1.2rem;
+		margin: 0 0 0.5rem;
+		color: var(--color-dark);
+	}
+
+	.recommendation-content p {
+		color: #6b7280;
+		line-height: 1.6;
+		margin-bottom: 1rem;
+	}
+
+	.recommendation-impact {
+		display: flex;
+		gap: 2rem;
+		align-items: center;
+	}
+
+	.impact-label, .effort-label {
+		font-size: 0.9rem;
+		color: #6b7280;
+	}
+
+	.impact-value, .effort-value {
+		font-weight: 600;
+		padding: 0.25rem 0.75rem;
+		border-radius: 20px;
+		font-size: 0.85rem;
+	}
+
+	.impact-value.high { background: #fee2e2; color: #ef4444; }
+	.impact-value.medium { background: #fef3c7; color: #f59e0b; }
+	.impact-value.low { background: #dbeafe; color: #3b82f6; }
+
+	.effort-value.high { background: #fee2e2; color: #ef4444; }
+	.effort-value.medium { background: #fef3c7; color: #f59e0b; }
+	.effort-value.low { background: #d1fae5; color: #10b981; }
+
+	.report-actions {
+		text-align: center;
+		margin-top: 4rem;
+		animation: fadeInUp 0.6s ease-out;
+		animation-delay: 0.5s;
+		animation-fill-mode: both;
+	}
+
+	.btn-primary.large {
+		padding: 1.25rem 2.5rem;
+		font-size: 1.2rem;
+		box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+	}
+
+	@media (max-width: 768px) {
+		.results-header {
+			flex-direction: column;
+			gap: 1.5rem;
+			align-items: flex-start;
+		}
+		
+		.overall-score {
+			flex-direction: column;
+			text-align: center;
+		}
+		
+		.score-breakdown {
+			grid-template-columns: 1fr;
+		}
+		
+		.findings-grid {
+			grid-template-columns: 1fr;
+		}
+		
+		.category-stats {
+			flex-direction: column;
+			gap: 0.5rem;
+		}
+		
+		.recommendation-item {
+			flex-direction: column;
+		}
+		
+		.recommendation-impact {
+			flex-wrap: wrap;
+		}
+	}
+</style>
+
+<script>
+	// Check auth
+	if (!localStorage.getItem('powerreview_auth')) {
+		window.location.href = '/login';
+	}
+
+	// Animate score circle on load
+	setTimeout(() => {
+		const circle = document.querySelector('circle:last-child') as SVGCircleElement;
+		if (circle) {
+			circle.style.transition = 'stroke-dashoffset 2s ease-out';
+			circle.style.strokeDashoffset = '141.37'; // 75% of circumference
+		}
+	}, 500);
+
+	// Animate numbers
+	function animateValue(element: HTMLElement, start: number, end: number, duration: number) {
+		const startTime = performance.now();
+		
+		function update(currentTime: number) {
+			const elapsed = currentTime - startTime;
+			const progress = Math.min(elapsed / duration, 1);
+			
+			const value = Math.floor(start + (end - start) * progress);
+			element.textContent = value.toString();
+			
+			if (progress < 1) {
+				requestAnimationFrame(update);
+			}
+		}
+		
+		requestAnimationFrame(update);
+	}
+
+	// Animate scores
+	const scoreValue = document.querySelector('.score-value') as HTMLElement;
+	if (scoreValue) {
+		animateValue(scoreValue, 0, 75, 2000);
+	}
+
+	// Animate category scores
+	document.querySelectorAll('.category-score').forEach((element, index) => {
+		const score = parseInt(element.textContent || '0');
+		element.textContent = '0/100';
+		setTimeout(() => {
+			animateValue(element as HTMLElement, 0, score, 1500);
+			setTimeout(() => {
+				element.textContent = `${score}/100`;
+			}, 1500);
+		}, 500 + index * 100);
+	});
+</script>

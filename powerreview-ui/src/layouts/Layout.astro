@@ -1,0 +1,186 @@
+---
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="PowerReview M365 Security Suite - Professional Security Assessment Framework for Microsoft 365">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<nav>
+			<div class="nav-container">
+				<a href="/" class="logo">
+					<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+						<path d="M9 12l2 2 4-4"/>
+					</svg>
+					PowerReview
+				</a>
+				<div class="nav-links">
+					<a href="/assessment">Assessment</a>
+					<a href="/reports">Reports</a>
+					<a href="/documentation">Docs</a>
+					<a href="/settings">Settings</a>
+				</div>
+			</div>
+		</nav>
+		<slot />
+		<footer>
+			<div class="footer-container">
+				<p>&copy; 2025 PowerReview M365 Security Suite. Professional security assessment framework.</p>
+				<div class="footer-links">
+					<a href="https://github.com/Ross851/M365-Lighthouse" target="_blank">GitHub</a>
+					<a href="/privacy">Privacy</a>
+					<a href="/terms">Terms</a>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--color-primary: #667eea;
+		--color-primary-dark: #5a67d8;
+		--color-secondary: #764ba2;
+		--color-dark: #1a202c;
+		--color-gray: #4a5568;
+		--color-light-gray: #e2e8f0;
+		--color-bg: #f7fafc;
+		--font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+		--shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+		--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+		--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+	}
+
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	html {
+		font-family: var(--font-sans);
+		background-color: var(--color-bg);
+		color: var(--color-dark);
+		line-height: 1.6;
+		scroll-behavior: smooth;
+	}
+
+	body {
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	nav {
+		background: white;
+		box-shadow: var(--shadow-sm);
+		position: sticky;
+		top: 0;
+		z-index: 100;
+	}
+
+	.nav-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 1rem 2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.logo {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: var(--color-primary);
+		text-decoration: none;
+		transition: opacity 0.3s ease;
+	}
+
+	.logo:hover {
+		opacity: 0.8;
+	}
+
+	.nav-links {
+		display: flex;
+		gap: 2rem;
+		align-items: center;
+	}
+
+	.nav-links a {
+		color: var(--color-gray);
+		text-decoration: none;
+		font-weight: 500;
+		transition: color 0.3s ease;
+	}
+
+	.nav-links a:hover {
+		color: var(--color-primary);
+	}
+
+	footer {
+		margin-top: auto;
+		background: white;
+		border-top: 1px solid var(--color-light-gray);
+		padding: 2rem 0;
+	}
+
+	.footer-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+
+	.footer-links {
+		display: flex;
+		gap: 2rem;
+	}
+
+	.footer-links a {
+		color: var(--color-gray);
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+
+	.footer-links a:hover {
+		color: var(--color-primary);
+	}
+
+	@media (max-width: 768px) {
+		.nav-container {
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		.nav-links {
+			gap: 1rem;
+		}
+
+		.footer-container {
+			flex-direction: column;
+			text-align: center;
+		}
+	}
+</style>

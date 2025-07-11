@@ -1,0 +1,664 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="PowerReview - Select Assessments">
+	<main class="select-main">
+		<div class="container">
+			<div class="header">
+				<h1>Select Your Assessments</h1>
+				<p>Choose which security assessments to run on your Microsoft 365 tenant</p>
+			</div>
+
+			<div class="assessment-grid">
+				<!-- Core Security Assessments -->
+				<div class="assessment-category">
+					<h2 class="category-title">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+						</svg>
+						Core Security
+					</h2>
+					
+					<div class="assessment-cards">
+						<label class="assessment-card">
+							<input type="checkbox" name="assessment" value="azuread" checked>
+							<div class="card-content">
+								<div class="card-header">
+									<div class="card-icon azure">
+										<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+											<path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+											<circle cx="8.5" cy="7" r="4"/>
+											<line x1="20" y1="8" x2="20" y2="14"/>
+											<line x1="23" y1="11" x2="17" y2="11"/>
+										</svg>
+									</div>
+									<div class="card-info">
+										<h3>Azure AD & Identity</h3>
+										<span class="duration">~15 min</span>
+									</div>
+								</div>
+								<p>User accounts, privileged roles, MFA status, conditional access policies</p>
+								<div class="card-features">
+									<span class="feature">Guest Users</span>
+									<span class="feature">Admin Roles</span>
+									<span class="feature">Sign-in Logs</span>
+								</div>
+							</div>
+						</label>
+
+						<label class="assessment-card">
+							<input type="checkbox" name="assessment" value="exchange" checked>
+							<div class="card-content">
+								<div class="card-header">
+									<div class="card-icon exchange">
+										<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+											<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+											<path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
+										</svg>
+									</div>
+									<div class="card-info">
+										<h3>Exchange Online</h3>
+										<span class="duration">~20 min</span>
+									</div>
+								</div>
+								<p>Email security, anti-phishing, anti-spam, mail flow rules, transport rules</p>
+								<div class="card-features">
+									<span class="feature">ATP Policies</span>
+									<span class="feature">DKIM/SPF</span>
+									<span class="feature">Quarantine</span>
+								</div>
+							</div>
+						</label>
+
+						<label class="assessment-card">
+							<input type="checkbox" name="assessment" value="defender" checked>
+							<div class="card-content">
+								<div class="card-header">
+									<div class="card-icon defender">
+										<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+											<path d="M3 3h18v18H3zM12 8v8m-4-4h8"/>
+										</svg>
+									</div>
+									<div class="card-info">
+										<h3>Microsoft Defender</h3>
+										<span class="duration">~10 min</span>
+									</div>
+								</div>
+								<p>Threat protection status, security recommendations, incident response</p>
+								<div class="card-features">
+									<span class="feature">Secure Score</span>
+									<span class="feature">Incidents</span>
+									<span class="feature">Alerts</span>
+								</div>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Collaboration Security -->
+				<div class="assessment-category">
+					<h2 class="category-title">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+							<circle cx="9" cy="7" r="4"/>
+							<path d="M23 21v-2a4 4 0 00-3-3.87"/>
+							<path d="M16 3.13a4 4 0 010 7.75"/>
+						</svg>
+						Collaboration
+					</h2>
+					
+					<div class="assessment-cards">
+						<label class="assessment-card">
+							<input type="checkbox" name="assessment" value="sharepoint">
+							<div class="card-content">
+								<div class="card-header">
+									<div class="card-icon sharepoint">
+										<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+											<path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/>
+											<polyline points="13 2 13 9 20 9"/>
+										</svg>
+									</div>
+									<div class="card-info">
+										<h3>SharePoint & OneDrive</h3>
+										<span class="duration">~25 min</span>
+									</div>
+								</div>
+								<p>Site permissions, external sharing, data governance, sensitivity labels</p>
+								<div class="card-features">
+									<span class="feature">Site Access</span>
+									<span class="feature">Sharing Links</span>
+									<span class="feature">DLP Rules</span>
+								</div>
+							</div>
+						</label>
+
+						<label class="assessment-card">
+							<input type="checkbox" name="assessment" value="teams">
+							<div class="card-content">
+								<div class="card-header">
+									<div class="card-icon teams">
+										<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+											<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+										</svg>
+									</div>
+									<div class="card-info">
+										<h3>Microsoft Teams</h3>
+										<span class="duration">~15 min</span>
+									</div>
+								</div>
+								<p>Team settings, guest access, meeting policies, app permissions</p>
+								<div class="card-features">
+									<span class="feature">Guest Policy</span>
+									<span class="feature">Apps Control</span>
+									<span class="feature">Meeting Security</span>
+								</div>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Compliance & Data Protection -->
+				<div class="assessment-category">
+					<h2 class="category-title">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M12 2L2 7l10 5 10-5-10-5z"/>
+							<path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+						</svg>
+						Compliance & Data Protection
+					</h2>
+					
+					<div class="assessment-cards">
+						<label class="assessment-card">
+							<input type="checkbox" name="assessment" value="dlp">
+							<div class="card-content">
+								<div class="card-header">
+									<div class="card-icon dlp">
+										<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+											<rect x="3" y="11" width="18" height="10" rx="2" ry="2"/>
+											<path d="M7 11V7a5 5 0 0110 0v4"/>
+										</svg>
+									</div>
+									<div class="card-info">
+										<h3>Data Loss Prevention</h3>
+										<span class="duration">~20 min</span>
+									</div>
+								</div>
+								<p>DLP policies, sensitive info types, policy matches and violations</p>
+								<div class="card-features">
+									<span class="feature">Policy Rules</span>
+									<span class="feature">Classifications</span>
+									<span class="feature">Incidents</span>
+								</div>
+							</div>
+						</label>
+
+						<label class="assessment-card">
+							<input type="checkbox" name="assessment" value="compliance">
+							<div class="card-content">
+								<div class="card-header">
+									<div class="card-icon compliance">
+										<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+											<path d="M9 11l3 3L22 4"/>
+											<path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+										</svg>
+									</div>
+									<div class="card-info">
+										<h3>Compliance & Audit</h3>
+										<span class="duration">~15 min</span>
+									</div>
+								</div>
+								<p>Audit logs, retention policies, eDiscovery, compliance manager score</p>
+								<div class="card-features">
+									<span class="feature">Audit Logs</span>
+									<span class="feature">Retention</span>
+									<span class="feature">Legal Hold</span>
+								</div>
+							</div>
+						</label>
+
+						<label class="assessment-card">
+							<input type="checkbox" name="assessment" value="powerplatform">
+							<div class="card-content">
+								<div class="card-header">
+									<div class="card-icon power">
+										<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+											<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+										</svg>
+									</div>
+									<div class="card-info">
+										<h3>Power Platform</h3>
+										<span class="duration">~10 min</span>
+									</div>
+								</div>
+								<p>Power Apps inventory, Power Automate flows, data policies, connectors</p>
+								<div class="card-features">
+									<span class="feature">App Inventory</span>
+									<span class="feature">Flow Analysis</span>
+									<span class="feature">DLP Policies</span>
+								</div>
+							</div>
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="action-bar">
+				<div class="selection-info">
+					<div class="selection-count">
+						<span id="selected-count">5</span> assessments selected
+					</div>
+					<div class="estimated-time">
+						Estimated time: <span id="total-time">100 minutes</span>
+					</div>
+				</div>
+
+				<div class="action-buttons">
+					<button class="btn-secondary" onclick="window.location.href='/preflight'">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M19 12H5M12 19l-7-7 7-7"/>
+						</svg>
+						Back
+					</button>
+					
+					<button id="start-assessment" class="btn-primary">
+						<span>Start Assessment</span>
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<polygon points="5 3 19 12 5 21 5 3"/>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.select-main {
+		min-height: calc(100vh - 140px);
+		background: linear-gradient(180deg, #fafbfc 0%, #e9ecef 100%);
+		padding: 3rem 1rem;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.header {
+		text-align: center;
+		margin-bottom: 3rem;
+		animation: fadeInDown 0.6s ease-out;
+	}
+
+	@keyframes fadeInDown {
+		from { opacity: 0; transform: translateY(-20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	.header h1 {
+		font-size: 3rem;
+		font-weight: 800;
+		color: var(--color-dark);
+		margin: 0 0 0.5rem;
+	}
+
+	.header p {
+		font-size: 1.25rem;
+		color: var(--color-gray);
+	}
+
+	.assessment-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 3rem;
+		margin-bottom: 6rem;
+	}
+
+	.assessment-category {
+		animation: fadeInUp 0.6s ease-out;
+		animation-fill-mode: both;
+	}
+
+	.assessment-category:nth-child(1) { animation-delay: 0.1s; }
+	.assessment-category:nth-child(2) { animation-delay: 0.2s; }
+	.assessment-category:nth-child(3) { animation-delay: 0.3s; }
+
+	@keyframes fadeInUp {
+		from { opacity: 0; transform: translateY(20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	.category-title {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		font-size: 1.5rem;
+		color: var(--color-dark);
+		margin-bottom: 1.5rem;
+	}
+
+	.category-title svg {
+		color: var(--color-primary);
+	}
+
+	.assessment-cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		gap: 1.5rem;
+	}
+
+	.assessment-card {
+		display: block;
+		cursor: pointer;
+		position: relative;
+	}
+
+	.assessment-card input {
+		position: absolute;
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.card-content {
+		background: white;
+		border: 2px solid #e5e7eb;
+		border-radius: 16px;
+		padding: 1.5rem;
+		transition: all 0.3s ease;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.card-content::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+		transition: left 0.6s ease;
+	}
+
+	.assessment-card:hover .card-content::before {
+		left: 100%;
+	}
+
+	.assessment-card input:checked ~ .card-content {
+		border-color: var(--color-primary);
+		background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+		box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
+	}
+
+	.card-header {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.card-icon {
+		width: 60px;
+		height: 60px;
+		border-radius: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: white;
+		flex-shrink: 0;
+	}
+
+	.card-icon.azure { background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%); }
+	.card-icon.exchange { background: linear-gradient(135deg, #0f7938 0%, #094d24 100%); }
+	.card-icon.defender { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); }
+	.card-icon.sharepoint { background: linear-gradient(135deg, #038387 0%, #025d60 100%); }
+	.card-icon.teams { background: linear-gradient(135deg, #5558af 0%, #3d3e8e 100%); }
+	.card-icon.dlp { background: linear-gradient(135deg, #f39c12 0%, #d68910 100%); }
+	.card-icon.compliance { background: linear-gradient(135deg, #27ae60 0%, #229954 100%); }
+	.card-icon.power { background: linear-gradient(135deg, #742774 0%, #5a1d5a 100%); }
+
+	.card-info h3 {
+		font-size: 1.25rem;
+		color: var(--color-dark);
+		margin: 0;
+		font-weight: 700;
+	}
+
+	.duration {
+		font-size: 0.875rem;
+		color: var(--color-gray);
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+
+	.card-content p {
+		color: #4b5563;
+		line-height: 1.6;
+		flex-grow: 1;
+	}
+
+	.card-features {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: auto;
+	}
+
+	.feature {
+		padding: 0.25rem 0.75rem;
+		background: #f3f4f6;
+		border-radius: 20px;
+		font-size: 0.8rem;
+		color: #6b7280;
+		border: 1px solid #e5e7eb;
+	}
+
+	.assessment-card input:checked ~ .card-content .feature {
+		background: rgba(102, 126, 234, 0.1);
+		color: var(--color-primary);
+		border-color: rgba(102, 126, 234, 0.3);
+	}
+
+	.action-bar {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: white;
+		border-top: 1px solid #e5e7eb;
+		padding: 1.5rem;
+		box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+		z-index: 100;
+	}
+
+	.action-bar .container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.selection-info {
+		display: flex;
+		gap: 2rem;
+		align-items: center;
+	}
+
+	.selection-count {
+		font-size: 1.1rem;
+		color: var(--color-dark);
+		font-weight: 600;
+	}
+
+	#selected-count {
+		color: var(--color-primary);
+		font-size: 1.5rem;
+	}
+
+	.estimated-time {
+		color: var(--color-gray);
+	}
+
+	#total-time {
+		font-weight: 600;
+		color: var(--color-dark);
+	}
+
+	.action-buttons {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.btn-primary, .btn-secondary {
+		padding: 0.875rem 1.5rem;
+		border-radius: 10px;
+		font-size: 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		transition: all 0.3s ease;
+		border: none;
+	}
+
+	.btn-primary {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.btn-primary::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+		transition: left 0.6s ease;
+	}
+
+	.btn-primary:hover::before {
+		left: 100%;
+	}
+
+	.btn-primary:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+	}
+
+	.btn-secondary {
+		background: transparent;
+		color: var(--color-primary);
+		border: 2px solid var(--color-primary);
+	}
+
+	.btn-secondary:hover {
+		background: var(--color-primary);
+		color: white;
+	}
+
+	@media (max-width: 768px) {
+		.header h1 {
+			font-size: 2rem;
+		}
+		
+		.assessment-cards {
+			grid-template-columns: 1fr;
+		}
+		
+		.action-bar .container {
+			flex-direction: column;
+			gap: 1.5rem;
+		}
+		
+		.selection-info {
+			width: 100%;
+			justify-content: space-between;
+		}
+		
+		.action-buttons {
+			width: 100%;
+		}
+		
+		.action-buttons button {
+			flex: 1;
+		}
+		
+		.select-main {
+			padding-bottom: 180px;
+		}
+	}
+</style>
+
+<script>
+	// Check auth
+	if (!localStorage.getItem('powerreview_auth')) {
+		window.location.href = '/login';
+	}
+
+	// Time estimates for each assessment (in minutes)
+	const timeEstimates = {
+		azuread: 15,
+		exchange: 20,
+		defender: 10,
+		sharepoint: 25,
+		teams: 15,
+		dlp: 20,
+		compliance: 15,
+		powerplatform: 10
+	};
+
+	// Handle checkbox changes
+	const checkboxes = document.querySelectorAll('input[name="assessment"]');
+	const selectedCount = document.getElementById('selected-count');
+	const totalTime = document.getElementById('total-time');
+	const startBtn = document.getElementById('start-assessment');
+
+	function updateSelection() {
+		const selected = Array.from(checkboxes).filter(cb => cb.checked);
+		const count = selected.length;
+		const time = selected.reduce((total, cb) => {
+			return total + (timeEstimates[cb.value] || 0);
+		}, 0);
+
+		selectedCount!.textContent = count.toString();
+		totalTime!.textContent = `${time} minutes`;
+
+		// Disable start button if nothing selected
+		startBtn!.style.opacity = count === 0 ? '0.5' : '1';
+		startBtn!.style.cursor = count === 0 ? 'not-allowed' : 'pointer';
+	}
+
+	checkboxes.forEach(checkbox => {
+		checkbox.addEventListener('change', updateSelection);
+	});
+
+	// Handle start assessment
+	startBtn!.addEventListener('click', () => {
+		const selected = Array.from(checkboxes)
+			.filter(cb => cb.checked)
+			.map(cb => cb.value);
+
+		if (selected.length === 0) {
+			return;
+		}
+
+		// Store selected assessments
+		localStorage.setItem('powerreview_assessments', JSON.stringify(selected));
+
+		// Redirect to execution page
+		window.location.href = '/execute';
+	});
+
+	// Initialize
+	updateSelection();
+</script>

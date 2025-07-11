@@ -1,0 +1,675 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="PowerReview Assessment">
+	<main>
+		<div class="container">
+			<h1>Security Assessment Wizard</h1>
+			<p class="subtitle">Configure and run your M365 security assessment</p>
+
+			<div class="wizard-container">
+				<div class="progress-container">
+					<div class="progress-bar">
+						<div class="progress-fill" style="width: 25%"></div>
+					</div>
+					<div class="progress-steps">
+						<div class="step active">1. Scope</div>
+						<div class="step">2. Connect</div>
+						<div class="step">3. Assess</div>
+						<div class="step">4. Report</div>
+					</div>
+				</div>
+
+				<form id="assessment-form" class="assessment-form">
+					<!-- Step 1: Scope Selection -->
+					<div class="form-step active" data-step="1">
+						<h2>Select Assessment Scope</h2>
+						<p>Choose the assessment type and areas to analyze</p>
+
+						<div class="radio-group">
+							<label class="radio-card">
+								<input type="radio" name="scope" value="quick" checked>
+								<div class="radio-card-content">
+									<h3>Quick Assessment</h3>
+									<p>15-30 minutes • Essential security checks</p>
+								</div>
+							</label>
+
+							<label class="radio-card">
+								<input type="radio" name="scope" value="standard">
+								<div class="radio-card-content">
+									<h3>Standard Assessment</h3>
+									<p>1-2 hours • Comprehensive analysis</p>
+								</div>
+							</label>
+
+							<label class="radio-card">
+								<input type="radio" name="scope" value="comprehensive">
+								<div class="radio-card-content">
+									<h3>Comprehensive Assessment</h3>
+									<p>2-4 hours • Full security review</p>
+								</div>
+							</label>
+
+							<label class="radio-card">
+								<input type="radio" name="scope" value="custom">
+								<div class="radio-card-content">
+									<h3>Custom Assessment</h3>
+									<p>Select specific areas to assess</p>
+								</div>
+							</label>
+						</div>
+
+						<div id="custom-areas" class="custom-areas" style="display: none;">
+							<h3>Select Areas to Assess</h3>
+							<div class="checkbox-group">
+								<label class="checkbox-item">
+									<input type="checkbox" name="areas" value="azuread">
+									<span>Azure AD & Identity</span>
+								</label>
+								<label class="checkbox-item">
+									<input type="checkbox" name="areas" value="exchange">
+									<span>Exchange & Email Security</span>
+								</label>
+								<label class="checkbox-item">
+									<input type="checkbox" name="areas" value="sharepoint">
+									<span>SharePoint & OneDrive</span>
+								</label>
+								<label class="checkbox-item">
+									<input type="checkbox" name="areas" value="teams">
+									<span>Microsoft Teams</span>
+								</label>
+								<label class="checkbox-item">
+									<input type="checkbox" name="areas" value="dlp">
+									<span>Data Loss Prevention</span>
+								</label>
+								<label class="checkbox-item">
+									<input type="checkbox" name="areas" value="defender">
+									<span>Microsoft Defender</span>
+								</label>
+								<label class="checkbox-item">
+									<input type="checkbox" name="areas" value="compliance">
+									<span>Compliance & Audit</span>
+								</label>
+								<label class="checkbox-item">
+									<input type="checkbox" name="areas" value="powerplatform">
+									<span>Power Platform</span>
+								</label>
+							</div>
+						</div>
+					</div>
+
+					<!-- Step 2: Connection -->
+					<div class="form-step" data-step="2">
+						<h2>Connect to M365 Services</h2>
+						<p>We'll need to connect to your Microsoft 365 tenant</p>
+
+						<div class="connection-info">
+							<div class="info-card">
+								<h3>Required Permissions</h3>
+								<ul>
+									<li>Global Reader or higher</li>
+									<li>Security Reader access</li>
+									<li>Compliance admin for audit logs</li>
+								</ul>
+							</div>
+
+							<div class="info-card">
+								<h3>Connection Method</h3>
+								<div class="radio-group-inline">
+									<label>
+										<input type="radio" name="auth" value="interactive" checked>
+										<span>Interactive Login</span>
+									</label>
+									<label>
+										<input type="radio" name="auth" value="certificate">
+										<span>Certificate Auth</span>
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="tenant-input">
+							<label for="tenant">
+								Tenant Name (optional)
+								<input type="text" id="tenant" name="tenant" placeholder="contoso.onmicrosoft.com">
+							</label>
+						</div>
+					</div>
+
+					<!-- Step 3: Assessment Running -->
+					<div class="form-step" data-step="3">
+						<h2>Running Assessment</h2>
+						<div class="assessment-progress">
+							<div class="spinner"></div>
+							<p id="status-message">Initializing assessment...</p>
+							<div class="task-list" id="task-list">
+								<!-- Tasks will be dynamically added here -->
+							</div>
+						</div>
+					</div>
+
+					<!-- Step 4: Results -->
+					<div class="form-step" data-step="4">
+						<h2>Assessment Complete!</h2>
+						<div class="results-summary">
+							<div class="result-card critical">
+								<h3>Critical Issues</h3>
+								<div class="result-count">0</div>
+							</div>
+							<div class="result-card high">
+								<h3>High Priority</h3>
+								<div class="result-count">0</div>
+							</div>
+							<div class="result-card medium">
+								<h3>Medium Priority</h3>
+								<div class="result-count">0</div>
+							</div>
+							<div class="result-card low">
+								<h3>Low Priority</h3>
+								<div class="result-count">0</div>
+							</div>
+						</div>
+						<div class="action-buttons">
+							<a href="/reports" class="btn btn-primary">View Detailed Report</a>
+							<button type="button" class="btn btn-secondary" onclick="window.print()">Export PDF</button>
+						</div>
+					</div>
+
+					<div class="form-navigation">
+						<button type="button" id="prev-btn" class="btn btn-secondary" style="display: none;">Previous</button>
+						<button type="button" id="next-btn" class="btn btn-primary">Next</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		padding: 2rem;
+		min-height: calc(100vh - 200px);
+	}
+
+	.container {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	h1 {
+		font-size: 2.5rem;
+		color: var(--color-dark);
+		margin-bottom: 0.5rem;
+	}
+
+	.subtitle {
+		color: var(--color-gray);
+		font-size: 1.2rem;
+		margin-bottom: 2rem;
+	}
+
+	.wizard-container {
+		background: white;
+		border-radius: 1rem;
+		box-shadow: var(--shadow-lg);
+		padding: 2rem;
+	}
+
+	.progress-container {
+		margin-bottom: 3rem;
+	}
+
+	.progress-bar {
+		height: 8px;
+		background: var(--color-light-gray);
+		border-radius: 4px;
+		overflow: hidden;
+		margin-bottom: 1rem;
+	}
+
+	.progress-fill {
+		height: 100%;
+		background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+		transition: width 0.3s ease;
+	}
+
+	.progress-steps {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.step {
+		font-size: 0.9rem;
+		color: var(--color-gray);
+		font-weight: 600;
+	}
+
+	.step.active {
+		color: var(--color-primary);
+	}
+
+	.form-step {
+		display: none;
+		animation: fadeIn 0.3s ease;
+	}
+
+	.form-step.active {
+		display: block;
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(10px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	.radio-group {
+		display: grid;
+		gap: 1rem;
+		margin-top: 1.5rem;
+	}
+
+	.radio-card {
+		display: block;
+		cursor: pointer;
+	}
+
+	.radio-card input {
+		display: none;
+	}
+
+	.radio-card-content {
+		padding: 1.5rem;
+		border: 2px solid var(--color-light-gray);
+		border-radius: 0.5rem;
+		transition: all 0.3s ease;
+	}
+
+	.radio-card input:checked ~ .radio-card-content {
+		border-color: var(--color-primary);
+		background: rgba(102, 126, 234, 0.1);
+	}
+
+	.radio-card h3 {
+		margin: 0 0 0.5rem;
+		color: var(--color-dark);
+	}
+
+	.radio-card p {
+		margin: 0;
+		color: var(--color-gray);
+		font-size: 0.9rem;
+	}
+
+	.custom-areas {
+		margin-top: 2rem;
+		padding: 1.5rem;
+		background: var(--color-bg);
+		border-radius: 0.5rem;
+	}
+
+	.checkbox-group {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+
+	.checkbox-item {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		cursor: pointer;
+	}
+
+	.checkbox-item input {
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+	}
+
+	.connection-info {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5rem;
+		margin: 2rem 0;
+	}
+
+	.info-card {
+		padding: 1.5rem;
+		background: var(--color-bg);
+		border-radius: 0.5rem;
+	}
+
+	.info-card h3 {
+		margin: 0 0 1rem;
+		color: var(--color-dark);
+	}
+
+	.info-card ul {
+		list-style: none;
+		padding: 0;
+	}
+
+	.info-card li {
+		padding: 0.5rem 0;
+		color: var(--color-gray);
+		position: relative;
+		padding-left: 1.5rem;
+	}
+
+	.info-card li::before {
+		content: "✓";
+		position: absolute;
+		left: 0;
+		color: var(--color-primary);
+	}
+
+	.radio-group-inline {
+		display: flex;
+		gap: 1.5rem;
+	}
+
+	.radio-group-inline label {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		cursor: pointer;
+	}
+
+	.tenant-input {
+		margin-top: 2rem;
+	}
+
+	.tenant-input label {
+		display: block;
+		color: var(--color-dark);
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+	}
+
+	.tenant-input input {
+		width: 100%;
+		padding: 0.75rem;
+		border: 2px solid var(--color-light-gray);
+		border-radius: 0.5rem;
+		font-size: 1rem;
+		transition: border-color 0.3s ease;
+	}
+
+	.tenant-input input:focus {
+		outline: none;
+		border-color: var(--color-primary);
+	}
+
+	.assessment-progress {
+		text-align: center;
+		padding: 3rem 0;
+	}
+
+	.spinner {
+		width: 60px;
+		height: 60px;
+		border: 4px solid var(--color-light-gray);
+		border-top-color: var(--color-primary);
+		border-radius: 50%;
+		margin: 0 auto 2rem;
+		animation: spin 1s linear infinite;
+	}
+
+	@keyframes spin {
+		to { transform: rotate(360deg); }
+	}
+
+	#status-message {
+		font-size: 1.2rem;
+		color: var(--color-gray);
+		margin-bottom: 2rem;
+	}
+
+	.task-list {
+		max-width: 500px;
+		margin: 0 auto;
+		text-align: left;
+	}
+
+	.task-item {
+		padding: 0.75rem;
+		margin: 0.5rem 0;
+		background: var(--color-bg);
+		border-radius: 0.5rem;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.task-item.completed {
+		color: var(--color-primary);
+	}
+
+	.results-summary {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+		gap: 1.5rem;
+		margin: 2rem 0;
+	}
+
+	.result-card {
+		padding: 1.5rem;
+		border-radius: 0.5rem;
+		text-align: center;
+	}
+
+	.result-card h3 {
+		margin: 0 0 1rem;
+		font-size: 1rem;
+		font-weight: 600;
+	}
+
+	.result-count {
+		font-size: 3rem;
+		font-weight: 800;
+	}
+
+	.result-card.critical {
+		background: #fee;
+		color: #c53030;
+	}
+
+	.result-card.high {
+		background: #fef5e7;
+		color: #d69e2e;
+	}
+
+	.result-card.medium {
+		background: #e6f3ff;
+		color: #3182ce;
+	}
+
+	.result-card.low {
+		background: #f0f9ff;
+		color: #4a5568;
+	}
+
+	.action-buttons {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+		margin-top: 2rem;
+	}
+
+	.form-navigation {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 2rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--color-light-gray);
+	}
+
+	.btn {
+		padding: 0.75rem 1.5rem;
+		border-radius: 0.5rem;
+		font-weight: 600;
+		text-decoration: none;
+		border: none;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		font-size: 1rem;
+	}
+
+	.btn-primary {
+		background: var(--color-primary);
+		color: white;
+	}
+
+	.btn-primary:hover {
+		background: var(--color-primary-dark);
+	}
+
+	.btn-secondary {
+		background: transparent;
+		color: var(--color-primary);
+		border: 2px solid var(--color-primary);
+	}
+
+	.btn-secondary:hover {
+		background: var(--color-primary);
+		color: white;
+	}
+
+	@media (max-width: 768px) {
+		.connection-info {
+			grid-template-columns: 1fr;
+		}
+		
+		.results-summary {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+</style>
+
+<script>
+	// Wizard navigation
+	let currentStep = 1;
+	const totalSteps = 4;
+	
+	const prevBtn = document.getElementById('prev-btn') as HTMLButtonElement;
+	const nextBtn = document.getElementById('next-btn') as HTMLButtonElement;
+	const progressFill = document.querySelector('.progress-fill') as HTMLElement;
+	const steps = document.querySelectorAll('.step');
+	const formSteps = document.querySelectorAll('.form-step');
+	
+	// Handle scope selection
+	const scopeRadios = document.querySelectorAll('input[name="scope"]');
+	const customAreas = document.getElementById('custom-areas');
+	
+	scopeRadios.forEach(radio => {
+		radio.addEventListener('change', (e) => {
+			const target = e.target as HTMLInputElement;
+			if (target.value === 'custom') {
+				customAreas!.style.display = 'block';
+			} else {
+				customAreas!.style.display = 'none';
+			}
+		});
+	});
+	
+	function updateStep(step: number) {
+		// Update progress
+		const progress = (step / totalSteps) * 100;
+		progressFill.style.width = `${progress}%`;
+		
+		// Update step indicators
+		steps.forEach((s, index) => {
+			if (index < step) {
+				s.classList.add('active');
+			} else {
+				s.classList.remove('active');
+			}
+		});
+		
+		// Show/hide form steps
+		formSteps.forEach((fs, index) => {
+			if (index === step - 1) {
+				fs.classList.add('active');
+			} else {
+				fs.classList.remove('active');
+			}
+		});
+		
+		// Update navigation buttons
+		prevBtn.style.display = step === 1 ? 'none' : 'block';
+		
+		if (step === 3) {
+			nextBtn.style.display = 'none';
+			runAssessment();
+		} else if (step === 4) {
+			nextBtn.textContent = 'Start New Assessment';
+		} else {
+			nextBtn.style.display = 'block';
+			nextBtn.textContent = 'Next';
+		}
+	}
+	
+	function runAssessment() {
+		const taskList = document.getElementById('task-list');
+		const statusMessage = document.getElementById('status-message');
+		
+		const tasks = [
+			'Connecting to Azure AD...',
+			'Analyzing user accounts...',
+			'Checking security policies...',
+			'Reviewing email settings...',
+			'Scanning SharePoint sites...',
+			'Evaluating Teams configuration...',
+			'Generating report...'
+		];
+		
+		let taskIndex = 0;
+		
+		const interval = setInterval(() => {
+			if (taskIndex < tasks.length) {
+				const taskItem = document.createElement('div');
+				taskItem.className = 'task-item';
+				taskItem.innerHTML = `✓ ${tasks[taskIndex]}`;
+				taskList!.appendChild(taskItem);
+				
+				statusMessage!.textContent = tasks[taskIndex];
+				taskIndex++;
+			} else {
+				clearInterval(interval);
+				statusMessage!.textContent = 'Assessment complete!';
+				
+				// Auto-advance to results after 1 second
+				setTimeout(() => {
+					currentStep = 4;
+					updateStep(currentStep);
+					nextBtn.style.display = 'block';
+				}, 1000);
+			}
+		}, 1500);
+	}
+	
+	nextBtn.addEventListener('click', () => {
+		if (currentStep === 4) {
+			// Reset form
+			currentStep = 1;
+			updateStep(currentStep);
+			document.getElementById('task-list')!.innerHTML = '';
+		} else if (currentStep < totalSteps) {
+			currentStep++;
+			updateStep(currentStep);
+		}
+	});
+	
+	prevBtn.addEventListener('click', () => {
+		if (currentStep > 1) {
+			currentStep--;
+			updateStep(currentStep);
+		}
+	});
+	
+	// Initialize
+	updateStep(currentStep);
+</script>

@@ -1,0 +1,551 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="PowerReview - Pre-flight Checks">
+	<main class="preflight-main">
+		<div class="container">
+			<div class="header">
+				<h1>Pre-flight Security Checklist</h1>
+				<p>Let's ensure you have everything ready for a successful assessment</p>
+			</div>
+
+			<div class="checklist-container">
+				<div class="checklist-section" id="credentials-section">
+					<div class="section-header">
+						<div class="section-icon">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+								<circle cx="12" cy="7" r="4"/>
+							</svg>
+						</div>
+						<h2>Microsoft 365 Credentials</h2>
+					</div>
+					
+					<div class="checklist-items">
+						<label class="checklist-item">
+							<input type="checkbox" name="cred-global" required>
+							<span class="checkbox-custom"></span>
+							<div class="item-content">
+								<h3>Global Admin or Global Reader Access</h3>
+								<p>Required for comprehensive tenant analysis</p>
+							</div>
+						</label>
+
+						<label class="checklist-item">
+							<input type="checkbox" name="cred-security" required>
+							<span class="checkbox-custom"></span>
+							<div class="item-content">
+								<h3>Security Reader Permissions</h3>
+								<p>For Microsoft Defender and security policies</p>
+							</div>
+						</label>
+
+						<label class="checklist-item">
+							<input type="checkbox" name="cred-compliance">
+							<span class="checkbox-custom"></span>
+							<div class="item-content">
+								<h3>Compliance Admin Access (Optional)</h3>
+								<p>For audit logs and compliance policies</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<div class="checklist-section" id="pim-section">
+					<div class="section-header">
+						<div class="section-icon">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+								<path d="M12 8v4M12 16h.01"/>
+							</svg>
+						</div>
+						<h2>Privileged Identity Management (PIM)</h2>
+					</div>
+					
+					<div class="checklist-items">
+						<label class="checklist-item">
+							<input type="checkbox" name="pim-activated">
+							<span class="checkbox-custom"></span>
+							<div class="item-content">
+								<h3>PIM Roles Activated</h3>
+								<p>Ensure your elevated permissions are active for the assessment duration</p>
+							</div>
+						</label>
+
+						<label class="checklist-item">
+							<input type="checkbox" name="pim-duration">
+							<span class="checkbox-custom"></span>
+							<div class="item-content">
+								<h3>Sufficient Activation Duration</h3>
+								<p>Recommended: 4+ hours for comprehensive assessment</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<div class="checklist-section" id="urls-section">
+					<div class="section-header">
+						<div class="section-icon">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+								<path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+							</svg>
+						</div>
+						<h2>Required URLs & Information</h2>
+					</div>
+					
+					<div class="url-inputs">
+						<div class="input-group">
+							<label for="tenant-name">
+								<span class="label-text">Primary Tenant Name</span>
+								<span class="label-hint">e.g., contoso.onmicrosoft.com</span>
+							</label>
+							<input type="text" id="tenant-name" name="tenant-name" placeholder="yourcompany.onmicrosoft.com" required>
+						</div>
+
+						<div class="input-group">
+							<label for="sharepoint-admin">
+								<span class="label-text">SharePoint Admin URL</span>
+								<span class="label-hint">Required for SharePoint/OneDrive assessment</span>
+							</label>
+							<input type="url" id="sharepoint-admin" name="sharepoint-admin" placeholder="https://contoso-admin.sharepoint.com">
+						</div>
+
+						<div class="input-group">
+							<label for="exchange-admin">
+								<span class="label-text">Exchange Admin Center URL</span>
+								<span class="label-hint">Optional - will use default if not provided</span>
+							</label>
+							<input type="url" id="exchange-admin" name="exchange-admin" placeholder="https://admin.exchange.microsoft.com">
+						</div>
+					</div>
+				</div>
+
+				<div class="checklist-section" id="mfa-section">
+					<div class="section-header">
+						<div class="section-icon">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<rect x="3" y="11" width="18" height="10" rx="2" ry="2"/>
+								<path d="M7 11V7a5 5 0 0110 0v4"/>
+							</svg>
+						</div>
+						<h2>Authentication Readiness</h2>
+					</div>
+					
+					<div class="checklist-items">
+						<label class="checklist-item">
+							<input type="checkbox" name="mfa-ready" required>
+							<span class="checkbox-custom"></span>
+							<div class="item-content">
+								<h3>MFA Device Ready</h3>
+								<p>Have your authenticator app or security key available</p>
+							</div>
+						</label>
+
+						<label class="checklist-item">
+							<input type="checkbox" name="browser-ready" required>
+							<span class="checkbox-custom"></span>
+							<div class="item-content">
+								<h3>Modern Browser Ready</h3>
+								<p>Chrome, Edge, or Firefox with pop-ups enabled for Microsoft domains</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<div class="action-section">
+					<div class="progress-indicator">
+						<div class="progress-bar">
+							<div class="progress-fill" id="progress-fill"></div>
+						</div>
+						<p class="progress-text">Complete all required items to proceed</p>
+					</div>
+
+					<button id="continue-btn" class="continue-button" disabled>
+						<span>Continue to Assessment Selection</span>
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M5 12h14M12 5l7 7-7 7"/>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.preflight-main {
+		min-height: calc(100vh - 140px);
+		background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+		padding: 3rem 1rem;
+	}
+
+	.container {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.header {
+		text-align: center;
+		margin-bottom: 3rem;
+		animation: fadeInDown 0.6s ease-out;
+	}
+
+	@keyframes fadeInDown {
+		from { opacity: 0; transform: translateY(-20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	.header h1 {
+		font-size: 3rem;
+		font-weight: 800;
+		color: var(--color-dark);
+		margin: 0 0 0.5rem;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.header p {
+		font-size: 1.25rem;
+		color: var(--color-gray);
+	}
+
+	.checklist-container {
+		background: white;
+		border-radius: 20px;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+		overflow: hidden;
+	}
+
+	.checklist-section {
+		padding: 2.5rem;
+		border-bottom: 1px solid #e5e7eb;
+		animation: fadeInUp 0.6s ease-out;
+		animation-fill-mode: both;
+	}
+
+	.checklist-section:nth-child(1) { animation-delay: 0.1s; }
+	.checklist-section:nth-child(2) { animation-delay: 0.2s; }
+	.checklist-section:nth-child(3) { animation-delay: 0.3s; }
+	.checklist-section:nth-child(4) { animation-delay: 0.4s; }
+
+	@keyframes fadeInUp {
+		from { opacity: 0; transform: translateY(20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	.checklist-section:last-of-type {
+		border-bottom: none;
+	}
+
+	.section-header {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		margin-bottom: 2rem;
+	}
+
+	.section-icon {
+		width: 50px;
+		height: 50px;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		border-radius: 12px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: white;
+		flex-shrink: 0;
+	}
+
+	.section-header h2 {
+		font-size: 1.5rem;
+		color: var(--color-dark);
+		margin: 0;
+	}
+
+	.checklist-items {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.checklist-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 1rem;
+		padding: 1.25rem;
+		background: #f9fafb;
+		border-radius: 12px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.checklist-item::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+		transition: left 0.5s ease;
+	}
+
+	.checklist-item:hover::before {
+		left: 100%;
+	}
+
+	.checklist-item:hover {
+		background: #f3f4f6;
+		transform: translateX(4px);
+	}
+
+	.checklist-item input[type="checkbox"] {
+		display: none;
+	}
+
+	.checkbox-custom {
+		width: 24px;
+		height: 24px;
+		border: 2px solid #d1d5db;
+		border-radius: 6px;
+		position: relative;
+		transition: all 0.3s ease;
+		flex-shrink: 0;
+		margin-top: 2px;
+	}
+
+	.checklist-item input[type="checkbox"]:checked ~ .checkbox-custom {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		border-color: transparent;
+	}
+
+	.checkbox-custom::after {
+		content: '';
+		position: absolute;
+		top: 2px;
+		left: 7px;
+		width: 6px;
+		height: 12px;
+		border: solid white;
+		border-width: 0 2px 2px 0;
+		transform: rotate(45deg) scale(0);
+		transition: transform 0.3s ease;
+	}
+
+	.checklist-item input[type="checkbox"]:checked ~ .checkbox-custom::after {
+		transform: rotate(45deg) scale(1);
+	}
+
+	.item-content h3 {
+		font-size: 1.1rem;
+		color: var(--color-dark);
+		margin: 0 0 0.25rem;
+		font-weight: 600;
+	}
+
+	.item-content p {
+		font-size: 0.9rem;
+		color: var(--color-gray);
+		margin: 0;
+		line-height: 1.5;
+	}
+
+	.url-inputs {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.input-group {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.input-group label {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+	}
+
+	.label-text {
+		font-weight: 600;
+		color: var(--color-dark);
+	}
+
+	.label-hint {
+		font-size: 0.85rem;
+		color: var(--color-gray);
+	}
+
+	.input-group input {
+		padding: 0.875rem 1rem;
+		border: 2px solid #e5e7eb;
+		border-radius: 10px;
+		font-size: 1rem;
+		transition: all 0.3s ease;
+		background: #f9fafb;
+	}
+
+	.input-group input:focus {
+		outline: none;
+		border-color: var(--color-primary);
+		background: white;
+		box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+	}
+
+	.action-section {
+		padding: 2.5rem;
+		background: linear-gradient(135deg, #f8fafc 0%, #f3f4f6 100%);
+	}
+
+	.progress-indicator {
+		margin-bottom: 2rem;
+	}
+
+	.progress-bar {
+		height: 8px;
+		background: #e5e7eb;
+		border-radius: 4px;
+		overflow: hidden;
+		margin-bottom: 1rem;
+	}
+
+	.progress-fill {
+		height: 100%;
+		background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+		width: 0%;
+		transition: width 0.5s ease;
+	}
+
+	.progress-text {
+		text-align: center;
+		color: var(--color-gray);
+		font-size: 0.95rem;
+	}
+
+	.continue-button {
+		width: 100%;
+		padding: 1.25rem;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		border: none;
+		border-radius: 12px;
+		font-size: 1.1rem;
+		font-weight: 600;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.continue-button::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+		transition: left 0.6s ease;
+	}
+
+	.continue-button:not(:disabled):hover::before {
+		left: 100%;
+	}
+
+	.continue-button:not(:disabled):hover {
+		transform: translateY(-2px);
+		box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+	}
+
+	.continue-button:disabled {
+		opacity: 0.5;
+		cursor: not-allowed;
+	}
+
+	@media (max-width: 768px) {
+		.header h1 {
+			font-size: 2rem;
+		}
+		
+		.checklist-section {
+			padding: 1.5rem;
+		}
+		
+		.section-header {
+			flex-direction: column;
+			text-align: center;
+		}
+	}
+</style>
+
+<script>
+	// Check auth
+	if (!localStorage.getItem('powerreview_auth')) {
+		window.location.href = '/login';
+	}
+
+	// Handle checkbox changes
+	const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+	const continueBtn = document.getElementById('continue-btn') as HTMLButtonElement;
+	const progressFill = document.getElementById('progress-fill') as HTMLElement;
+	const requiredCheckboxes = document.querySelectorAll('input[type="checkbox"][required]');
+	
+	function updateProgress() {
+		const totalRequired = requiredCheckboxes.length;
+		const checkedRequired = Array.from(requiredCheckboxes).filter(cb => cb.checked).length;
+		const totalOptional = checkboxes.length - totalRequired;
+		const checkedOptional = Array.from(checkboxes).filter(cb => cb.checked && !cb.required).length;
+		
+		// Required items have more weight
+		const requiredProgress = (checkedRequired / totalRequired) * 70;
+		const optionalProgress = (checkedOptional / totalOptional) * 30;
+		const totalProgress = requiredProgress + optionalProgress;
+		
+		progressFill.style.width = `${totalProgress}%`;
+		
+		// Enable continue button only if all required items are checked
+		const allRequiredChecked = checkedRequired === totalRequired;
+		continueBtn.disabled = !allRequiredChecked;
+		
+		if (allRequiredChecked) {
+			document.querySelector('.progress-text')!.textContent = 'All requirements met! You can proceed.';
+		} else {
+			document.querySelector('.progress-text')!.textContent = `Complete ${totalRequired - checkedRequired} more required items to proceed`;
+		}
+	}
+	
+	checkboxes.forEach(checkbox => {
+		checkbox.addEventListener('change', updateProgress);
+	});
+	
+	// Handle form submission
+	continueBtn.addEventListener('click', () => {
+		// Store the configuration
+		const config = {
+			tenant: (document.getElementById('tenant-name') as HTMLInputElement).value,
+			sharepointUrl: (document.getElementById('sharepoint-admin') as HTMLInputElement).value,
+			exchangeUrl: (document.getElementById('exchange-admin') as HTMLInputElement).value,
+			timestamp: new Date().toISOString()
+		};
+		
+		localStorage.setItem('powerreview_config', JSON.stringify(config));
+		
+		// Redirect to assessment selection
+		window.location.href = '/assessment-select';
+	});
+	
+	// Initialize
+	updateProgress();
+</script>
