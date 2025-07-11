@@ -9,7 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/vercel": "^7.5.0",
+    "@astrojs/vercel": "^8.0.0",
     "astro": "^5.11.0",
     "jsonwebtoken": "^9.0.2",
     "bcryptjs": "^2.4.3"
