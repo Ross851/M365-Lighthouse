@@ -687,6 +687,97 @@ import Layout from '../layouts/Layout.astro';
 		elapsedTime.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 	}, 1000);
 
+	// Connect to real assessment stream
+	async function startAssessment() {
+		try {
+			const config = JSON.parse(localStorage.getItem('powerreview_config') || '{}');
+			const token = localStorage.getItem('powerreview_auth');
+			
+			// Start assessment via API
+			const response = await fetch('/api/assessment/start', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${token}`
+				},
+				body: JSON.stringify({
+					assessments,
+					config
+				})
+			});
+			
+			const { sessionId } = await response.json();
+			localStorage.setItem('powerreview_session', sessionId);
+			
+			// Connect to event stream
+			const eventSource = new EventSource(`/api/assessment/stream?sessionId=${sessionId}`);
+			
+			eventSource.onmessage = (event) => {
+				const data = JSON.parse(event.data);
+				handleStreamEvent(data);
+			};
+			
+			eventSource.onerror = () => {
+				console.error('Stream connection lost');
+				eventSource.close();
+			};
+			
+		} catch (error) {
+			console.error('Failed to start assessment:', error);
+		}
+	}
+	
+	// Handle stream events
+	function handleStreamEvent(data: any) {
+		switch (data.type) {
+			case 'log':
+				addTerminalLine(
+					data.message.includes('[SUCCESS]') ? 'success' :
+					data.message.includes('[WARN]') ? 'warning' :
+					data.message.includes('[ERROR]') || data.message.includes('[CRITICAL]') ? 'error' : 'info',
+					data.message
+				);
+				break;
+				
+			case 'progress':
+				const pipelineItem = document.getElementById(`pipeline-${data.assessment}`);
+				if (pipelineItem) {
+					pipelineItem.classList.remove('active', 'completed', 'error');
+					pipelineItem.classList.add(data.status === 'completed' ? 'completed' : 'active');
+					
+					if (data.duration) {
+						pipelineItem.querySelector('.pipeline-time')!.textContent = data.duration;
+					}
+				}
+				break;
+				
+			case 'metric':
+				const element = document.getElementById(data.name);
+				if (element) {
+					element.textContent = data.value.toString();
+				}
+				updateMetrics();
+				break;
+				
+			case 'complete':
+				addTerminalLine('success', data.message);
+				progressPercent.textContent = '100%';
+				
+				// Redirect to results
+				setTimeout(() => {
+					const sessionId = localStorage.getItem('powerreview_session');
+					window.location.href = `/results?sessionId=${sessionId}`;
+				}, 2000);
+				break;
+		}
+		
+		// Update progress
+		const completed = document.querySelectorAll('.pipeline-item.completed').length;
+		const total = assessments.length;
+		const progress = Math.floor((completed / total) * 100);
+		progressPercent.textContent = `${progress}%`;
+	}
+
 	// Simulate assessment execution
 	function runAssessment() {
 		if (currentAssessmentIndex >= assessments.length) {
@@ -756,9 +847,16 @@ import Layout from '../layouts/Layout.astro';
 		}, 5000); // Simulate faster for demo
 	}
 
-	// Start assessment
+	// Start real assessment or simulation
 	setTimeout(() => {
-		runAssessment();
+		// Check if we have API endpoints available
+		if (window.location.hostname === 'localhost') {
+			// Use simulation for local development
+			runAssessment();
+		} else {
+			// Use real API in production
+			startAssessment();
+		}
 	}, 1000);
 
 	// Handle auto-scroll toggle

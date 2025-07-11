@@ -1,0 +1,430 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const { sessionId } = Astro.params;
+---
+
+<Layout title="PowerReview - Security Report">
+	<main class="report-main">
+		<div class="report-container">
+			<header class="report-header">
+				<div class="header-content">
+					<h1>Security Assessment Report</h1>
+					<p class="session-info">Session ID: {sessionId}</p>
+				</div>
+				<div class="header-actions">
+					<button class="btn-action" onclick="window.print()">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<polyline points="6 9 6 2 18 2 18 9"/>
+							<path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/>
+							<rect x="6" y="14" width="12" height="8"/>
+						</svg>
+						Print Report
+					</button>
+					<button class="btn-action" id="download-pdf">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+							<polyline points="7 10 12 15 17 10"/>
+							<line x1="12" y1="15" x2="12" y2="3"/>
+						</svg>
+						Download PDF
+					</button>
+					<button class="btn-action primary" id="share-report">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<circle cx="18" cy="5" r="3"/>
+							<circle cx="6" cy="12" r="3"/>
+							<circle cx="18" cy="19" r="3"/>
+							<line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+							<line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+						</svg>
+						Share with Client
+					</button>
+				</div>
+			</header>
+
+			<div class="report-content" id="report-content">
+				<div class="loading-spinner">
+					<div class="spinner"></div>
+					<p>Loading report data...</p>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.report-main {
+		min-height: 100vh;
+		background: #f8f9fa;
+		padding: 2rem;
+	}
+
+	.report-container {
+		max-width: 1200px;
+		margin: 0 auto;
+		background: white;
+		border-radius: 12px;
+		box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+		overflow: hidden;
+	}
+
+	.report-header {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		padding: 2rem 3rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.header-content h1 {
+		font-size: 2rem;
+		margin: 0 0 0.5rem;
+	}
+
+	.session-info {
+		opacity: 0.9;
+		font-family: 'SF Mono', 'Monaco', monospace;
+		font-size: 0.9rem;
+	}
+
+	.header-actions {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.btn-action {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.25rem;
+		background: rgba(255, 255, 255, 0.2);
+		color: white;
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		border-radius: 8px;
+		font-weight: 500;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.btn-action:hover {
+		background: rgba(255, 255, 255, 0.3);
+		transform: translateY(-1px);
+	}
+
+	.btn-action.primary {
+		background: white;
+		color: #667eea;
+		border: none;
+	}
+
+	.btn-action.primary:hover {
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+	}
+
+	.report-content {
+		padding: 3rem;
+		min-height: 500px;
+	}
+
+	.loading-spinner {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		min-height: 400px;
+	}
+
+	.spinner {
+		width: 50px;
+		height: 50px;
+		border: 3px solid #f3f3f3;
+		border-top: 3px solid #667eea;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+		margin-bottom: 1rem;
+	}
+
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+
+	/* Report sections */
+	.executive-summary {
+		background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+		padding: 2rem;
+		border-radius: 12px;
+		margin-bottom: 2rem;
+	}
+
+	.summary-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1.5rem;
+		margin-top: 1.5rem;
+	}
+
+	.summary-card {
+		background: white;
+		padding: 1.5rem;
+		border-radius: 8px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+		text-align: center;
+	}
+
+	.summary-value {
+		font-size: 2.5rem;
+		font-weight: 700;
+		color: #667eea;
+		margin: 0.5rem 0;
+	}
+
+	.summary-label {
+		color: #6b7280;
+		font-size: 0.9rem;
+	}
+
+	.findings-section {
+		margin: 3rem 0;
+	}
+
+	.findings-section h2 {
+		font-size: 1.5rem;
+		margin-bottom: 1.5rem;
+		color: #1a202c;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.finding-item {
+		background: #f9fafb;
+		border-left: 4px solid #667eea;
+		padding: 1.5rem;
+		margin-bottom: 1rem;
+		border-radius: 0 8px 8px 0;
+	}
+
+	.finding-item.critical {
+		border-left-color: #ef4444;
+		background: #fef2f2;
+	}
+
+	.finding-item.high {
+		border-left-color: #f59e0b;
+		background: #fffbeb;
+	}
+
+	.finding-item.medium {
+		border-left-color: #3b82f6;
+		background: #eff6ff;
+	}
+
+	.finding-title {
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+		color: #1a202c;
+	}
+
+	.finding-description {
+		color: #4b5563;
+		line-height: 1.6;
+		margin-bottom: 1rem;
+	}
+
+	.finding-metadata {
+		display: flex;
+		gap: 2rem;
+		font-size: 0.875rem;
+		color: #6b7280;
+	}
+
+	.recommendations {
+		background: #f0fdf4;
+		border: 1px solid #86efac;
+		padding: 2rem;
+		border-radius: 12px;
+		margin: 2rem 0;
+	}
+
+	.recommendations h3 {
+		color: #166534;
+		margin-bottom: 1rem;
+	}
+
+	.recommendation-list {
+		list-style: none;
+		padding: 0;
+	}
+
+	.recommendation-list li {
+		padding: 0.75rem 0;
+		border-bottom: 1px solid #dcfce7;
+		display: flex;
+		align-items: flex-start;
+		gap: 0.5rem;
+	}
+
+	.recommendation-list li:last-child {
+		border-bottom: none;
+	}
+
+	@media print {
+		.report-header {
+			background: none;
+			color: black;
+			border-bottom: 2px solid #667eea;
+		}
+
+		.header-actions {
+			display: none;
+		}
+
+		.btn-action {
+			display: none;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.report-header {
+			flex-direction: column;
+			gap: 1.5rem;
+		}
+
+		.header-actions {
+			flex-wrap: wrap;
+		}
+
+		.report-content {
+			padding: 1.5rem;
+		}
+	}
+</style>
+
+<script define:vars={{ sessionId }}>
+	// Load report data
+	async function loadReport() {
+		try {
+			const response = await fetch(`/api/results/${sessionId}`);
+			const data = await response.json();
+			
+			// Generate report HTML
+			const reportHTML = generateReportHTML(data);
+			document.getElementById('report-content').innerHTML = reportHTML;
+			
+		} catch (error) {
+			console.error('Failed to load report:', error);
+			document.getElementById('report-content').innerHTML = `
+				<div class="error-message">
+					<h2>Error Loading Report</h2>
+					<p>Unable to load report data. Please try again later.</p>
+				</div>
+			`;
+		}
+	}
+	
+	function generateReportHTML(data) {
+		return `
+			<section class="executive-summary">
+				<h2>Executive Summary</h2>
+				<p>Security assessment completed on ${new Date(data.timestamp).toLocaleString()}</p>
+				
+				<div class="summary-grid">
+					<div class="summary-card">
+						<div class="summary-label">Overall Score</div>
+						<div class="summary-value">${data.overallScore}/100</div>
+					</div>
+					<div class="summary-card">
+						<div class="summary-label">Critical Issues</div>
+						<div class="summary-value" style="color: #ef4444">${data.findings.critical.length}</div>
+					</div>
+					<div class="summary-card">
+						<div class="summary-label">High Priority</div>
+						<div class="summary-value" style="color: #f59e0b">${data.findings.high.length}</div>
+					</div>
+					<div class="summary-card">
+						<div class="summary-label">Total Findings</div>
+						<div class="summary-value">${
+							data.findings.critical.length + 
+							data.findings.high.length + 
+							data.findings.medium.length + 
+							data.findings.low.length
+						}</div>
+					</div>
+				</div>
+			</section>
+			
+			<section class="findings-section">
+				<h2>
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="12" cy="12" r="10"/>
+						<line x1="12" y1="8" x2="12" y2="12"/>
+						<line x1="12" y1="16" x2="12.01" y2="16"/>
+					</svg>
+					Critical Findings
+				</h2>
+				${data.findings.critical.map(finding => `
+					<div class="finding-item critical">
+						<h3 class="finding-title">${finding.title}</h3>
+						<p class="finding-description">${finding.description}</p>
+						<div class="finding-metadata">
+							<span>Category: ${finding.category}</span>
+							<span>Impact: High</span>
+						</div>
+					</div>
+				`).join('')}
+			</section>
+			
+			<section class="findings-section">
+				<h2>
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+						<line x1="12" y1="9" x2="12" y2="13"/>
+					</svg>
+					High Priority Issues
+				</h2>
+				${data.findings.high.map(finding => `
+					<div class="finding-item high">
+						<h3 class="finding-title">${finding.title}</h3>
+						<p class="finding-description">${finding.description}</p>
+						<div class="finding-metadata">
+							<span>Category: ${finding.category}</span>
+							<span>Impact: High</span>
+						</div>
+					</div>
+				`).join('')}
+			</section>
+			
+			<section class="recommendations">
+				<h3>Top Recommendations</h3>
+				<ol class="recommendation-list">
+					${data.recommendations.map(rec => `
+						<li>
+							<strong>${rec.title}:</strong>
+							${rec.description}
+							<span style="margin-left: auto; font-size: 0.875rem; color: #6b7280;">
+								Impact: ${rec.impact}, Effort: ${rec.effort}
+							</span>
+						</li>
+					`).join('')}
+				</ol>
+			</section>
+		`;
+	}
+	
+	// Download PDF functionality
+	document.getElementById('download-pdf').addEventListener('click', async () => {
+		// In production, this would call a PDF generation API
+		alert('PDF generation would be implemented here');
+	});
+	
+	// Share functionality
+	document.getElementById('share-report').addEventListener('click', async () => {
+		// In production, this would open a share dialog
+		alert('Share functionality would be implemented here');
+	});
+	
+	// Load report on page load
+	loadReport();
+</script>

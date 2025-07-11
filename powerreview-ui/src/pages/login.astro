@@ -419,19 +419,56 @@ import Layout from '../layouts/Layout.astro';
 		
 		const button = form.querySelector('.login-button') as HTMLButtonElement;
 		const buttonText = button.querySelector('.button-text') as HTMLElement;
+		const email = (document.getElementById('email') as HTMLInputElement).value;
+		const password = (document.getElementById('password') as HTMLInputElement).value;
 		
 		// Show loading state
 		buttonText.textContent = 'Authenticating...';
 		button.disabled = true;
 		
-		// Simulate authentication
-		setTimeout(() => {
-			// Store auth state
-			localStorage.setItem('powerreview_auth', 'true');
-			localStorage.setItem('powerreview_user', 'developer@company.com');
+		try {
+			// Call authentication API
+			const response = await fetch('/api/auth/login', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ email, password })
+			});
 			
-			// Redirect to pre-flight checks
-			window.location.href = '/preflight';
-		}, 1500);
+			const data = await response.json();
+			
+			if (response.ok && data.success) {
+				// Store auth state
+				localStorage.setItem('powerreview_auth', data.token);
+				localStorage.setItem('powerreview_user', JSON.stringify(data.user));
+				
+				// Show success briefly
+				buttonText.textContent = 'Success! Redirecting...';
+				
+				// Redirect to pre-flight checks
+				setTimeout(() => {
+					window.location.href = '/preflight';
+				}, 500);
+			} else {
+				// Show error
+				buttonText.textContent = 'Invalid credentials';
+				button.disabled = false;
+				
+				// Reset button text after 2 seconds
+				setTimeout(() => {
+					buttonText.textContent = 'Sign In Securely';
+				}, 2000);
+			}
+		} catch (error) {
+			// Show error
+			buttonText.textContent = 'Connection error';
+			button.disabled = false;
+			
+			// Reset button text after 2 seconds
+			setTimeout(() => {
+				buttonText.textContent = 'Sign In Securely';
+			}, 2000);
+		}
 	});
 </script>

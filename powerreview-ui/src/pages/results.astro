@@ -852,6 +852,57 @@ import Layout from '../layouts/Layout.astro';
 	if (!localStorage.getItem('powerreview_auth')) {
 		window.location.href = '/login';
 	}
+	
+	// Get session ID from URL or localStorage
+	const urlParams = new URLSearchParams(window.location.search);
+	const sessionId = urlParams.get('sessionId') || localStorage.getItem('powerreview_session');
+	
+	// Load real results if session exists
+	if (sessionId) {
+		loadResults(sessionId);
+	}
+	
+	async function loadResults(sessionId: string) {
+		try {
+			const response = await fetch(`/api/results/${sessionId}`);
+			if (response.ok) {
+				const data = await response.json();
+				updateUIWithResults(data);
+			}
+		} catch (error) {
+			console.error('Failed to load results:', error);
+		}
+	}
+	
+	function updateUIWithResults(data: any) {
+		// Update score
+		const scoreValue = document.querySelector('.score-value');
+		if (scoreValue) {
+			scoreValue.textContent = data.overallScore.toString();
+		}
+		
+		// Update findings counts
+		document.querySelector('.finding-card.critical .finding-count')!.textContent = 
+			data.findings.critical.length.toString();
+		document.querySelector('.finding-card.high .finding-count')!.textContent = 
+			data.findings.high.length.toString();
+		document.querySelector('.finding-card.medium .finding-count')!.textContent = 
+			data.findings.medium.length.toString();
+		document.querySelector('.finding-card.low .finding-count')!.textContent = 
+			data.findings.low.length.toString();
+		
+		// Update category scores
+		Object.entries(data.categoryScores).forEach(([category, info]: [string, any]) => {
+			const categoryEl = document.querySelector(`[data-category="${category}"]`);
+			if (categoryEl) {
+				categoryEl.querySelector('.category-score')!.textContent = `${info.score}/100`;
+				const progressBar = categoryEl.querySelector('.progress-fill') as HTMLElement;
+				if (progressBar) {
+					progressBar.style.width = `${info.score}%`;
+				}
+			}
+		});
+	}
 
 	// Animate score circle on load
 	setTimeout(() => {

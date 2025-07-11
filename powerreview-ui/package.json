@@ -9,6 +9,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.11.0"
+    "astro": "^5.11.0",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/bcryptjs": "^2.4.6"
   }
 }
