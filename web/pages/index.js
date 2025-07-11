@@ -39,8 +39,8 @@ export default function PowerReviewDashboard() {
             <nav style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
               <a href="https://github.com/Ross851/M365-Lighthouse" target="_blank" rel="noopener noreferrer" 
                  style={{ color: '#666', textDecoration: 'none' }}>GitHub</a>
-              <a href="/login" 
-                 style={{ color: '#666', textDecoration: 'none' }}>Login</a>
+              <a href="/demo" 
+                 style={{ color: '#666', textDecoration: 'none' }}>Full Demo</a>
               <button onClick={() => setShowDemo(!showDemo)} 
                       style={{ 
                         backgroundColor: '#2563eb', 

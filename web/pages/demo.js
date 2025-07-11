@@ -1,88 +1,160 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 
-export default function Dashboard() {
-  const router = useRouter();
-  const [user, setUser] = useState(null);
-  const [activeView, setActiveView] = useState('overview');
-  const [assessments, setAssessments] = useState([]);
-  const [running, setRunning] = useState(false);
+export default function Demo() {
+  const [authenticated, setAuthenticated] = useState(false);
+  const [activeView, setActiveView] = useState('login');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [assessmentRunning, setAssessmentRunning] = useState(false);
   const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    // Check authentication
-    const token = localStorage.getItem('auth-token');
-    const userData = localStorage.getItem('user-data');
-    if (!token) {
-      router.push('/login');
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (username === 'admin' && password === 'PowerReview2024') {
+      setAuthenticated(true);
+      setActiveView('overview');
+      setError('');
     } else {
-      setUser(JSON.parse(userData));
+      setError('Invalid credentials. Try admin / PowerReview2024');
     }
-  }, []);
+  };
 
-  const startAssessment = async () => {
-    setRunning(true);
+  const startAssessment = () => {
+    setAssessmentRunning(true);
     setProgress(0);
     
-    try {
-      const response = await fetch('/api/assessment', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          tenant: 'current-tenant',
-          modules: ['purview', 'sharepoint', 'teams', 'powerplatform'],
-          analysisLevel: 'standard'
-        })
+    const interval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setAssessmentRunning(false);
+          alert('Assessment Complete! View results in Reports section.');
+          return 100;
+        }
+        return prev + 10;
       });
-      
-      const data = await response.json();
-      
-      // Simulate progress
-      const interval = setInterval(() => {
-        setProgress(prev => {
-          if (prev >= 100) {
-            clearInterval(interval);
-            setRunning(false);
-            loadAssessments();
-            return 100;
-          }
-          return prev + 10;
-        });
-      }, 1000);
-      
-    } catch (error) {
-      console.error('Assessment failed:', error);
-      setRunning(false);
-    }
+    }, 1000);
   };
 
-  const loadAssessments = () => {
-    // Load previous assessments
-    const stored = localStorage.getItem('assessments') || '[]';
-    setAssessments(JSON.parse(stored));
-  };
+  if (!authenticated) {
+    return (
+      <>
+        <Head>
+          <title>PowerReview - Login</title>
+        </Head>
+        <div style={{ 
+          minHeight: '100vh', 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          background: 'linear-gradient(to right, #1e3a8a, #7c3aed)',
+          fontFamily: 'Arial, sans-serif'
+        }}>
+          <div style={{ 
+            background: 'white', 
+            padding: '2rem', 
+            borderRadius: '0.5rem', 
+            boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
+            width: '100%',
+            maxWidth: '400px'
+          }}>
+            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+              <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🚀 PowerReview</h1>
+              <p style={{ color: '#6b7280' }}>Microsoft 365 Security Assessment</p>
+            </div>
 
-  const exportResults = async (format) => {
-    try {
-      const response = await fetch(`/api/export?format=${format}&assessmentId=current`);
-      const data = await response.json();
-      
-      if (data.downloadUrl) {
-        // In production, trigger actual download
-        alert(`Export initiated! Format: ${format}. Download URL: ${data.downloadUrl}`);
-      }
-    } catch (error) {
-      console.error('Export failed:', error);
-    }
-  };
+            <form onSubmit={handleLogin}>
+              <div style={{ marginBottom: '1rem' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600' }}>
+                  Username
+                </label>
+                <input 
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter username"
+                  required
+                  style={{ 
+                    width: '100%', 
+                    padding: '0.75rem', 
+                    border: '1px solid #d1d5db',
+                    borderRadius: '0.375rem',
+                    fontSize: '1rem',
+                    boxSizing: 'border-box'
+                  }}
+                />
+              </div>
 
-  if (!user) return <div>Loading...</div>;
+              <div style={{ marginBottom: '1.5rem' }}>
+                <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600' }}>
+                  Password
+                </label>
+                <input 
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter password"
+                  required
+                  style={{ 
+                    width: '100%', 
+                    padding: '0.75rem', 
+                    border: '1px solid #d1d5db',
+                    borderRadius: '0.375rem',
+                    fontSize: '1rem',
+                    boxSizing: 'border-box'
+                  }}
+                />
+              </div>
+
+              {error && (
+                <div style={{ 
+                  padding: '0.75rem', 
+                  background: '#fee2e2', 
+                  border: '1px solid #fecaca',
+                  borderRadius: '0.375rem',
+                  color: '#dc2626',
+                  marginBottom: '1rem',
+                  fontSize: '0.875rem'
+                }}>
+                  {error}
+                </div>
+              )}
+
+              <button 
+                type="submit"
+                style={{ 
+                  width: '100%',
+                  padding: '0.75rem',
+                  background: '#3b82f6',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '0.375rem',
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  cursor: 'pointer'
+                }}
+              >
+                Sign In
+              </button>
+            </form>
+
+            <div style={{ marginTop: '2rem', textAlign: 'center', fontSize: '0.875rem', color: '#6b7280' }}>
+              <p>Demo Credentials:</p>
+              <p><strong>Username:</strong> admin</p>
+              <p><strong>Password:</strong> PowerReview2024</p>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
       <Head>
-        <title>PowerReview Dashboard - {user?.name}</title>
+        <title>PowerReview Dashboard</title>
       </Head>
 
       <div style={{ minHeight: '100vh', backgroundColor: '#f5f5f5', fontFamily: 'Arial, sans-serif' }}>
@@ -147,11 +219,12 @@ export default function Dashboard() {
               </nav>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <span>👤 {user.name}</span>
+              <span>👤 Admin User</span>
               <button 
                 onClick={() => {
-                  localStorage.clear();
-                  router.push('/login');
+                  setAuthenticated(false);
+                  setUsername('');
+                  setPassword('');
                 }}
                 style={{ 
                   background: '#ef4444',
@@ -260,7 +333,7 @@ export default function Dashboard() {
             <div style={{ background: 'white', padding: '2rem', borderRadius: '0.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
               <h2>Run New Assessment</h2>
               
-              {!running ? (
+              {!assessmentRunning ? (
                 <div>
                   <div style={{ marginBottom: '2rem' }}>
                     <h3>Select Tenant</h3>
@@ -287,23 +360,7 @@ export default function Dashboard() {
                       <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <input type="checkbox" defaultChecked /> Power Platform
                       </label>
-                      <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <input type="checkbox" defaultChecked /> Exchange Online
-                      </label>
-                      <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <input type="checkbox" defaultChecked /> Azure Security
-                      </label>
                     </div>
-                  </div>
-
-                  <div style={{ marginBottom: '2rem' }}>
-                    <h3>Analysis Level</h3>
-                    <select style={{ width: '100%', padding: '0.5rem', borderRadius: '0.25rem', border: '1px solid #d1d5db' }}>
-                      <option>Basic - Quick scan (5-10 minutes)</option>
-                      <option>Standard - Recommended (10-20 minutes)</option>
-                      <option>Deep - Comprehensive analysis (30-45 minutes)</option>
-                      <option>Forensic - Full audit (1-2 hours)</option>
-                    </select>
                   </div>
 
                   <button 
@@ -360,7 +417,6 @@ export default function Dashboard() {
                   <option>General Discovery (15 questions)</option>
                   <option>Healthcare HIPAA Compliance</option>
                   <option>Financial Services SOX</option>
-                  <option>Zero Trust Readiness</option>
                 </select>
               </div>
 
@@ -427,9 +483,9 @@ export default function Dashboard() {
               
               <div style={{ background: 'white', padding: '1.5rem', borderRadius: '0.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', marginBottom: '2rem' }}>
                 <h3>Export Options</h3>
-                <div style={{ display: 'flex', gap: '1rem' }}>
+                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                   <button 
-                    onClick={() => exportResults('pdf')}
+                    onClick={() => alert('PDF Export initiated! In production, this would generate a real PDF.')}
                     style={{ 
                       background: '#ef4444',
                       color: 'white',
@@ -442,7 +498,7 @@ export default function Dashboard() {
                     📄 Export PDF
                   </button>
                   <button 
-                    onClick={() => exportResults('excel')}
+                    onClick={() => alert('Excel Export initiated! In production, this would generate a real Excel file.')}
                     style={{ 
                       background: '#10b981',
                       color: 'white',
@@ -455,7 +511,7 @@ export default function Dashboard() {
                     📊 Export Excel
                   </button>
                   <button 
-                    onClick={() => exportResults('powerbi')}
+                    onClick={() => alert('PowerBI Export initiated! In production, this would connect to PowerBI.')}
                     style={{ 
                       background: '#f59e0b',
                       color: 'white',
@@ -468,6 +524,7 @@ export default function Dashboard() {
                     📈 Export to PowerBI
                   </button>
                   <button 
+                    onClick={() => alert('Client Portal Generated! URL: https://portal.powerreview.com/abc123')}
                     style={{ 
                       background: '#8b5cf6',
                       color: 'white',
@@ -484,47 +541,49 @@ export default function Dashboard() {
 
               <div style={{ background: 'white', padding: '1.5rem', borderRadius: '0.5rem', boxShadow: '0 1px 3px rgba(0,0,0,0.1)' }}>
                 <h3>Recent Reports</h3>
-                <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                  <thead>
-                    <tr style={{ borderBottom: '2px solid #e5e7eb' }}>
-                      <th style={{ padding: '0.75rem', textAlign: 'left' }}>Date</th>
-                      <th style={{ padding: '0.75rem', textAlign: 'left' }}>Tenant</th>
-                      <th style={{ padding: '0.75rem', textAlign: 'left' }}>Score</th>
-                      <th style={{ padding: '0.75rem', textAlign: 'left' }}>Findings</th>
-                      <th style={{ padding: '0.75rem', textAlign: 'left' }}>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
-                      <td style={{ padding: '0.75rem' }}>2024-01-11</td>
-                      <td style={{ padding: '0.75rem' }}>Contoso</td>
-                      <td style={{ padding: '0.75rem' }}>72/100</td>
-                      <td style={{ padding: '0.75rem' }}>
-                        <span style={{ color: '#ef4444' }}>12 Critical</span>, 
-                        <span style={{ color: '#f59e0b' }}> 47 High</span>
-                      </td>
-                      <td style={{ padding: '0.75rem' }}>
-                        <button style={{ marginRight: '0.5rem', color: '#3b82f6', cursor: 'pointer' }}>View</button>
-                        <button style={{ marginRight: '0.5rem', color: '#10b981', cursor: 'pointer' }}>Download</button>
-                        <button style={{ color: '#8b5cf6', cursor: 'pointer' }}>Share</button>
-                      </td>
-                    </tr>
-                    <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
-                      <td style={{ padding: '0.75rem' }}>2024-01-10</td>
-                      <td style={{ padding: '0.75rem' }}>Fabrikam</td>
-                      <td style={{ padding: '0.75rem' }}>85/100</td>
-                      <td style={{ padding: '0.75rem' }}>
-                        <span style={{ color: '#ef4444' }}>3 Critical</span>, 
-                        <span style={{ color: '#f59e0b' }}> 15 High</span>
-                      </td>
-                      <td style={{ padding: '0.75rem' }}>
-                        <button style={{ marginRight: '0.5rem', color: '#3b82f6', cursor: 'pointer' }}>View</button>
-                        <button style={{ marginRight: '0.5rem', color: '#10b981', cursor: 'pointer' }}>Download</button>
-                        <button style={{ color: '#8b5cf6', cursor: 'pointer' }}>Share</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <div style={{ overflowX: 'auto' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '600px' }}>
+                    <thead>
+                      <tr style={{ borderBottom: '2px solid #e5e7eb' }}>
+                        <th style={{ padding: '0.75rem', textAlign: 'left' }}>Date</th>
+                        <th style={{ padding: '0.75rem', textAlign: 'left' }}>Tenant</th>
+                        <th style={{ padding: '0.75rem', textAlign: 'left' }}>Score</th>
+                        <th style={{ padding: '0.75rem', textAlign: 'left' }}>Findings</th>
+                        <th style={{ padding: '0.75rem', textAlign: 'left' }}>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
+                        <td style={{ padding: '0.75rem' }}>2024-01-11</td>
+                        <td style={{ padding: '0.75rem' }}>Contoso</td>
+                        <td style={{ padding: '0.75rem' }}>72/100</td>
+                        <td style={{ padding: '0.75rem' }}>
+                          <span style={{ color: '#ef4444' }}>12 Critical</span>, 
+                          <span style={{ color: '#f59e0b' }}> 47 High</span>
+                        </td>
+                        <td style={{ padding: '0.75rem' }}>
+                          <button style={{ marginRight: '0.5rem', color: '#3b82f6', cursor: 'pointer', background: 'none', border: 'none' }}>View</button>
+                          <button style={{ marginRight: '0.5rem', color: '#10b981', cursor: 'pointer', background: 'none', border: 'none' }}>Download</button>
+                          <button style={{ color: '#8b5cf6', cursor: 'pointer', background: 'none', border: 'none' }}>Share</button>
+                        </td>
+                      </tr>
+                      <tr style={{ borderBottom: '1px solid #e5e7eb' }}>
+                        <td style={{ padding: '0.75rem' }}>2024-01-10</td>
+                        <td style={{ padding: '0.75rem' }}>Fabrikam</td>
+                        <td style={{ padding: '0.75rem' }}>85/100</td>
+                        <td style={{ padding: '0.75rem' }}>
+                          <span style={{ color: '#ef4444' }}>3 Critical</span>, 
+                          <span style={{ color: '#f59e0b' }}> 15 High</span>
+                        </td>
+                        <td style={{ padding: '0.75rem' }}>
+                          <button style={{ marginRight: '0.5rem', color: '#3b82f6', cursor: 'pointer', background: 'none', border: 'none' }}>View</button>
+                          <button style={{ marginRight: '0.5rem', color: '#10b981', cursor: 'pointer', background: 'none', border: 'none' }}>Download</button>
+                          <button style={{ color: '#8b5cf6', cursor: 'pointer', background: 'none', border: 'none' }}>Share</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
           )}

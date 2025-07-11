@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // Remove static export for dynamic routes
+  output: 'export',
   images: {
     unoptimized: true
   }
