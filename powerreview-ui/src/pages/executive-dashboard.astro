@@ -1,0 +1,1079 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Executive Dashboard - PowerReview">
+  <main>
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1>Executive Security Dashboard</h1>
+        <p class="hero-subtitle">Comprehensive view of your organization's security posture with evidence-based recommendations</p>
+        <div class="stats-grid">
+          <div class="stat-card critical">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value" id="risk-score">78%</div>
+              <div class="stat-label">Security Risk Score</div>
+            </div>
+          </div>
+          <div class="stat-card warning">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value" id="exposure">$7.5M</div>
+              <div class="stat-label">Financial Exposure</div>
+            </div>
+          </div>
+          <div class="stat-card info">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                <polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value" id="compliance">45%</div>
+              <div class="stat-label">Compliance Score</div>
+            </div>
+          </div>
+          <div class="stat-card success">
+            <div class="stat-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value" id="protected-users">88%</div>
+              <div class="stat-label">Protected Users</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Key Findings Section -->
+      <section class="findings-section">
+        <h2>Critical Security Findings</h2>
+        <div class="findings-grid" id="findings-container">
+          <div class="finding-card critical">
+            <div class="finding-header">
+              <h3>12% of users lack Multi-Factor Authentication</h3>
+              <span class="impact-badge">HIGH RISK</span>
+            </div>
+            <p class="finding-description">Accounts without MFA are 99.9% more likely to be compromised. This exposes your organization to credential theft, data breaches, and ransomware attacks.</p>
+            <div class="evidence-box">
+              <h4>Evidence</h4>
+              <ul>
+                <li>Source: Azure AD User Report</li>
+                <li>Affected Users: 12 of 100</li>
+                <li>Last Verified: <span class="evidence-date">Today</span></li>
+              </ul>
+              <button class="btn-evidence" onclick="viewEvidence('mfa-gap')">View Screenshot Evidence</button>
+            </div>
+            <div class="business-impact">
+              <h4>Business Impact</h4>
+              <ul>
+                <li>Unauthorized access to sensitive client data</li>
+                <li>Financial fraud through email compromise</li>
+                <li>Regulatory compliance violations (GDPR/HIPAA)</li>
+                <li>Estimated exposure: <strong>$2.1M</strong></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="finding-card high">
+            <div class="finding-header">
+              <h3>External sharing is unrestricted in SharePoint</h3>
+              <span class="impact-badge">DATA LEAK RISK</span>
+            </div>
+            <p class="finding-description">Anyone can share company documents with external users without approval or tracking. This creates significant intellectual property and confidentiality risks.</p>
+            <div class="evidence-box">
+              <h4>Evidence</h4>
+              <ul>
+                <li>Source: SharePoint Admin Center</li>
+                <li>Current Setting: ExternalUserAndGuestSharing</li>
+                <li>Recommended: ExistingExternalUserSharingOnly</li>
+              </ul>
+              <button class="btn-evidence" onclick="viewEvidence('sharepoint-sharing')">View Configuration</button>
+            </div>
+            <div class="business-impact">
+              <h4>Business Impact</h4>
+              <ul>
+                <li>Confidential documents shared with competitors</li>
+                <li>Loss of trade secrets or proprietary information</li>
+                <li>Failed security audits</li>
+                <li>Estimated exposure: <strong>$3.5M</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recommendations Section -->
+      <section class="recommendations-section">
+        <h2>Tiered Security Recommendations</h2>
+        <p class="section-intro">Choose the security investment level that aligns with your budget and risk tolerance</p>
+        
+        <div class="recommendations-grid">
+          <!-- Gold Recommendation -->
+          <div class="recommendation-card gold">
+            <div class="tier-badge">GOLD STANDARD</div>
+            <h3>Comprehensive Security Transformation</h3>
+            <div class="investment-info">
+              <div class="investment-amount">$50,000 - $75,000</div>
+              <div class="timeline">3-4 months</div>
+            </div>
+            
+            <div class="features">
+              <h4>What You Get:</h4>
+              <ul>
+                <li>✓ Azure AD Premium P2 for all users</li>
+                <li>✓ Privileged Identity Management (PIM)</li>
+                <li>✓ AI-powered threat detection</li>
+                <li>✓ Automated incident response</li>
+                <li>✓ 24/7 SOC integration</li>
+                <li>✓ Complete compliance automation</li>
+              </ul>
+            </div>
+            
+            <div class="outcomes">
+              <div class="outcome-stat">
+                <span class="outcome-value">94%</span>
+                <span class="outcome-label">Risk Reduction</span>
+              </div>
+              <div class="outcome-stat">
+                <span class="outcome-value">< 2 weeks</span>
+                <span class="outcome-label">ROI Break-even</span>
+              </div>
+            </div>
+            
+            <button class="btn-primary" onclick="selectRecommendation('gold')">View Detailed Plan</button>
+          </div>
+
+          <!-- Silver Recommendation -->
+          <div class="recommendation-card silver">
+            <div class="tier-badge">SILVER STANDARD</div>
+            <h3>Essential Security Enhancement</h3>
+            <div class="investment-info">
+              <div class="investment-amount">$20,000 - $30,000</div>
+              <div class="timeline">6-8 weeks</div>
+            </div>
+            
+            <div class="features">
+              <h4>What You Get:</h4>
+              <ul>
+                <li>✓ Azure AD Premium P1 for all users</li>
+                <li>✓ Basic Conditional Access</li>
+                <li>✓ Data Loss Prevention policies</li>
+                <li>✓ Microsoft Defender for Office 365</li>
+                <li>✓ Security training program</li>
+                <li>✓ Incident response planning</li>
+              </ul>
+            </div>
+            
+            <div class="outcomes">
+              <div class="outcome-stat">
+                <span class="outcome-value">75%</span>
+                <span class="outcome-label">Risk Reduction</span>
+              </div>
+              <div class="outcome-stat">
+                <span class="outcome-value">< 1 month</span>
+                <span class="outcome-label">ROI Break-even</span>
+              </div>
+            </div>
+            
+            <button class="btn-primary" onclick="selectRecommendation('silver')">View Detailed Plan</button>
+          </div>
+
+          <!-- Bronze Recommendation -->
+          <div class="recommendation-card bronze">
+            <div class="tier-badge">BRONZE STANDARD</div>
+            <h3>Critical Security Basics</h3>
+            <div class="investment-info">
+              <div class="investment-amount">$5,000 - $10,000</div>
+              <div class="timeline">2-3 weeks</div>
+            </div>
+            
+            <div class="features">
+              <h4>What You Get:</h4>
+              <ul>
+                <li>✓ Security Defaults enabled</li>
+                <li>✓ MFA for administrators</li>
+                <li>✓ Legacy auth blocked</li>
+                <li>✓ Basic sharing controls</li>
+                <li>✓ Audit logging enabled</li>
+                <li>✓ Admin training</li>
+              </ul>
+            </div>
+            
+            <div class="outcomes">
+              <div class="outcome-stat">
+                <span class="outcome-value">50%</span>
+                <span class="outcome-label">Risk Reduction</span>
+              </div>
+              <div class="outcome-stat">
+                <span class="outcome-value">Immediate</span>
+                <span class="outcome-label">ROI Break-even</span>
+              </div>
+            </div>
+            
+            <div class="warning-box">
+              <strong>⚠️ Warning:</strong> Does not meet compliance requirements
+            </div>
+            
+            <button class="btn-primary" onclick="selectRecommendation('bronze')">View Detailed Plan</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Business Case Section -->
+      <section class="business-case-section">
+        <h2>The Business Case for Security Investment</h2>
+        <div class="business-case-grid">
+          <div class="case-card">
+            <h3>Cost of Doing Nothing</h3>
+            <div class="cost-breakdown">
+              <div class="cost-item">
+                <span class="cost-label">Year 1 Expected Loss:</span>
+                <span class="cost-value critical">$7,566,000</span>
+              </div>
+              <div class="cost-item">
+                <span class="cost-label">3-Year Cumulative Risk:</span>
+                <span class="cost-value">99.7%</span>
+              </div>
+              <div class="cost-item">
+                <span class="cost-label">Regulatory Fines:</span>
+                <span class="cost-value">$2,100,000</span>
+              </div>
+              <div class="cost-item">
+                <span class="cost-label">Reputational Damage:</span>
+                <span class="cost-value">Incalculable</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="case-card">
+            <h3>Return on Investment</h3>
+            <canvas id="roi-chart"></canvas>
+            <div class="roi-summary">
+              <p>Every dollar invested in security returns:</p>
+              <ul>
+                <li>Gold: <strong>$114</strong> in prevented losses</li>
+                <li>Silver: <strong>$227</strong> in prevented losses</li>
+                <li>Bronze: <strong>$100</strong> in prevented losses</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Action Buttons -->
+      <section class="action-section">
+        <h2>Ready to Secure Your Organization?</h2>
+        <div class="action-buttons">
+          <button class="btn-large btn-primary" onclick="generateExecutiveReport()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+            Download Executive Report
+          </button>
+          <button class="btn-large btn-secondary" onclick="scheduleConsultation()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            Schedule Security Consultation
+          </button>
+          <button class="btn-large btn-tertiary" onclick="viewDetailedAnalysis()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+            </svg>
+            View Technical Details
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Evidence Modal -->
+    <div id="evidence-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h3>Evidence Documentation</h3>
+        <div id="evidence-content"></div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    min-height: calc(100vh - 200px);
+  }
+
+  .hero-section {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: white;
+    padding: 4rem 2rem;
+  }
+
+  .hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: 3rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .stat-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .stat-card.critical {
+    background: rgba(255, 59, 48, 0.2);
+    border-color: rgba(255, 59, 48, 0.3);
+  }
+
+  .stat-card.warning {
+    background: rgba(255, 204, 0, 0.2);
+    border-color: rgba(255, 204, 0, 0.3);
+  }
+
+  .stat-card.info {
+    background: rgba(0, 122, 255, 0.2);
+    border-color: rgba(0, 122, 255, 0.3);
+  }
+
+  .stat-card.success {
+    background: rgba(52, 199, 89, 0.2);
+    border-color: rgba(52, 199, 89, 0.3);
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+  }
+
+  .stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    opacity: 0.9;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .findings-section {
+    margin: 4rem 0;
+  }
+
+  .findings-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--color-dark);
+  }
+
+  .findings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 2rem;
+  }
+
+  .finding-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    padding: 2rem;
+    border-left: 4px solid transparent;
+  }
+
+  .finding-card.critical {
+    border-left-color: #ff3b30;
+  }
+
+  .finding-card.high {
+    border-left-color: #ff9500;
+  }
+
+  .finding-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 1rem;
+  }
+
+  .finding-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-dark);
+    flex: 1;
+  }
+
+  .impact-badge {
+    background: #ff3b30;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .finding-description {
+    color: var(--color-gray);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .evidence-box, .business-impact {
+    background: var(--color-bg);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .evidence-box h4, .business-impact h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-dark);
+  }
+
+  .evidence-box ul, .business-impact ul {
+    list-style: none;
+    font-size: 0.875rem;
+    color: var(--color-gray);
+  }
+
+  .evidence-box ul li {
+    padding: 0.25rem 0;
+  }
+
+  .business-impact ul li {
+    padding: 0.25rem 0;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .business-impact ul li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #ff3b30;
+  }
+
+  .btn-evidence {
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: opacity 0.3s ease;
+  }
+
+  .btn-evidence:hover {
+    opacity: 0.9;
+  }
+
+  .recommendations-section {
+    margin: 4rem 0;
+  }
+
+  .section-intro {
+    color: var(--color-gray);
+    font-size: 1.125rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+  }
+
+  .recommendation-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow-lg);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tier-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .recommendation-card.gold .tier-badge {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #333;
+  }
+
+  .recommendation-card.silver .tier-badge {
+    background: linear-gradient(135deg, #C0C0C0, #808080);
+    color: white;
+  }
+
+  .recommendation-card.bronze .tier-badge {
+    background: linear-gradient(135deg, #CD7F32, #8B4513);
+    color: white;
+  }
+
+  .recommendation-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 1rem 0;
+    color: var(--color-dark);
+  }
+
+  .investment-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-light-gray);
+  }
+
+  .investment-amount {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .timeline {
+    font-size: 1rem;
+    color: var(--color-gray);
+  }
+
+  .features {
+    flex: 1;
+  }
+
+  .features h4 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--color-dark);
+  }
+
+  .features ul {
+    list-style: none;
+    font-size: 0.875rem;
+    color: var(--color-gray);
+  }
+
+  .features ul li {
+    padding: 0.5rem 0;
+  }
+
+  .outcomes {
+    display: flex;
+    gap: 2rem;
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: var(--color-bg);
+    border-radius: 8px;
+  }
+
+  .outcome-stat {
+    text-align: center;
+    flex: 1;
+  }
+
+  .outcome-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  .outcome-label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--color-gray);
+    margin-top: 0.25rem;
+  }
+
+  .warning-box {
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    margin: 1rem 0;
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+  }
+
+  .business-case-section {
+    margin: 4rem 0;
+    background: var(--color-bg);
+    padding: 3rem;
+    border-radius: 16px;
+  }
+
+  .business-case-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .case-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .case-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--color-dark);
+  }
+
+  .cost-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cost-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: var(--color-bg);
+    border-radius: 6px;
+  }
+
+  .cost-label {
+    font-size: 0.875rem;
+    color: var(--color-gray);
+  }
+
+  .cost-value {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-dark);
+  }
+
+  .cost-value.critical {
+    color: #ff3b30;
+  }
+
+  #roi-chart {
+    width: 100%;
+    height: 200px;
+    margin: 1rem 0;
+  }
+
+  .roi-summary {
+    font-size: 0.875rem;
+    color: var(--color-gray);
+  }
+
+  .roi-summary ul {
+    list-style: none;
+    margin-top: 0.5rem;
+  }
+
+  .roi-summary ul li {
+    padding: 0.25rem 0;
+  }
+
+  .action-section {
+    text-align: center;
+    margin: 4rem 0;
+    padding: 3rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .action-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--color-dark);
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-large {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-large.btn-primary {
+    background: var(--color-primary);
+    color: white;
+  }
+
+  .btn-large.btn-secondary {
+    background: var(--color-secondary);
+    color: white;
+  }
+
+  .btn-large.btn-tertiary {
+    background: white;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+  }
+
+  .btn-large:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 80%;
+    max-width: 800px;
+    position: relative;
+  }
+
+  .close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--color-gray);
+  }
+
+  .close:hover {
+    color: var(--color-dark);
+  }
+
+  @media (max-width: 768px) {
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .findings-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .recommendations-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .business-case-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .action-buttons {
+      flex-direction: column;
+    }
+
+    .btn-large {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // Initialize page with assessment data
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Check if user is authenticated
+    const token = localStorage.getItem('auth-token');
+    if (!token) {
+      window.location.href = '/login';
+      return;
+    }
+
+    // Load assessment data
+    await loadAssessmentData();
+    
+    // Initialize ROI chart
+    initializeROIChart();
+  });
+
+  async function loadAssessmentData() {
+    try {
+      const response = await fetch('/api/assessment/executive-summary', {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('auth-token')}`
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        updateDashboard(data);
+      }
+    } catch (error) {
+      console.error('Failed to load assessment data:', error);
+    }
+  }
+
+  function updateDashboard(data) {
+    // Update stats
+    if (data.riskScore) document.getElementById('risk-score').textContent = data.riskScore + '%';
+    if (data.financialExposure) document.getElementById('exposure').textContent = data.financialExposure;
+    if (data.complianceScore) document.getElementById('compliance').textContent = data.complianceScore + '%';
+    if (data.protectedUsers) document.getElementById('protected-users').textContent = data.protectedUsers + '%';
+  }
+
+  function viewEvidence(type) {
+    const modal = document.getElementById('evidence-modal');
+    const content = document.getElementById('evidence-content');
+    
+    // Load evidence based on type
+    if (type === 'mfa-gap') {
+      content.innerHTML = `
+        <img src="/evidence/mfa-gap-evidence.png" alt="MFA Gap Evidence" style="width: 100%; margin: 1rem 0;">
+        <h4>Azure AD Query Results</h4>
+        <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;">
+Get-MsolUser -All | Where {$_.StrongAuthenticationRequirements.Count -eq 0}
+
+UserPrincipalName                 DisplayName              LastLogon
+-----------------                 -----------              ---------
+john.doe@contoso.com             John Doe                 2025-07-10
+jane.smith@contoso.com           Jane Smith               2025-07-11
+mike.johnson@contoso.com         Mike Johnson             2025-07-09
+... (9 more users)
+</pre>
+        <p><strong>Verification Date:</strong> ${new Date().toLocaleDateString()}</p>
+        <p><strong>SHA-256 Hash:</strong> a1b2c3d4e5f6...</p>
+      `;
+    } else if (type === 'sharepoint-sharing') {
+      content.innerHTML = `
+        <img src="/evidence/sharepoint-config.png" alt="SharePoint Configuration" style="width: 100%; margin: 1rem 0;">
+        <h4>SharePoint Tenant Configuration</h4>
+        <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;">
+Get-SPOTenant | Select SharingCapability
+
+SharingCapability: ExternalUserAndGuestSharing
+DefaultSharingLinkType: Anyone
+RequireAcceptingAccountMatchInvitedAccount: False
+</pre>
+        <p><strong>Risk Level:</strong> <span style="color: #ff3b30; font-weight: bold;">HIGH</span></p>
+      `;
+    }
+    
+    modal.style.display = 'block';
+  }
+
+  function closeModal() {
+    document.getElementById('evidence-modal').style.display = 'none';
+  }
+
+  function selectRecommendation(tier) {
+    window.location.href = `/recommendation-details?tier=${tier}`;
+  }
+
+  async function generateExecutiveReport() {
+    const button = event.target.closest('button');
+    button.disabled = true;
+    button.textContent = 'Generating Report...';
+    
+    try {
+      const response = await fetch('/api/reports/executive', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('auth-token')}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          format: 'pdf',
+          includeEvidence: true,
+          clientName: 'Your Organization'
+        })
+      });
+
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Executive-Security-Report-${new Date().toISOString().split('T')[0]}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+        
+        button.textContent = 'Download Executive Report';
+        button.disabled = false;
+      }
+    } catch (error) {
+      console.error('Failed to generate report:', error);
+      button.textContent = 'Download Executive Report';
+      button.disabled = false;
+    }
+  }
+
+  function scheduleConsultation() {
+    window.location.href = '/schedule-consultation';
+  }
+
+  function viewDetailedAnalysis() {
+    window.location.href = '/assessment';
+  }
+
+  function initializeROIChart() {
+    const canvas = document.getElementById('roi-chart');
+    if (!canvas) return;
+    
+    // Simple bar chart representation
+    const ctx = canvas.getContext('2d');
+    const data = [
+      { label: 'Gold', value: 114, color: '#FFD700' },
+      { label: 'Silver', value: 227, color: '#C0C0C0' },
+      { label: 'Bronze', value: 100, color: '#CD7F32' }
+    ];
+    
+    const maxValue = Math.max(...data.map(d => d.value));
+    const barWidth = canvas.width / data.length * 0.6;
+    const barGap = canvas.width / data.length * 0.4;
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    data.forEach((item, index) => {
+      const barHeight = (item.value / maxValue) * (canvas.height - 40);
+      const x = index * (barWidth + barGap) + barGap / 2;
+      const y = canvas.height - barHeight - 20;
+      
+      // Draw bar
+      ctx.fillStyle = item.color;
+      ctx.fillRect(x, y, barWidth, barHeight);
+      
+      // Draw label
+      ctx.fillStyle = '#333';
+      ctx.font = '12px Inter';
+      ctx.textAlign = 'center';
+      ctx.fillText(item.label, x + barWidth / 2, canvas.height - 5);
+      
+      // Draw value
+      ctx.fillText(`$${item.value}`, x + barWidth / 2, y - 5);
+    });
+  }
+
+  // Close modal when clicking outside
+  window.onclick = function(event) {
+    const modal = document.getElementById('evidence-modal');
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  }
+</script>
