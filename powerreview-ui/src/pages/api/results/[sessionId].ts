@@ -2,6 +2,8 @@ import type { APIRoute } from 'astro';
 import path from 'path';
 import fs from 'fs/promises';
 
+export const prerender = false;
+
 export const GET: APIRoute = async ({ params }) => {
   try {
     const { sessionId } = params;
