@@ -4,6 +4,42 @@ import Head from 'next/head';
 export default function PowerReviewDashboard() {
   const [activeTab, setActiveTab] = useState('overview');
   const [showDemo, setShowDemo] = useState(false);
+  const [showFullDemo, setShowFullDemo] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [assessmentRunning, setAssessmentRunning] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [activeView, setActiveView] = useState('login');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (username === 'admin' && password === 'PowerReview2024') {
+      setAuthenticated(true);
+      setActiveView('overview');
+      setError('');
+    } else {
+      setError('Invalid credentials. Try admin / PowerReview2024');
+    }
+  };
+
+  const startAssessment = () => {
+    setAssessmentRunning(true);
+    setProgress(0);
+    
+    const interval = setInterval(() => {
+      setProgress(prev => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setAssessmentRunning(false);
+          alert('Assessment Complete! View results in Reports section.');
+          return 100;
+        }
+        return prev + 10;
+      });
+    }, 1000);
+  };
 
   const securityScore = 72;
   const findings = {
@@ -33,7 +69,7 @@ export default function PowerReviewDashboard() {
         <header style={{ backgroundColor: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', borderBottom: '1px solid #e5e5e5' }}>
           <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '1rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', margin: 0 }}>🚀 PowerReview</h1>
+              <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', margin: 0 }}>🚀 PowerReview v2.0</h1>
               <span style={{ fontSize: '0.875rem', color: '#666' }}>M365 Security Assessment Framework</span>
             </div>
             <nav style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>

@@ -1,10 +1,10 @@
 {
   "name": "powerreview-dashboard",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "PowerReview M365 Security Assessment Dashboard",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export",
     "start": "next start"
   },
   "dependencies": {

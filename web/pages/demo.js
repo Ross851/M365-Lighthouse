@@ -61,7 +61,7 @@ export default function Demo() {
             maxWidth: '400px'
           }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-              <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🚀 PowerReview</h1>
+              <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>🚀 PowerReview v2.0</h1>
               <p style={{ color: '#6b7280' }}>Microsoft 365 Security Assessment</p>
             </div>
 
@@ -162,7 +162,7 @@ export default function Demo() {
         <header style={{ backgroundColor: '#1e293b', color: 'white', padding: '1rem' }}>
           <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-              <h1 style={{ margin: 0, fontSize: '1.5rem' }}>🚀 PowerReview Pro</h1>
+              <h1 style={{ margin: 0, fontSize: '1.5rem' }}>🚀 PowerReview Pro v2.0</h1>
               <nav style={{ display: 'flex', gap: '1rem' }}>
                 <button 
                   onClick={() => setActiveView('overview')}
