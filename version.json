@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "name": "PowerReview M365 Security Suite",
+  "description": "Professional Security Assessment Framework for Microsoft 365",
+  "released": "2025-07-11",
+  "components": {
+    "powershell": "2.0.0",
+    "web-ui": "2.0.0"
+  },
+  "features": [
+    "Enhanced error handling and logging",
+    "Interactive wizard interface",
+    "Ultra-professional web UI",
+    "Real-time assessment monitoring",
+    "Comprehensive security reporting"
+  ],
+  "changelog": {
+    "2.0.0": {
+      "date": "2025-07-11",
+      "changes": [
+        "Added professional web interface with Astro",
+        "Implemented secure authentication flow",
+        "Created pre-flight checklist system",
+        "Built real-time execution monitoring",
+        "Added comprehensive results dashboard",
+        "Fixed Power Platform cmdlet issues",
+        "Enhanced error handling throughout"
+      ]
+    },
+    "1.0.0": {
+      "date": "2025-07-10",
+      "changes": [
+        "Initial release",
+        "Basic PowerShell assessment framework",
+        "Core security checks"
+      ]
+    }
+  }
+}

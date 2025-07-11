@@ -1,6 +1,24 @@
 # 🚀 PowerReview - Microsoft 365 & Azure Security Assessment Framework
 
+<div align="center">
+  <img src="https://img.shields.io/badge/version-2.0.0-blue.svg" alt="Version 2.0.0">
+  <img src="https://img.shields.io/badge/platform-M365-orange.svg" alt="M365 Platform">
+  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="MIT License">
+  <img src="https://img.shields.io/badge/powershell-7.0+-purple.svg" alt="PowerShell 7.0+">
+  <img src="https://img.shields.io/badge/ui-Astro-ff5e00.svg" alt="Astro UI">
+</div>
+
 A comprehensive, enterprise-grade assessment tool for Microsoft 365 and Azure environments, focusing on security, compliance, and governance best practices.
+
+## 🆕 PowerReview v2.0 - Now with Ultra-Professional Web UI!
+
+### ✨ What's New in v2.0
+- **🌐 Stunning Web Interface**: Beautiful Astro-based UI with real-time monitoring
+- **🔐 Secure Authentication**: Professional login system with pre-flight checks
+- **📊 Live Assessment Tracking**: Watch your security scans execute in real-time
+- **📈 Interactive Dashboard**: Comprehensive results with scores and recommendations
+- **🛡️ Enhanced Error Handling**: Robust error recovery and logging throughout
+- **🎯 Wizard Interface**: Step-by-step guidance through the assessment process
 
 ## 🎯 What is PowerReview?
 
@@ -21,6 +39,7 @@ PowerReview is a professional security assessment framework that evaluates:
 - **Best practice mapping** to industry frameworks (NIST, CIS, ISO27001)
 
 ### 🎨 Professional User Experience
+- **NEW: Web-based UI** with real-time execution monitoring
 - **Wizard-style interface** with progress tracking
 - **Interactive discovery questionnaires** based on industry templates
 - **Executive dashboards** with risk scoring and recommendations
@@ -40,37 +59,45 @@ PowerReview is a professional security assessment framework that evaluates:
 
 ## 🚀 Quick Start
 
+### Option 1: Web UI (Recommended for v2.0)
+```bash
+# 1. Clone repository
+git clone https://github.com/Ross851/M365-Lighthouse.git
+cd M365-Lighthouse/powerreview-ui
+
+# 2. Install dependencies
+npm install
+
+# 3. Start the web interface
+npm run dev
+
+# 4. Open browser to http://localhost:4321/login
+```
+
+### Option 2: PowerShell Direct
+```powershell
+# 1. Clone repository
+git clone https://github.com/Ross851/M365-Lighthouse.git
+cd M365-Lighthouse
+
+# 2. Run enhanced PowerShell wizard
+.\Start-PowerReview-Enhanced.ps1
+```
+
 ### Prerequisites
 - Windows 10/11 or Windows Server 2019+
 - PowerShell 7.0+
+- Node.js 18+ (for web UI)
 - Microsoft 365 Global Reader (minimum) or Global Admin (full features)
 - Azure Reader role (for Azure assessments)
 
-### 5-Minute Setup
-```powershell
-# 1. Clone repository
-git clone https://github.com/yourorg/PowerReview.git
-cd PowerReview
+## 🌐 Deploy to Production
 
-# 2. Run quick setup
-.\QUICK-START-WORKSHOP.ps1
+### Deploy Web UI to Vercel
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Ross851/M365-Lighthouse/tree/main/powerreview-ui)
 
-# 3. Start assessment
-.\Start-PowerReview.ps1
-```
-
-### Professional Setup
-```powershell
-# 1. Configure storage and security
-.\Configure-DataStorage.ps1 -UseDefaults
-.\Setup-PowerReviewSecurity.ps1 -ConfigureAll
-
-# 2. Setup role-based access
-.\Initialize-RoleBasedAccess.ps1
-
-# 3. Run comprehensive assessment
-.\Start-PowerReview.ps1 -DeepAnalysis
-```
+### Deploy to Azure Static Web Apps
+See [deployment guide](./DEPLOYMENT_GUIDE.md) for detailed instructions.
 
 ## 📋 Assessment Modules
 
@@ -109,6 +136,7 @@ New-PowerReviewUser -UserPrincipalName "analyst@company.com" `
 
 | Document | Description |
 |----------|-------------|
+| [Web UI Guide](./README-UI.md) | Complete guide for the new web interface |
 | [Deployment Guide](./DEPLOYMENT-GUIDE.md) | Complete deployment instructions |
 | [Developer Guide](./DEVELOPER-IMPLEMENTATION-GUIDE.md) | For developers and contractors |
 | [Role Assignment Guide](./ROLE-ASSIGNMENT-GUIDE.md) | User management and permissions |
@@ -119,9 +147,14 @@ New-PowerReviewUser -UserPrincipalName "analyst@company.com" `
 ## 🛠️ Key Scripts
 
 ### Core Assessment
-- `Start-PowerReview.ps1` - Main wizard interface
+- `Start-PowerReview-Enhanced.ps1` - Enhanced wizard interface (v2.0)
 - `PowerReview-Complete.ps1` - Core assessment engine
 - `PowerReview-Enhanced-Framework.ps1` - Advanced features
+- `PowerReview-Wizard.ps1` - Interactive wizard component (v2.0)
+
+### Error Handling & Fixes (New in v2.0)
+- `PowerReview-ErrorHandling.ps1` - Comprehensive error handling
+- `Fix-PowerPlatformIssue.ps1` - Power Platform compatibility fixes
 
 ### Discovery & Questionnaires
 - `PowerReview-Discovery-Questionnaire.ps1` - Interactive questionnaire system
@@ -142,6 +175,22 @@ New-PowerReviewUser -UserPrincipalName "analyst@company.com" `
 - **Compliance**: GDPR, HIPAA, SOC2, ISO27001 ready
 - **Audit**: Complete audit trail for all operations
 
+## 📈 Version History
+
+### v2.0.0 (2025-07-11)
+- Added professional web interface with Astro
+- Implemented secure authentication flow
+- Created pre-flight checklist system
+- Built real-time execution monitoring
+- Added comprehensive results dashboard
+- Fixed Power Platform cmdlet issues
+- Enhanced error handling throughout
+
+### v1.0.0 (2025-07-10)
+- Initial release
+- Basic PowerShell assessment framework
+- Core security checks
+
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -160,7 +209,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - PowerShell Community for module development
 - Electoral Commission for comprehensive questionnaire templates
 - Enterprise customers for real-world testing and feedback
+- Astro Framework Team for the amazing web framework
 
 ---
 
-**Ready to secure your Microsoft 365 environment? [Get started now!](./QUICK-START-WORKSHOP.ps1)**
+<div align="center">
+  <strong>PowerReview v2.0</strong> - Professional M365 Security Assessments<br>
+  <strong>Ready to secure your Microsoft 365 environment?</strong><br>
+  <a href="./powerreview-ui">🌐 Try the Web UI</a> | <a href="./Start-PowerReview-Enhanced.ps1">🖥️ Use PowerShell</a>
+</div>
