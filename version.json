@@ -1,20 +1,41 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
   "name": "PowerReview M365 Security Suite",
-  "description": "Professional Security Assessment Framework for Microsoft 365",
+  "description": "AI-Powered Security Assessment Framework for Microsoft 365 with MCP Integration",
   "released": "2025-07-11",
   "components": {
     "powershell": "2.0.0",
-    "web-ui": "2.0.0"
+    "web-ui": "2.1.0",
+    "mcp-integration": "1.0.0",
+    "ai-assistant": "1.0.0"
   },
   "features": [
     "Enhanced error handling and logging",
     "Interactive wizard interface",
     "Ultra-professional web UI",
     "Real-time assessment monitoring",
-    "Comprehensive security reporting"
+    "Comprehensive security reporting",
+    "AI-powered security assessments via MCP",
+    "Natural language interaction with AI Assistant",
+    "Automated browser-based M365 scanning",
+    "Intelligent remediation script generation",
+    "Compliance monitoring and drift detection"
   ],
   "changelog": {
+    "2.1.0": {
+      "date": "2025-07-11",
+      "changes": [
+        "Integrated MCP (Model Context Protocol) servers for AI capabilities",
+        "Added AI Assistant with natural language interaction",
+        "Implemented automated browser-based M365 assessments",
+        "Created PowerReview AI MCP server for assessment automation",
+        "Added support for GitHub, FileSystem, Browser Tools, and Puppeteer MCP servers",
+        "Enabled AI-powered security analysis and recommendations",
+        "Implemented automated remediation script generation",
+        "Added compliance comparison with industry standards",
+        "Created security drift monitoring capabilities"
+      ]
+    },
     "2.0.0": {
       "date": "2025-07-11",
       "changes": [

@@ -1,0 +1,70 @@
+{
+  "mcpServers": {
+    "github": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "-e",
+        "GITHUB_TOOLSETS=repos,issues,pull_requests,code_security",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/mnt/c/Users/Ross/M365-Lighthouse"],
+      "description": "Access PowerReview files and reports"
+    },
+    "browser-tools": {
+      "command": "npx",
+      "args": ["@agentdeskai/browser-tools-mcp@latest"],
+      "description": "Automate M365 portal interactions"
+    },
+    "git": {
+      "command": "npx",
+      "args": ["@cyanheads/git-mcp-server"],
+      "description": "Version control for assessments"
+    },
+    "sequential-thinking": {
+      "command": "python",
+      "args": ["/mnt/c/Users/Ross/M365-Lighthouse/mcp/sequential-thinking/main.py"],
+      "description": "Complex assessment logic"
+    },
+    "fetch": {
+      "command": "npx",
+      "args": ["fetch-mcp"],
+      "description": "Fetch data from Microsoft APIs"
+    },
+    "puppeteer": {
+      "command": "npx",
+      "args": ["-y", "puppeteer-mcp-server"],
+      "env": {
+        "CHROME_PATH": "/usr/bin/google-chrome"
+      },
+      "description": "Automated M365 portal testing"
+    },
+    "powerreview-ai": {
+      "command": "node",
+      "args": ["/mnt/c/Users/Ross/M365-Lighthouse/mcp/powerreview-ai-server.js"],
+      "description": "PowerReview AI assessment engine"
+    }
+  },
+  "tools": {
+    "powerreview": {
+      "assessments": [
+        "azure-ad-security",
+        "exchange-protection",
+        "sharepoint-governance",
+        "teams-compliance",
+        "dlp-policies",
+        "defender-status"
+      ]
+    }
+  }
+}

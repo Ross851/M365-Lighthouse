@@ -1,0 +1,23 @@
+{
+  "name": "powerreview-mcp-integration",
+  "version": "2.0.0",
+  "description": "MCP integration for PowerReview AI-powered assessments",
+  "type": "module",
+  "main": "powerreview-ai-server.js",
+  "scripts": {
+    "start": "node powerreview-ai-server.js",
+    "install-mcp": "npm install -g @agentdeskai/browser-tools-mcp @cyanheads/git-mcp-server fetch-mcp puppeteer-mcp-server @playwright/mcp@latest",
+    "dev": "nodemon powerreview-ai-server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.6.0",
+    "@modelcontextprotocol/server-filesystem": "^0.6.1",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
