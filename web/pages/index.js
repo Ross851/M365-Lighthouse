@@ -77,7 +77,7 @@ export default function PowerReviewDashboard() {
                         }}>
                   View Demo Dashboard
                 </button>
-                <a href="/login" 
+                <a href="/demo" 
                    style={{ 
                      backgroundColor: 'transparent', 
                      color: 'white', 
@@ -88,7 +88,7 @@ export default function PowerReviewDashboard() {
                      textDecoration: 'none',
                      display: 'inline-block'
                    }}>
-                  Login to Dashboard
+                  Try Full Demo
                 </a>
               </div>
             </div>
