@@ -2,6 +2,8 @@ import type { APIRoute } from 'astro';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
+export const prerender = false;
+
 // In production, these would be in environment variables
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 const USERS = {
@@ -24,10 +26,56 @@ const USERS = {
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    const { email, password } = await request.json();
+    // Parse request body
+    let email, password;
+    try {
+      const body = await request.json();
+      email = body.email;
+      password = body.password;
+    } catch (parseError) {
+      return new Response(JSON.stringify({ error: 'Invalid request format' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+    
+    // Validate inputs
+    if (!email || !password) {
+      return new Response(JSON.stringify({ error: 'Email and password are required' }), {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
     
     // Check if user exists
     const user = USERS[email];
+    
+    // For demo account, handle specially
+    if (email === 'demo@powerreview.com' && password === 'demo') {
+      const token = jwt.sign(
+        { 
+          email: 'demo@powerreview.com', 
+          role: 'admin',
+          name: 'Demo User' 
+        },
+        JWT_SECRET,
+        { expiresIn: '24h' }
+      );
+      
+      return new Response(JSON.stringify({ 
+        success: true,
+        token,
+        user: {
+          email: 'demo@powerreview.com',
+          name: 'Demo User',
+          role: 'admin'
+        }
+      }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+    
     if (!user) {
       return new Response(JSON.stringify({ error: 'Invalid credentials' }), {
         status: 401,
@@ -36,13 +84,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
     
     // Verify password
-    // For demo purposes, also accept plain text password 'demo'
-    let isValid = false;
-    if (password === 'demo' && email === 'demo@powerreview.com') {
-      isValid = true;
-    } else {
-      isValid = await bcrypt.compare(password, user.password);
-    }
+    const isValid = await bcrypt.compare(password, user.password);
     
     if (!isValid) {
       return new Response(JSON.stringify({ error: 'Invalid credentials' }), {
