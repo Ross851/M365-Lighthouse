@@ -1,0 +1,146 @@
+# PowerReview .gitignore
+
+# Sensitive data and results
+*-Results/
+*-Output/
+*-Data/
+SecureVault/
+Client-Portals/
+Exports/
+PowerReview-Data/
+Discovery-Results/
+EC-Discovery-Results/
+Logs/
+Tasks/
+Email-Drafts/
+
+# Configuration files with secrets
+*config.json
+!*-template.json
+!*-config-template.json
+*-credentials.json
+*-secrets.json
+*.key
+*.pfx
+*.cer
+*.vault
+auth-config.json
+db-config.secure.json
+azure-ad-config.json
+local-auth-config.json
+storage-config.json
+audit-config.json
+backup-config.json
+workshop-config.json
+
+# User and role files
+PowerReview-Users.json
+
+# Personal/organization-specific files
+organization-config.json
+local-settings.json
+personal-config.json
+
+# Temporary and cache files
+*.tmp
+*.temp
+*.cache
+*.log
+~$*
+*.swp
+*.swo
+Temp/
+
+# Backup files
+*.bak
+*.backup
+*_backup/
+*.old
+
+# Test results and coverage
+TestResults/
+Coverage/
+*.trx
+*.coverage
+
+# IDE and editor files
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# PowerShell specific
+*.ps1xml
+profile.ps1
+
+# Certificates and keys
+*.p12
+*.pem
+*.crt
+*.csr
+client_secret*
+
+# Database files
+*.mdf
+*.ldf
+*.db
+*.sqlite
+
+# Compressed files
+*.zip
+*.rar
+*.7z
+*.tar.gz
+
+# Documentation build outputs
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# Dependency directories
+node_modules/
+packages/
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Azure Functions
+local.settings.json
+.azure/
+
+# PowerBI
+*.pbix
+
+# Office temp files
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# Custom exclusions for PowerReview
+Multi-Tenant-Results-*/
+Assessment-*/
+Portal-*/
+Backup-*/
+
+# Sample data
+Sample-Discovery-*.json
+
+# Keep template files but ignore configured versions
+!*-template.json
+!example-*.json

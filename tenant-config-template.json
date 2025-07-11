@@ -1,0 +1,157 @@
+{
+    "ConfigVersion": "1.0",
+    "AssessmentName": "Enterprise M365 and Azure Assessment",
+    "GlobalSettings": {
+        "AnalysisDepth": "Deep",
+        "DaysToAnalyze": 90,
+        "SecureStorage": true,
+        "UseMCP": true,
+        "GenerateEvidence": true,
+        "AutoRemediate": false,
+        "ComplianceMode": true
+    },
+    "Modules": [
+        "Purview",
+        "PowerPlatform",
+        "SharePoint",
+        "Security",
+        "AzureLandingZone",
+        "Compliance",
+        "DataGovernance"
+    ],
+    "Tenants": [
+        {
+            "Name": "Contoso Corporation",
+            "Id": "contoso.onmicrosoft.com",
+            "AdminUser": "admin@contoso.onmicrosoft.com",
+            "Domains": [
+                "contoso.com",
+                "contoso.onmicrosoft.com"
+            ],
+            "Modules": [
+                "Purview",
+                "PowerPlatform",
+                "SharePoint",
+                "Security",
+                "Compliance"
+            ],
+            "CustomSettings": {
+                "Region": "US",
+                "Industry": "Finance",
+                "UserCount": 5000,
+                "CriticalDataTypes": ["PII", "Financial", "HealthRecords"]
+            },
+            "ComplianceRequirements": ["SOC2", "GDPR", "CCPA"],
+            "AzureSubscriptions": [
+                {
+                    "Name": "Production",
+                    "Id": "12345678-1234-1234-1234-123456789012"
+                },
+                {
+                    "Name": "Development",
+                    "Id": "23456789-2345-2345-2345-234567890123"
+                }
+            ]
+        },
+        {
+            "Name": "Fabrikam Industries",
+            "Id": "fabrikam.onmicrosoft.com",
+            "AdminUser": "admin@fabrikam.onmicrosoft.com",
+            "Domains": [
+                "fabrikam.com",
+                "fabrikam.onmicrosoft.com"
+            ],
+            "Modules": [
+                "Purview",
+                "Security",
+                "AzureLandingZone"
+            ],
+            "CustomSettings": {
+                "Region": "EU",
+                "Industry": "Manufacturing",
+                "UserCount": 10000,
+                "CriticalDataTypes": ["Intellectual Property", "Trade Secrets"]
+            },
+            "ComplianceRequirements": ["ISO27001", "GDPR"],
+            "AzureSubscriptions": [
+                {
+                    "Name": "Main",
+                    "Id": "34567890-3456-3456-3456-345678901234"
+                }
+            ]
+        },
+        {
+            "Name": "Adventure Works",
+            "Id": "adventureworks.onmicrosoft.com",
+            "AdminUser": "admin@adventureworks.onmicrosoft.com",
+            "Domains": [
+                "adventureworks.com",
+                "adventureworks.onmicrosoft.com"
+            ],
+            "Modules": [
+                "SharePoint",
+                "PowerPlatform",
+                "Security"
+            ],
+            "CustomSettings": {
+                "Region": "APAC",
+                "Industry": "Retail",
+                "UserCount": 3000,
+                "CriticalDataTypes": ["Customer Data", "Payment Information"]
+            },
+            "ComplianceRequirements": ["PCI-DSS", "GDPR"],
+            "AzureSubscriptions": []
+        },
+        {
+            "Name": "Northwind Traders",
+            "Id": "northwind.onmicrosoft.com",
+            "AdminUser": "admin@northwind.onmicrosoft.com",
+            "Domains": [
+                "northwindtraders.com",
+                "northwind.onmicrosoft.com"
+            ],
+            "Modules": "inherit",
+            "CustomSettings": {
+                "Region": "UK",
+                "Industry": "Healthcare",
+                "UserCount": 7500,
+                "CriticalDataTypes": ["PHI", "Medical Records", "Research Data"]
+            },
+            "ComplianceRequirements": ["HIPAA", "GDPR", "NHS"],
+            "AzureSubscriptions": [
+                {
+                    "Name": "Healthcare-Prod",
+                    "Id": "45678901-4567-4567-4567-456789012345"
+                },
+                {
+                    "Name": "Healthcare-Dev",
+                    "Id": "56789012-5678-5678-5678-567890123456"
+                },
+                {
+                    "Name": "Research",
+                    "Id": "67890123-6789-6789-6789-678901234567"
+                },
+                {
+                    "Name": "Archive",
+                    "Id": "78901234-7890-7890-7890-789012345678"
+                }
+            ]
+        }
+    ],
+    "ReportingOptions": {
+        "ConsolidatedReport": true,
+        "IndividualTenantReports": true,
+        "ComplianceReports": true,
+        "ExecutiveSummary": true,
+        "TechnicalDetails": true,
+        "RemediationRoadmap": true,
+        "CostAnalysis": false,
+        "OutputFormats": ["HTML", "PDF", "CSV", "JSON"]
+    },
+    "NotificationSettings": {
+        "EmailNotifications": false,
+        "EmailRecipients": [],
+        "TeamsWebhook": "",
+        "SlackWebhook": ""
+    }
+}
