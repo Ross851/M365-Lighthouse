@@ -739,11 +739,53 @@ import Layout from '../layouts/Layout.astro';
 	</style>
 
 	<script>
-		// Import mock data generator functions
-		import('../../lib/mock-data-generator.ts').then(module => {
-			window.mockDataGenerator = module;
-			initializeDashboard();
-		});
+		// Inline mock data to avoid dynamic import issues
+		window.mockDataGenerator = {
+			getClientData: function(clientId) {
+				const mockClients = {
+					'globalcorp-apac': {
+						organizationName: 'GlobalCorp Asia-Pacific',
+						headquarters: 'Singapore',
+						industry: 'Financial Services',
+						employeeCount: 25000,
+						dataDistribution: {
+							'ap-southeast-1': { customer: 45000, assessment: 120, files: 890000, logs: 2400000, totalGB: 1200 },
+							'ap-southeast-2': { customer: 38000, assessment: 95, files: 720000, logs: 1950000, totalGB: 980 },
+							'ap-northeast-1': { customer: 52000, assessment: 140, files: 980000, logs: 2800000, totalGB: 1450 }
+						},
+						complianceScores: {
+							'ap-southeast-1': { GDPR: 88, SOX: 92, APPI: 95 },
+							'ap-southeast-2': { GDPR: 85, SOX: 89, APPI: 91 }
+						}
+					},
+					'techventures-global': {
+						organizationName: 'TechVentures Global',
+						headquarters: 'Dublin',
+						industry: 'Technology',
+						employeeCount: 15000,
+						dataDistribution: {
+							'eu-west-1': { customer: 32000, assessment: 85, files: 650000, logs: 1800000, totalGB: 890 },
+							'us-east-1': { customer: 41000, assessment: 110, files: 780000, logs: 2200000, totalGB: 1100 }
+						},
+						complianceScores: {
+							'eu-west-1': { GDPR: 92, CCPA: 87, ISO27001: 90 },
+							'us-east-1': { GDPR: 89, CCPA: 91, ISO27001: 88 }
+						}
+					}
+				};
+				return mockClients[clientId] || mockClients['globalcorp-apac'];
+			},
+			generateRecentActivity: function(clientId, hours) {
+				return [
+					{ type: 'sync', message: 'Cross-region sync completed', time: '2 minutes ago', status: 'success' },
+					{ type: 'compliance', message: 'GDPR assessment updated', time: '15 minutes ago', status: 'info' },
+					{ type: 'backup', message: 'Data backup to EU region', time: '1 hour ago', status: 'success' },
+					{ type: 'alert', message: 'High data volume detected', time: '2 hours ago', status: 'warning' }
+				].slice(0, hours > 12 ? 10 : 4);
+			}
+		};
+		
+		initializeDashboard();
 
 		let currentClient = 'globalcorp-apac';
 		let activityPaused = false;
