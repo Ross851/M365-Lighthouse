@@ -61,6 +61,41 @@ import Layout from '../layouts/Layout.astro';
 								<p>Guest users, B2B settings, external collaboration</p>
 							</div>
 						</label>
+						<label class="area-item">
+							<input type="checkbox" name="azuread" value="app-registrations">
+							<div class="area-content">
+								<h4>App Registrations</h4>
+								<p>Application permissions, OAuth apps, service principals</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="azuread" value="password-policy">
+							<div class="area-content">
+								<h4>Password & Authentication Policy</h4>
+								<p>Password complexity, expiration, self-service reset</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="azuread" value="security-defaults">
+							<div class="area-content">
+								<h4>Security Defaults & Baseline</h4>
+								<p>Security defaults status, baseline policies</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="azuread" value="legacy-auth">
+							<div class="area-content">
+								<h4>Legacy Authentication</h4>
+								<p>Legacy protocol usage, blocking policies</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="azuread" value="device-management">
+							<div class="area-content">
+								<h4>Device Management</h4>
+								<p>Device registration, compliance policies, hybrid join</p>
+							</div>
+						</label>
 					</div>
 				</div>
 
@@ -115,6 +150,41 @@ import Layout from '../layouts/Layout.astro';
 								<p>Transport rules, connectors, accepted domains</p>
 							</div>
 						</label>
+						<label class="area-item">
+							<input type="checkbox" name="exchange" value="quarantine">
+							<div class="area-content">
+								<h4>Quarantine Management</h4>
+								<p>Quarantine policies, end-user spam notifications</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="exchange" value="mailbox-auditing">
+							<div class="area-content">
+								<h4>Mailbox Auditing</h4>
+								<p>Audit logging, mailbox access tracking</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="exchange" value="encryption">
+							<div class="area-content">
+								<h4>Email Encryption</h4>
+								<p>OME settings, S/MIME, transport encryption</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="exchange" value="mobile-device">
+							<div class="area-content">
+								<h4>Mobile Device Policies</h4>
+								<p>ActiveSync policies, device access rules</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="exchange" value="shared-mailboxes">
+							<div class="area-content">
+								<h4>Shared Mailbox Security</h4>
+								<p>Shared mailbox permissions, delegation settings</p>
+							</div>
+						</label>
 					</div>
 				</div>
 
@@ -159,6 +229,27 @@ import Layout from '../layouts/Layout.astro';
 							<div class="area-content">
 								<h4>Security Alerts & Incidents</h4>
 								<p>Active alerts, incident correlation, investigation status</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="defender" value="vulnerability-management">
+							<div class="area-content">
+								<h4>Vulnerability Management</h4>
+								<p>Exposed devices, software vulnerabilities, security recommendations</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="defender" value="device-compliance">
+							<div class="area-content">
+								<h4>Device Compliance</h4>
+								<p>Device health, compliance trends, non-compliant devices</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="defender" value="threat-hunting">
+							<div class="area-content">
+								<h4>Advanced Hunting</h4>
+								<p>Custom detection rules, hunting queries</p>
 							</div>
 						</label>
 					</div>
@@ -215,6 +306,34 @@ import Layout from '../layouts/Layout.astro';
 								<p>Retention policies, holds, site classifications</p>
 							</div>
 						</label>
+						<label class="area-item">
+							<input type="checkbox" name="sharepoint" value="versioning">
+							<div class="area-content">
+								<h4>Versioning & Recovery</h4>
+								<p>Version history settings, recycle bin configuration</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="sharepoint" value="site-creation">
+							<div class="area-content">
+								<h4>Site Creation Policies</h4>
+								<p>Site creation restrictions, naming policies</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="sharepoint" value="access-requests">
+							<div class="area-content">
+								<h4>Access Request Settings</h4>
+								<p>Access request configuration, approval workflows</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="sharepoint" value="information-barriers">
+							<div class="area-content">
+								<h4>Information Barriers</h4>
+								<p>Segment policies, compliance boundaries</p>
+							</div>
+						</label>
 					</div>
 				</div>
 
@@ -266,6 +385,34 @@ import Layout from '../layouts/Layout.astro';
 							<div class="area-content">
 								<h4>Data Lifecycle</h4>
 								<p>Retention policies, deletion settings, archival</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="teams" value="messaging-policies">
+							<div class="area-content">
+								<h4>Messaging Policies</h4>
+								<p>Chat permissions, message deletion, moderation</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="teams" value="calling-policies">
+							<div class="area-content">
+								<h4>Calling & Voice Policies</h4>
+								<p>Calling policies, emergency calling, call recording</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="teams" value="live-events">
+							<div class="area-content">
+								<h4>Live Events Security</h4>
+								<p>Live event policies, recording settings</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="teams" value="org-wide-teams">
+							<div class="area-content">
+								<h4>Org-Wide Teams</h4>
+								<p>Organization-wide team settings and membership</p>
 							</div>
 						</label>
 					</div>
@@ -322,6 +469,27 @@ import Layout from '../layouts/Layout.astro';
 								<p>Third-party app control, OAuth apps, shadow IT</p>
 							</div>
 						</label>
+						<label class="area-item">
+							<input type="checkbox" name="dlp" value="insider-risk">
+							<div class="area-content">
+								<h4>Insider Risk Management</h4>
+								<p>Risk indicators, user activity monitoring</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="dlp" value="communication-compliance">
+							<div class="area-content">
+								<h4>Communication Compliance</h4>
+								<p>Offensive language detection, regulatory compliance</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="dlp" value="exact-data-match">
+							<div class="area-content">
+								<h4>Exact Data Match</h4>
+								<p>EDM schemas, sensitive data identification</p>
+							</div>
+						</label>
 					</div>
 				</div>
 
@@ -376,6 +544,27 @@ import Layout from '../layouts/Layout.astro';
 								<p>Current score, improvement actions, assessments</p>
 							</div>
 						</label>
+						<label class="area-item">
+							<input type="checkbox" name="compliance" value="privacy-management">
+							<div class="area-content">
+								<h4>Privacy Management</h4>
+								<p>Data subject requests, privacy risk management</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="compliance" value="regulatory-compliance">
+							<div class="area-content">
+								<h4>Regulatory Compliance</h4>
+								<p>GDPR, HIPAA, SOC2, ISO mapping</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="compliance" value="activity-explorer">
+							<div class="area-content">
+								<h4>Activity Explorer</h4>
+								<p>User activity tracking, data handling visibility</p>
+							</div>
+						</label>
 					</div>
 				</div>
 
@@ -427,6 +616,333 @@ import Layout from '../layouts/Layout.astro';
 							<div class="area-content">
 								<h4>Data Policies</h4>
 								<p>DLP policies, tenant isolation, data export restrictions</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="powerplatform" value="maker-security">
+							<div class="area-content">
+								<h4>Maker Security</h4>
+								<p>Maker environment settings, development restrictions</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="powerplatform" value="solution-checker">
+							<div class="area-content">
+								<h4>Solution Compliance</h4>
+								<p>Solution checker results, best practice violations</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="powerplatform" value="capacity-management">
+							<div class="area-content">
+								<h4>Capacity & Licensing</h4>
+								<p>Storage usage, API limits, license compliance</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Microsoft Intune -->
+				<div class="service-section">
+					<div class="service-header">
+						<label class="service-toggle">
+							<input type="checkbox" id="intune-all">
+							<div class="service-info">
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+									<line x1="12" y1="18" x2="12" y2="18"/>
+								</svg>
+								<h2>Microsoft Intune</h2>
+								<span class="area-count">0 areas selected</span>
+							</div>
+						</label>
+					</div>
+					<div class="service-areas">
+						<label class="area-item">
+							<input type="checkbox" name="intune" value="device-compliance">
+							<div class="area-content">
+								<h4>Device Compliance Policies</h4>
+								<p>Compliance rules, actions for non-compliance</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="intune" value="app-protection">
+							<div class="area-content">
+								<h4>App Protection Policies</h4>
+								<p>MAM policies, data protection settings</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="intune" value="configuration-profiles">
+							<div class="area-content">
+								<h4>Configuration Profiles</h4>
+								<p>Device restrictions, security baselines</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="intune" value="enrollment-restrictions">
+							<div class="area-content">
+								<h4>Enrollment Restrictions</h4>
+								<p>Device type restrictions, enrollment limits</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="intune" value="windows-autopilot">
+							<div class="area-content">
+								<h4>Windows Autopilot</h4>
+								<p>Deployment profiles, enrollment status</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="intune" value="update-policies">
+							<div class="area-content">
+								<h4>Update Management</h4>
+								<p>Windows update rings, iOS/Android updates</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Microsoft Purview -->
+				<div class="service-section">
+					<div class="service-header">
+						<label class="service-toggle">
+							<input type="checkbox" id="purview-all">
+							<div class="service-info">
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+									<polyline points="9 22 9 12 15 12 15 22"/>
+								</svg>
+								<h2>Microsoft Purview</h2>
+								<span class="area-count">0 areas selected</span>
+							</div>
+						</label>
+					</div>
+					<div class="service-areas">
+						<label class="area-item">
+							<input type="checkbox" name="purview" value="data-map">
+							<div class="area-content">
+								<h4>Data Map & Catalog</h4>
+								<p>Data sources, scanning, classifications</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="purview" value="data-estate-insights">
+							<div class="area-content">
+								<h4>Data Estate Insights</h4>
+								<p>Asset distribution, classification insights</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="purview" value="data-lineage">
+							<div class="area-content">
+								<h4>Data Lineage</h4>
+								<p>Data flow tracking, impact analysis</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="purview" value="business-glossary">
+							<div class="area-content">
+								<h4>Business Glossary</h4>
+								<p>Term management, data ownership</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="purview" value="access-control">
+							<div class="area-content">
+								<h4>Access Control</h4>
+								<p>Collection permissions, role assignments</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Azure Information Protection -->
+				<div class="service-section">
+					<div class="service-header">
+						<label class="service-toggle">
+							<input type="checkbox" id="aip-all">
+							<div class="service-info">
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M19 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2z"/>
+									<line x1="9" y1="9" x2="15" y2="15"/>
+									<line x1="15" y1="9" x2="9" y2="15"/>
+								</svg>
+								<h2>Azure Information Protection</h2>
+								<span class="area-count">0 areas selected</span>
+							</div>
+						</label>
+					</div>
+					<div class="service-areas">
+						<label class="area-item">
+							<input type="checkbox" name="aip" value="labels">
+							<div class="area-content">
+								<h4>Sensitivity Labels</h4>
+								<p>Label configuration, auto-labeling rules</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="aip" value="scanner">
+							<div class="area-content">
+								<h4>AIP Scanner</h4>
+								<p>On-premises file scanning, discovery</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="aip" value="protection-templates">
+							<div class="area-content">
+								<h4>Protection Templates</h4>
+								<p>Encryption settings, usage rights</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="aip" value="track-revoke">
+							<div class="area-content">
+								<h4>Track & Revoke</h4>
+								<p>Document tracking, access revocation</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="aip" value="analytics">
+							<div class="area-content">
+								<h4>Analytics & Reporting</h4>
+								<p>Label usage, protection activities</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Microsoft Sentinel -->
+				<div class="service-section">
+					<div class="service-header">
+						<label class="service-toggle">
+							<input type="checkbox" id="sentinel-all">
+							<div class="service-info">
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<circle cx="12" cy="12" r="3"/>
+									<circle cx="12" cy="12" r="8"/>
+									<circle cx="12" cy="12" r="11"/>
+								</svg>
+								<h2>Microsoft Sentinel</h2>
+								<span class="area-count">0 areas selected</span>
+							</div>
+						</label>
+					</div>
+					<div class="service-areas">
+						<label class="area-item">
+							<input type="checkbox" name="sentinel" value="data-connectors">
+							<div class="area-content">
+								<h4>Data Connectors</h4>
+								<p>Connected sources, ingestion status</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="sentinel" value="analytics-rules">
+							<div class="area-content">
+								<h4>Analytics Rules</h4>
+								<p>Detection rules, custom analytics</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="sentinel" value="workbooks">
+							<div class="area-content">
+								<h4>Workbooks & Dashboards</h4>
+								<p>Visualization setup, monitoring views</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="sentinel" value="automation">
+							<div class="area-content">
+								<h4>Automation & SOAR</h4>
+								<p>Playbooks, automated responses</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="sentinel" value="threat-intelligence">
+							<div class="area-content">
+								<h4>Threat Intelligence</h4>
+								<p>TI feeds, indicator management</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="sentinel" value="entity-behavior">
+							<div class="area-content">
+								<h4>Entity Behavior (UEBA)</h4>
+								<p>User analytics, anomaly detection</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Additional Security Features -->
+				<div class="service-section">
+					<div class="service-header">
+						<label class="service-toggle">
+							<input type="checkbox" id="additional-all">
+							<div class="service-info">
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+								</svg>
+								<h2>Additional Security Features</h2>
+								<span class="area-count">0 areas selected</span>
+							</div>
+						</label>
+					</div>
+					<div class="service-areas">
+						<label class="area-item">
+							<input type="checkbox" name="additional" value="privileged-access">
+							<div class="area-content">
+								<h4>Privileged Access Management</h4>
+								<p>Just-in-time access, approval workflows</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="additional" value="customer-lockbox">
+							<div class="area-content">
+								<h4>Customer Lockbox</h4>
+								<p>Microsoft access controls, approval process</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="additional" value="admin-audit-log">
+							<div class="area-content">
+								<h4>Admin Audit Logging</h4>
+								<p>Administrative actions, change tracking</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="additional" value="service-encryption">
+							<div class="area-content">
+								<h4>Service Encryption</h4>
+								<p>Encryption keys, customer key setup</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="additional" value="advanced-ediscovery">
+							<div class="area-content">
+								<h4>Advanced eDiscovery</h4>
+								<p>Case management, custodian management</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="additional" value="microsoft-cloud-app-security">
+							<div class="area-content">
+								<h4>Microsoft Cloud App Security</h4>
+								<p>Shadow IT discovery, app governance</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="additional" value="secure-documents">
+							<div class="area-content">
+								<h4>Secure Documents</h4>
+								<p>Safe Documents, protected view settings</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="additional" value="zero-trust">
+							<div class="area-content">
+								<h4>Zero Trust Readiness</h4>
+								<p>Zero trust principles, implementation gaps</p>
 							</div>
 						</label>
 					</div>
