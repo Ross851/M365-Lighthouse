@@ -695,8 +695,8 @@ import Layout from '../layouts/Layout.astro';
 			try {
 				// Import modules
 				const [mockModule, powerAppModule] = await Promise.all([
-					import('../../lib/mock-data-generator.js'),
-					import('../../lib/powerapp-connector.js')
+					import('../../lib/mock-data-generator.ts'),
+					import('../../lib/powerapp-connector.ts')
 				]);
 				
 				mockDataGenerator = mockModule;
