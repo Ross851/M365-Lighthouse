@@ -141,11 +141,7 @@ $grantControls = New-Object -TypeName Microsoft.Open.MSGraph.Model.ConditionalAc
 $grantControls._Operator = "OR"
 $grantControls.BuiltInControls = "Block"
 
-New-AzureADMSConditionalAccessPolicy `
-    -DisplayName "Block Legacy Authentication" `
-    -State "enabledForReportingButNotEnforced" `
-    -Conditions $conditions `
-    -GrantControls $grantControls
+New-AzureADMSConditionalAccessPolicy -DisplayName "Block Legacy Authentication" -State "enabledForReportingButNotEnforced" -Conditions $conditions -GrantControls $grantControls
 
 Write-Host "✓ Policy created in report-only mode" -ForegroundColor Green
 Write-Host "Monitor for 7 days before enabling enforcement" -ForegroundColor Yellow`
@@ -160,18 +156,12 @@ Write-Host "Monitor for 7 days before enabling enforcement" -ForegroundColor Yel
 
 # Connect to Security & Compliance Center
 $UserCredential = Get-Credential
-$Session = New-PSSession -ConfigurationName Microsoft.Exchange `
-    -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid/ `
-    -Credential $UserCredential -Authentication Basic -AllowRedirection
+$Session = New-PSSession -ConfigurationName Microsoft.Exchange -ConnectionUri https://ps.compliance.protection.outlook.com/powershell-liveid/ -Credential $UserCredential -Authentication Basic -AllowRedirection
 
 Import-PSSession $Session -DisableNameChecking
 
 # Create DLP policy for sensitive information
-New-DlpPolicy -Name "Protect Sensitive Information" `
-    -Mode Enable `
-    -ExchangeLocation All `
-    -SharePointLocation All `
-    -OneDriveLocation All
+New-DlpPolicy -Name "Protect Sensitive Information" -Mode Enable -ExchangeLocation All -SharePointLocation All -OneDriveLocation All
 
 # Add sensitive information types
 $sensitiveTypes = @(
@@ -182,12 +172,7 @@ $sensitiveTypes = @(
 )
 
 foreach ($type in $sensitiveTypes) {
-    New-DlpComplianceRule -Name "Block $type" `
-        -Policy "Protect Sensitive Information" `
-        -ContentContainsSensitiveInformation @{Name=$type; minCount="1"} `
-        -BlockAccess $true `
-        -NotifyUser Owner `
-        -NotifyPolicyTipCustomText "This file contains sensitive information and cannot be shared externally."
+    New-DlpComplianceRule -Name "Block $type" -Policy "Protect Sensitive Information" -ContentContainsSensitiveInformation @{Name=$type; minCount="1"} -BlockAccess $true -NotifyUser Owner -NotifyPolicyTipCustomText "This file contains sensitive information and cannot be shared externally."
 }
 
 Write-Host "✓ DLP policies configured successfully" -ForegroundColor Green`
