@@ -30,6 +30,12 @@ import Layout from '../layouts/Layout.astro';
 								<input type="text" id="tenant-domain" placeholder="contoso.onmicrosoft.com" />
 								<button onclick="updateLinks()" class="btn-update">Update Links</button>
 							</div>
+							<div style="margin-top: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+								<button onclick="signInAndCapture()" class="btn-detect" style="padding: 0.5rem 1rem; background: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; font-size: 0.875rem;">
+									🔍 Auto-detect from Microsoft Sign-in
+								</button>
+								<span style="font-size: 0.75rem; color: #666;">Sign in to Microsoft and we'll capture your tenant</span>
+							</div>
 						</div>
 
 						<h3>Quick Links (will update with your tenant):</h3>
@@ -536,6 +542,116 @@ import Layout from '../layouts/Layout.astro';
 </style>
 
 <script>
+	// Function to detect Microsoft account from authentication
+	async function detectMicrosoftAccount() {
+		try {
+			// Check if user is authenticated via our auth system
+			const authData = JSON.parse(localStorage.getItem('powerreview_auth') || '{}');
+			if (authData.email) {
+				// Extract domain from email
+				const emailDomain = authData.email.split('@')[1];
+				if (emailDomain) {
+					// For Microsoft accounts, convert to tenant domain format
+					const tenantDomain = emailDomain.includes('.onmicrosoft.com') 
+						? emailDomain 
+						: `${emailDomain.split('.')[0]}.onmicrosoft.com`;
+					
+					document.getElementById('tenant-domain').value = tenantDomain;
+					updateLinks();
+					return;
+				}
+			}
+
+			// Try to detect from existing Microsoft authentication
+			// This checks if user has signed into any Microsoft service
+			const msalAccounts = await checkMSALAccounts();
+			if (msalAccounts && msalAccounts.length > 0) {
+				// Use the first account found
+				const account = msalAccounts[0];
+				const tenantDomain = account.tenantDomain || account.username.split('@')[1];
+				if (tenantDomain) {
+					document.getElementById('tenant-domain').value = tenantDomain;
+					updateLinks();
+				}
+			}
+		} catch (error) {
+			console.log('Could not auto-detect Microsoft account:', error);
+		}
+	}
+
+	// Check for MSAL (Microsoft Authentication Library) accounts
+	async function checkMSALAccounts() {
+		// Check if MSAL is available in the browser
+		if (window.localStorage) {
+			// Look for MSAL cache entries
+			const msalKeys = Object.keys(localStorage).filter(key => 
+				key.includes('msal') && key.includes('idtoken')
+			);
+			
+			if (msalKeys.length > 0) {
+				try {
+					// Parse MSAL tokens to get account info
+					const accounts = [];
+					for (const key of msalKeys) {
+						const tokenData = localStorage.getItem(key);
+						if (tokenData) {
+							const parsed = JSON.parse(tokenData);
+							if (parsed.credentialType === 'IdToken' && parsed.secret) {
+								// Decode JWT token (base64)
+								const payload = JSON.parse(atob(parsed.secret.split('.')[1]));
+								if (payload.preferred_username || payload.upn) {
+									accounts.push({
+										username: payload.preferred_username || payload.upn,
+										tenantDomain: payload.tid ? `${payload.tid}.onmicrosoft.com` : null,
+										name: payload.name
+									});
+								}
+							}
+						}
+					}
+					return accounts;
+				} catch (error) {
+					console.log('Error parsing MSAL tokens:', error);
+				}
+			}
+		}
+		return null;
+	}
+
+	// Function to trigger Microsoft sign-in and capture account
+	async function signInAndCapture() {
+		// Open a small window to Azure portal to trigger authentication
+		const authWindow = window.open(
+			'https://portal.azure.com',
+			'msauth',
+			'width=500,height=600,left=100,top=100'
+		);
+
+		// Monitor the window
+		const checkInterval = setInterval(() => {
+			try {
+				// Check if window is closed
+				if (authWindow.closed) {
+					clearInterval(checkInterval);
+					// After sign-in, try to detect account again
+					setTimeout(() => {
+						detectMicrosoftAccount();
+					}, 1000);
+				}
+			} catch (e) {
+				// Window is on different domain, which is expected
+			}
+		}, 1000);
+
+		// Auto-close after 30 seconds
+		setTimeout(() => {
+			clearInterval(checkInterval);
+			if (!authWindow.closed) {
+				authWindow.close();
+			}
+		}, 30000);
+	}
+
 	// Update links with tenant domain
 	function updateLinks() {
 		const domain = document.getElementById('tenant-domain').value;
@@ -563,12 +679,27 @@ import Layout from '../layouts/Layout.astro';
 
 		// Show success
 		const btn = document.querySelector('.btn-update');
-		btn.textContent = 'Links Updated ✓';
-		btn.style.background = '#28a745';
-		setTimeout(() => {
-			btn.textContent = 'Update Links';
-			btn.style.background = '';
-		}, 2000);
+		if (btn) {
+			btn.textContent = 'Links Updated ✓';
+			btn.style.background = '#28a745';
+			setTimeout(() => {
+				btn.textContent = 'Update Links';
+				btn.style.background = '';
+			}, 2000);
+		}
+
+		// Show detected account info
+		const tenantSelector = document.querySelector('.tenant-selector');
+		const detectedInfo = document.getElementById('detected-info');
+		if (!detectedInfo) {
+			const info = document.createElement('div');
+			info.id = 'detected-info';
+			info.style.cssText = 'margin-top: 0.5rem; font-size: 0.875rem; color: #28a745;';
+			info.textContent = `✓ Links configured for ${domain}`;
+			tenantSelector.appendChild(info);
+		} else {
+			detectedInfo.textContent = `✓ Links configured for ${domain}`;
+		}
 	}
 
 	// Timer functionality
@@ -624,12 +755,29 @@ import Layout from '../layouts/Layout.astro';
 		window.location.href = '/preflight-detailed';
 	}
 
-	// Auto-populate domain if stored
+	// Auto-populate domain on page load
 	window.addEventListener('DOMContentLoaded', () => {
+		// First check stored domain
 		const savedDomain = sessionStorage.getItem('tenantDomain');
 		if (savedDomain) {
 			document.getElementById('tenant-domain').value = savedDomain;
 			updateLinks();
+		} else {
+			// Try to auto-detect Microsoft account
+			detectMicrosoftAccount();
+		}
+	});
+
+	// Add click handler to PIM link to capture sign-in
+	document.addEventListener('DOMContentLoaded', () => {
+		const pimLink = document.getElementById('pim-link');
+		if (pimLink) {
+			pimLink.addEventListener('click', (e) => {
+				// After 3 seconds, check for new authentication
+				setTimeout(() => {
+					detectMicrosoftAccount();
+				}, 3000);
+			});
 		}
 	});
 </script>

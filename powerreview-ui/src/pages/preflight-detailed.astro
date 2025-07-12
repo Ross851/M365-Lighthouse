@@ -34,7 +34,7 @@ import Layout from '../layouts/Layout.astro';
 							<li>Go to <a href="https://portal.azure.com" target="_blank">https://portal.azure.com</a></li>
 							<li>Click on your profile picture in the top-right corner</li>
 							<li>Look for "Directory" or "Switch directory"</li>
-							<li>Verify the tenant name matches your customer: <strong id="tenant-name">[Customer Name]</strong></li>
+							<li>Verify the tenant name matches your customer: <strong id="tenant-name">[Customer Name]</strong> <span id="auto-detected" style="display: none; color: #28a745; font-size: 0.875rem;">(Auto-detected ✓)</span></li>
 						</ol>
 
 						<div class="visual-guide">
@@ -863,10 +863,99 @@ import Layout from '../layouts/Layout.astro';
 		checkbox.addEventListener('change', checkAllComplete);
 	});
 
+	// Function to detect Microsoft account from authentication
+	async function detectMicrosoftAccount() {
+		try {
+			// Check if user is authenticated via our auth system
+			const authData = JSON.parse(localStorage.getItem('powerreview_auth') || '{}');
+			if (authData.email) {
+				const emailDomain = authData.email.split('@')[1];
+				if (emailDomain) {
+					const tenantDomain = emailDomain.includes('.onmicrosoft.com') 
+						? emailDomain 
+						: `${emailDomain.split('.')[0]}.onmicrosoft.com`;
+					
+					// Update tenant name display
+					const customerName = emailDomain.split('.')[0];
+					document.getElementById('tenant-name').textContent = customerName;
+					document.getElementById('auto-detected').style.display = 'inline';
+					sessionStorage.setItem('customerName', customerName);
+					sessionStorage.setItem('tenantDomain', tenantDomain);
+					
+					// Auto-check tenant verification
+					setTimeout(() => {
+						document.getElementById('check-tenant').checked = true;
+						checkAllComplete();
+					}, 1000);
+				}
+			}
+
+			// Try to detect from existing Microsoft authentication
+			const msalAccounts = await checkMSALAccounts();
+			if (msalAccounts && msalAccounts.length > 0) {
+				const account = msalAccounts[0];
+				const tenantDomain = account.tenantDomain || account.username.split('@')[1];
+				if (tenantDomain) {
+					const customerName = tenantDomain.split('.')[0];
+					document.getElementById('tenant-name').textContent = customerName;
+					document.getElementById('auto-detected').style.display = 'inline';
+					sessionStorage.setItem('customerName', customerName);
+					sessionStorage.setItem('tenantDomain', tenantDomain);
+					
+					// Auto-check tenant verification
+					setTimeout(() => {
+						document.getElementById('check-tenant').checked = true;
+						checkAllComplete();
+					}, 1000);
+				}
+			}
+		} catch (error) {
+			console.log('Could not auto-detect Microsoft account:', error);
+		}
+	}
+
+	// Check for MSAL (Microsoft Authentication Library) accounts
+	async function checkMSALAccounts() {
+		if (window.localStorage) {
+			const msalKeys = Object.keys(localStorage).filter(key => 
+				key.includes('msal') && key.includes('idtoken')
+			);
+			
+			if (msalKeys.length > 0) {
+				try {
+					const accounts = [];
+					for (const key of msalKeys) {
+						const tokenData = localStorage.getItem(key);
+						if (tokenData) {
+							const parsed = JSON.parse(tokenData);
+							if (parsed.credentialType === 'IdToken' && parsed.secret) {
+								const payload = JSON.parse(atob(parsed.secret.split('.')[1]));
+								if (payload.preferred_username || payload.upn) {
+									accounts.push({
+										username: payload.preferred_username || payload.upn,
+										tenantDomain: payload.tid ? `${payload.tid}.onmicrosoft.com` : null,
+										name: payload.name
+									});
+								}
+							}
+						}
+					}
+					return accounts;
+				} catch (error) {
+					console.log('Error parsing MSAL tokens:', error);
+				}
+			}
+		}
+		return null;
+	}
+
 	// Auto-check tenant verification if customer name is known
 	const customerName = sessionStorage.getItem('customerName');
 	if (customerName) {
 		document.getElementById('tenant-name').textContent = customerName;
+	} else {
+		// Try to auto-detect
+		detectMicrosoftAccount();
 	}
 
 	// Track access portal checks
