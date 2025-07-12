@@ -565,13 +565,17 @@ import Layout from '../layouts/Layout.astro';
 		
 		if (isDemo) {
 			// Set up demo data
-			const demoAssessments = ['azuread', 'exchange', 'defender', 'sharepoint'];
+			const demoAssessments = ['azuread', 'exchange', 'defender', 'sharepoint', 'teams', 'compliance'];
 			localStorage.setItem('powerreview_assessments', JSON.stringify(demoAssessments));
 			localStorage.setItem('powerreview_customer', JSON.stringify({
-				organization: 'Demo Organization',
-				contact: 'Demo User',
-				purpose: 'Security Assessment Demo'
+				organization: 'Contoso Corporation',
+				contact: 'Security Team',
+				purpose: 'Quarterly Security Assessment'
 			}));
+			sessionStorage.setItem('tenantDomain', 'contoso.onmicrosoft.com');
+			
+			// Reload the data to show demo values
+			loadAssessmentData();
 			
 			// Auto-start after a short delay
 			setTimeout(() => {
@@ -604,6 +608,8 @@ import Layout from '../layouts/Layout.astro';
 
 	function createProgressItems(assessments) {
 		const progressGrid = document.getElementById('progress-grid');
+		progressGrid.innerHTML = ''; // Clear any existing items
+		
 		const assessmentMap = {
 			'azuread': 'Azure AD & Identity',
 			'exchange': 'Exchange Online',
@@ -630,7 +636,8 @@ import Layout from '../layouts/Layout.astro';
 			progressGrid.appendChild(item);
 		});
 
-		// Update total steps
+		// Update total steps and reset current
+		document.getElementById('current-step').textContent = '0';
 		document.getElementById('total-steps').textContent = assessments.length.toString();
 	}
 
