@@ -31,10 +31,10 @@ import Layout from '../layouts/Layout.astro';
 							<label>Enter your tenant domain to generate correct links:</label>
 							<div class="input-group">
 								<input type="text" id="tenant-domain" placeholder="contoso.onmicrosoft.com" />
-								<button onclick="updateLinks()" class="btn-update">Update Links</button>
+								<button id="update-links-btn" class="btn-update">Update Links</button>
 							</div>
 							<div style="margin-top: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
-								<button onclick="signInAndCapture()" class="btn-detect" style="padding: 0.5rem 1rem; background: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; font-size: 0.875rem;">
+								<button id="signin-detect-btn" class="btn-detect" style="padding: 0.5rem 1rem; background: #f0f0f0; border: 1px solid #ddd; border-radius: 4px; cursor: pointer; font-size: 0.875rem;">
 									🔍 Auto-detect from Microsoft Sign-in
 								</button>
 								<span style="font-size: 0.75rem; color: #666;">Sign in to Microsoft and we'll capture your tenant</span>
@@ -123,7 +123,7 @@ import Layout from '../layouts/Layout.astro';
 						<div class="timer-section">
 							<h4>Activation Timer</h4>
 							<p>Click to start a 5-minute timer while roles propagate:</p>
-							<button onclick="startTimer()" class="btn-timer" id="timer-btn">Start 5-Minute Timer</button>
+							<button id="timer-btn" class="btn-timer">Start 5-Minute Timer</button>
 							<div id="timer-display" class="timer-display" style="display: none;">
 								<span id="timer-text">5:00</span>
 								<span id="timer-status">Waiting for role propagation...</span>
@@ -178,7 +178,7 @@ import Layout from '../layouts/Layout.astro';
 						<span>I've verified my roles are active</span>
 					</label>
 				</div>
-				<button id="continue-btn" class="btn-primary" disabled onclick="proceedToChecklist()">
+				<button id="continue-btn" class="btn-primary" disabled>
 					Continue to Step 2: Sign In
 					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 						<path d="M5 12h14M12 5l7 7-7 7"/>
@@ -564,19 +564,26 @@ import Layout from '../layouts/Layout.astro';
 	async function detectMicrosoftAccount() {
 		try {
 			// Check if user is authenticated via our auth system
-			const authData = JSON.parse(localStorage.getItem('powerreview_auth') || '{}');
-			if (authData.email) {
-				// Extract domain from email
-				const emailDomain = authData.email.split('@')[1];
-				if (emailDomain) {
-					// For Microsoft accounts, convert to tenant domain format
-					const tenantDomain = emailDomain.includes('.onmicrosoft.com') 
-						? emailDomain 
-						: `${emailDomain.split('.')[0]}.onmicrosoft.com`;
-					
-					document.getElementById('tenant-domain').value = tenantDomain;
-					updateLinks();
-					return;
+			const authDataStr = localStorage.getItem('powerreview_auth');
+			if (authDataStr && authDataStr !== '') {
+				try {
+					const authData = JSON.parse(authDataStr);
+					if (authData.email) {
+						// Extract domain from email
+						const emailDomain = authData.email.split('@')[1];
+						if (emailDomain) {
+							// For Microsoft accounts, convert to tenant domain format
+							const tenantDomain = emailDomain.includes('.onmicrosoft.com') 
+								? emailDomain 
+								: `${emailDomain.split('.')[0]}.onmicrosoft.com`;
+							
+							document.getElementById('tenant-domain').value = tenantDomain;
+							updateLinks();
+							return;
+						}
+					}
+				} catch (parseError) {
+					console.log('Error parsing auth data:', parseError);
 				}
 			}
 
@@ -689,7 +696,7 @@ import Layout from '../layouts/Layout.astro';
 		
 		// Update PIM links
 		document.getElementById('pim-link').href = `${azureBase}blade/Microsoft_Azure_PIMCommon/ActivationMenuBlade/aadmigratedroles`;
-		document.getElementById('pim-status').href = `${azureBase}blade/Microsoft_Azure_PIMCommon/ResourceMenuBlade/MyActions`;
+		document.getElementById('pim-status').href = `${azureBase}blade/Microsoft_Azure_PIMCommon/ResourceMenuBlade/MyActions/provider/aadroles`;
 		document.getElementById('azure-users').href = `${azureBase}blade/Microsoft_AAD_IAM/UsersManagementMenuBlade/AllUsers`;
 
 		// Update admin center link
@@ -790,10 +797,29 @@ import Layout from '../layouts/Layout.astro';
 			// Try to auto-detect Microsoft account
 			detectMicrosoftAccount();
 		}
-	});
 
-	// Add click handler to PIM link to capture sign-in
-	document.addEventListener('DOMContentLoaded', () => {
+		// Add event listeners
+		const updateBtn = document.getElementById('update-links-btn');
+		if (updateBtn) {
+			updateBtn.addEventListener('click', updateLinks);
+		}
+
+		const signinBtn = document.getElementById('signin-detect-btn');
+		if (signinBtn) {
+			signinBtn.addEventListener('click', signInAndCapture);
+		}
+
+		const timerBtn = document.getElementById('timer-btn');
+		if (timerBtn) {
+			timerBtn.addEventListener('click', startTimer);
+		}
+
+		const continueBtn = document.getElementById('continue-btn');
+		if (continueBtn) {
+			continueBtn.addEventListener('click', proceedToChecklist);
+		}
+
+		// Add click handler to PIM link to capture sign-in
 		const pimLink = document.getElementById('pim-link');
 		if (pimLink) {
 			pimLink.addEventListener('click', (e) => {
