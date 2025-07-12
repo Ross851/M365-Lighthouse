@@ -693,14 +693,64 @@ import Layout from '../layouts/Layout.astro';
 		// Initialize the test dashboard
 		async function initializeTestDashboard() {
 			try {
-				// Import modules
-				const [mockModule, powerAppModule] = await Promise.all([
-					import('../../lib/mock-data-generator.ts'),
-					import('../../lib/powerapp-connector.ts')
-				]);
+				// Inline mock data to avoid dynamic import issues
+				mockDataGenerator = {
+					getAllClients: function() {
+						return [
+							{ id: 'globalcorp-apac', name: 'GlobalCorp Asia-Pacific' },
+							{ id: 'techventures-global', name: 'TechVentures Global' },
+							{ id: 'healthcare-europe', name: 'HealthTech Europe' },
+							{ id: 'finance-americas', name: 'FinanceFlow Americas' }
+						];
+					},
+					getClientData: function(clientId) {
+						const clients = {
+							'globalcorp-apac': {
+								clientId: 'globalcorp-apac',
+								organizationName: 'GlobalCorp Asia-Pacific',
+								headquarters: 'Singapore',
+								industry: 'Financial Services',
+								employeeCount: 25000,
+								dataDistribution: {
+									'ap-southeast-1': { customer: 45000, assessment: 120, files: 890000, logs: 2400000, totalGB: 1200 },
+									'ap-southeast-2': { customer: 38000, assessment: 95, files: 720000, logs: 1950000, totalGB: 980 }
+								},
+								complianceScores: {
+									'ap-southeast-1': { GDPR: 88, SOX: 92, APPI: 95 },
+									'ap-southeast-2': { GDPR: 85, SOX: 89, APPI: 91 }
+								}
+							},
+							'techventures-global': {
+								clientId: 'techventures-global',
+								organizationName: 'TechVentures Global',
+								headquarters: 'Dublin',
+								industry: 'Technology',
+								employeeCount: 15000,
+								dataDistribution: {
+									'eu-west-1': { customer: 32000, assessment: 85, files: 650000, logs: 1800000, totalGB: 890 }
+								},
+								complianceScores: {
+									'eu-west-1': { GDPR: 92, CCPA: 87, ISO27001: 90 }
+								}
+							}
+						};
+						return clients[clientId] || clients['globalcorp-apac'];
+					},
+					generateRecentActivity: function(clientId, hours) {
+						return [
+							{ timestamp: '2024-07-12 14:30:00', region: 'ap-southeast-1', action: 'Data Sync', details: 'Cross-region sync completed', userId: 'system', severity: 'info' },
+							{ timestamp: '2024-07-12 14:15:00', region: 'ap-southeast-2', action: 'Compliance Check', details: 'GDPR assessment updated', userId: 'admin@globalcorp.com', severity: 'info' },
+							{ timestamp: '2024-07-12 13:45:00', region: 'ap-northeast-1', action: 'Data Backup', details: 'Backup to EU region completed', userId: 'system', severity: 'success' },
+							{ timestamp: '2024-07-12 13:30:00', region: 'ap-southeast-1', action: 'Alert', details: 'High data volume detected', userId: 'monitor', severity: 'warning' }
+						].slice(0, Math.min(hours, 10));
+					}
+				};
 				
-				mockDataGenerator = mockModule;
-				powerAppConnector = powerAppModule.powerAppConnector;
+				// Mock power app connector
+				powerAppConnector = {
+					connect: function() { return Promise.resolve({ success: true }); },
+					sendData: function() { return Promise.resolve({ success: true }); }
+				};
 
 				// Setup event listeners
 				setupEventListeners();
