@@ -1,0 +1,897 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Power Platform Tools Integration - PowerReview Advisors">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <main>
+    <!-- PowerReview Advisors Header -->
+    <div class="advisor-header">
+      <div class="header-content">
+        <div class="brand">
+          <h1>PowerReview Advisors</h1>
+          <p class="tagline">Power Platform Tools & Automation Suite</p>
+        </div>
+        <p class="subtitle">Comprehensive toolset integrating Microsoft PAC CLI, CoE Starter Kit, and XRM Toolbox for enterprise-grade Power Platform governance</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn primary" onclick="installTools()">
+          <i class="fas fa-download"></i>
+          Install Tool Suite
+        </button>
+        <button class="btn secondary" onclick="viewDocumentation()">
+          <i class="fas fa-book"></i>
+          Documentation
+        </button>
+      </div>
+    </div>
+
+    <!-- Tool Categories -->
+    <section class="tools-overview">
+      <h2><i class="fas fa-toolbox"></i> Integrated Power Platform Tools</h2>
+      <p class="section-intro">PowerReview Advisors leverages the most powerful tools available for Power Platform assessment, governance, and remediation</p>
+      
+      <div class="tool-categories">
+        <!-- PAC CLI Section -->
+        <div class="tool-section pac-cli">
+          <div class="tool-header">
+            <i class="fas fa-terminal"></i>
+            <h3>Microsoft Power Platform CLI (PAC)</h3>
+            <span class="badge official">Official Microsoft Tool</span>
+          </div>
+          
+          <div class="tool-content">
+            <p>Command-line interface for Power Platform operations, automation, and governance</p>
+            
+            <div class="cli-features">
+              <h4>Security & Governance Commands</h4>
+              <div class="command-examples">
+                <div class="command">
+                  <code>pac auth create --name ProductionAudit</code>
+                  <p>Create secure authentication profile for auditing</p>
+                </div>
+                <div class="command">
+                  <code>pac env list --output json</code>
+                  <p>Export all environments for compliance review</p>
+                </div>
+                <div class="command">
+                  <code>pac solution check --path ./solution.zip</code>
+                  <p>Security and quality analysis of solutions</p>
+                </div>
+                <div class="command">
+                  <code>pac admin backup --environment prod-env</code>
+                  <p>Automated environment backup for DR</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="integration-scripts">
+              <h4>PowerReview Integration Scripts</h4>
+              <pre><code># PowerReview Automated Security Scan
+pac auth create --name PowerReviewScan
+pac env list | ForEach-Object {
+    Write-Host "Scanning environment: $_"
+    pac solution list --environment $_ 
+    pac admin app-users list --environment $_
+    pac dlp list --environment $_
+}
+
+# Export results for analysis
+pac telemetry export --format json > power-platform-audit.json</code></pre>
+              <button class="btn-copy" onclick="copyScript(this)">
+                <i class="fas fa-copy"></i> Copy Script
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CoE Starter Kit Section -->
+        <div class="tool-section coe-kit">
+          <div class="tool-header">
+            <i class="fas fa-building"></i>
+            <h3>Center of Excellence Starter Kit</h3>
+            <span class="badge framework">Governance Framework</span>
+          </div>
+          
+          <div class="tool-content">
+            <p>Complete governance solution with analytics, compliance monitoring, and automation</p>
+            
+            <div class="coe-components">
+              <h4>Key Components for Security Assessment</h4>
+              <div class="component-grid">
+                <div class="component">
+                  <i class="fas fa-chart-line"></i>
+                  <h5>Admin Analytics</h5>
+                  <p>Power BI reports for usage, adoption, and risk analysis</p>
+                </div>
+                <div class="component">
+                  <i class="fas fa-robot"></i>
+                  <h5>Compliance Flows</h5>
+                  <p>Automated governance and approval workflows</p>
+                </div>
+                <div class="component">
+                  <i class="fas fa-shield-alt"></i>
+                  <h5>Security Center</h5>
+                  <p>Centralized security monitoring and alerts</p>
+                </div>
+                <div class="component">
+                  <i class="fas fa-graduation-cap"></i>
+                  <h5>Training Portal</h5>
+                  <p>Maker education and certification tracking</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="implementation-guide">
+              <h4>Quick Implementation</h4>
+              <ol>
+                <li>Install CoE solution in dedicated environment</li>
+                <li>Configure service accounts and connections</li>
+                <li>Set up automated inventory flows</li>
+                <li>Deploy Power BI analytics workspace</li>
+                <li>Enable compliance monitoring</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- XRM Toolbox Section -->
+        <div class="tool-section xrm-toolbox">
+          <div class="tool-header">
+            <i class="fas fa-wrench"></i>
+            <h3>XRM Toolbox Essential Tools</h3>
+            <span class="badge community">Community Powered</span>
+          </div>
+          
+          <div class="tool-content">
+            <p>Specialized tools for deep Dataverse analysis and remediation</p>
+            
+            <div class="xrm-tools-grid">
+              <div class="xrm-category">
+                <h4><i class="fas fa-lock"></i> Security Tools</h4>
+                <ul>
+                  <li><strong>User Security Manager</strong> - Bulk security operations</li>
+                  <li><strong>Role Documenter</strong> - Export security model</li>
+                  <li><strong>Access Checker</strong> - Verify user permissions</li>
+                  <li><strong>Field Security Manager</strong> - Protect sensitive fields</li>
+                </ul>
+              </div>
+              
+              <div class="xrm-category">
+                <h4><i class="fas fa-database"></i> Data Tools</h4>
+                <ul>
+                  <li><strong>Bulk Data Updater</strong> - Mass data operations</li>
+                  <li><strong>Data Anonymizer</strong> - GDPR compliance</li>
+                  <li><strong>Duplicate Detection</strong> - Data quality</li>
+                  <li><strong>Record Counter</strong> - Size analysis</li>
+                </ul>
+              </div>
+              
+              <div class="xrm-category">
+                <h4><i class="fas fa-cogs"></i> Admin Tools</h4>
+                <ul>
+                  <li><strong>Solution Packager</strong> - ALM operations</li>
+                  <li><strong>Metadata Browser</strong> - Schema analysis</li>
+                  <li><strong>Plugin Profiler</strong> - Performance tuning</li>
+                  <li><strong>Audit Explorer</strong> - Compliance tracking</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PowerReview Automation Section -->
+        <div class="tool-section powerreview-automation">
+          <div class="tool-header">
+            <i class="fas fa-magic"></i>
+            <h3>PowerReview Automated Assessment</h3>
+            <span class="badge enhanced">AI-Enhanced</span>
+          </div>
+          
+          <div class="tool-content">
+            <p>Our proprietary automation combining all tools for comprehensive assessment</p>
+            
+            <div class="automation-workflow">
+              <h4>Integrated Assessment Workflow</h4>
+              <div class="workflow-steps">
+                <div class="step">
+                  <div class="step-number">1</div>
+                  <h5>Environment Discovery</h5>
+                  <p>PAC CLI scans all environments and exports inventory</p>
+                </div>
+                <div class="step">
+                  <div class="step-number">2</div>
+                  <h5>Security Analysis</h5>
+                  <p>XRM tools analyze permissions, roles, and access</p>
+                </div>
+                <div class="step">
+                  <div class="step-number">3</div>
+                  <h5>Compliance Check</h5>
+                  <p>CoE Kit validates against governance policies</p>
+                </div>
+                <div class="step">
+                  <div class="step-number">4</div>
+                  <h5>AI Recommendations</h5>
+                  <p>MCP servers generate remediation plan</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="automation-script">
+              <h4>Master Assessment Script</h4>
+              <pre><code># PowerReview Master Assessment Script
+# Combines PAC CLI, CoE Kit data, and XRM analysis
+
+function Start-PowerPlatformAssessment {
+    param(
+        [string]$TenantId,
+        [string]$OutputPath = "./assessment-results"
+    )
+    
+    Write-Host "🚀 Starting PowerReview Assessment" -ForegroundColor Cyan
+    
+    # Phase 1: PAC CLI Environment Scan
+    Write-Host "📊 Phase 1: Environment Discovery" -ForegroundColor Yellow
+    pac auth create --tenant $TenantId
+    $environments = pac env list --json | ConvertFrom-Json
+    
+    foreach ($env in $environments) {
+        Write-Host "  Scanning: $($env.displayName)"
+        
+        # Get solutions
+        pac solution list --environment $env.name --json >> "$OutputPath/solutions.json"
+        
+        # Get makers and admins
+        pac admin list --environment $env.name --json >> "$OutputPath/admins.json"
+        
+        # Get DLP policies
+        pac dlp list --environment $env.name --json >> "$OutputPath/dlp.json"
+        
+        # Get connectors
+        pac connector list --environment $env.name --json >> "$OutputPath/connectors.json"
+    }
+    
+    # Phase 2: Security Analysis
+    Write-Host "🔒 Phase 2: Security Analysis" -ForegroundColor Yellow
+    # Run XRM Toolbox scripts (automated via API)
+    & ./Invoke-XRMSecurityAudit.ps1 -Environments $environments
+    
+    # Phase 3: CoE Kit Integration
+    Write-Host "📈 Phase 3: CoE Analytics" -ForegroundColor Yellow
+    # Query CoE Dataverse tables
+    & ./Get-CoEInventory.ps1 -TenantId $TenantId
+    
+    # Phase 4: Generate Report
+    Write-Host "📄 Phase 4: Generating Report" -ForegroundColor Yellow
+    & ./New-AssessmentReport.ps1 -DataPath $OutputPath
+    
+    Write-Host "✅ Assessment Complete!" -ForegroundColor Green
+}
+
+# Execute assessment
+Start-PowerPlatformAssessment -TenantId "your-tenant-id"</code></pre>
+              <button class="btn-copy" onclick="copyScript(this)">
+                <i class="fas fa-copy"></i> Copy Script
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tool Installation Guide -->
+    <section class="installation-guide">
+      <h2><i class="fas fa-download"></i> Quick Start Installation</h2>
+      
+      <div class="install-options">
+        <div class="install-method">
+          <h3>Option 1: PowerReview Installer (Recommended)</h3>
+          <p>Our all-in-one installer configures all tools with proper settings</p>
+          <pre><code># Download and run PowerReview installer
+iex ((New-Object System.Net.WebClient).DownloadString('https://powerreview.io/install.ps1'))</code></pre>
+          <button class="btn primary" onclick="downloadInstaller()">
+            <i class="fas fa-download"></i> Download Installer
+          </button>
+        </div>
+        
+        <div class="install-method">
+          <h3>Option 2: Manual Installation</h3>
+          <div class="manual-steps">
+            <h4>1. Install PAC CLI</h4>
+            <pre><code>dotnet tool install --global Microsoft.PowerApps.CLI.Tool</code></pre>
+            
+            <h4>2. Install XRM Toolbox</h4>
+            <pre><code>choco install xrmtoolbox</code></pre>
+            
+            <h4>3. Deploy CoE Starter Kit</h4>
+            <p>Download from <a href="https://aka.ms/CoEStarterKit" target="_blank">Microsoft CoE GitHub</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Integration Examples -->
+    <section class="integration-examples">
+      <h2><i class="fas fa-plug"></i> Real-World Integration Examples</h2>
+      
+      <div class="examples-grid">
+        <div class="example">
+          <h3>Automated Security Audit</h3>
+          <p>Weekly automated scan of all environments with email reports</p>
+          <pre><code>pac auth create --name WeeklyScan
+$results = pac solution check --all-environments
+Send-MailMessage -To "security@company.com" -Body $results</code></pre>
+        </div>
+        
+        <div class="example">
+          <h3>Compliance Monitoring</h3>
+          <p>Real-time DLP policy enforcement and alerting</p>
+          <pre><code>pac dlp create --name "Block External Sharing"
+pac flow create --template "DLP-Alert-Flow"</code></pre>
+        </div>
+        
+        <div class="example">
+          <h3>License Optimization</h3>
+          <p>Identify unused licenses and over-privileged users</p>
+          <pre><code>pac admin app-users list --include-licenses
+| Where-Object {$_.LastLogin -lt (Get-Date).AddDays(-90)}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+      <h2>Ready to Master Power Platform Governance?</h2>
+      <p>Let PowerReview Advisors implement these tools and create your custom governance framework</p>
+      <div class="cta-buttons">
+        <button class="btn primary large" onclick="scheduleDemo()">
+          <i class="fas fa-calendar"></i>
+          Schedule Tool Demo
+        </button>
+        <button class="btn secondary large" onclick="downloadGuide()">
+          <i class="fas fa-file-pdf"></i>
+          Download Integration Guide
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    main {
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #f8fafc;
+      min-height: 100vh;
+    }
+
+    /* Advisor Header */
+    .advisor-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 16px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+    }
+
+    .brand h1 {
+      font-size: 2.5rem;
+      margin: 0 0 0.5rem;
+      font-weight: 800;
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      padding: 0.875rem 1.75rem;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn.primary {
+      background: white;
+      color: #667eea;
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Tools Overview */
+    .tools-overview {
+      margin-bottom: 3rem;
+    }
+
+    .tools-overview h2 {
+      color: #1e293b;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .section-intro {
+      color: #64748b;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .tool-categories {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .tool-section {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .tool-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tool-header i {
+      font-size: 2rem;
+      color: #667eea;
+    }
+
+    .tool-header h3 {
+      flex: 1;
+      margin: 0;
+      color: #1e293b;
+    }
+
+    .badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .badge.official {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .badge.framework {
+      background: #e0e7ff;
+      color: #4338ca;
+    }
+
+    .badge.community {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .badge.enhanced {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .tool-content {
+      color: #475569;
+    }
+
+    .tool-content > p {
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* CLI Features */
+    .cli-features {
+      margin-bottom: 2rem;
+    }
+
+    .cli-features h4 {
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+
+    .command-examples {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .command {
+      background: #f8fafc;
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 3px solid #667eea;
+    }
+
+    .command code {
+      display: block;
+      font-family: 'Consolas', 'Monaco', monospace;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .command p {
+      margin: 0;
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+
+    /* Integration Scripts */
+    .integration-scripts {
+      margin-top: 2rem;
+    }
+
+    .integration-scripts h4 {
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+
+    pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin-bottom: 1rem;
+      position: relative;
+    }
+
+    .btn-copy {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #475569;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s;
+    }
+
+    .btn-copy:hover {
+      background: #64748b;
+    }
+
+    /* CoE Components */
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .component {
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .component i {
+      font-size: 2rem;
+      color: #667eea;
+      margin-bottom: 0.5rem;
+    }
+
+    .component h5 {
+      color: #1e293b;
+      margin: 0.5rem 0;
+    }
+
+    .component p {
+      font-size: 0.875rem;
+      color: #64748b;
+      margin: 0;
+    }
+
+    /* Implementation Guide */
+    .implementation-guide {
+      background: #f0f9ff;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
+
+    .implementation-guide h4 {
+      color: #1e40af;
+      margin-bottom: 1rem;
+    }
+
+    .implementation-guide ol {
+      margin: 0;
+      padding-left: 1.5rem;
+      color: #475569;
+    }
+
+    .implementation-guide li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* XRM Tools Grid */
+    .xrm-tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .xrm-category {
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    .xrm-category h4 {
+      color: #1e293b;
+      margin: 0 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .xrm-category ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .xrm-category li {
+      padding: 0.5rem 0;
+      font-size: 0.875rem;
+      color: #64748b;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .xrm-category li:last-child {
+      border-bottom: none;
+    }
+
+    .xrm-category li strong {
+      color: #1e293b;
+    }
+
+    /* Workflow Steps */
+    .workflow-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .step {
+      text-align: center;
+    }
+
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background: #667eea;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto 1rem;
+    }
+
+    .step h5 {
+      color: #1e293b;
+      margin: 0 0 0.5rem;
+    }
+
+    .step p {
+      font-size: 0.875rem;
+      color: #64748b;
+      margin: 0;
+    }
+
+    /* Installation Guide */
+    .installation-guide {
+      background: white;
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .installation-guide h2 {
+      color: #1e293b;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .install-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+    }
+
+    .install-method {
+      background: #f8fafc;
+      padding: 2rem;
+      border-radius: 8px;
+    }
+
+    .install-method h3 {
+      color: #1e293b;
+      margin: 0 0 1rem;
+    }
+
+    .manual-steps h4 {
+      color: #334155;
+      margin: 1.5rem 0 0.5rem;
+      font-size: 1rem;
+    }
+
+    /* Integration Examples */
+    .integration-examples {
+      margin-bottom: 3rem;
+    }
+
+    .integration-examples h2 {
+      color: #1e293b;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .examples-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .example {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .example h3 {
+      color: #1e293b;
+      margin: 0 0 0.5rem;
+    }
+
+    .example > p {
+      color: #64748b;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      border-radius: 16px;
+      padding: 3rem;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+    }
+
+    .cta-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .btn.large {
+      padding: 1.25rem 2.5rem;
+      font-size: 1.125rem;
+    }
+
+    @media (max-width: 768px) {
+      .tool-header {
+        flex-wrap: wrap;
+      }
+
+      .workflow-steps {
+        grid-template-columns: 1fr;
+      }
+
+      .install-options {
+        grid-template-columns: 1fr;
+      }
+
+      .examples-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <script>
+    function copyScript(button) {
+      const pre = button.parentElement.querySelector('code');
+      const text = pre.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        const originalHTML = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+          button.innerHTML = originalHTML;
+        }, 2000);
+      });
+    }
+
+    function installTools() {
+      alert('Downloading PowerReview Tool Suite installer...');
+    }
+
+    function viewDocumentation() {
+      window.open('https://docs.microsoft.com/power-platform/developer/cli/', '_blank');
+    }
+
+    function downloadInstaller() {
+      alert('Preparing PowerReview installer download...');
+    }
+
+    function scheduleDemo() {
+      alert('Opening calendar to schedule Power Platform tools demo...');
+    }
+
+    function downloadGuide() {
+      alert('Preparing integration guide PDF...');
+    }
+  </script>
+</Layout>

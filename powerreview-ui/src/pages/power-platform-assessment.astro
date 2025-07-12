@@ -1,0 +1,869 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Power Platform Assessment - PowerReview Advisors">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <main>
+    <!-- PowerReview Advisors Header -->
+    <div class="advisor-header">
+      <div class="header-content">
+        <div class="brand">
+          <h1>PowerReview Advisors</h1>
+          <p class="tagline">Power Platform Governance & Security Assessment</p>
+        </div>
+        <p class="subtitle">Comprehensive analysis of your Power Platform environment including Power Apps, Power Automate, Power BI, and Dataverse</p>
+      </div>
+      <div class="header-actions">
+        <button class="btn primary" onclick="runAssessment()">
+          <i class="fas fa-play"></i>
+          Run Assessment
+        </button>
+        <button class="btn secondary" onclick="viewTools()">
+          <i class="fas fa-toolbox"></i>
+          View Tools Suite
+        </button>
+      </div>
+    </div>
+
+    <!-- Assessment Overview -->
+    <section class="assessment-overview">
+      <h2><i class="fas fa-chart-line"></i> Power Platform Security Score</h2>
+      <div class="score-container">
+        <div class="score-visual">
+          <canvas id="powerPlatformScore" width="200" height="200"></canvas>
+          <div class="score-center">
+            <div class="score-value">58</div>
+            <div class="score-label">Overall Score</div>
+          </div>
+        </div>
+        <div class="score-details">
+          <h3>Your Power Platform Posture</h3>
+          <p>Based on Microsoft's Center of Excellence best practices and security guidelines, your Power Platform environment needs significant improvements in governance and security.</p>
+          <div class="score-components">
+            <div class="component">
+              <span class="label">Power Apps Security:</span>
+              <span class="value critical">45/100</span>
+            </div>
+            <div class="component">
+              <span class="label">Power Automate Governance:</span>
+              <span class="value warning">62/100</span>
+            </div>
+            <div class="component">
+              <span class="label">Dataverse Security:</span>
+              <span class="value moderate">68/100</span>
+            </div>
+            <div class="component">
+              <span class="label">Environment Management:</span>
+              <span class="value warning">57/100</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Findings -->
+    <section class="findings-section">
+      <h2><i class="fas fa-exclamation-triangle"></i> Critical Findings</h2>
+      <div class="findings-grid">
+        
+        <div class="finding-card critical">
+          <div class="finding-header">
+            <i class="fas fa-user-secret"></i>
+            <h3>Shadow IT & Ungoverned Apps</h3>
+          </div>
+          <div class="finding-content">
+            <p><strong>Issue:</strong> 234 Power Apps created outside of IT governance</p>
+            <p><strong>Risk:</strong> Uncontrolled data access and compliance violations</p>
+            <p><strong>Impact:</strong> Potential data breaches through ungoverned applications</p>
+            <div class="finding-stats">
+              <span class="stat">156 apps sharing data externally</span>
+              <span class="stat">89 using premium connectors</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="finding-card critical">
+          <div class="finding-header">
+            <i class="fas fa-robot"></i>
+            <h3>High-Risk Power Automate Flows</h3>
+          </div>
+          <div class="finding-content">
+            <p><strong>Issue:</strong> 67 flows with excessive permissions and no approval</p>
+            <p><strong>Risk:</strong> Automated processes could delete or modify critical data</p>
+            <p><strong>Impact:</strong> Business process corruption or data loss</p>
+            <div class="finding-stats">
+              <span class="stat">23 flows with admin privileges</span>
+              <span class="stat">44 accessing multiple systems</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="finding-card high">
+          <div class="finding-header">
+            <i class="fas fa-database"></i>
+            <h3>Dataverse Security Gaps</h3>
+          </div>
+          <div class="finding-content">
+            <p><strong>Issue:</strong> No field-level security on sensitive data</p>
+            <p><strong>Risk:</strong> All users can view PII and financial information</p>
+            <p><strong>Impact:</strong> GDPR and compliance violations</p>
+            <div class="finding-stats">
+              <span class="stat">1.2M records unprotected</span>
+              <span class="stat">No audit logging enabled</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="finding-card high">
+          <div class="finding-header">
+            <i class="fas fa-plug"></i>
+            <h3>Unmanaged Connectors</h3>
+          </div>
+          <div class="finding-content">
+            <p><strong>Issue:</strong> 45 custom connectors without security review</p>
+            <p><strong>Risk:</strong> Direct API access to external systems</p>
+            <p><strong>Impact:</strong> Data exfiltration and unauthorized integrations</p>
+            <div class="finding-stats">
+              <span class="stat">12 connectors to unknown APIs</span>
+              <span class="stat">No DLP policies applied</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Power Platform Assessment Tools -->
+    <section class="assessment-tools">
+      <h2><i class="fas fa-toolbox"></i> Assessment Methodology & Tools</h2>
+      <p class="section-intro">PowerReview Advisors uses industry-leading tools and Microsoft's CoE Starter Kit to provide comprehensive Power Platform assessments</p>
+      
+      <div class="tools-grid">
+        <div class="tool-category">
+          <h3><i class="fas fa-shield-alt"></i> Security Assessment Tools</h3>
+          <ul>
+            <li><strong>User Security Manager:</strong> Analyze user permissions across environments</li>
+            <li><strong>Role Documenter:</strong> Document and audit security roles</li>
+            <li><strong>Field Level Security Manager:</strong> Identify unprotected sensitive fields</li>
+            <li><strong>Sharing Manager:</strong> Audit record sharing and access</li>
+          </ul>
+        </div>
+
+        <div class="tool-category">
+          <h3><i class="fas fa-chart-bar"></i> Governance Analytics</h3>
+          <ul>
+            <li><strong>Power Apps Inventory:</strong> Catalog all apps and their usage</li>
+            <li><strong>Flow Analytics:</strong> Monitor automation patterns and risks</li>
+            <li><strong>Connector Usage Report:</strong> Track data connections</li>
+            <li><strong>License Optimization:</strong> Identify waste and compliance gaps</li>
+          </ul>
+        </div>
+
+        <div class="tool-category">
+          <h3><i class="fas fa-cogs"></i> Technical Assessment</h3>
+          <ul>
+            <li><strong>Solution Checker:</strong> Code quality and performance analysis</li>
+            <li><strong>Dependency Analyzer:</strong> Map component relationships</li>
+            <li><strong>Performance Profiler:</strong> Identify bottlenecks</li>
+            <li><strong>API Usage Monitor:</strong> Track custom API calls</li>
+          </ul>
+        </div>
+
+        <div class="tool-category">
+          <h3><i class="fas fa-database"></i> Data Governance</h3>
+          <ul>
+            <li><strong>Data Anonymizer:</strong> Test GDPR compliance</li>
+            <li><strong>Duplicate Detection:</strong> Data quality assessment</li>
+            <li><strong>Audit Trail Analyzer:</strong> Compliance verification</li>
+            <li><strong>Retention Policy Checker:</strong> Data lifecycle management</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Implementation Roadmap -->
+    <section class="roadmap-section">
+      <h2><i class="fas fa-road"></i> Your Power Platform Governance Roadmap</h2>
+      
+      <div class="roadmap-phases">
+        <div class="phase immediate">
+          <div class="phase-header">
+            <div class="phase-icon">🚨</div>
+            <h3>Immediate Actions</h3>
+            <span class="timeframe">Week 1-2</span>
+          </div>
+          <div class="phase-content">
+            <h4>Stop the Bleeding</h4>
+            <ul>
+              <li>Enable DLP policies to block external sharing</li>
+              <li>Require approval for new Power Apps creation</li>
+              <li>Audit and secure high-risk flows</li>
+              <li>Implement environment strategy (Dev/Test/Prod)</li>
+            </ul>
+            <div class="phase-outcome">
+              <strong>Expected Result:</strong> Immediate risk reduction and governance control
+            </div>
+          </div>
+        </div>
+
+        <div class="phase short-term">
+          <div class="phase-header">
+            <div class="phase-icon">🔧</div>
+            <h3>CoE Implementation</h3>
+            <span class="timeframe">Month 1-3</span>
+          </div>
+          <div class="phase-content">
+            <h4>Deploy Center of Excellence</h4>
+            <ul>
+              <li>Install Microsoft CoE Starter Kit</li>
+              <li>Configure Power Platform admin center</li>
+              <li>Set up automated compliance monitoring</li>
+              <li>Establish maker training program</li>
+              <li>Implement app certification process</li>
+            </ul>
+            <div class="phase-outcome">
+              <strong>Expected Result:</strong> Structured governance with visibility and control
+            </div>
+          </div>
+        </div>
+
+        <div class="phase long-term">
+          <div class="phase-header">
+            <div class="phase-icon">🚀</div>
+            <h3>Advanced Governance</h3>
+            <span class="timeframe">Month 4-6</span>
+          </div>
+          <div class="phase-content">
+            <h4>Mature Power Platform Practice</h4>
+            <ul>
+              <li>AI-powered compliance monitoring</li>
+              <li>Automated security remediation</li>
+              <li>Advanced analytics and insights</li>
+              <li>Fusion development teams</li>
+              <li>Innovation pipeline management</li>
+            </ul>
+            <div class="phase-outcome">
+              <strong>Expected Result:</strong> Industry-leading Power Platform governance
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- XRM Toolbox Integration -->
+    <section class="xrm-tools">
+      <h2><i class="fas fa-wrench"></i> Recommended XRM Toolbox Tools</h2>
+      <p class="section-intro">Based on your assessment results, these XRM Toolbox tools will help remediate your specific issues:</p>
+      
+      <div class="tools-recommendations">
+        <div class="tool-rec critical">
+          <div class="tool-header">
+            <i class="fas fa-user-shield"></i>
+            <h4>For Security Gaps</h4>
+          </div>
+          <ul>
+            <li><strong>User Security Manager:</strong> Fix permission issues</li>
+            <li><strong>Security Roles Explorer:</strong> Audit and optimize roles</li>
+            <li><strong>Field Security Profile Manager:</strong> Protect sensitive data</li>
+          </ul>
+        </div>
+
+        <div class="tool-rec high">
+          <div class="tool-header">
+            <i class="fas fa-broom"></i>
+            <h4>For Data Cleanup</h4>
+          </div>
+          <ul>
+            <li><strong>Bulk Data Updater:</strong> Mass data corrections</li>
+            <li><strong>Duplicate Detection Manager:</strong> Clean duplicate records</li>
+            <li><strong>Data Anonymizer:</strong> GDPR compliance testing</li>
+          </ul>
+        </div>
+
+        <div class="tool-rec medium">
+          <div class="tool-header">
+            <i class="fas fa-tachometer-alt"></i>
+            <h4>For Performance</h4>
+          </div>
+          <ul>
+            <li><strong>Performance Analyzer:</strong> Identify bottlenecks</li>
+            <li><strong>View Layout Replicator:</strong> Optimize forms</li>
+            <li><strong>Solution Component Mover:</strong> Clean deployments</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+      <h2>Ready to Secure Your Power Platform?</h2>
+      <p>PowerReview Advisors will guide you through implementing Microsoft's CoE best practices and achieving governance excellence</p>
+      <div class="cta-buttons">
+        <button class="btn primary large" onclick="scheduleConsultation()">
+          <i class="fas fa-calendar"></i>
+          Schedule Power Platform Review
+        </button>
+        <button class="btn secondary large" onclick="downloadReport()">
+          <i class="fas fa-download"></i>
+          Download Assessment Report
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    main {
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #f8fafc;
+      min-height: 100vh;
+    }
+
+    /* Advisor Header */
+    .advisor-header {
+      background: linear-gradient(135deg, #5e2aca 0%, #7c3aed 100%);
+      color: white;
+      border-radius: 16px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 40px rgba(94, 42, 202, 0.2);
+    }
+
+    .brand h1 {
+      font-size: 2.5rem;
+      margin: 0 0 0.5rem;
+      font-weight: 800;
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      opacity: 0.8;
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      padding: 0.875rem 1.75rem;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn.primary {
+      background: white;
+      color: #5e2aca;
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Assessment Overview */
+    .assessment-overview {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .assessment-overview h2 {
+      color: #1e293b;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .score-container {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .score-visual {
+      position: relative;
+    }
+
+    .score-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .score-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #dc2626;
+    }
+
+    .score-label {
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+
+    .score-details h3 {
+      color: #1e293b;
+      margin: 0 0 1rem;
+    }
+
+    .score-details p {
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .score-components {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .component {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem;
+      background: #f8fafc;
+      border-radius: 8px;
+    }
+
+    .component .label {
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .component .value {
+      font-weight: 700;
+      font-size: 1.125rem;
+    }
+
+    .value.critical {
+      color: #dc2626;
+    }
+
+    .value.warning {
+      color: #f59e0b;
+    }
+
+    .value.moderate {
+      color: #3b82f6;
+    }
+
+    /* Findings Section */
+    .findings-section {
+      margin-bottom: 3rem;
+    }
+
+    .findings-section h2 {
+      color: #1e293b;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .findings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 2rem;
+    }
+
+    .finding-card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      border-left: 4px solid;
+    }
+
+    .finding-card.critical {
+      border-left-color: #dc2626;
+    }
+
+    .finding-card.high {
+      border-left-color: #f59e0b;
+    }
+
+    .finding-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .finding-header i {
+      font-size: 2rem;
+      color: #5e2aca;
+    }
+
+    .finding-header h3 {
+      margin: 0;
+      color: #1e293b;
+      font-size: 1.25rem;
+    }
+
+    .finding-content p {
+      margin: 0.75rem 0;
+      color: #475569;
+      line-height: 1.6;
+    }
+
+    .finding-content p strong {
+      color: #1e293b;
+    }
+
+    .finding-stats {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .stat {
+      background: #fef3f2;
+      color: #dc2626;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    /* Assessment Tools */
+    .assessment-tools {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .assessment-tools h2 {
+      color: #1e293b;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .section-intro {
+      color: #64748b;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .tool-category {
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 12px;
+    }
+
+    .tool-category h3 {
+      color: #5e2aca;
+      margin: 0 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tool-category ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tool-category li {
+      padding: 0.5rem 0;
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    .tool-category li strong {
+      color: #1e293b;
+    }
+
+    /* Roadmap Section */
+    .roadmap-section {
+      margin-bottom: 3rem;
+    }
+
+    .roadmap-section h2 {
+      color: #1e293b;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .roadmap-phases {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .phase {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      border-left: 4px solid;
+    }
+
+    .phase.immediate {
+      border-left-color: #dc2626;
+    }
+
+    .phase.short-term {
+      border-left-color: #f59e0b;
+    }
+
+    .phase.long-term {
+      border-left-color: #10b981;
+    }
+
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .phase-icon {
+      font-size: 2.5rem;
+    }
+
+    .phase-header h3 {
+      margin: 0;
+      color: #1e293b;
+      flex: 1;
+    }
+
+    .timeframe {
+      color: #64748b;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .phase-content h4 {
+      color: #334155;
+      margin: 0 0 1rem;
+    }
+
+    .phase-content ul {
+      margin: 0 0 1.5rem;
+      padding-left: 1.5rem;
+      color: #64748b;
+    }
+
+    .phase-outcome {
+      padding: 1rem;
+      background: #f0fdf4;
+      border-radius: 8px;
+      color: #059669;
+      font-weight: 600;
+    }
+
+    /* XRM Tools */
+    .xrm-tools {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .xrm-tools h2 {
+      color: #1e293b;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .tools-recommendations {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .tool-rec {
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border-top: 3px solid;
+    }
+
+    .tool-rec.critical {
+      border-top-color: #dc2626;
+    }
+
+    .tool-rec.high {
+      border-top-color: #f59e0b;
+    }
+
+    .tool-rec.medium {
+      border-top-color: #3b82f6;
+    }
+
+    .tool-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .tool-header i {
+      font-size: 1.5rem;
+      color: #5e2aca;
+    }
+
+    .tool-header h4 {
+      margin: 0;
+      color: #1e293b;
+    }
+
+    .tool-rec ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .tool-rec li {
+      padding: 0.5rem 0;
+      color: #64748b;
+      font-size: 0.875rem;
+    }
+
+    .tool-rec li strong {
+      color: #1e293b;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #5e2aca, #7c3aed);
+      color: white;
+      border-radius: 16px;
+      padding: 3rem;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(94, 42, 202, 0.2);
+    }
+
+    .cta-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .cta-section p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .btn.large {
+      padding: 1.25rem 2.5rem;
+      font-size: 1.125rem;
+    }
+
+    @media (max-width: 768px) {
+      .score-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .findings-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tools-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Initialize Power Platform Score Chart
+    document.addEventListener('DOMContentLoaded', () => {
+      const ctx = document.getElementById('powerPlatformScore').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          datasets: [{
+            data: [58, 42],
+            backgroundColor: ['#5e2aca', '#e5e7eb'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '75%',
+          plugins: {
+            legend: { display: false },
+            tooltip: { enabled: false }
+          }
+        }
+      });
+    });
+
+    function runAssessment() {
+      alert('Launching Power Platform assessment scan...');
+    }
+
+    function viewTools() {
+      window.location.href = '/power-platform-tools';
+    }
+
+    function scheduleConsultation() {
+      alert('Opening calendar to schedule Power Platform governance consultation...');
+    }
+
+    function downloadReport() {
+      alert('Preparing Power Platform assessment report for download...');
+    }
+  </script>
+</Layout>
