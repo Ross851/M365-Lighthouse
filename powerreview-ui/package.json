@@ -12,10 +12,14 @@
     "@astrojs/vercel": "^8.0.0",
     "astro": "^5.11.0",
     "jsonwebtoken": "^9.0.2",
-    "bcryptjs": "^2.4.3"
+    "bcryptjs": "^2.4.3",
+    "ws": "^8.16.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.5",
-    "@types/bcryptjs": "^2.4.6"
+    "@types/bcryptjs": "^2.4.6",
+    "@types/ws": "^8.5.10",
+    "@types/uuid": "^9.0.7"
   }
 }

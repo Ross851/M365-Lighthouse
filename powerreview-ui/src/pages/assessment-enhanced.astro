@@ -1456,6 +1456,35 @@ import Layout from '../layouts/Layout.astro';
 			transition-duration: 0.01ms !important;
 		}
 	}
+
+	/* Error message */
+	.error-message {
+		background: #fee;
+		border: 1px solid #fcc;
+		border-radius: 8px;
+		padding: 1rem;
+		margin-top: 1rem;
+		color: #c53030;
+	}
+
+	.error-message strong {
+		display: block;
+		margin-bottom: 0.5rem;
+	}
+
+	.error-message p {
+		margin: 0.25rem 0;
+		font-size: 0.875rem;
+	}
+
+	/* Spinner animation */
+	@keyframes spin {
+		to { transform: rotate(360deg); }
+	}
+
+	.animate-spin {
+		animation: spin 1s linear infinite;
+	}
 </style>
 
 <script>
@@ -1840,7 +1869,12 @@ import Layout from '../layouts/Layout.astro';
 		text.textContent = message;
 	}
 
-	function startAssessment() {
+	async function startAssessment() {
+		// Disable start button
+		const startBtn = document.getElementById('start-assessment');
+		startBtn.disabled = true;
+		startBtn.innerHTML = '<svg class="animate-spin" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" opacity="0.75"/></svg> Starting...';
+		
 		// Collect all assessment data
 		assessmentConfig = {
 			customer: {
@@ -1918,8 +1952,70 @@ import Layout from '../layouts/Layout.astro';
 		// Store configuration
 		localStorage.setItem('telana-assessment-config', JSON.stringify(assessmentConfig));
 		
-		// Redirect to execution page
-		window.location.href = '/execute';
+		try {
+			// Get auth token
+			const token = localStorage.getItem('auth-token');
+			if (!token) {
+				window.location.href = '/login';
+				return;
+			}
+			
+			// Call the backend API to start the real assessment
+			const response = await fetch('/api/assessment/start', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${token}`
+				},
+				body: JSON.stringify({
+					// Convert to backend expected format
+					assessments: assessmentConfig.environment.services.map(s => ({
+						type: s,
+						depth: assessmentConfig.environment.depth
+					})),
+					config: {
+						tenant: assessmentConfig.customer.name,
+						customerInfo: assessmentConfig.customer,
+						environment: assessmentConfig.environment,
+						aiQuestions: assessmentConfig.aiQuestions
+					}
+				})
+			});
+			
+			if (!response.ok) {
+				throw new Error(`Failed to start assessment: ${response.statusText}`);
+			}
+			
+			const result = await response.json();
+			
+			if (result.success && result.sessionId) {
+				// Store session ID
+				localStorage.setItem('current-session-id', result.sessionId);
+				localStorage.setItem('websocket-url', result.websocketUrl || 'ws://localhost:8080');
+				
+				// Redirect to execution monitoring page
+				window.location.href = `/execute?session=${result.sessionId}`;
+			} else {
+				throw new Error(result.error || 'Failed to start assessment');
+			}
+			
+		} catch (error) {
+			console.error('Failed to start assessment:', error);
+			
+			// Show error message
+			const errorMsg = document.createElement('div');
+			errorMsg.className = 'error-message';
+			errorMsg.innerHTML = `
+				<strong>Failed to start assessment</strong>
+				<p>${error.message}</p>
+				<p>Please check your connection and try again.</p>
+			`;
+			document.querySelector('.start-section').appendChild(errorMsg);
+			
+			// Re-enable button
+			startBtn.disabled = false;
+			startBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg> Start Assessment';
+		}
 	}
 
 	// Accessibility enhancements

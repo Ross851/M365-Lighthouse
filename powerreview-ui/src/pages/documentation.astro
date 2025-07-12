@@ -46,7 +46,7 @@ git clone https://github.com/Ross851/M365-Lighthouse.git
 cd M365-Lighthouse
 
 # Install PowerShell modules
-./Install-PowerReview.ps1
+&#46;&#47;Install-PowerReview&#46;ps1
 
 # Start the web UI
 cd powerreview-ui
@@ -86,10 +86,10 @@ Connect-AzureAD</code></pre>
 
 					<h3>PowerShell Direct</h3>
 					<pre><code class="language-powershell"># Run comprehensive assessment
-./Start-PowerReview-Enhanced.ps1
+&#46;&#47;Start-PowerReview-Enhanced&#46;ps1
 
 # Run specific module
-./Start-PowerReview-Enhanced.ps1 -Module "AzureAD"</code></pre>
+&#46;&#47;Start-PowerReview-Enhanced&#46;ps1 -Module "AzureAD"</code></pre>
 
 					<h3>AI-Powered Assessment</h3>
 					<p>Use the AI Assistant for natural language queries:</p>
@@ -175,7 +175,7 @@ Content-Type: application/json
 }</code></pre>
 
 					<h3>Get Results</h3>
-					<pre><code class="language-http">GET /api/results/{sessionId}
+					<pre><code class="language-http">GET /api/results/[sessionId]
 Authorization: Bearer YOUR_TOKEN</code></pre>
 
 					<h3>Generate Report</h3>

@@ -34,11 +34,14 @@ function Send-WebUpdate {
     }
     
     # Write to output stream for web consumption
-    $json = $update | ConvertTo-Json -Compress
+    $json = $update | ConvertTo-Json -Compress -Depth 10
     Write-Output "STREAM:$json"
     
     # Also log to file
     $logFile = Join-Path $OutputPath "$SessionId\stream.log"
+    if (-not (Test-Path (Split-Path $logFile))) {
+        New-Item -ItemType Directory -Path (Split-Path $logFile) -Force | Out-Null
+    }
     Add-Content -Path $logFile -Value $json
 }
 
@@ -267,12 +270,37 @@ function Connect-M365Service {
 
 # Main execution
 if ($ConfigJson) {
-    $config = $ConfigJson | ConvertFrom-Json -AsHashtable
-    
-    # Create session directory
-    $sessionPath = Join-Path $OutputPath $SessionId
-    New-Item -ItemType Directory -Path $sessionPath -Force | Out-Null
-    
-    # Start assessment
-    Start-WebAssessment -Config $config
+    try {
+        # Parse config
+        $config = $ConfigJson | ConvertFrom-Json -AsHashtable
+        
+        # Ensure session ID is provided
+        if (-not $SessionId) {
+            throw "SessionId is required"
+        }
+        
+        # Create session directory
+        $sessionPath = Join-Path $OutputPath $SessionId
+        New-Item -ItemType Directory -Path $sessionPath -Force | Out-Null
+        
+        # Log start
+        $startLog = @{
+            SessionId = $SessionId
+            StartTime = Get-Date -Format "yyyy-MM-ddTHH:mm:ss"
+            Config = $config
+        }
+        $startLog | ConvertTo-Json -Depth 10 | Set-Content -Path "$sessionPath\config.json"
+        
+        # Start assessment
+        Start-WebAssessment -Config $config
+    } catch {
+        Send-WebUpdate -Type "error" -Data @{
+            message = "Failed to start assessment: $_"
+            error = $_.Exception.Message
+        }
+        throw
+    }
+} else {
+    Write-Error "ConfigJson parameter is required"
+    exit 1
 }
