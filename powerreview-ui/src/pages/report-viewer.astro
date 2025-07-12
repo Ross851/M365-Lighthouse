@@ -250,10 +250,10 @@ import Layout from '../layouts/Layout.astro';
             <div class="finding-evidence">
               <h4>Evidence</h4>
               <div class="evidence-box">
-                <pre><code>Get-MsolUser -All | Where {$_.StrongAuthenticationMethods.Count -eq 0} | Measure
+                <pre><code>Get-MsolUser -All | Where &#123;$_.StrongAuthenticationMethods.Count -eq 0&#125; | Measure
 Count: 1,950 users without MFA
 
-Get-MsolRole -RoleName "*admin*" | Get-MsolRoleMember | Where {$_.StrongAuthenticationMethods.Count -eq 0}
+Get-MsolRole -RoleName "*admin*" | Get-MsolRoleMember | Where &#123;$_.StrongAuthenticationMethods.Count -eq 0&#125;
 Found: 15 admin accounts without MFA</code></pre>
               </div>
               <button class="btn-link" onclick="viewFullEvidence('AAD-001')">
