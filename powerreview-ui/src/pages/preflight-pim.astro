@@ -1,0 +1,635 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="PIM Activation Required - PowerReview">
+	<main>
+		<div class="container">
+			<div class="pim-warning">
+				<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+					<line x1="12" y1="9" x2="12" y2="13"/>
+					<line x1="12" y1="17" x2="12" y2="17"/>
+				</svg>
+				<h1>Privileged Identity Management (PIM) Activation Required</h1>
+				<p>If your organization uses PIM, you MUST activate your privileged roles before starting the assessment</p>
+			</div>
+
+			<div class="pim-steps">
+				<div class="step-card critical">
+					<div class="step-header">
+						<div class="step-number">!</div>
+						<h2>Critical First Step</h2>
+					</div>
+					<div class="step-content">
+						<p><strong>PIM activation can take 5-10 minutes to fully propagate.</strong> Complete this step first while preparing other requirements.</p>
+						
+						<div class="tenant-selector">
+							<label>Enter your tenant domain to generate correct links:</label>
+							<div class="input-group">
+								<input type="text" id="tenant-domain" placeholder="contoso.onmicrosoft.com" />
+								<button onclick="updateLinks()" class="btn-update">Update Links</button>
+							</div>
+						</div>
+
+						<h3>Quick Links (will update with your tenant):</h3>
+						<div class="quick-links">
+							<a id="pim-link" href="https://portal.azure.com/#blade/Microsoft_Azure_PIMCommon/ActivationMenuBlade/aadmigratedroles" target="_blank" class="pim-button">
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+									<path d="M13.73 21a2 2 0 01-3.46 0"/>
+								</svg>
+								Activate PIM Roles Now
+							</a>
+							<a id="pim-status" href="https://portal.azure.com/#blade/Microsoft_Azure_PIMCommon/ResourceMenuBlade/MyActions" target="_blank" class="status-button">
+								Check PIM Status
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="step-card">
+					<div class="step-header">
+						<div class="step-number">1</div>
+						<h2>How to Activate PIM Roles</h2>
+					</div>
+					<div class="step-content">
+						<ol>
+							<li>Click "Activate PIM Roles Now" above</li>
+							<li>Select the roles you need:
+								<ul>
+									<li><strong>Global Administrator</strong> or <strong>Global Reader</strong> (Required)</li>
+									<li><strong>Security Administrator</strong> (Recommended)</li>
+									<li><strong>Compliance Administrator</strong> (For Purview access)</li>
+								</ul>
+							</li>
+							<li>Set duration: <strong>8 hours minimum</strong> (for full assessment)</li>
+							<li>Provide justification: "Security assessment for [Customer Name]"</li>
+							<li>Complete MFA verification if prompted</li>
+							<li>Click "Activate"</li>
+						</ol>
+
+						<div class="warning-box">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<circle cx="12" cy="12" r="10"/>
+								<line x1="12" y1="8" x2="12" y2="8"/>
+								<line x1="12" y1="12" x2="12" y2="16"/>
+							</svg>
+							<div>
+								<strong>Important:</strong> After clicking Activate, wait 5-10 minutes before proceeding. The roles need time to propagate across all services.
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="step-card">
+					<div class="step-header">
+						<div class="step-number">2</div>
+						<h2>Verify Activation Status</h2>
+					</div>
+					<div class="step-content">
+						<p>After waiting 5-10 minutes, verify your roles are active:</p>
+						
+						<div class="verification-methods">
+							<div class="method">
+								<h4>Azure Portal Check</h4>
+								<ol>
+									<li>Go to <a id="azure-users" href="https://portal.azure.com/#blade/Microsoft_AAD_IAM/UsersManagementMenuBlade/AllUsers" target="_blank">Azure AD → Users</a></li>
+									<li>Search for your account</li>
+									<li>Click "Assigned roles"</li>
+									<li>Verify roles show as "Active" not "Eligible"</li>
+								</ol>
+							</div>
+							
+							<div class="method">
+								<h4>Admin Center Check</h4>
+								<ol>
+									<li>Go to <a id="admin-center" href="https://admin.microsoft.com" target="_blank">Microsoft 365 Admin Center</a></li>
+									<li>If you can access it, your roles are active</li>
+									<li>Check "Active users" to confirm permissions</li>
+								</ol>
+							</div>
+						</div>
+
+						<div class="timer-section">
+							<h4>Activation Timer</h4>
+							<p>Click to start a 5-minute timer while roles propagate:</p>
+							<button onclick="startTimer()" class="btn-timer" id="timer-btn">Start 5-Minute Timer</button>
+							<div id="timer-display" class="timer-display" style="display: none;">
+								<span id="timer-text">5:00</span>
+								<span id="timer-status">Waiting for role propagation...</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="step-card">
+					<div class="step-header">
+						<div class="step-number">3</div>
+						<h2>Common PIM Issues</h2>
+					</div>
+					<div class="step-content">
+						<div class="issue-list">
+							<div class="issue">
+								<h4>🔴 "No eligible roles" message</h4>
+								<p><strong>Solution:</strong> Contact your Azure AD administrator to assign eligible roles to your account</p>
+							</div>
+							
+							<div class="issue">
+								<h4>🔴 Activation fails with error</h4>
+								<p><strong>Solution:</strong> Check if you need approval from another admin, or if there are PIM policies blocking activation</p>
+							</div>
+							
+							<div class="issue">
+								<h4>🔴 Roles activated but still no access</h4>
+								<p><strong>Solution:</strong> Sign out completely from all Microsoft services and sign back in. Clear browser cache if needed.</p>
+							</div>
+							
+							<div class="issue">
+								<h4>🔴 MFA loop during activation</h4>
+								<p><strong>Solution:</strong> Complete MFA setup at <a href="https://aka.ms/mfasetup" target="_blank">aka.ms/mfasetup</a> first</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="action-bar">
+				<div class="checklist">
+					<label class="check-item">
+						<input type="checkbox" id="check-pim-activated">
+						<span>I've activated my PIM roles</span>
+					</label>
+					<label class="check-item">
+						<input type="checkbox" id="check-wait-time">
+						<span>I've waited 5-10 minutes for propagation</span>
+					</label>
+					<label class="check-item">
+						<input type="checkbox" id="check-verified">
+						<span>I've verified my roles are active</span>
+					</label>
+				</div>
+				<button id="continue-btn" class="btn-primary" disabled onclick="proceedToChecklist()">
+					Continue to Full Checklist
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M5 12h14M12 5l7 7-7 7"/>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		min-height: calc(100vh - 140px);
+		background: #f5f7fa;
+		padding: 2rem 1rem;
+	}
+
+	.container {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.pim-warning {
+		text-align: center;
+		background: #fff3cd;
+		border: 2px solid #ffeaa7;
+		border-radius: 12px;
+		padding: 2rem;
+		margin-bottom: 2rem;
+	}
+
+	.pim-warning svg {
+		color: #856404;
+		margin-bottom: 1rem;
+	}
+
+	.pim-warning h1 {
+		color: #856404;
+		font-size: 1.75rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.pim-warning p {
+		color: #856404;
+		font-size: 1.125rem;
+		margin: 0;
+	}
+
+	.pim-steps {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		margin-bottom: 2rem;
+	}
+
+	.step-card {
+		background: white;
+		border-radius: 12px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+		overflow: hidden;
+	}
+
+	.step-card.critical {
+		border: 2px solid #dc3545;
+	}
+
+	.step-header {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		padding: 1.5rem;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.critical .step-header {
+		background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+	}
+
+	.step-number {
+		width: 40px;
+		height: 40px;
+		background: rgba(255, 255, 255, 0.2);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.5rem;
+		font-weight: bold;
+	}
+
+	.step-content {
+		padding: 2rem;
+	}
+
+	.tenant-selector {
+		background: #f8f9fa;
+		padding: 1.5rem;
+		border-radius: 8px;
+		margin-bottom: 1.5rem;
+	}
+
+	.tenant-selector label {
+		display: block;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+		color: var(--color-dark);
+	}
+
+	.input-group {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.input-group input {
+		flex: 1;
+		padding: 0.75rem;
+		border: 2px solid #ddd;
+		border-radius: 6px;
+		font-size: 1rem;
+	}
+
+	.btn-update {
+		padding: 0.75rem 1.5rem;
+		background: var(--color-primary);
+		color: white;
+		border: none;
+		border-radius: 6px;
+		cursor: pointer;
+		font-weight: 500;
+		transition: all 0.2s ease;
+	}
+
+	.btn-update:hover {
+		background: var(--color-primary-dark);
+		transform: translateY(-1px);
+	}
+
+	.quick-links {
+		display: flex;
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+
+	.pim-button, .status-button {
+		flex: 1;
+		padding: 1rem;
+		background: #28a745;
+		color: white;
+		text-decoration: none;
+		border-radius: 8px;
+		text-align: center;
+		font-weight: 600;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		transition: all 0.2s ease;
+	}
+
+	.pim-button:hover {
+		background: #218838;
+		transform: translateY(-2px);
+	}
+
+	.status-button {
+		background: #17a2b8;
+	}
+
+	.status-button:hover {
+		background: #138496;
+	}
+
+	.warning-box {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.75rem;
+		padding: 1rem;
+		background: #fff3cd;
+		border: 1px solid #ffeaa7;
+		border-radius: 8px;
+		margin-top: 1.5rem;
+	}
+
+	.warning-box svg {
+		flex-shrink: 0;
+		color: #856404;
+		margin-top: 2px;
+	}
+
+	.verification-methods {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 1.5rem;
+		margin-top: 1rem;
+	}
+
+	.method {
+		background: #f8f9fa;
+		padding: 1.5rem;
+		border-radius: 8px;
+	}
+
+	.method h4 {
+		font-size: 1.125rem;
+		margin-bottom: 0.75rem;
+		color: var(--color-dark);
+	}
+
+	.method ol {
+		margin: 0;
+		padding-left: 1.5rem;
+	}
+
+	.method li {
+		margin-bottom: 0.5rem;
+	}
+
+	.timer-section {
+		background: #e3f2fd;
+		padding: 1.5rem;
+		border-radius: 8px;
+		margin-top: 1.5rem;
+		text-align: center;
+	}
+
+	.btn-timer {
+		padding: 0.75rem 2rem;
+		background: #2196f3;
+		color: white;
+		border: none;
+		border-radius: 6px;
+		font-size: 1rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+
+	.btn-timer:hover {
+		background: #1976d2;
+		transform: translateY(-1px);
+	}
+
+	.timer-display {
+		margin-top: 1rem;
+	}
+
+	#timer-text {
+		font-size: 3rem;
+		font-weight: bold;
+		color: #2196f3;
+		display: block;
+	}
+
+	#timer-status {
+		font-size: 1rem;
+		color: #666;
+		display: block;
+		margin-top: 0.5rem;
+	}
+
+	.issue-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.issue {
+		background: #f8f9fa;
+		border-left: 4px solid #dc3545;
+		padding: 1rem;
+		border-radius: 4px;
+	}
+
+	.issue h4 {
+		font-size: 1rem;
+		margin-bottom: 0.5rem;
+		color: var(--color-dark);
+	}
+
+	.issue p {
+		font-size: 0.875rem;
+		margin: 0;
+		color: #666;
+	}
+
+	.action-bar {
+		background: white;
+		padding: 1.5rem;
+		border-radius: 12px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		position: sticky;
+		bottom: 1rem;
+	}
+
+	.checklist {
+		display: flex;
+		gap: 2rem;
+	}
+
+	.check-item {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		cursor: pointer;
+		font-size: 0.875rem;
+	}
+
+	.check-item input[type="checkbox"] {
+		width: 18px;
+		height: 18px;
+		cursor: pointer;
+	}
+
+	.btn-primary {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: var(--color-primary);
+		color: white;
+		border: none;
+		border-radius: 8px;
+		font-size: 1rem;
+		font-weight: 500;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.btn-primary:hover:not(:disabled) {
+		background: var(--color-primary-dark);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+	}
+
+	.btn-primary:disabled {
+		background: #ccc;
+		cursor: not-allowed;
+		opacity: 0.6;
+	}
+
+	@media (max-width: 768px) {
+		.quick-links {
+			flex-direction: column;
+		}
+
+		.verification-methods {
+			grid-template-columns: 1fr;
+		}
+
+		.action-bar {
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		.checklist {
+			flex-direction: column;
+			gap: 0.75rem;
+		}
+	}
+</style>
+
+<script>
+	// Update links with tenant domain
+	function updateLinks() {
+		const domain = document.getElementById('tenant-domain').value;
+		if (!domain) {
+			alert('Please enter your tenant domain');
+			return;
+		}
+
+		// Store for later use
+		sessionStorage.setItem('tenantDomain', domain);
+
+		// Extract tenant name (everything before .onmicrosoft.com)
+		const tenantName = domain.replace('.onmicrosoft.com', '');
+
+		// Update Azure portal links with tenant
+		const azureBase = `https://portal.azure.com/${domain}#`;
+		
+		// Update PIM links
+		document.getElementById('pim-link').href = `${azureBase}blade/Microsoft_Azure_PIMCommon/ActivationMenuBlade/aadmigratedroles`;
+		document.getElementById('pim-status').href = `${azureBase}blade/Microsoft_Azure_PIMCommon/ResourceMenuBlade/MyActions`;
+		document.getElementById('azure-users').href = `${azureBase}blade/Microsoft_AAD_IAM/UsersManagementMenuBlade/AllUsers`;
+
+		// Update admin center link
+		document.getElementById('admin-center').href = `https://admin.microsoft.com/?tenant=${domain}`;
+
+		// Show success
+		const btn = document.querySelector('.btn-update');
+		btn.textContent = 'Links Updated ✓';
+		btn.style.background = '#28a745';
+		setTimeout(() => {
+			btn.textContent = 'Update Links';
+			btn.style.background = '';
+		}, 2000);
+	}
+
+	// Timer functionality
+	let timerInterval;
+	function startTimer() {
+		const btn = document.getElementById('timer-btn');
+		const display = document.getElementById('timer-display');
+		const timerText = document.getElementById('timer-text');
+		const timerStatus = document.getElementById('timer-status');
+
+		btn.style.display = 'none';
+		display.style.display = 'block';
+
+		let timeLeft = 300; // 5 minutes in seconds
+
+		timerInterval = setInterval(() => {
+			const minutes = Math.floor(timeLeft / 60);
+			const seconds = timeLeft % 60;
+			timerText.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+			if (timeLeft <= 60) {
+				timerStatus.textContent = 'Almost ready! Verify your roles now.';
+				timerText.style.color = '#28a745';
+			}
+
+			if (timeLeft === 0) {
+				clearInterval(timerInterval);
+				timerStatus.textContent = '✓ Roles should be active. Please verify!';
+				timerText.textContent = 'Ready!';
+				// Auto-check the wait time checkbox
+				document.getElementById('check-wait-time').checked = true;
+				checkAllComplete();
+			}
+
+			timeLeft--;
+		}, 1000);
+	}
+
+	// Enable continue button when all checks complete
+	function checkAllComplete() {
+		const checks = document.querySelectorAll('.check-item input');
+		const allChecked = Array.from(checks).every(cb => cb.checked);
+		document.getElementById('continue-btn').disabled = !allChecked;
+	}
+
+	// Add listeners to checkboxes
+	document.querySelectorAll('.check-item input').forEach(cb => {
+		cb.addEventListener('change', checkAllComplete);
+	});
+
+	// Proceed to main checklist
+	function proceedToChecklist() {
+		window.location.href = '/preflight-detailed';
+	}
+
+	// Auto-populate domain if stored
+	window.addEventListener('DOMContentLoaded', () => {
+		const savedDomain = sessionStorage.getItem('tenantDomain');
+		if (savedDomain) {
+			document.getElementById('tenant-domain').value = savedDomain;
+			updateLinks();
+		}
+	});
+</script>

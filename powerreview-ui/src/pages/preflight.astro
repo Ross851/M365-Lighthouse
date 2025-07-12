@@ -8,17 +8,40 @@ import Layout from '../layouts/Layout.astro';
 			<div class="header">
 				<h1>Pre-flight Security Checklist</h1>
 				<p>Let's ensure you have everything ready for a successful assessment</p>
-				<a href="/preflight-detailed" class="detailed-link">
-					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<circle cx="12" cy="12" r="10"/>
-						<path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
-						<line x1="12" y1="17" x2="12" y2="17"/>
-					</svg>
-					Need help? View detailed verification guide
-				</a>
+				<div class="help-links">
+					<a href="/preflight-pim" class="pim-link">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+							<path d="M13.73 21a2 2 0 01-3.46 0"/>
+						</svg>
+						Using PIM? Activate roles first
+					</a>
+					<a href="/preflight-detailed" class="detailed-link">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<circle cx="12" cy="12" r="10"/>
+							<path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+							<line x1="12" y1="17" x2="12" y2="17"/>
+						</svg>
+						Need help? View detailed verification guide
+					</a>
+				</div>
 			</div>
 
 			<div class="checklist-container">
+				<!-- PIM Alert Box - First Thing Users See -->
+				<div class="pim-alert">
+					<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+						<line x1="12" y1="9" x2="12" y2="13"/>
+						<line x1="12" y1="17" x2="12" y2="17"/>
+					</svg>
+					<div>
+						<h3>⚠️ CRITICAL: Does your organization use PIM?</h3>
+						<p>If yes, you MUST activate your privileged roles FIRST and wait 5-10 minutes before proceeding.</p>
+						<a href="/preflight-pim" class="pim-activate-btn">Activate PIM Roles Now →</a>
+					</div>
+				</div>
+
 				<div class="checklist-section" id="credentials-section">
 					<div class="section-header">
 						<div class="section-icon">
@@ -527,6 +550,35 @@ import Layout from '../layouts/Layout.astro';
 		transform: translateY(-2px);
 	}
 
+	.help-links {
+		display: flex;
+		gap: 1rem;
+		margin-top: 1rem;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+
+	.pim-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.25rem;
+		background: rgba(220, 53, 69, 0.1);
+		color: #dc3545;
+		text-decoration: none;
+		border-radius: 8px;
+		font-size: 0.875rem;
+		font-weight: 500;
+		transition: all 0.2s ease;
+		border: 1px solid rgba(220, 53, 69, 0.2);
+	}
+
+	.pim-link:hover {
+		background: rgba(220, 53, 69, 0.2);
+		transform: translateY(-2px);
+		border-color: #dc3545;
+	}
+
 	.details-link:hover {
 		text-decoration: underline;
 	}
@@ -558,6 +610,53 @@ import Layout from '../layouts/Layout.astro';
 
 	.mfa-notice strong {
 		color: #1976d2;
+	}
+
+	.pim-alert {
+		background: #fff3cd;
+		border: 2px solid #ffeaa7;
+		border-radius: 12px;
+		padding: 1.5rem;
+		margin-bottom: 2rem;
+		display: flex;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+
+	.pim-alert svg {
+		flex-shrink: 0;
+		color: #856404;
+		margin-top: 0.25rem;
+	}
+
+	.pim-alert h3 {
+		font-size: 1.25rem;
+		color: #856404;
+		margin: 0 0 0.5rem 0;
+	}
+
+	.pim-alert p {
+		color: #856404;
+		margin: 0 0 1rem 0;
+		font-weight: 500;
+	}
+
+	.pim-activate-btn {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.75rem 1.25rem;
+		background: #dc3545;
+		color: white;
+		text-decoration: none;
+		border-radius: 6px;
+		font-weight: 600;
+		transition: all 0.2s ease;
+	}
+
+	.pim-activate-btn:hover {
+		background: #c82333;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
 	}
 </style>
 
