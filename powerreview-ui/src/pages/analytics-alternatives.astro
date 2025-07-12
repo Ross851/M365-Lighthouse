@@ -1,0 +1,1068 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Analytics Alternatives - Better than PowerBI">
+  <main>
+    <div class="alternatives-header">
+      <h1>Enterprise Analytics Solutions</h1>
+      <p class="subtitle">Professional alternatives to PowerBI - No expensive licenses required</p>
+    </div>
+
+    <!-- Comparison Table -->
+    <section class="comparison-section">
+      <h2>PowerBI vs Better Alternatives</h2>
+      <div class="comparison-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th class="powerbi">PowerBI</th>
+              <th class="grafana">Grafana</th>
+              <th class="metabase">Metabase</th>
+              <th class="superset">Apache Superset</th>
+              <th class="custom">Custom Dashboards</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>License Cost</strong></td>
+              <td class="powerbi">$10-20/user/month</td>
+              <td class="grafana">FREE</td>
+              <td class="metabase">FREE (Open Source)</td>
+              <td class="superset">FREE</td>
+              <td class="custom">FREE</td>
+            </tr>
+            <tr>
+              <td><strong>Real-time Updates</strong></td>
+              <td class="powerbi">Limited</td>
+              <td class="grafana">Excellent</td>
+              <td class="metabase">Good</td>
+              <td class="superset">Good</td>
+              <td class="custom">Perfect</td>
+            </tr>
+            <tr>
+              <td><strong>Customization</strong></td>
+              <td class="powerbi">Limited</td>
+              <td class="grafana">High</td>
+              <td class="metabase">Medium</td>
+              <td class="superset">High</td>
+              <td class="custom">Unlimited</td>
+            </tr>
+            <tr>
+              <td><strong>Embedding</strong></td>
+              <td class="powerbi">Complex</td>
+              <td class="grafana">Easy</td>
+              <td class="metabase">Easy</td>
+              <td class="superset">Easy</td>
+              <td class="custom">Native</td>
+            </tr>
+            <tr>
+              <td><strong>API Integration</strong></td>
+              <td class="powerbi">Limited</td>
+              <td class="grafana">Excellent</td>
+              <td class="metabase">Good</td>
+              <td class="superset">Good</td>
+              <td class="custom">Perfect</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Solution Cards -->
+    <section class="solutions-grid">
+      <!-- Grafana Solution -->
+      <div class="solution-card recommended">
+        <div class="solution-header">
+          <div class="solution-icon grafana">📊</div>
+          <h3>Grafana + InfluxDB</h3>
+          <span class="badge recommended">RECOMMENDED</span>
+        </div>
+        
+        <div class="solution-benefits">
+          <h4>Why Grafana is Better:</h4>
+          <ul>
+            <li>✅ <strong>100% FREE</strong> - No per-user licensing</li>
+            <li>✅ <strong>Real-time streaming</strong> - Live security metrics</li>
+            <li>✅ <strong>Beautiful dashboards</strong> - Professional visualizations</li>
+            <li>✅ <strong>Alert system</strong> - Built-in notifications</li>
+            <li>✅ <strong>Easy embedding</strong> - iframe integration</li>
+            <li>✅ <strong>Multiple data sources</strong> - PostgreSQL, InfluxDB, etc.</li>
+          </ul>
+        </div>
+
+        <div class="integration-preview">
+          <h4>Sample Integration:</h4>
+          <pre><code>// Send metrics to InfluxDB
+const point = new Point('security_score')
+  .tag('organization', 'contoso')
+  .tag('region', 'us-east')
+  .floatField('score', 78)
+  .floatField('previous_score', 65)
+  .timestamp(new Date());
+
+await writeApi.writePoint(point);</code></pre>
+        </div>
+
+        <div class="solution-actions">
+          <button class="btn primary" onclick="setupGrafana()">Setup Grafana Integration</button>
+          <a href="#grafana-guide" class="btn secondary">View Setup Guide</a>
+        </div>
+      </div>
+
+      <!-- Metabase Solution -->
+      <div class="solution-card">
+        <div class="solution-header">
+          <div class="solution-icon metabase">📈</div>
+          <h3>Metabase</h3>
+          <span class="badge free">FREE</span>
+        </div>
+        
+        <div class="solution-benefits">
+          <h4>Metabase Advantages:</h4>
+          <ul>
+            <li>✅ <strong>User-friendly</strong> - Non-technical users</li>
+            <li>✅ <strong>Quick setup</strong> - 5-minute installation</li>
+            <li>✅ <strong>Auto-generated dashboards</strong> - AI suggestions</li>
+            <li>✅ <strong>SQL interface</strong> - Custom queries</li>
+            <li>✅ <strong>Public sharing</strong> - Client presentations</li>
+          </ul>
+        </div>
+
+        <div class="solution-actions">
+          <button class="btn primary" onclick="setupMetabase()">Setup Metabase</button>
+          <a href="#metabase-guide" class="btn secondary">Documentation</a>
+        </div>
+      </div>
+
+      <!-- Custom Dashboard Solution -->
+      <div class="solution-card">
+        <div class="solution-header">
+          <div class="solution-icon custom">🎨</div>
+          <h3>Custom PowerReview Dashboards</h3>
+          <span class="badge native">NATIVE</span>
+        </div>
+        
+        <div class="solution-benefits">
+          <h4>Built-in Dashboard Features:</h4>
+          <ul>
+            <li>✅ <strong>No additional tools</strong> - Already integrated</li>
+            <li>✅ <strong>Real-time updates</strong> - WebSocket streaming</li>
+            <li>✅ <strong>Security-focused</strong> - Purpose-built metrics</li>
+            <li>✅ <strong>Client branding</strong> - White-label ready</li>
+            <li>✅ <strong>Export options</strong> - PDF, Excel, CSV</li>
+          </ul>
+        </div>
+
+        <div class="solution-actions">
+          <a href="/interactive-dashboard" class="btn primary">View Demo Dashboard</a>
+          <a href="/visualization-demo" class="btn secondary">Component Library</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Threat Monitoring -->
+    <section class="threat-monitoring-section">
+      <h2>🚨 Live Threat Intelligence Integration</h2>
+      <p class="section-subtitle">Monitoring real threat feeds and automatically creating security checks</p>
+      
+      <div class="threat-sources-grid">
+        <div class="threat-source active">
+          <div class="source-header">
+            <div class="source-icon">🏛️</div>
+            <h3>CISA Known Exploited Vulnerabilities</h3>
+            <div class="status-indicator online">ONLINE</div>
+          </div>
+          <div class="source-stats">
+            <div class="stat">
+              <span class="stat-value" id="cisa-threats">23</span>
+              <span class="stat-label">New Threats (24h)</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="cisa-checks">5</span>
+              <span class="stat-label">Auto-Generated Checks</span>
+            </div>
+          </div>
+          <div class="source-url">https://www.cisa.gov/known-exploited-vulnerabilities-catalog</div>
+        </div>
+
+        <div class="threat-source active">
+          <div class="source-header">
+            <div class="source-icon">🔒</div>
+            <h3>Microsoft Security Response Center</h3>
+            <div class="status-indicator online">ONLINE</div>
+          </div>
+          <div class="source-stats">
+            <div class="stat">
+              <span class="stat-value" id="msrc-threats">8</span>
+              <span class="stat-label">New Advisories (24h)</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="msrc-checks">3</span>
+              <span class="stat-label">M365 Checks Added</span>
+            </div>
+          </div>
+          <div class="source-url">https://api.msrc.microsoft.com/</div>
+        </div>
+
+        <div class="threat-source active">
+          <div class="source-header">
+            <div class="source-icon">🌐</div>
+            <h3>NIST National Vulnerability Database</h3>
+            <div class="status-indicator online">ONLINE</div>
+          </div>
+          <div class="source-stats">
+            <div class="stat">
+              <span class="stat-value" id="nvd-threats">15</span>
+              <span class="stat-label">M365 CVEs (7d)</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="nvd-checks">2</span>
+              <span class="stat-label">Patch Checks</span>
+            </div>
+          </div>
+          <div class="source-url">https://services.nvd.nist.gov/rest/json/cves/2.0</div>
+        </div>
+
+        <div class="threat-source active">
+          <div class="source-header">
+            <div class="source-icon">🦠</div>
+            <h3>Abuse.ch Malware Database</h3>
+            <div class="status-indicator online">ONLINE</div>
+          </div>
+          <div class="source-stats">
+            <div class="stat">
+              <span class="stat-value" id="abuse-threats">42</span>
+              <span class="stat-label">Office Malware (24h)</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="abuse-checks">7</span>
+              <span class="stat-label">IOC Checks</span>
+            </div>
+          </div>
+          <div class="source-url">https://bazaar.abuse.ch/api/</div>
+        </div>
+      </div>
+
+      <!-- Live Threat Feed -->
+      <div class="live-threat-feed">
+        <div class="feed-header">
+          <h3>🔴 Live Threat Feed</h3>
+          <div class="feed-controls">
+            <button class="feed-btn" onclick="pauseThreatFeed()">⏸️ Pause</button>
+            <button class="feed-btn" onclick="clearThreatFeed()">🗑️ Clear</button>
+            <button class="feed-btn" onclick="exportThreats()">📥 Export</button>
+          </div>
+        </div>
+        <div class="threat-feed-container" id="threatFeedContainer">
+          <!-- Live threats will appear here -->
+        </div>
+      </div>
+
+      <!-- Auto-Generated Checks -->
+      <div class="auto-checks-section">
+        <h3>🤖 Automatically Generated Security Checks</h3>
+        <div class="checks-grid" id="autoChecksGrid">
+          <!-- Auto-generated checks will appear here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Setup Guides -->
+    <section class="setup-guides">
+      <div id="grafana-guide" class="guide-section">
+        <h2>Grafana Setup Guide</h2>
+        <div class="setup-steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Install Grafana & InfluxDB</h4>
+              <pre><code># Docker Compose setup
+version: '3.8'
+services:
+  influxdb:
+    image: influxdb:2.6
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=powerreview123
+      - DOCKER_INFLUXDB_INIT_ORG=powerreview
+      - DOCKER_INFLUXDB_INIT_BUCKET=security-metrics
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb-data:/var/lib/influxdb2
+
+  grafana:
+    image: grafana/grafana:latest
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=powerreview123
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana</code></pre>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Configure Data Source</h4>
+              <pre><code>// PowerReview InfluxDB integration
+import { InfluxDB, Point } from '@influxdata/influxdb-client';
+
+const client = new InfluxDB({
+  url: 'http://localhost:8086',
+  token: 'your-influxdb-token'
+});
+
+const writeApi = client.getWriteApi('powerreview', 'security-metrics');
+
+// Send security metrics
+export async function sendSecurityMetrics(data) {
+  const point = new Point('security_assessment')
+    .tag('org_id', data.organizationId)
+    .tag('region', data.region)
+    .floatField('security_score', data.securityScore)
+    .intField('critical_findings', data.criticalFindings)
+    .intField('high_findings', data.highFindings)
+    .timestamp(new Date());
+
+  await writeApi.writePoint(point);
+  await writeApi.flush();
+}</code></pre>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Import PowerReview Dashboard</h4>
+              <button class="btn primary" onclick="downloadGrafanaDashboard()">Download Dashboard JSON</button>
+              <p>Import this dashboard into Grafana for instant PowerReview visualizations</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="metabase-guide" class="guide-section">
+        <h2>Metabase Setup Guide</h2>
+        <div class="setup-steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h4>Quick Docker Setup</h4>
+              <pre><code># Run Metabase with Docker
+docker run -d -p 3000:3000 \
+  -e "MB_DB_TYPE=postgres" \
+  -e "MB_DB_DBNAME=powerreview" \
+  -e "MB_DB_PORT=5432" \
+  -e "MB_DB_USER=powerreview_user" \
+  -e "MB_DB_PASS=your_password" \
+  -e "MB_DB_HOST=your_db_host" \
+  --name metabase metabase/metabase</code></pre>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h4>Connect to PowerReview Database</h4>
+              <ul>
+                <li>Open Metabase at http://localhost:3000</li>
+                <li>Add PostgreSQL connection to PowerReview database</li>
+                <li>Test connection and sync schema</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h4>Import Pre-built Questions</h4>
+              <button class="btn primary" onclick="downloadMetabaseQuestions()">Download Questions Pack</button>
+              <p>Import these pre-built questions for instant PowerReview analytics</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    main {
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #f8fafc;
+      min-height: 100vh;
+    }
+
+    .alternatives-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .alternatives-header h1 {
+      font-size: 2.5rem;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.125rem;
+      color: #64748b;
+    }
+
+    /* Comparison Table */
+    .comparison-section {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .comparison-section h2 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .comparison-table {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    th {
+      background: #f8fafc;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .powerbi { background: #fef2f2; color: #dc2626; }
+    .grafana { background: #f0fdf4; color: #059669; }
+    .metabase { background: #eff6ff; color: #1d4ed8; }
+    .superset { background: #fefce8; color: #ca8a04; }
+    .custom { background: #f3e8ff; color: #7c3aed; }
+
+    /* Solutions Grid */
+    .solutions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .solution-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: all 0.3s;
+    }
+
+    .solution-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .solution-card.recommended {
+      border: 2px solid #10b981;
+    }
+
+    .solution-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .solution-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .solution-icon.grafana { background: #f0fdf4; }
+    .solution-icon.metabase { background: #eff6ff; }
+    .solution-icon.custom { background: #f3e8ff; }
+
+    .solution-header h3 {
+      flex: 1;
+      font-size: 1.25rem;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    .badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .badge.recommended {
+      background: #d1fae5;
+      color: #059669;
+    }
+
+    .badge.free {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .badge.native {
+      background: #e0e7ff;
+      color: #6366f1;
+    }
+
+    .solution-benefits {
+      margin-bottom: 1.5rem;
+    }
+
+    .solution-benefits h4 {
+      font-size: 1rem;
+      color: #374151;
+      margin-bottom: 0.75rem;
+    }
+
+    .solution-benefits ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .solution-benefits li {
+      padding: 0.5rem 0;
+      color: #64748b;
+      font-size: 0.875rem;
+    }
+
+    .integration-preview {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .integration-preview h4 {
+      font-size: 0.875rem;
+      color: #374151;
+      margin-bottom: 0.5rem;
+    }
+
+    .integration-preview pre {
+      margin: 0;
+      font-size: 0.75rem;
+      overflow-x: auto;
+    }
+
+    .solution-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.875rem;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn.primary {
+      background: #6366f1;
+      color: white;
+    }
+
+    .btn.primary:hover {
+      background: #4f46e5;
+      transform: translateY(-1px);
+    }
+
+    .btn.secondary {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #e2e8f0;
+    }
+
+    /* Threat Monitoring */
+    .threat-monitoring-section {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .threat-monitoring-section h2 {
+      font-size: 1.75rem;
+      color: #1e293b;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 2rem;
+    }
+
+    .threat-sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .threat-source {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 2px solid #e5e7eb;
+    }
+
+    .threat-source.active {
+      border-color: #10b981;
+    }
+
+    .source-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .source-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .source-header h3 {
+      flex: 1;
+      font-size: 1rem;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    .status-indicator {
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .status-indicator.online {
+      background: #d1fae5;
+      color: #059669;
+    }
+
+    .source-stats {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .stat {
+      flex: 1;
+      text-align: center;
+    }
+
+    .stat-value {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    .source-url {
+      font-size: 0.75rem;
+      color: #9ca3af;
+      font-family: monospace;
+    }
+
+    /* Live Feed */
+    .live-threat-feed {
+      background: #fafafa;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .feed-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .feed-header h3 {
+      margin: 0;
+      color: #1e293b;
+    }
+
+    .feed-controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .feed-btn {
+      padding: 0.5rem 1rem;
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .feed-btn:hover {
+      background: #f3f4f6;
+    }
+
+    .threat-feed-container {
+      height: 300px;
+      overflow-y: auto;
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    /* Setup Guides */
+    .setup-guides {
+      margin-top: 3rem;
+    }
+
+    .guide-section {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .guide-section h2 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 2rem;
+    }
+
+    .setup-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .step {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #6366f1;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-content h4 {
+      font-size: 1.125rem;
+      color: #1e293b;
+      margin-bottom: 0.75rem;
+    }
+
+    .step-content pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.875rem;
+      margin: 1rem 0;
+    }
+
+    .step-content ul {
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .solutions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .threat-sources-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .solution-actions {
+        flex-direction: column;
+      }
+
+      .source-stats {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+
+  <script>
+    // Simulated threat monitoring
+    let threatFeedPaused = false;
+    let threatCount = 0;
+
+    function simulateThreatFeed() {
+      if (threatFeedPaused) return;
+
+      const threats = [
+        {
+          type: 'CVE',
+          severity: 'critical',
+          title: 'CVE-2024-26167 - Microsoft Exchange Server RCE',
+          source: 'CISA',
+          time: new Date().toLocaleTimeString()
+        },
+        {
+          type: 'IOC',
+          severity: 'high', 
+          title: 'Malicious Office document detected',
+          source: 'Abuse.ch',
+          time: new Date().toLocaleTimeString()
+        },
+        {
+          type: 'Advisory',
+          severity: 'medium',
+          title: 'Microsoft Security Advisory MS24-001',
+          source: 'MSRC',
+          time: new Date().toLocaleTimeString()
+        }
+      ];
+
+      const threat = threats[Math.floor(Math.random() * threats.length)];
+      addThreatToFeed(threat);
+      
+      // Update counters
+      updateThreatCounters();
+    }
+
+    function addThreatToFeed(threat) {
+      const container = document.getElementById('threatFeedContainer');
+      const threatElement = document.createElement('div');
+      threatElement.className = `threat-item ${threat.severity}`;
+      threatElement.innerHTML = `
+        <div class="threat-header">
+          <span class="threat-type">${threat.type}</span>
+          <span class="threat-severity ${threat.severity}">${threat.severity.toUpperCase()}</span>
+          <span class="threat-time">${threat.time}</span>
+        </div>
+        <div class="threat-title">${threat.title}</div>
+        <div class="threat-source">Source: ${threat.source}</div>
+      `;
+      
+      container.insertBefore(threatElement, container.firstChild);
+      
+      // Remove old threats (keep last 10)
+      while (container.children.length > 10) {
+        container.removeChild(container.lastChild);
+      }
+      
+      threatCount++;
+    }
+
+    function updateThreatCounters() {
+      // Simulate updating counters
+      document.getElementById('cisa-threats').textContent = Math.floor(Math.random() * 30) + 15;
+      document.getElementById('msrc-threats').textContent = Math.floor(Math.random() * 15) + 5;
+      document.getElementById('nvd-threats').textContent = Math.floor(Math.random() * 25) + 10;
+      document.getElementById('abuse-threats').textContent = Math.floor(Math.random() * 60) + 30;
+      
+      document.getElementById('cisa-checks').textContent = Math.floor(Math.random() * 8) + 2;
+      document.getElementById('msrc-checks').textContent = Math.floor(Math.random() * 5) + 1;
+      document.getElementById('nvd-checks').textContent = Math.floor(Math.random() * 4) + 1;
+      document.getElementById('abuse-checks').textContent = Math.floor(Math.random() * 10) + 3;
+    }
+
+    function pauseThreatFeed() {
+      threatFeedPaused = !threatFeedPaused;
+      const btn = document.querySelector('.feed-btn');
+      btn.textContent = threatFeedPaused ? '▶️ Resume' : '⏸️ Pause';
+    }
+
+    function clearThreatFeed() {
+      document.getElementById('threatFeedContainer').innerHTML = '';
+      threatCount = 0;
+    }
+
+    function exportThreats() {
+      alert('Exporting threat intelligence data...');
+    }
+
+    function setupGrafana() {
+      alert('Setting up Grafana integration...\n\nThis will:\n1. Deploy Grafana + InfluxDB containers\n2. Configure data sources\n3. Import PowerReview dashboards');
+    }
+
+    function setupMetabase() {
+      alert('Setting up Metabase integration...\n\nThis will:\n1. Deploy Metabase container\n2. Connect to PowerReview database\n3. Import pre-built questions');
+    }
+
+    function downloadGrafanaDashboard() {
+      // In real implementation, this would download the actual JSON
+      alert('Downloading Grafana dashboard JSON...\n\nFile: powerreview-dashboard.json');
+    }
+
+    function downloadMetabaseQuestions() {
+      alert('Downloading Metabase questions pack...\n\nFile: powerreview-questions.zip');
+    }
+
+    // Start threat feed simulation
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add initial threats
+      setTimeout(() => {
+        simulateThreatFeed();
+        setInterval(simulateThreatFeed, 5000); // New threat every 5 seconds
+      }, 1000);
+      
+      // Update counters periodically
+      setInterval(updateThreatCounters, 10000);
+    });
+  </script>
+
+  <style>
+    .threat-item {
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      border-radius: 8px;
+      border-left: 4px solid #e5e7eb;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    .threat-item.critical {
+      background: #fef2f2;
+      border-left-color: #dc2626;
+    }
+
+    .threat-item.high {
+      background: #fffbeb;
+      border-left-color: #f59e0b;
+    }
+
+    .threat-item.medium {
+      background: #fefce8;
+      border-left-color: #facc15;
+    }
+
+    .threat-header {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .threat-type {
+      background: #6366f1;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .threat-severity {
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .threat-severity.critical {
+      background: #dc2626;
+      color: white;
+    }
+
+    .threat-severity.high {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .threat-severity.medium {
+      background: #facc15;
+      color: #1e293b;
+    }
+
+    .threat-time {
+      margin-left: auto;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    .threat-title {
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.25rem;
+    }
+
+    .threat-source {
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</Layout>

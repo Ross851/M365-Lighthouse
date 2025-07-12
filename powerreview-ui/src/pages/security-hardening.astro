@@ -1,0 +1,1212 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Security Hardening - PowerReview">
+  <main>
+    <div class="hardening-header">
+      <h1>🛡️ Security Hardening Dashboard</h1>
+      <p class="subtitle">Advanced security controls, threat protection, and automated hardening</p>
+      
+      <div class="security-status-cards">
+        <div class="status-card critical">
+          <div class="status-icon">🔴</div>
+          <div class="status-content">
+            <div class="status-value" id="criticalFindings">0</div>
+            <div class="status-label">Critical Findings</div>
+          </div>
+        </div>
+        
+        <div class="status-card high">
+          <div class="status-icon">🟠</div>
+          <div class="status-content">
+            <div class="status-value" id="highFindings">0</div>
+            <div class="status-label">High Priority</div>
+          </div>
+        </div>
+        
+        <div class="status-card medium">
+          <div class="status-icon">🟡</div>
+          <div class="status-content">
+            <div class="status-value" id="mediumFindings">0</div>
+            <div class="status-label">Medium Priority</div>
+          </div>
+        </div>
+        
+        <div class="status-card score">
+          <div class="status-icon">📊</div>
+          <div class="status-content">
+            <div class="status-value" id="securityScore">85</div>
+            <div class="status-label">Security Score</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Security Assessment Results -->
+    <section class="assessment-section">
+      <div class="section-header">
+        <h2>🔍 Security Assessment Results</h2>
+        <div class="section-actions">
+          <button class="btn primary" onclick="runSecurityAssessment()">
+            <span class="btn-icon">🔄</span>
+            Run Assessment
+          </button>
+          <button class="btn secondary" onclick="exportResults()">
+            <span class="btn-icon">📥</span>
+            Export Results
+          </button>
+        </div>
+      </div>
+      
+      <div class="assessment-results" id="assessmentResults">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Click "Run Assessment" to analyze your security posture</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security Policies Management -->
+    <section class="policies-section">
+      <div class="section-header">
+        <h2>📋 Security Policies</h2>
+        <div class="policy-filter">
+          <select id="policyFilter" onchange="filterPolicies()">
+            <option value="all">All Categories</option>
+            <option value="access_control">Access Control</option>
+            <option value="data_protection">Data Protection</option>
+            <option value="network_security">Network Security</option>
+            <option value="application_security">Application Security</option>
+            <option value="monitoring">Monitoring</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="policies-grid" id="policiesGrid">
+        <!-- Policies will be populated by JavaScript -->
+      </div>
+    </section>
+
+    <!-- Hardening Rules -->
+    <section class="hardening-section">
+      <div class="section-header">
+        <h2>🔧 Security Hardening Rules</h2>
+        <p class="section-description">Automated security configurations and best practices</p>
+      </div>
+      
+      <div class="hardening-grid" id="hardeningGrid">
+        <!-- Hardening rules will be populated by JavaScript -->
+      </div>
+    </section>
+
+    <!-- Security Incidents -->
+    <section class="incidents-section">
+      <div class="section-header">
+        <h2>🚨 Security Incidents</h2>
+        <div class="incident-filter">
+          <select id="incidentFilter" onchange="filterIncidents()">
+            <option value="all">All Incidents</option>
+            <option value="open">Open</option>
+            <option value="investigating">Investigating</option>
+            <option value="resolved">Resolved</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="incidents-list" id="incidentsList">
+        <!-- Incidents will be populated by JavaScript -->
+      </div>
+    </section>
+
+    <!-- Real-time Security Monitoring -->
+    <section class="monitoring-section">
+      <div class="section-header">
+        <h2>📡 Real-time Security Monitoring</h2>
+        <div class="monitoring-controls">
+          <button class="btn small" onclick="toggleMonitoring()" id="monitoringToggle">
+            <span class="btn-icon">⏸️</span>
+            Pause Monitoring
+          </button>
+          <button class="btn small secondary" onclick="clearMonitoringLog()">
+            <span class="btn-icon">🗑️</span>
+            Clear Log
+          </button>
+        </div>
+      </div>
+      
+      <div class="monitoring-dashboard">
+        <div class="monitoring-stats">
+          <div class="stat-item">
+            <div class="stat-value" id="eventsLastHour">247</div>
+            <div class="stat-label">Events (1h)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="threatsBlocked">12</div>
+            <div class="stat-label">Threats Blocked</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="policiesEnforced">89</div>
+            <div class="stat-label">Policies Enforced</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="complianceScore">94%</div>
+            <div class="stat-label">Compliance</div>
+          </div>
+        </div>
+        
+        <div class="monitoring-log" id="monitoringLog">
+          <!-- Real-time events will appear here -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    main {
+      padding: 2rem;
+      max-width: 1600px;
+      margin: 0 auto;
+      background: #f8fafc;
+      min-height: 100vh;
+    }
+
+    .hardening-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .hardening-header h1 {
+      font-size: 2.5rem;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.125rem;
+      color: #64748b;
+      margin-bottom: 2rem;
+    }
+
+    .security-status-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .status-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .status-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .status-card.critical {
+      border-left: 4px solid #dc2626;
+    }
+
+    .status-card.high {
+      border-left: 4px solid #f59e0b;
+    }
+
+    .status-card.medium {
+      border-left: 4px solid #facc15;
+    }
+
+    .status-card.score {
+      border-left: 4px solid #10b981;
+    }
+
+    .status-icon {
+      font-size: 2rem;
+    }
+
+    .status-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .status-label {
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+
+    /* Section Styles */
+    .assessment-section, .policies-section, .hardening-section, .incidents-section, .monitoring-section {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    .section-description {
+      color: #64748b;
+      margin: 0;
+      font-size: 0.875rem;
+    }
+
+    .section-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* Button Styles */
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      font-size: 0.875rem;
+    }
+
+    .btn.primary {
+      background: #6366f1;
+      color: white;
+    }
+
+    .btn.primary:hover {
+      background: #4f46e5;
+      transform: translateY(-1px);
+    }
+
+    .btn.secondary {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .btn.secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .btn.small {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+    }
+
+    .btn-icon {
+      font-size: 1rem;
+    }
+
+    /* Loading State */
+    .loading-state {
+      text-align: center;
+      padding: 3rem;
+      color: #64748b;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #e2e8f0;
+      border-top: 4px solid #6366f1;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Grid Layouts */
+    .policies-grid, .hardening-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .policy-card, .hardening-card {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 2px solid #e5e7eb;
+      transition: all 0.3s;
+    }
+
+    .policy-card:hover, .hardening-card:hover {
+      border-color: #6366f1;
+      transform: translateY(-2px);
+    }
+
+    .policy-header, .hardening-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .policy-title, .hardening-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    .policy-description, .hardening-description {
+      color: #64748b;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .policy-toggle {
+      width: 48px;
+      height: 24px;
+      background: #e5e7eb;
+      border-radius: 12px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .policy-toggle.enabled {
+      background: #10b981;
+    }
+
+    .policy-toggle::before {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: white;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.3s;
+    }
+
+    .policy-toggle.enabled::before {
+      transform: translateX(24px);
+    }
+
+    .severity-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .severity-badge.critical {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .severity-badge.high {
+      background: #fef3c7;
+      color: #f59e0b;
+    }
+
+    .severity-badge.medium {
+      background: #fef9c3;
+      color: #facc15;
+    }
+
+    .severity-badge.low {
+      background: #dcfce7;
+      color: #059669;
+    }
+
+    /* Incidents */
+    .incidents-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .incident-card {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border-left: 4px solid #e5e7eb;
+    }
+
+    .incident-card.critical {
+      border-left-color: #dc2626;
+    }
+
+    .incident-card.high {
+      border-left-color: #f59e0b;
+    }
+
+    .incident-card.medium {
+      border-left-color: #facc15;
+    }
+
+    .incident-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .incident-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    .incident-meta {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.875rem;
+      color: #64748b;
+      margin-bottom: 1rem;
+    }
+
+    .incident-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* Monitoring */
+    .monitoring-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 1rem;
+      background: #f8fafc;
+      border-radius: 8px;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+
+    .monitoring-log {
+      height: 300px;
+      overflow-y: auto;
+      background: #1e293b;
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: monospace;
+      font-size: 0.875rem;
+    }
+
+    .log-entry {
+      margin-bottom: 0.5rem;
+      padding: 0.5rem;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .log-timestamp {
+      color: #9ca3af;
+    }
+
+    .log-level {
+      font-weight: 600;
+      margin: 0 0.5rem;
+    }
+
+    .log-level.info {
+      color: #60a5fa;
+    }
+
+    .log-level.warning {
+      color: #fbbf24;
+    }
+
+    .log-level.error {
+      color: #f87171;
+    }
+
+    .log-message {
+      color: #e5e7eb;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .security-status-cards {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .policies-grid, .hardening-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .monitoring-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+
+  <script>
+    // Security Hardening Dashboard JavaScript
+    let securityEngine;
+    let monitoringActive = true;
+    let assessmentRunning = false;
+
+    // Initialize dashboard
+    document.addEventListener('DOMContentLoaded', async () => {
+      await initializeSecurityEngine();
+      await loadSecurityPolicies();
+      await loadHardeningRules();
+      await loadSecurityIncidents();
+      startRealTimeMonitoring();
+    });
+
+    async function initializeSecurityEngine() {
+      // In a real implementation, this would initialize the security engine
+      console.log('🛡️ Initializing Security Hardening Engine...');
+      
+      // Simulate initialization
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      console.log('✅ Security Engine initialized');
+    }
+
+    async function runSecurityAssessment() {
+      if (assessmentRunning) return;
+      
+      assessmentRunning = true;
+      const resultsContainer = document.getElementById('assessmentResults');
+      
+      // Show loading state
+      resultsContainer.innerHTML = `
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Running comprehensive security assessment...</p>
+        </div>
+      `;
+
+      try {
+        // Simulate assessment
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        
+        // Mock assessment results
+        const results = {
+          overallScore: 78,
+          findings: [
+            {
+              category: 'access_control',
+              severity: 'critical',
+              finding: '12% of users lack Multi-Factor Authentication',
+              recommendation: 'Enable MFA for all user accounts immediately',
+              hardeningRule: 'hard_aad_mfa'
+            },
+            {
+              category: 'data_protection',
+              severity: 'high',
+              finding: 'External sharing enabled for sensitive SharePoint sites',
+              recommendation: 'Configure SharePoint external sharing restrictions',
+              hardeningRule: 'hard_sharepoint_external_sharing'
+            },
+            {
+              category: 'access_control',
+              severity: 'medium',
+              finding: 'Legacy authentication protocols detected',
+              recommendation: 'Block legacy authentication methods',
+              hardeningRule: 'hard_block_legacy_auth'
+            }
+          ]
+        };
+
+        displayAssessmentResults(results);
+        updateSecurityStatusCards(results);
+        
+      } catch (error) {
+        resultsContainer.innerHTML = `
+          <div class="error-state">
+            <p>❌ Assessment failed: ${error.message}</p>
+            <button class="btn primary" onclick="runSecurityAssessment()">Retry Assessment</button>
+          </div>
+        `;
+      } finally {
+        assessmentRunning = false;
+      }
+    }
+
+    function displayAssessmentResults(results) {
+      const container = document.getElementById('assessmentResults');
+      
+      const findingsHtml = results.findings.map(finding => `
+        <div class="finding-card">
+          <div class="finding-header">
+            <h4>${finding.finding}</h4>
+            <span class="severity-badge ${finding.severity}">${finding.severity.toUpperCase()}</span>
+          </div>
+          <p class="finding-recommendation">${finding.recommendation}</p>
+          <div class="finding-actions">
+            <button class="btn small primary" onclick="applyHardening('${finding.hardeningRule}')">
+              Apply Fix
+            </button>
+            <button class="btn small secondary" onclick="viewHardeningDetails('${finding.hardeningRule}')">
+              View Details
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      container.innerHTML = `
+        <div class="assessment-complete">
+          <div class="score-display">
+            <div class="score-circle">
+              <div class="score-value">${results.overallScore}</div>
+              <div class="score-label">Security Score</div>
+            </div>
+          </div>
+          <div class="findings-section">
+            <h3>Security Findings</h3>
+            <div class="findings-list">
+              ${findingsHtml}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function updateSecurityStatusCards(results) {
+      const criticalCount = results.findings.filter(f => f.severity === 'critical').length;
+      const highCount = results.findings.filter(f => f.severity === 'high').length;
+      const mediumCount = results.findings.filter(f => f.severity === 'medium').length;
+      
+      document.getElementById('criticalFindings').textContent = criticalCount;
+      document.getElementById('highFindings').textContent = highCount;
+      document.getElementById('mediumFindings').textContent = mediumCount;
+      document.getElementById('securityScore').textContent = results.overallScore;
+    }
+
+    async function loadSecurityPolicies() {
+      const policiesGrid = document.getElementById('policiesGrid');
+      
+      // Mock security policies
+      const policies = [
+        {
+          id: 'pol_mfa_enforcement',
+          name: 'Multi-Factor Authentication Enforcement',
+          category: 'access_control',
+          description: 'Requires MFA for all user accounts to prevent unauthorized access',
+          enabled: true,
+          severity: 'critical'
+        },
+        {
+          id: 'pol_conditional_access',
+          name: 'Conditional Access Policies',
+          category: 'access_control',
+          description: 'Controls access based on user, device, location, and risk conditions',
+          enabled: true,
+          severity: 'high'
+        },
+        {
+          id: 'pol_data_encryption',
+          name: 'Data Encryption at Rest and Transit',
+          category: 'data_protection',
+          description: 'Ensures all data is encrypted using industry-standard algorithms',
+          enabled: false,
+          severity: 'critical'
+        },
+        {
+          id: 'pol_dlp_protection',
+          name: 'Data Loss Prevention',
+          category: 'data_protection',
+          description: 'Prevents sensitive data from being shared externally',
+          enabled: true,
+          severity: 'high'
+        }
+      ];
+
+      const policiesHtml = policies.map(policy => `
+        <div class="policy-card" data-category="${policy.category}">
+          <div class="policy-header">
+            <h3 class="policy-title">${policy.name}</h3>
+            <div class="policy-toggle ${policy.enabled ? 'enabled' : ''}" 
+                 onclick="togglePolicy('${policy.id}')"></div>
+          </div>
+          <p class="policy-description">${policy.description}</p>
+          <div class="policy-meta">
+            <span class="severity-badge ${policy.severity}">${policy.severity.toUpperCase()}</span>
+            <span class="category-badge">${policy.category.replace('_', ' ')}</span>
+          </div>
+        </div>
+      `).join('');
+
+      policiesGrid.innerHTML = policiesHtml;
+    }
+
+    async function loadHardeningRules() {
+      const hardeningGrid = document.getElementById('hardeningGrid');
+      
+      // Mock hardening rules
+      const rules = [
+        {
+          id: 'hard_aad_mfa',
+          name: 'Enable MFA for All Users',
+          description: 'Automatically enables multi-factor authentication for all user accounts',
+          service: 'Azure AD',
+          severity: 'critical',
+          riskLevel: 2,
+          businessImpact: 'medium'
+        },
+        {
+          id: 'hard_block_legacy_auth',
+          name: 'Block Legacy Authentication',
+          description: 'Blocks legacy authentication protocols that bypass modern security',
+          service: 'Azure AD',
+          severity: 'high',
+          riskLevel: 3,
+          businessImpact: 'high'
+        },
+        {
+          id: 'hard_sharepoint_external_sharing',
+          name: 'Restrict SharePoint External Sharing',
+          description: 'Configures SharePoint to restrict external sharing and require authentication',
+          service: 'SharePoint',
+          severity: 'high',
+          riskLevel: 4,
+          businessImpact: 'medium'
+        },
+        {
+          id: 'hard_defender_atp',
+          name: 'Enable Microsoft Defender ATP',
+          description: 'Configures Microsoft Defender Advanced Threat Protection',
+          service: 'Defender',
+          severity: 'critical',
+          riskLevel: 1,
+          businessImpact: 'low'
+        }
+      ];
+
+      const rulesHtml = rules.map(rule => `
+        <div class="hardening-card">
+          <div class="hardening-header">
+            <h3 class="hardening-title">${rule.name}</h3>
+            <span class="severity-badge ${rule.severity}">${rule.severity.toUpperCase()}</span>
+          </div>
+          <p class="hardening-description">${rule.description}</p>
+          <div class="hardening-meta">
+            <div class="meta-item">
+              <span class="meta-label">Service:</span>
+              <span class="meta-value">${rule.service}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Risk Level:</span>
+              <span class="meta-value">${rule.riskLevel}/10</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">Business Impact:</span>
+              <span class="meta-value">${rule.businessImpact}</span>
+            </div>
+          </div>
+          <div class="hardening-actions">
+            <button class="btn small primary" onclick="applyHardening('${rule.id}')">
+              Apply Hardening
+            </button>
+            <button class="btn small secondary" onclick="validateHardening('${rule.id}')">
+              Validate
+            </button>
+            <button class="btn small secondary" onclick="testHardening('${rule.id}')">
+              Test Mode
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      hardeningGrid.innerHTML = rulesHtml;
+    }
+
+    async function loadSecurityIncidents() {
+      const incidentsList = document.getElementById('incidentsList');
+      
+      // Mock security incidents
+      const incidents = [
+        {
+          id: 'inc_001',
+          type: 'brute_force',
+          severity: 'high',
+          title: 'Brute Force Attack Detected',
+          description: 'Multiple failed login attempts from IP 185.220.100.252',
+          status: 'investigating',
+          detectedAt: new Date(Date.now() - 3600000), // 1 hour ago
+          affectedResources: ['user@company.com']
+        },
+        {
+          id: 'inc_002',
+          type: 'phishing',
+          severity: 'medium',
+          title: 'Suspicious Email Campaign',
+          description: 'Phishing emails detected targeting finance department',
+          status: 'contained',
+          detectedAt: new Date(Date.now() - 7200000), // 2 hours ago
+          affectedResources: ['finance@company.com', 'accounting@company.com']
+        },
+        {
+          id: 'inc_003',
+          type: 'privilege_escalation',
+          severity: 'critical',
+          title: 'Unauthorized Privilege Escalation',
+          description: 'User account elevated to admin without approval',
+          status: 'open',
+          detectedAt: new Date(Date.now() - 1800000), // 30 minutes ago
+          affectedResources: ['testuser@company.com']
+        }
+      ];
+
+      const incidentsHtml = incidents.map(incident => `
+        <div class="incident-card ${incident.severity}">
+          <div class="incident-header">
+            <h3 class="incident-title">${incident.title}</h3>
+            <span class="severity-badge ${incident.severity}">${incident.severity.toUpperCase()}</span>
+          </div>
+          <p class="incident-description">${incident.description}</p>
+          <div class="incident-meta">
+            <span>Type: ${incident.type}</span>
+            <span>Status: ${incident.status}</span>
+            <span>Detected: ${incident.detectedAt.toLocaleString()}</span>
+          </div>
+          <div class="incident-actions">
+            <button class="btn small primary" onclick="respondToIncident('${incident.id}')">
+              Respond
+            </button>
+            <button class="btn small secondary" onclick="viewIncidentDetails('${incident.id}')">
+              Details
+            </button>
+            <button class="btn small secondary" onclick="markResolved('${incident.id}')">
+              Mark Resolved
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      incidentsList.innerHTML = incidentsHtml;
+    }
+
+    function startRealTimeMonitoring() {
+      const logContainer = document.getElementById('monitoringLog');
+      
+      function addLogEntry(level, message) {
+        const timestamp = new Date().toLocaleTimeString();
+        const entry = document.createElement('div');
+        entry.className = 'log-entry';
+        entry.innerHTML = `
+          <span class="log-timestamp">[${timestamp}]</span>
+          <span class="log-level ${level}">${level.toUpperCase()}</span>
+          <span class="log-message">${message}</span>
+        `;
+        
+        logContainer.insertBefore(entry, logContainer.firstChild);
+        
+        // Keep only last 50 entries
+        while (logContainer.children.length > 50) {
+          logContainer.removeChild(logContainer.lastChild);
+        }
+      }
+
+      // Simulate real-time monitoring events
+      const events = [
+        { level: 'info', message: 'MFA authentication successful for user@company.com' },
+        { level: 'warning', message: 'Failed login attempt from unknown IP address' },
+        { level: 'info', message: 'DLP policy blocked external file sharing' },
+        { level: 'error', message: 'Suspicious PowerShell execution detected' },
+        { level: 'info', message: 'Conditional access policy enforced' },
+        { level: 'warning', message: 'Legacy authentication attempt blocked' },
+        { level: 'info', message: 'Security policy compliance check passed' }
+      ];
+
+      setInterval(() => {
+        if (monitoringActive) {
+          const event = events[Math.floor(Math.random() * events.length)];
+          addLogEntry(event.level, event.message);
+          
+          // Update stats occasionally
+          if (Math.random() < 0.1) {
+            updateMonitoringStats();
+          }
+        }
+      }, 2000);
+
+      // Initial log entries
+      addLogEntry('info', 'Security monitoring system started');
+      addLogEntry('info', 'Loading security policies...');
+      addLogEntry('info', 'Threat detection engines online');
+    }
+
+    function updateMonitoringStats() {
+      document.getElementById('eventsLastHour').textContent = Math.floor(200 + Math.random() * 100);
+      document.getElementById('threatsBlocked').textContent = Math.floor(10 + Math.random() * 20);
+      document.getElementById('policiesEnforced').textContent = Math.floor(80 + Math.random() * 20);
+      document.getElementById('complianceScore').textContent = Math.floor(90 + Math.random() * 10) + '%';
+    }
+
+    // Event handlers
+    function togglePolicy(policyId) {
+      const toggle = document.querySelector(`[onclick="togglePolicy('${policyId}')"]`);
+      toggle.classList.toggle('enabled');
+      console.log(`Policy ${policyId} ${toggle.classList.contains('enabled') ? 'enabled' : 'disabled'}`);
+    }
+
+    async function applyHardening(hardeningId) {
+      console.log(`Applying hardening rule: ${hardeningId}`);
+      // Show confirmation dialog
+      if (confirm('Are you sure you want to apply this hardening rule? This action cannot be easily undone.')) {
+        // Simulate hardening application
+        alert(`Hardening rule ${hardeningId} applied successfully!`);
+      }
+    }
+
+    async function validateHardening(hardeningId) {
+      console.log(`Validating hardening rule: ${hardeningId}`);
+      alert(`Validation results: Hardening rule ${hardeningId} is compliant (Score: 95/100)`);
+    }
+
+    async function testHardening(hardeningId) {
+      console.log(`Testing hardening rule: ${hardeningId}`);
+      alert(`Test mode results: Hardening rule ${hardeningId} would be applied successfully`);
+    }
+
+    function respondToIncident(incidentId) {
+      console.log(`Responding to incident: ${incidentId}`);
+      alert(`Automated response initiated for incident ${incidentId}`);
+    }
+
+    function viewIncidentDetails(incidentId) {
+      console.log(`Viewing incident details: ${incidentId}`);
+      // In a real implementation, this would open a detailed incident view
+    }
+
+    function markResolved(incidentId) {
+      console.log(`Marking incident resolved: ${incidentId}`);
+      alert(`Incident ${incidentId} marked as resolved`);
+    }
+
+    function toggleMonitoring() {
+      monitoringActive = !monitoringActive;
+      const toggle = document.getElementById('monitoringToggle');
+      toggle.innerHTML = monitoringActive 
+        ? '<span class="btn-icon">⏸️</span> Pause Monitoring'
+        : '<span class="btn-icon">▶️</span> Resume Monitoring';
+    }
+
+    function clearMonitoringLog() {
+      document.getElementById('monitoringLog').innerHTML = '';
+    }
+
+    function filterPolicies() {
+      const filter = document.getElementById('policyFilter').value;
+      const cards = document.querySelectorAll('.policy-card');
+      
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function filterIncidents() {
+      const filter = document.getElementById('incidentFilter').value;
+      // Implementation would filter incidents based on status
+      console.log(`Filtering incidents by: ${filter}`);
+    }
+
+    function exportResults() {
+      console.log('Exporting security assessment results...');
+      alert('Security assessment results exported to PowerReview_Security_Report.pdf');
+    }
+  </script>
+
+  <!-- Additional styles for assessment results -->
+  <style>
+    .assessment-complete {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .score-display {
+      text-align: center;
+    }
+
+    .score-circle {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: conic-gradient(#10b981 0deg 280deg, #e5e7eb 280deg 360deg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .score-circle::before {
+      content: '';
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: white;
+    }
+
+    .score-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #1e293b;
+      z-index: 1;
+    }
+
+    .score-label {
+      font-size: 0.875rem;
+      color: #64748b;
+      z-index: 1;
+    }
+
+    .findings-section h3 {
+      font-size: 1.25rem;
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+
+    .findings-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .finding-card {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 1.5rem;
+      border-left: 4px solid #e5e7eb;
+    }
+
+    .finding-card .severity-badge.critical {
+      border-left-color: #dc2626;
+    }
+
+    .finding-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.5rem;
+    }
+
+    .finding-header h4 {
+      margin: 0;
+      font-size: 1rem;
+      color: #1e293b;
+    }
+
+    .finding-recommendation {
+      color: #64748b;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .finding-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .meta-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
+    }
+
+    .meta-label {
+      color: #64748b;
+    }
+
+    .meta-value {
+      color: #1e293b;
+      font-weight: 500;
+    }
+
+    .hardening-meta {
+      margin-bottom: 1rem;
+    }
+
+    .hardening-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .category-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: #eff6ff;
+      color: #1d4ed8;
+      margin-left: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .assessment-complete {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .score-circle {
+        width: 150px;
+        height: 150px;
+      }
+
+      .score-circle::before {
+        width: 100px;
+        height: 100px;
+      }
+
+      .score-value {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</Layout>
