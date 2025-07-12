@@ -8,6 +8,15 @@ import Layout from '../layouts/Layout.astro';
 			<div class="header">
 				<h1>Select Your Assessments</h1>
 				<p>Choose which security assessments to run on your Microsoft 365 tenant</p>
+				<div class="selection-options">
+					<a href="/assessment-detailed" class="detailed-selection-link">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M21 18V6H8L2 12l6 6h13z"/>
+							<path d="M12 12h9"/>
+						</svg>
+						Need granular control? Select specific security areas
+					</a>
+				</div>
 			</div>
 
 			<div class="assessment-grid">
@@ -273,11 +282,12 @@ import Layout from '../layouts/Layout.astro';
 						Back
 					</button>
 					
-					<button class="btn-secondary" onclick="window.location.href='/assessment-detailed'">
+					<button class="btn-secondary detailed-btn" onclick="window.location.href='/assessment-detailed'">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M12 2v20M2 12h20"/>
+							<path d="M21 18V6H8L2 12l6 6h13z"/>
+							<path d="M12 12h9"/>
 						</svg>
-						Customize Areas
+						Select Specific Areas (80+ Options)
 					</button>
 					
 					<button id="start-assessment" class="btn-primary">
@@ -325,6 +335,31 @@ import Layout from '../layouts/Layout.astro';
 	.header p {
 		font-size: 1.25rem;
 		color: var(--color-gray);
+	}
+
+	.selection-options {
+		margin-top: 1rem;
+	}
+
+	.detailed-selection-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(102, 126, 234, 0.1);
+		color: var(--color-primary);
+		text-decoration: none;
+		border-radius: 8px;
+		font-weight: 500;
+		border: 1px solid rgba(102, 126, 234, 0.3);
+		transition: all 0.3s ease;
+	}
+
+	.detailed-selection-link:hover {
+		background: rgba(102, 126, 234, 0.2);
+		border-color: var(--color-primary);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
 	}
 
 	.assessment-grid {
@@ -577,6 +612,18 @@ import Layout from '../layouts/Layout.astro';
 		color: white;
 	}
 
+	.detailed-btn {
+		background: rgba(102, 126, 234, 0.05);
+		border-color: rgba(102, 126, 234, 0.5);
+		color: var(--color-primary);
+	}
+
+	.detailed-btn:hover {
+		background: rgba(102, 126, 234, 0.1);
+		border-color: var(--color-primary);
+		transform: translateY(-2px);
+	}
+
 	@media (max-width: 768px) {
 		.header h1 {
 			font-size: 2rem;
@@ -649,8 +696,8 @@ import Layout from '../layouts/Layout.astro';
 		// Store selected assessments
 		localStorage.setItem('powerreview_assessments', JSON.stringify(selected));
 
-		// Redirect to execution page
-		window.location.href = '/execute';
+		// Redirect to enhanced assessment page for customer info
+		window.location.href = '/assessment-enhanced';
 	});
 
 	// Initialize
