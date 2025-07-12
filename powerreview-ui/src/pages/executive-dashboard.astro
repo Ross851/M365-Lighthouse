@@ -945,7 +945,7 @@ import Layout from '../layouts/Layout.astro';
         <img src="/evidence/mfa-gap-evidence.png" alt="MFA Gap Evidence" style="width: 100%; margin: 1rem 0;">
         <h4>Azure AD Query Results</h4>
         <pre style="background: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto;">
-Get-MsolUser -All | Where {$_.StrongAuthenticationRequirements.Count -eq 0}
+Get-MsolUser -All | Where &#123;$_.StrongAuthenticationRequirements.Count -eq 0&#125;
 
 UserPrincipalName                 DisplayName              LastLogon
 -----------------                 -----------              ---------

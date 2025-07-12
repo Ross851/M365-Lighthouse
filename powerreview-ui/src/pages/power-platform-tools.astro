@@ -335,7 +335,7 @@ pac flow create --template "DLP-Alert-Flow"</code></pre>
           <h3>License Optimization</h3>
           <p>Identify unused licenses and over-privileged users</p>
           <pre><code>pac admin app-users list --include-licenses
-| Where-Object {$_.LastLogin -lt (Get-Date).AddDays(-90)}</code></pre>
+| Where-Object &#123;$_.LastLogin -lt (Get-Date).AddDays(-90)&#125;</code></pre>
         </div>
       </div>
     </section>

@@ -727,10 +727,10 @@ import Layout from '../layouts/Layout.astro';
 				<pre style="background: #1e293b; color: #e2e8f0; padding: 1rem; border-radius: 8px; overflow-x: auto; font-size: 0.85rem;">
 # Enable MFA for all users
 Connect-MsolService
-$users = Get-MsolUser -All | Where {$_.StrongAuth...}
-foreach ($user in $users) {
+$users = Get-MsolUser -All | Where &#123;$_.StrongAuth...&#125;
+foreach ($user in $users) &#123;
     Set-MsolUser -UserPrincipalName $user.UPN ...
-}
+&#125;
 
 # Reduce Global Admin count
 # Review and reassign roles...
