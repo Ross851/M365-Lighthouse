@@ -1,0 +1,709 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="PowerReview - Get Started">
+	<main class="preflight-main">
+		<div class="container">
+			<div class="header">
+				<h1>Welcome to PowerReview</h1>
+				<p>Let's get you signed in and ready for your security assessment</p>
+			</div>
+
+			<!-- Two Path Options -->
+			<div class="path-options">
+				<!-- Quick Start Path -->
+				<div class="path-card recommended">
+					<div class="recommended-badge">Recommended</div>
+					<div class="path-icon">
+						<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+						</svg>
+					</div>
+					<h2>Quick Start</h2>
+					<p>Sign in once and we'll handle everything automatically</p>
+					<ul class="features-list">
+						<li>✓ Automatic permission verification</li>
+						<li>✓ Instant tenant detection</li>
+						<li>✓ Pre-configured assessment setup</li>
+						<li>✓ Ready in under 2 minutes</li>
+					</ul>
+					<button onclick="startQuickSetup()" class="path-button primary">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+							<path d="M21.8 0H2.2C1 0 0 1 0 2.2v19.6C0 23 1 24 2.2 24h19.6c1.2 0 2.2-1 2.2-2.2V2.2C24 1 23 0 21.8 0zm-5.4 19.5h-3.2v-3.2h3.2v3.2zm0-4.7h-3.2v-3.2h3.2v3.2zm0-4.8h-3.2V6.8h3.2V10zm4.8 9.5h-3.2v-3.2h3.2v3.2zm0-4.7h-3.2v-3.2h3.2v3.2zm0-4.8h-3.2V6.8h3.2V10z" fill="#0078D4"/>
+						</svg>
+						Sign in with Microsoft
+					</button>
+				</div>
+
+				<!-- Manual Path -->
+				<div class="path-card">
+					<div class="path-icon secondary">
+						<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M9 11l3 3L22 4"/>
+							<path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+						</svg>
+					</div>
+					<h2>Manual Setup</h2>
+					<p>Prefer to verify everything yourself step-by-step</p>
+					<ul class="features-list">
+						<li>• Detailed permission checklist</li>
+						<li>• Manual tenant verification</li>
+						<li>• Step-by-step guidance</li>
+						<li>• Full control over setup</li>
+					</ul>
+					<a href="/preflight-detailed" class="path-button secondary">
+						Use Manual Checklist
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M5 12h14M12 5l7 7-7 7"/>
+						</svg>
+					</a>
+				</div>
+			</div>
+
+			<!-- PIM Notice -->
+			<div class="pim-notice">
+				<div class="notice-icon">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="12" cy="12" r="10"/>
+						<line x1="12" y1="16" x2="12" y2="12"/>
+						<line x1="12" y1="8" x2="12" y2="8"/>
+					</svg>
+				</div>
+				<div class="notice-content">
+					<h3>Using Privileged Identity Management (PIM)?</h3>
+					<p>If your organization uses PIM, you'll need to activate your privileged roles before starting. This process takes 5-10 minutes to propagate.</p>
+					<a href="/preflight-pim" class="pim-link">Learn about PIM activation →</a>
+				</div>
+			</div>
+
+			<!-- Quick Setup Modal (Hidden) -->
+			<div id="setup-modal" class="modal" style="display: none;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2>Signing you in to Microsoft 365</h2>
+						<button onclick="closeModal()" class="close-btn">×</button>
+					</div>
+					<div class="modal-body">
+						<div id="setup-status" class="setup-status">
+							<div class="status-step active" id="step-signin">
+								<div class="step-icon">
+									<div class="spinner"></div>
+								</div>
+								<div class="step-content">
+									<h4>Authenticating with Microsoft</h4>
+									<p>Redirecting to Microsoft sign-in...</p>
+								</div>
+							</div>
+							<div class="status-step" id="step-verify">
+								<div class="step-icon">⏳</div>
+								<div class="step-content">
+									<h4>Verifying Permissions</h4>
+									<p>Checking your admin access levels</p>
+								</div>
+							</div>
+							<div class="status-step" id="step-configure">
+								<div class="step-icon">⏳</div>
+								<div class="step-content">
+									<h4>Configuring Assessment</h4>
+									<p>Setting up your environment</p>
+								</div>
+							</div>
+						</div>
+
+						<div id="setup-results" style="display: none;">
+							<div class="success-icon">
+								<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#28a745" stroke-width="2">
+									<path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+									<polyline points="22 4 12 14.01 9 11.01"/>
+								</svg>
+							</div>
+							<h3>You're all set!</h3>
+							<div class="result-details">
+								<div class="detail-item">
+									<strong>Account:</strong>
+									<span id="result-email"></span>
+								</div>
+								<div class="detail-item">
+									<strong>Tenant:</strong>
+									<span id="result-tenant"></span>
+								</div>
+								<div class="detail-item">
+									<strong>Access Level:</strong>
+									<span id="result-role"></span>
+								</div>
+							</div>
+							<button onclick="proceedToAssessment()" class="continue-btn">
+								Continue to Assessment Selection
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M5 12h14M12 5l7 7-7 7"/>
+								</svg>
+							</button>
+						</div>
+
+						<div id="setup-error" style="display: none;">
+							<div class="error-icon">❌</div>
+							<h3>Setup Failed</h3>
+							<p id="error-message"></p>
+							<button onclick="retrySetup()" class="retry-btn">Try Again</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.preflight-main {
+		min-height: calc(100vh - 140px);
+		background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+		padding: 3rem 1rem;
+	}
+
+	.container {
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	.header {
+		text-align: center;
+		margin-bottom: 3rem;
+		animation: fadeInDown 0.6s ease-out;
+	}
+
+	@keyframes fadeInDown {
+		from { opacity: 0; transform: translateY(-20px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	.header h1 {
+		font-size: 3rem;
+		font-weight: 800;
+		color: var(--color-dark);
+		margin: 0 0 0.5rem;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.header p {
+		font-size: 1.25rem;
+		color: var(--color-gray);
+	}
+
+	.path-options {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		gap: 2rem;
+		margin-bottom: 3rem;
+	}
+
+	.path-card {
+		background: white;
+		border-radius: 20px;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+		padding: 2.5rem;
+		position: relative;
+		transition: all 0.3s ease;
+		border: 2px solid transparent;
+	}
+
+	.path-card:hover {
+		transform: translateY(-5px);
+		box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+	}
+
+	.path-card.recommended {
+		border-color: #667eea;
+		background: linear-gradient(to bottom, #ffffff 0%, #f8f9ff 100%);
+	}
+
+	.recommended-badge {
+		position: absolute;
+		top: -12px;
+		right: 24px;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		padding: 0.25rem 1rem;
+		border-radius: 20px;
+		font-size: 0.875rem;
+		font-weight: 600;
+	}
+
+	.path-icon {
+		width: 80px;
+		height: 80px;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		border-radius: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 1.5rem;
+		color: white;
+	}
+
+	.path-icon.secondary {
+		background: linear-gradient(135deg, #e0e7ff 0%, #cfd8ff 100%);
+		color: #667eea;
+	}
+
+	.path-card h2 {
+		font-size: 1.75rem;
+		color: var(--color-dark);
+		margin: 0 0 0.5rem;
+	}
+
+	.path-card > p {
+		color: var(--color-gray);
+		margin: 0 0 1.5rem;
+		line-height: 1.6;
+	}
+
+	.features-list {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 2rem;
+	}
+
+	.features-list li {
+		padding: 0.5rem 0;
+		color: var(--color-gray);
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.path-button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		width: 100%;
+		padding: 1rem 1.5rem;
+		border-radius: 10px;
+		font-size: 1.1rem;
+		font-weight: 600;
+		text-decoration: none;
+		transition: all 0.3s ease;
+		cursor: pointer;
+		border: none;
+	}
+
+	.path-button.primary {
+		background: #0078D4;
+		color: white;
+	}
+
+	.path-button.primary:hover {
+		background: #106ebe;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 20px rgba(0, 120, 212, 0.3);
+	}
+
+	.path-button.secondary {
+		background: white;
+		color: var(--color-primary);
+		border: 2px solid var(--color-primary);
+	}
+
+	.path-button.secondary:hover {
+		background: #f0f4ff;
+		transform: translateY(-2px);
+	}
+
+	.pim-notice {
+		background: #e3f2fd;
+		border: 1px solid #90caf9;
+		border-radius: 12px;
+		padding: 1.5rem;
+		display: flex;
+		gap: 1rem;
+		align-items: flex-start;
+	}
+
+	.notice-icon {
+		flex-shrink: 0;
+		width: 40px;
+		height: 40px;
+		background: #2196f3;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: white;
+	}
+
+	.notice-content h3 {
+		font-size: 1.125rem;
+		color: #1565c0;
+		margin: 0 0 0.5rem;
+	}
+
+	.notice-content p {
+		color: #0d47a1;
+		margin: 0 0 0.75rem;
+		line-height: 1.6;
+	}
+
+	.pim-link {
+		color: #2196f3;
+		text-decoration: none;
+		font-weight: 500;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+
+	.pim-link:hover {
+		text-decoration: underline;
+	}
+
+	/* Modal Styles */
+	.modal {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.5);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 1000;
+		animation: fadeIn 0.3s ease-out;
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+
+	.modal-content {
+		background: white;
+		border-radius: 20px;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+		width: 90%;
+		max-width: 600px;
+		max-height: 90vh;
+		overflow: hidden;
+		animation: slideIn 0.3s ease-out;
+	}
+
+	@keyframes slideIn {
+		from { transform: translateY(50px); opacity: 0; }
+		to { transform: translateY(0); opacity: 1; }
+	}
+
+	.modal-header {
+		padding: 1.5rem 2rem;
+		border-bottom: 1px solid #e0e0e0;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.modal-header h2 {
+		margin: 0;
+		color: var(--color-dark);
+	}
+
+	.close-btn {
+		background: none;
+		border: none;
+		font-size: 2rem;
+		color: #999;
+		cursor: pointer;
+		width: 40px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		transition: all 0.2s ease;
+	}
+
+	.close-btn:hover {
+		background: #f5f5f5;
+		color: #333;
+	}
+
+	.modal-body {
+		padding: 2rem;
+	}
+
+	.setup-status {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	.status-step {
+		display: flex;
+		gap: 1rem;
+		opacity: 0.5;
+		transition: all 0.3s ease;
+	}
+
+	.status-step.active {
+		opacity: 1;
+	}
+
+	.status-step.completed {
+		opacity: 1;
+	}
+
+	.status-step.completed .step-icon {
+		background: #28a745;
+		color: white;
+	}
+
+	.step-icon {
+		width: 48px;
+		height: 48px;
+		background: #f0f0f0;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		font-size: 1.5rem;
+	}
+
+	.spinner {
+		width: 24px;
+		height: 24px;
+		border: 3px solid #f3f3f3;
+		border-top: 3px solid #667eea;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+	}
+
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+
+	.step-content h4 {
+		margin: 0 0 0.25rem;
+		color: var(--color-dark);
+	}
+
+	.step-content p {
+		margin: 0;
+		color: var(--color-gray);
+		font-size: 0.875rem;
+	}
+
+	.success-icon {
+		text-align: center;
+		margin-bottom: 1.5rem;
+	}
+
+	#setup-results h3 {
+		text-align: center;
+		color: #28a745;
+		font-size: 1.5rem;
+		margin: 0 0 1.5rem;
+	}
+
+	.result-details {
+		background: #f8f9fa;
+		border-radius: 12px;
+		padding: 1.5rem;
+		margin-bottom: 1.5rem;
+	}
+
+	.detail-item {
+		display: flex;
+		justify-content: space-between;
+		padding: 0.5rem 0;
+	}
+
+	.detail-item:not(:last-child) {
+		border-bottom: 1px solid #e9ecef;
+	}
+
+	.continue-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		width: 100%;
+		padding: 1rem;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		border: none;
+		border-radius: 10px;
+		font-size: 1.1rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.continue-btn:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+	}
+
+	.error-icon {
+		text-align: center;
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+
+	#setup-error h3 {
+		text-align: center;
+		color: #dc3545;
+		margin: 0 0 1rem;
+	}
+
+	#setup-error p {
+		text-align: center;
+		color: var(--color-gray);
+		margin: 0 0 1.5rem;
+	}
+
+	.retry-btn {
+		display: block;
+		margin: 0 auto;
+		padding: 0.75rem 2rem;
+		background: #dc3545;
+		color: white;
+		border: none;
+		border-radius: 8px;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+
+	.retry-btn:hover {
+		background: #c82333;
+		transform: translateY(-1px);
+	}
+
+	@media (max-width: 768px) {
+		.header h1 {
+			font-size: 2rem;
+		}
+
+		.path-options {
+			grid-template-columns: 1fr;
+		}
+
+		.modal-content {
+			width: 95%;
+			margin: 1rem;
+		}
+	}
+</style>
+
+<script>
+	// Check auth
+	if (!localStorage.getItem('powerreview_auth')) {
+		window.location.href = '/login';
+	}
+
+	const modal = document.getElementById('setup-modal');
+	const setupStatus = document.getElementById('setup-status');
+	const setupResults = document.getElementById('setup-results');
+	const setupError = document.getElementById('setup-error');
+
+	function startQuickSetup() {
+		modal.style.display = 'flex';
+		performQuickSetup();
+	}
+
+	function closeModal() {
+		modal.style.display = 'none';
+	}
+
+	async function performQuickSetup() {
+		try {
+			// Reset state
+			setupStatus.style.display = 'block';
+			setupResults.style.display = 'none';
+			setupError.style.display = 'none';
+
+			// Step 1: Sign in
+			await simulateStep('step-signin', async () => {
+				// In production: initiate OAuth flow
+				// For now: simulate with existing auth
+				await new Promise(resolve => setTimeout(resolve, 2000));
+			});
+
+			// Step 2: Verify permissions
+			const userInfo = await simulateStep('step-verify', async () => {
+				// In production: call Graph API to check permissions
+				// For now: simulate
+				await new Promise(resolve => setTimeout(resolve, 1500));
+				return {
+					email: 'admin@contoso.com',
+					tenant: 'contoso.onmicrosoft.com',
+					roles: ['Global Administrator', 'Security Administrator'],
+					hasAllPermissions: true
+				};
+			});
+
+			// Step 3: Configure environment
+			await simulateStep('step-configure', async () => {
+				// Store configuration
+				sessionStorage.setItem('ms_auth', JSON.stringify(userInfo));
+				sessionStorage.setItem('tenantDomain', userInfo.tenant);
+				await new Promise(resolve => setTimeout(resolve, 1000));
+			});
+
+			// Show success
+			showSuccess(userInfo);
+
+		} catch (error) {
+			showError(error.message || 'An unexpected error occurred');
+		}
+	}
+
+	async function simulateStep(stepId, action) {
+		const step = document.getElementById(stepId);
+		step.classList.add('active');
+		
+		try {
+			const result = await action();
+			step.classList.add('completed');
+			step.querySelector('.step-icon').innerHTML = '✓';
+			return result;
+		} catch (error) {
+			step.querySelector('.step-icon').innerHTML = '❌';
+			throw error;
+		}
+	}
+
+	function showSuccess(userInfo) {
+		setupStatus.style.display = 'none';
+		setupResults.style.display = 'block';
+		
+		document.getElementById('result-email').textContent = userInfo.email;
+		document.getElementById('result-tenant').textContent = userInfo.tenant;
+		document.getElementById('result-role').textContent = userInfo.roles[0];
+	}
+
+	function showError(message) {
+		setupStatus.style.display = 'none';
+		setupError.style.display = 'block';
+		document.getElementById('error-message').textContent = message;
+	}
+
+	function retrySetup() {
+		performQuickSetup();
+	}
+
+	function proceedToAssessment() {
+		window.location.href = '/assessment-select';
+	}
+
+	// Close modal on background click
+	modal.addEventListener('click', (e) => {
+		if (e.target === modal) {
+			closeModal();
+		}
+	});
+</script>

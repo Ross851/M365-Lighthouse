@@ -1,0 +1,604 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="PowerReview - Quick Start">
+	<main class="preflight-main">
+		<div class="container">
+			<div class="header">
+				<h1>Let's Get Started</h1>
+				<p>Sign in to Microsoft 365 and we'll automatically verify your access</p>
+			</div>
+
+			<!-- PIM Warning - Still Important -->
+			<div class="pim-alert">
+				<svg width=\"32\" height=\"32\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">
+					<path d=\"M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z\"/>
+					<line x1=\"12\" y1=\"9\" x2=\"12\" y2=\"13\"/>
+					<line x1=\"12\" y1=\"17\" x2=\"12\" y2=\"17\"/>
+				</svg>
+				<div>
+					<h3>⚠️ Using Privileged Identity Management (PIM)?</h3>
+					<p>You'll need to activate your roles first. This takes 5-10 minutes.</p>
+					<a href="/preflight-pim" class="pim-activate-btn">Activate PIM Roles →</a>
+				</div>
+			</div>
+
+			<!-- Simple Sign-In Card -->
+			<div class="signin-card">
+				<div class="card-icon">
+					<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+						<circle cx="12" cy="7" r="4"/>
+					</svg>
+				</div>
+				
+				<h2>Sign in to Microsoft 365</h2>
+				<p>We'll automatically check your permissions and set up your assessment</p>
+				
+				<button id="signin-btn" class="signin-button">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+						<path d="M21.8 0H2.2C1 0 0 1 0 2.2v19.6C0 23 1 24 2.2 24h19.6c1.2 0 2.2-1 2.2-2.2V2.2C24 1 23 0 21.8 0zm-5.4 19.5h-3.2v-3.2h3.2v3.2zm0-4.7h-3.2v-3.2h3.2v3.2zm0-4.8h-3.2V6.8h3.2V10zm4.8 9.5h-3.2v-3.2h3.2v3.2zm0-4.7h-3.2v-3.2h3.2v3.2zm0-4.8h-3.2V6.8h3.2V10z" fill="#0078D4"/>
+					</svg>
+					Sign in with Microsoft
+				</button>
+
+				<!-- Status Section (Hidden by default) -->
+				<div id="status-section" style="display: none;">
+					<div class="checking-status">
+						<div class="spinner"></div>
+						<span id="status-text">Signing you in...</span>
+					</div>
+				</div>
+
+				<!-- Results Section (Hidden by default) -->
+				<div id="results-section" style="display: none;">
+					<div class="results-header">
+						<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#28a745" stroke-width="2">
+							<path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+							<polyline points="22 4 12 14.01 9 11.01"/>
+						</svg>
+						<h3>Successfully signed in!</h3>
+					</div>
+
+					<div class="account-info">
+						<div class="info-item">
+							<strong>Account:</strong>
+							<span id="user-email"></span>
+						</div>
+						<div class="info-item">
+							<strong>Tenant:</strong>
+							<span id="tenant-name"></span>
+						</div>
+					</div>
+
+					<div class="access-results">
+						<h4>Your Access Level:</h4>
+						<div id="role-list" class="role-list"></div>
+						<div id="access-warnings" class="warnings" style="display: none;"></div>
+					</div>
+
+					<button id="continue-btn" class="continue-button">
+						Continue to Assessment
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M5 12h14M12 5l7 7-7 7"/>
+						</svg>
+					</button>
+				</div>
+			</div>
+
+			<!-- Help Section -->
+			<div class="help-section">
+				<h3>What happens when you sign in?</h3>
+				<div class="help-items">
+					<div class="help-item">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M9 11l3 3L22 4"/>
+							<path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+						</svg>
+						<span>We verify your admin permissions</span>
+					</div>
+					<div class="help-item">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<circle cx="12" cy="12" r="10"/>
+							<path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+							<line x1="9" y1="9" x2="9.01" y2="9"/>
+							<line x1="15" y1="9" x2="15.01" y2="9"/>
+						</svg>
+						<span>We detect your tenant automatically</span>
+					</div>
+					<div class="help-item">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+						</svg>
+						<span>We configure everything for your assessment</span>
+					</div>
+				</div>
+
+				<p class="help-note">
+					<strong>Need manual setup?</strong> 
+					<a href="/preflight-detailed">Use the detailed checklist instead</a>
+				</p>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.preflight-main {
+		min-height: calc(100vh - 140px);
+		background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+		padding: 3rem 1rem;
+	}
+
+	.container {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.header {
+		text-align: center;
+		margin-bottom: 2rem;
+	}
+
+	.header h1 {
+		font-size: 3rem;
+		font-weight: 800;
+		color: var(--color-dark);
+		margin: 0 0 0.5rem;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.header p {
+		font-size: 1.25rem;
+		color: var(--color-gray);
+	}
+
+	.pim-alert {
+		background: #fff3cd;
+		border: 2px solid #ffeaa7;
+		border-radius: 12px;
+		padding: 1.5rem;
+		margin-bottom: 2rem;
+		display: flex;
+		align-items: flex-start;
+		gap: 1rem;
+	}
+
+	.pim-alert svg {
+		flex-shrink: 0;
+		color: #856404;
+		margin-top: 0.25rem;
+	}
+
+	.pim-alert h3 {
+		font-size: 1.25rem;
+		color: #856404;
+		margin: 0 0 0.5rem 0;
+	}
+
+	.pim-alert p {
+		color: #856404;
+		margin: 0 0 1rem 0;
+		font-weight: 500;
+	}
+
+	.pim-activate-btn {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.75rem 1.25rem;
+		background: #dc3545;
+		color: white;
+		text-decoration: none;
+		border-radius: 6px;
+		font-weight: 600;
+		transition: all 0.2s ease;
+	}
+
+	.pim-activate-btn:hover {
+		background: #c82333;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+	}
+
+	.signin-card {
+		background: white;
+		border-radius: 20px;
+		box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+		padding: 3rem;
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+
+	.card-icon {
+		width: 80px;
+		height: 80px;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		border-radius: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 2rem;
+		color: white;
+	}
+
+	.signin-card h2 {
+		font-size: 2rem;
+		color: var(--color-dark);
+		margin: 0 0 0.5rem;
+	}
+
+	.signin-card > p {
+		font-size: 1.125rem;
+		color: var(--color-gray);
+		margin: 0 0 2rem;
+	}
+
+	.signin-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 1rem 2rem;
+		background: white;
+		color: #0078D4;
+		border: 2px solid #0078D4;
+		border-radius: 8px;
+		font-size: 1.125rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.signin-button:hover {
+		background: #0078D4;
+		color: white;
+		transform: translateY(-2px);
+		box-shadow: 0 5px 20px rgba(0, 120, 212, 0.3);
+	}
+
+	.signin-button:hover svg path {
+		fill: white;
+	}
+
+	.checking-status {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+		padding: 2rem;
+	}
+
+	.spinner {
+		width: 24px;
+		height: 24px;
+		border: 3px solid #f3f3f3;
+		border-top: 3px solid #667eea;
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+	}
+
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+
+	.results-header {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.75rem;
+		margin-bottom: 2rem;
+	}
+
+	.results-header h3 {
+		font-size: 1.5rem;
+		color: #28a745;
+		margin: 0;
+	}
+
+	.account-info {
+		background: #f8f9fa;
+		border-radius: 12px;
+		padding: 1.5rem;
+		margin-bottom: 2rem;
+		text-align: left;
+	}
+
+	.info-item {
+		display: flex;
+		justify-content: space-between;
+		padding: 0.5rem 0;
+	}
+
+	.info-item:not(:last-child) {
+		border-bottom: 1px solid #e9ecef;
+	}
+
+	.access-results {
+		text-align: left;
+		margin-bottom: 2rem;
+	}
+
+	.access-results h4 {
+		font-size: 1.25rem;
+		color: var(--color-dark);
+		margin: 0 0 1rem;
+	}
+
+	.role-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-bottom: 1rem;
+	}
+
+	.role-badge {
+		padding: 0.5rem 1rem;
+		background: #e7f3ff;
+		color: #0066cc;
+		border-radius: 20px;
+		font-size: 0.875rem;
+		font-weight: 500;
+	}
+
+	.role-badge.admin {
+		background: #d4edda;
+		color: #155724;
+	}
+
+	.warnings {
+		background: #fff3cd;
+		border: 1px solid #ffeaa7;
+		border-radius: 8px;
+		padding: 1rem;
+		margin-top: 1rem;
+	}
+
+	.warning-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.5rem;
+		color: #856404;
+		font-size: 0.875rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.warning-item:last-child {
+		margin-bottom: 0;
+	}
+
+	.continue-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 1rem 2rem;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		border: none;
+		border-radius: 8px;
+		font-size: 1.125rem;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.continue-button:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+	}
+
+	.help-section {
+		background: white;
+		border-radius: 12px;
+		padding: 2rem;
+		text-align: center;
+	}
+
+	.help-section h3 {
+		font-size: 1.25rem;
+		color: var(--color-dark);
+		margin: 0 0 1.5rem;
+	}
+
+	.help-items {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		text-align: left;
+		max-width: 400px;
+		margin: 0 auto 1.5rem;
+	}
+
+	.help-item {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		color: var(--color-gray);
+	}
+
+	.help-item svg {
+		flex-shrink: 0;
+		color: var(--color-primary);
+	}
+
+	.help-note {
+		font-size: 0.875rem;
+		color: var(--color-gray);
+		margin: 0;
+	}
+
+	.help-note a {
+		color: var(--color-primary);
+		text-decoration: none;
+	}
+
+	.help-note a:hover {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 768px) {
+		.header h1 {
+			font-size: 2rem;
+		}
+
+		.signin-card {
+			padding: 2rem;
+		}
+
+		.help-items {
+			max-width: 100%;
+		}
+	}
+</style>
+
+<script>
+	// Check auth
+	if (!localStorage.getItem('powerreview_auth')) {
+		window.location.href = '/login';
+	}
+
+	const signinBtn = document.getElementById('signin-btn');
+	const statusSection = document.getElementById('status-section');
+	const statusText = document.getElementById('status-text');
+	const resultsSection = document.getElementById('results-section');
+	const continueBtn = document.getElementById('continue-btn');
+
+	// Microsoft Graph permissions we need to check
+	const requiredScopes = [
+		'User.Read',
+		'Directory.Read.All',
+		'SecurityEvents.Read.All',
+		'AuditLog.Read.All'
+	];
+
+	// Handle sign-in
+	signinBtn.addEventListener('click', async () => {
+		signinBtn.style.display = 'none';
+		statusSection.style.display = 'block';
+		
+		try {
+			// Step 1: Initiate Microsoft OAuth flow
+			statusText.textContent = 'Redirecting to Microsoft sign-in...';
+			
+			// In a real implementation, this would:
+			// 1. Call our backend API to get OAuth URL
+			// 2. Redirect to Microsoft login
+			// 3. Handle callback with auth code
+			// 4. Exchange for tokens
+			// 5. Check user permissions via Graph API
+			
+			// For now, simulate the process
+			await simulateSignIn();
+			
+		} catch (error) {
+			console.error('Sign-in failed:', error);
+			statusSection.style.display = 'none';
+			signinBtn.style.display = 'inline-flex';
+			alert('Sign-in failed. Please try again.');
+		}
+	});
+
+	// Simulate sign-in process (replace with real OAuth flow)
+	async function simulateSignIn() {
+		// Simulate checking steps
+		const steps = [
+			'Authenticating with Microsoft...',
+			'Verifying your permissions...',
+			'Checking tenant access...',
+			'Configuring assessment environment...'
+		];
+		
+		for (const step of steps) {
+			statusText.textContent = step;
+			await new Promise(resolve => setTimeout(resolve, 1000));
+		}
+		
+		// Simulate getting user info
+		const userInfo = {
+			email: 'admin@contoso.com',
+			tenant: 'contoso.onmicrosoft.com',
+			roles: ['Global Administrator', 'Security Administrator'],
+			hasRequiredAccess: true,
+			warnings: []
+		};
+		
+		// Show results
+		showResults(userInfo);
+	}
+
+	// Display results
+	function showResults(userInfo) {
+		statusSection.style.display = 'none';
+		resultsSection.style.display = 'block';
+		
+		// Populate user info
+		document.getElementById('user-email').textContent = userInfo.email;
+		document.getElementById('tenant-name').textContent = userInfo.tenant;
+		
+		// Show roles
+		const roleList = document.getElementById('role-list');
+		roleList.innerHTML = '';
+		userInfo.roles.forEach(role => {
+			const badge = document.createElement('div');
+			badge.className = 'role-badge';
+			if (role.includes('Global Administrator')) {
+				badge.classList.add('admin');
+			}
+			badge.textContent = role;
+			roleList.appendChild(badge);
+		});
+		
+		// Show warnings if any
+		const warningsDiv = document.getElementById('access-warnings');
+		if (userInfo.warnings.length > 0) {
+			warningsDiv.style.display = 'block';
+			warningsDiv.innerHTML = '';
+			userInfo.warnings.forEach(warning => {
+				const warningItem = document.createElement('div');
+				warningItem.className = 'warning-item';
+				warningItem.innerHTML = `⚠️ ${warning}`;
+				warningsDiv.appendChild(warningItem);
+			});
+		}
+		
+		// Store auth info
+		sessionStorage.setItem('ms_auth', JSON.stringify({
+			authenticated: true,
+			email: userInfo.email,
+			tenant: userInfo.tenant,
+			roles: userInfo.roles
+		}));
+	}
+
+	// Continue to assessment
+	continueBtn.addEventListener('click', () => {
+		window.location.href = '/assessment-select';
+	});
+
+	// Real OAuth implementation would look like this:
+	/*
+	async function initiateOAuth() {
+		const response = await fetch('/api/auth/microsoft/initiate');
+		const { authUrl } = await response.json();
+		window.location.href = authUrl;
+	}
+	
+	// Handle OAuth callback (on a separate page)
+	async function handleOAuthCallback() {
+		const params = new URLSearchParams(window.location.search);
+		const code = params.get('code');
+		
+		const response = await fetch('/api/auth/microsoft/callback', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ code })
+		});
+		
+		const userInfo = await response.json();
+		return userInfo;
+	}
+	*/
+</script>
