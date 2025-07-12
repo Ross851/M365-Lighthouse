@@ -1249,37 +1249,22 @@ import Layout from '../layouts/Layout.astro';
 
     // Report actions
     function viewReport(reportId) {
-      // Skip any authentication checks for demo
       const report = mockReports.find(r => r.id === reportId);
       if (!report) return;
       
-      // Ensure the modal elements exist
-      const modal = document.getElementById('reportViewerModal');
-      const title = document.getElementById('viewerTitle');
-      const content = document.getElementById('reportContent');
+      // Navigate to the dedicated report viewer page with the report data
+      const params = new URLSearchParams({
+        id: report.id,
+        type: report.type,
+        org: report.organization,
+        status: report.status
+      });
       
-      if (!modal || !title || !content) {
-        console.error('Modal elements not found');
-        return;
-      }
+      // Store report data in localStorage for the viewer to access
+      localStorage.setItem('currentReport', JSON.stringify(report));
       
-      title.textContent = report.title;
-      
-      // Simulate report content
-      const reportHTML = generateReportContent(report);
-      content.innerHTML = reportHTML;
-      
-      // Add debugging
-      console.log('Opening report modal for:', reportId);
-      
-      // Show the modal
-      modal.classList.add('show');
-      
-      // Initialize charts after modal is shown
-      setTimeout(() => initializeReportCharts(report.id), 100);
-      
-      // Prevent any redirects
-      window.history.pushState(null, null, window.location.href);
+      // Navigate to the report viewer page
+      window.location.href = `/report-viewer?${params.toString()}`;
     }
 
     function generateReportContent(report) {
