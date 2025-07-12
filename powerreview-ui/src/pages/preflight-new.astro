@@ -10,70 +10,85 @@ import Layout from '../layouts/Layout.astro';
 				<p>Let's get you signed in and ready for your security assessment</p>
 			</div>
 
-			<!-- Two Path Options -->
-			<div class="path-options">
-				<!-- Quick Start Path -->
-				<div class="path-card recommended">
-					<div class="recommended-badge">Recommended</div>
-					<div class="path-icon">
-						<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-						</svg>
-					</div>
-					<h2>Quick Start</h2>
-					<p>Sign in once and we'll handle everything automatically</p>
-					<ul class="features-list">
-						<li>✓ Automatic permission verification</li>
-						<li>✓ Instant tenant detection</li>
-						<li>✓ Pre-configured assessment setup</li>
-						<li>✓ Ready in under 2 minutes</li>
-					</ul>
-					<button onclick="startQuickSetup()" class="path-button primary">
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-							<path d="M21.8 0H2.2C1 0 0 1 0 2.2v19.6C0 23 1 24 2.2 24h19.6c1.2 0 2.2-1 2.2-2.2V2.2C24 1 23 0 21.8 0zm-5.4 19.5h-3.2v-3.2h3.2v3.2zm0-4.7h-3.2v-3.2h3.2v3.2zm0-4.8h-3.2V6.8h3.2V10zm4.8 9.5h-3.2v-3.2h3.2v3.2zm0-4.7h-3.2v-3.2h3.2v3.2zm0-4.8h-3.2V6.8h3.2V10z" fill="#0078D4"/>
-						</svg>
-						Sign in with Microsoft
-					</button>
+			<!-- CRITICAL: PIM Check First -->
+			<div class="pim-critical-check">
+				<div class="critical-icon">
+					<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+						<line x1="12" y1="9" x2="12" y2="13"/>
+						<line x1="12" y1="17" x2="12" y2="17"/>
+					</svg>
 				</div>
-
-				<!-- Manual Path -->
-				<div class="path-card">
-					<div class="path-icon secondary">
-						<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M9 11l3 3L22 4"/>
-							<path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
-						</svg>
+				<div class="critical-content">
+					<h2>⚠️ STOP: Critical First Step</h2>
+					<h3>Does your organization use Privileged Identity Management (PIM)?</h3>
+					<p>If yes, you MUST activate your privileged roles BEFORE signing in. PIM activation takes 5-10 minutes to propagate.</p>
+					<div class="pim-buttons">
+						<a href="/preflight-pim" class="pim-yes-button">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+								<path d="M13.73 21a2 2 0 01-3.46 0"/>
+							</svg>
+							Yes - Activate PIM First
+						</a>
+						<button onclick="confirmNoPIM()" class="pim-no-button">
+							No PIM - Continue
+						</button>
 					</div>
-					<h2>Manual Setup</h2>
-					<p>Prefer to verify everything yourself step-by-step</p>
-					<ul class="features-list">
-						<li>• Detailed permission checklist</li>
-						<li>• Manual tenant verification</li>
-						<li>• Step-by-step guidance</li>
-						<li>• Full control over setup</li>
-					</ul>
-					<a href="/preflight-detailed" class="path-button secondary">
-						Use Manual Checklist
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-							<path d="M5 12h14M12 5l7 7-7 7"/>
-						</svg>
-					</a>
 				</div>
 			</div>
 
-			<!-- PIM Notice -->
-			<div class="pim-notice">
-				<div class="notice-icon">
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-						<circle cx="12" cy="12" r="10"/>
-						<line x1="12" y1="16" x2="12" y2="12"/>
-						<line x1="12" y1="8" x2="12" y2="8"/>
-					</svg>
-				</div>
-				<div class="notice-content">
-					<h3>Using Privileged Identity Management (PIM)?</h3>
-					<p>If your organization uses PIM, you'll need to activate your privileged roles before starting. This process takes 5-10 minutes to propagate.</p>
-					<a href="/preflight-pim" class="pim-link">Learn about PIM activation →</a>
+			<!-- Main Options (Initially Hidden) -->
+			<div id="main-options" style="display: none;">
+				<!-- Two Path Options -->
+				<div class="path-options">
+					<!-- Quick Start Path -->
+					<div class="path-card recommended">
+						<div class="recommended-badge">Recommended</div>
+						<div class="path-icon">
+							<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+							</svg>
+						</div>
+						<h2>Quick Start</h2>
+						<p>Sign in once and we'll handle everything automatically</p>
+						<ul class="features-list">
+							<li>✓ Automatic permission verification</li>
+							<li>✓ Instant tenant detection</li>
+							<li>✓ Pre-configured assessment setup</li>
+							<li>✓ Ready in under 2 minutes</li>
+						</ul>
+						<button onclick="startQuickSetup()" class="path-button primary">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+								<path d="M21.8 0H2.2C1 0 0 1 0 2.2v19.6C0 23 1 24 2.2 24h19.6c1.2 0 2.2-1 2.2-2.2V2.2C24 1 23 0 21.8 0zm-5.4 19.5h-3.2v-3.2h3.2v3.2zm0-4.7h-3.2v-3.2h3.2v3.2zm0-4.8h-3.2V6.8h3.2V10zm4.8 9.5h-3.2v-3.2h3.2v3.2zm0-4.7h-3.2v-3.2h3.2v3.2zm0-4.8h-3.2V6.8h3.2V10z" fill="#0078D4"/>
+							</svg>
+							Sign in with Microsoft
+						</button>
+					</div>
+
+					<!-- Manual Path -->
+					<div class="path-card">
+						<div class="path-icon secondary">
+							<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M9 11l3 3L22 4"/>
+								<path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+							</svg>
+						</div>
+						<h2>Manual Setup</h2>
+						<p>Prefer to verify everything yourself step-by-step</p>
+						<ul class="features-list">
+							<li>• Detailed permission checklist</li>
+							<li>• Manual tenant verification</li>
+							<li>• Step-by-step guidance</li>
+							<li>• Full control over setup</li>
+						</ul>
+						<a href="/preflight-detailed" class="path-button secondary">
+							Use Manual Checklist
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M5 12h14M12 5l7 7-7 7"/>
+							</svg>
+						</a>
+					</div>
 				</div>
 			</div>
 
@@ -191,6 +206,107 @@ import Layout from '../layouts/Layout.astro';
 	.header p {
 		font-size: 1.25rem;
 		color: var(--color-gray);
+	}
+
+	/* Critical PIM Check Styles */
+	.pim-critical-check {
+		background: #fff3cd;
+		border: 3px solid #ff6b6b;
+		border-radius: 20px;
+		padding: 2.5rem;
+		margin-bottom: 3rem;
+		display: flex;
+		gap: 2rem;
+		align-items: flex-start;
+		box-shadow: 0 10px 40px rgba(255, 107, 107, 0.2);
+		animation: pulse-border 2s ease-in-out infinite;
+	}
+
+	@keyframes pulse-border {
+		0%, 100% { border-color: #ff6b6b; }
+		50% { border-color: #ff4444; }
+	}
+
+	.critical-icon {
+		flex-shrink: 0;
+		width: 80px;
+		height: 80px;
+		background: #ff6b6b;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: white;
+		animation: shake 0.5s ease-in-out;
+	}
+
+	@keyframes shake {
+		0%, 100% { transform: translateX(0); }
+		25% { transform: translateX(-5px); }
+		75% { transform: translateX(5px); }
+	}
+
+	.critical-content h2 {
+		font-size: 2rem;
+		color: #d73502;
+		margin: 0 0 0.5rem;
+	}
+
+	.critical-content h3 {
+		font-size: 1.25rem;
+		color: #856404;
+		margin: 0 0 1rem;
+	}
+
+	.critical-content p {
+		color: #856404;
+		font-size: 1.1rem;
+		margin: 0 0 1.5rem;
+		line-height: 1.6;
+	}
+
+	.pim-buttons {
+		display: flex;
+		gap: 1rem;
+		flex-wrap: wrap;
+	}
+
+	.pim-yes-button, .pim-no-button {
+		padding: 1rem 2rem;
+		border-radius: 10px;
+		font-size: 1.1rem;
+		font-weight: 600;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		transition: all 0.3s ease;
+		cursor: pointer;
+		border: none;
+	}
+
+	.pim-yes-button {
+		background: #dc3545;
+		color: white;
+		box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+	}
+
+	.pim-yes-button:hover {
+		background: #c82333;
+		transform: translateY(-2px);
+		box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+	}
+
+	.pim-no-button {
+		background: white;
+		color: #28a745;
+		border: 2px solid #28a745;
+	}
+
+	.pim-no-button:hover {
+		background: #28a745;
+		color: white;
+		transform: translateY(-2px);
 	}
 
 	.path-options {
@@ -609,6 +725,40 @@ import Layout from '../layouts/Layout.astro';
 	const setupStatus = document.getElementById('setup-status');
 	const setupResults = document.getElementById('setup-results');
 	const setupError = document.getElementById('setup-error');
+	const mainOptions = document.getElementById('main-options');
+	const pimCheck = document.querySelector('.pim-critical-check');
+
+	// Handle PIM confirmation
+	function confirmNoPIM() {
+		// Confirm they really don't use PIM
+		const confirmed = confirm(
+			"Are you SURE your organization doesn't use PIM?\n\n" +
+			"If you have PIM and haven't activated your roles, the assessment will fail.\n\n" +
+			"Click OK only if you're certain you don't need PIM activation."
+		);
+		
+		if (confirmed) {
+			// Hide PIM check, show main options
+			pimCheck.style.display = 'none';
+			mainOptions.style.display = 'block';
+			
+			// Store PIM check status
+			sessionStorage.setItem('pim_check_completed', 'true');
+			sessionStorage.setItem('uses_pim', 'false');
+		}
+	}
+
+	// Check if returning from PIM activation
+	window.addEventListener('DOMContentLoaded', () => {
+		const pimActivated = sessionStorage.getItem('pim_activated');
+		const pimCheckCompleted = sessionStorage.getItem('pim_check_completed');
+		
+		if (pimActivated === 'true' || pimCheckCompleted === 'true') {
+			// User has completed PIM activation or confirmed no PIM
+			pimCheck.style.display = 'none';
+			mainOptions.style.display = 'block';
+		}
+	});
 
 	function startQuickSetup() {
 		modal.style.display = 'flex';

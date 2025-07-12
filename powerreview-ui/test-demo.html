@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerReview Quick Start Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f7fa;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .demo-button {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: #0078D4;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 2rem 0;
+        }
+        .demo-button:hover {
+            background: #106ebe;
+        }
+        .status {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        .step {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+        .step.active {
+            opacity: 1;
+            background: #e3f2fd;
+        }
+        .step.complete {
+            opacity: 1;
+            background: #d4edda;
+        }
+        .results {
+            display: none;
+            padding: 2rem;
+            background: #d4edda;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0078D4;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PowerReview Quick Start Demo</h1>
+        <p>This demonstrates the new streamlined sign-in flow:</p>
+        
+        <button class="demo-button" onclick="startDemo()">
+            🔐 Sign in with Microsoft
+        </button>
+        
+        <div class="status" id="status">
+            <h2>Setting up your assessment...</h2>
+            
+            <div class="step" id="step1">
+                <span class="spinner"></span> Authenticating with Microsoft...
+            </div>
+            
+            <div class="step" id="step2">
+                ⏳ Verifying your permissions...
+            </div>
+            
+            <div class="step" id="step3">
+                ⏳ Configuring assessment environment...
+            </div>
+        </div>
+        
+        <div class="results" id="results">
+            <h2>✅ Success!</h2>
+            <p><strong>Account:</strong> admin@contoso.com</p>
+            <p><strong>Tenant:</strong> contoso.onmicrosoft.com</p>
+            <p><strong>Roles:</strong> Global Administrator, Security Administrator</p>
+            <p><strong>Status:</strong> Ready to begin assessment</p>
+            
+            <button class="demo-button" style="background: #28a745;">
+                Continue to Assessment →
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        async function startDemo() {
+            document.querySelector('.demo-button').style.display = 'none';
+            document.getElementById('status').style.display = 'block';
+            
+            // Step 1: Authentication
+            const step1 = document.getElementById('step1');
+            step1.classList.add('active');
+            await sleep(2000);
+            step1.innerHTML = '✓ Authenticated successfully';
+            step1.classList.add('complete');
+            
+            // Step 2: Verify permissions
+            const step2 = document.getElementById('step2');
+            step2.classList.add('active');
+            step2.innerHTML = '<span class="spinner"></span> Checking admin roles...';
+            await sleep(1500);
+            step2.innerHTML = '✓ Global Administrator access confirmed';
+            step2.classList.add('complete');
+            
+            // Step 3: Configure
+            const step3 = document.getElementById('step3');
+            step3.classList.add('active');
+            step3.innerHTML = '<span class="spinner"></span> Setting up tenant configuration...';
+            await sleep(1000);
+            step3.innerHTML = '✓ Environment configured';
+            step3.classList.add('complete');
+            
+            // Show results
+            await sleep(500);
+            document.getElementById('status').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+        }
+        
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+    </script>
+</body>
+</html>

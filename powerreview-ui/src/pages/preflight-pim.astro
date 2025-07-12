@@ -5,6 +5,9 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="PIM Activation Required - PowerReview">
 	<main>
 		<div class="container">
+			<div class="step-indicator">
+				<span class="step-badge">STEP 1 OF 2</span>
+			</div>
 			<div class="pim-warning">
 				<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 					<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
@@ -12,7 +15,7 @@ import Layout from '../layouts/Layout.astro';
 					<line x1="12" y1="17" x2="12" y2="17"/>
 				</svg>
 				<h1>Privileged Identity Management (PIM) Activation Required</h1>
-				<p>If your organization uses PIM, you MUST activate your privileged roles before starting the assessment</p>
+				<p>You MUST complete this step before signing in to Microsoft 365</p>
 			</div>
 
 			<div class="pim-steps">
@@ -176,7 +179,7 @@ import Layout from '../layouts/Layout.astro';
 					</label>
 				</div>
 				<button id="continue-btn" class="btn-primary" disabled onclick="proceedToChecklist()">
-					Continue to Full Checklist
+					Continue to Step 2: Sign In
 					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 						<path d="M5 12h14M12 5l7 7-7 7"/>
 					</svg>
@@ -196,6 +199,21 @@ import Layout from '../layouts/Layout.astro';
 	.container {
 		max-width: 900px;
 		margin: 0 auto;
+	}
+
+	.step-indicator {
+		text-align: center;
+		margin-bottom: 1rem;
+	}
+
+	.step-badge {
+		background: #dc3545;
+		color: white;
+		padding: 0.5rem 1rem;
+		border-radius: 20px;
+		font-size: 0.875rem;
+		font-weight: 600;
+		letter-spacing: 0.5px;
 	}
 
 	.pim-warning {
@@ -752,7 +770,13 @@ import Layout from '../layouts/Layout.astro';
 
 	// Proceed to main checklist
 	function proceedToChecklist() {
-		window.location.href = '/preflight-detailed';
+		// Mark PIM as activated
+		sessionStorage.setItem('pim_activated', 'true');
+		sessionStorage.setItem('pim_check_completed', 'true');
+		sessionStorage.setItem('uses_pim', 'true');
+		
+		// Go to the new streamlined flow
+		window.location.href = '/preflight-new';
 	}
 
 	// Auto-populate domain on page load
