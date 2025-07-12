@@ -2,429 +2,695 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Reports - PowerReview Enhanced">
-  <!-- Load Chart.js for report visualizations -->
+<Layout title="Security Assessment Reports - PowerReview">
+  <!-- Load Chart.js for data visualizations -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   
   <main>
+    <!-- Professional Header -->
     <div class="reports-header">
-      <h1>📊 Security Assessment Reports</h1>
-      <p class="subtitle">Generate, view, and export comprehensive security reports with real-time data</p>
-      
+      <div class="header-content">
+        <h1>Microsoft 365 Security Assessment</h1>
+        <p class="subtitle">Comprehensive analysis based on Microsoft Security Best Practices and industry standards</p>
+      </div>
       <div class="header-actions">
-        <button class="btn primary" onclick="generateNewReport()">
-          <span class="btn-icon">📋</span>
-          Generate New Report
+        <button class="btn primary" onclick="downloadExecutiveSummary()">
+          <i class="fas fa-download"></i>
+          Executive Summary
         </button>
-        <button class="btn secondary" onclick="exportAllReports()">
-          <span class="btn-icon">📥</span>
-          Export All
-        </button>
-        <button class="btn secondary" onclick="scheduleReport()">
-          <span class="btn-icon">⏰</span>
-          Schedule Report
+        <button class="btn secondary" onclick="scheduleConsultation()">
+          <i class="fas fa-calendar"></i>
+          Schedule Consultation
         </button>
       </div>
     </div>
 
-    <!-- Quick Stats Dashboard -->
-    <section class="stats-dashboard">
-      <div class="stats-grid">
-        <div class="stat-card critical">
-          <div class="stat-icon">🔴</div>
-          <div class="stat-content">
-            <div class="stat-value" id="criticalIssues">23</div>
-            <div class="stat-label">Critical Issues</div>
-            <div class="stat-change">+3 from last week</div>
+    <!-- Security Score Overview -->
+    <section class="security-score-section">
+      <div class="score-container">
+        <div class="score-visual">
+          <canvas id="securityScoreChart" width="200" height="200"></canvas>
+          <div class="score-center">
+            <div class="score-value">72</div>
+            <div class="score-label">Security Score</div>
           </div>
         </div>
-        
-        <div class="stat-card warning">
-          <div class="stat-icon">🟡</div>
-          <div class="stat-content">
-            <div class="stat-value" id="openFindings">156</div>
-            <div class="stat-label">Open Findings</div>
-            <div class="stat-change">-12 from last week</div>
-          </div>
-        </div>
-        
-        <div class="stat-card success">
-          <div class="stat-icon">✅</div>
-          <div class="stat-content">
-            <div class="stat-value" id="complianceScore">78%</div>
-            <div class="stat-label">Compliance Score</div>
-            <div class="stat-change">+5% from last month</div>
-          </div>
-        </div>
-        
-        <div class="stat-card info">
-          <div class="stat-icon">📈</div>
-          <div class="stat-content">
-            <div class="stat-value" id="totalAssessments">42</div>
-            <div class="stat-label">Total Assessments</div>
-            <div class="stat-change">This quarter</div>
+        <div class="score-details">
+          <h2>Your Security Posture</h2>
+          <p>Based on our comprehensive assessment, your Microsoft 365 environment scores 72 out of 100, indicating room for improvement in several critical areas.</p>
+          <div class="score-breakdown">
+            <div class="breakdown-item">
+              <span class="label">Industry Average:</span>
+              <span class="value">78</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="label">Best in Class:</span>
+              <span class="value">92</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="label">Your Percentile:</span>
+              <span class="value">45th</span>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Report Filters -->
-    <section class="filters-section">
-      <div class="filters-container">
-        <div class="filter-group">
-          <label>Date Range</label>
-          <select id="dateFilter" onchange="filterReports()">
-            <option value="all">All Time</option>
-            <option value="today">Today</option>
-            <option value="week">Last 7 Days</option>
-            <option value="month" selected>Last 30 Days</option>
-            <option value="quarter">Last Quarter</option>
-          </select>
+    <!-- Key Findings Summary -->
+    <section class="findings-section">
+      <h2>Executive Summary of Key Findings</h2>
+      <div class="findings-grid">
+        <div class="finding-card critical">
+          <div class="finding-header">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Critical: Identity Protection</h3>
+          </div>
+          <div class="finding-content">
+            <p><strong>Finding:</strong> 847 users (12% of workforce) lack multi-factor authentication</p>
+            <p><strong>Risk:</strong> 99.9% of account compromise attacks target accounts without MFA</p>
+            <p><strong>Industry Context:</strong> Organizations without MFA are 5x more likely to experience a breach</p>
+            <div class="finding-impact">
+              <span class="impact-label">Financial Impact:</span>
+              <span class="impact-value">$2.3M average breach cost</span>
+            </div>
+          </div>
         </div>
-        
-        <div class="filter-group">
-          <label>Report Type</label>
-          <select id="typeFilter" onchange="filterReports()">
-            <option value="all">All Types</option>
-            <option value="executive">Executive Summary</option>
-            <option value="technical">Technical Analysis</option>
-            <option value="compliance">Compliance Report</option>
-            <option value="security">Security Assessment</option>
-            <option value="vulnerability">Vulnerability Report</option>
-          </select>
+
+        <div class="finding-card high">
+          <div class="finding-header">
+            <i class="fas fa-shield-alt"></i>
+            <h3>High: Data Protection</h3>
+          </div>
+          <div class="finding-content">
+            <p><strong>Finding:</strong> No Data Loss Prevention (DLP) policies configured</p>
+            <p><strong>Risk:</strong> Sensitive data can be shared externally without detection</p>
+            <p><strong>Industry Context:</strong> 68% of breaches involve data exfiltration</p>
+            <div class="finding-impact">
+              <span class="impact-label">Compliance Risk:</span>
+              <span class="impact-value">GDPR fines up to €20M</span>
+            </div>
+          </div>
         </div>
-        
-        <div class="filter-group">
-          <label>Status</label>
-          <select id="statusFilter" onchange="filterReports()">
-            <option value="all">All Status</option>
-            <option value="completed">Completed</option>
-            <option value="in-progress">In Progress</option>
-            <option value="scheduled">Scheduled</option>
-            <option value="failed">Failed</option>
-          </select>
+
+        <div class="finding-card medium">
+          <div class="finding-header">
+            <i class="fas fa-envelope"></i>
+            <h3>Medium: Email Security</h3>
+          </div>
+          <div class="finding-content">
+            <p><strong>Finding:</strong> Basic email protection only; no advanced threat detection</p>
+            <p><strong>Risk:</strong> 91% of cyberattacks start with a phishing email</p>
+            <p><strong>Industry Context:</strong> Average phishing click rate: 3.4%</p>
+            <div class="finding-impact">
+              <span class="impact-label">Productivity Loss:</span>
+              <span class="impact-value">$1.6M annually</span>
+            </div>
+          </div>
         </div>
-        
-        <div class="filter-group">
-          <label>Organization</label>
-          <select id="orgFilter" onchange="filterReports()">
-            <option value="all">All Organizations</option>
-            <option value="contoso">Contoso Corporation</option>
-            <option value="fabrikam">Fabrikam Industries</option>
-            <option value="northwind">Northwind Traders</option>
-            <option value="tailspin">Tailspin Toys</option>
-          </select>
-        </div>
-        
-        <button class="btn secondary" onclick="resetFilters()">
-          <span class="btn-icon">🔄</span>
-          Reset Filters
-        </button>
       </div>
     </section>
 
-    <!-- Reports Grid -->
+    <!-- Implementation Roadmap -->
+    <section class="roadmap-section">
+      <h2>Your Security Implementation Roadmap</h2>
+      <p class="roadmap-intro">We've developed a phased approach to address your security gaps systematically while minimizing business disruption.</p>
+      
+      <div class="roadmap-timeline">
+        <div class="phase phase-1">
+          <div class="phase-header">
+            <div class="phase-number">Phase 1</div>
+            <div class="phase-timeframe">Immediate (Week 1-2)</div>
+            <div class="phase-cost">$5,000 - $10,000</div>
+          </div>
+          <h3>Critical Security Controls</h3>
+          <ul>
+            <li>Enable MFA for all administrator accounts</li>
+            <li>Implement baseline Conditional Access policies</li>
+            <li>Block legacy authentication protocols</li>
+            <li>Enable Security Defaults</li>
+          </ul>
+          <div class="phase-outcome">
+            <strong>Expected Outcome:</strong> 80% reduction in account compromise risk
+          </div>
+        </div>
+
+        <div class="phase phase-2">
+          <div class="phase-header">
+            <div class="phase-number">Phase 2</div>
+            <div class="phase-timeframe">Short-term (Month 1-3)</div>
+            <div class="phase-cost">$25,000 - $40,000</div>
+          </div>
+          <h3>Enhanced Protection</h3>
+          <ul>
+            <li>Deploy Microsoft Defender for Office 365</li>
+            <li>Configure Data Loss Prevention policies</li>
+            <li>Implement Privileged Identity Management</li>
+            <li>Set up audit log monitoring</li>
+          </ul>
+          <div class="phase-outcome">
+            <strong>Expected Outcome:</strong> Achieve 85% security score
+          </div>
+        </div>
+
+        <div class="phase phase-3">
+          <div class="phase-header">
+            <div class="phase-number">Phase 3</div>
+            <div class="phase-timeframe">Long-term (Month 4-6)</div>
+            <div class="phase-cost">$50,000 - $75,000</div>
+          </div>
+          <h3>Advanced Security Posture</h3>
+          <ul>
+            <li>Implement Zero Trust architecture</li>
+            <li>Deploy Microsoft Sentinel for SIEM</li>
+            <li>Automate incident response</li>
+            <li>Continuous compliance monitoring</li>
+          </ul>
+          <div class="phase-outcome">
+            <strong>Expected Outcome:</strong> Industry-leading security posture (95+ score)
+          </div>
+        </div>
+      </div>
+
+      <div class="roadmap-roi">
+        <h3>Return on Investment</h3>
+        <div class="roi-metrics">
+          <div class="roi-item">
+            <span class="roi-label">Total Investment:</span>
+            <span class="roi-value">$80,000 - $125,000</span>
+          </div>
+          <div class="roi-item">
+            <span class="roi-label">Risk Reduction:</span>
+            <span class="roi-value">95%</span>
+          </div>
+          <div class="roi-item">
+            <span class="roi-label">Breach Cost Avoided:</span>
+            <span class="roi-value">$2.3M</span>
+          </div>
+          <div class="roi-item highlight">
+            <span class="roi-label">ROI:</span>
+            <span class="roi-value">1,840%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Reports Grid -->
     <section class="reports-section">
       <div class="section-header">
-        <h2>Available Reports</h2>
-        <div class="view-controls">
-          <button class="view-btn active" data-view="grid" onclick="switchView('grid')">
-            <span class="btn-icon">⊞</span>
-            Grid
-          </button>
-          <button class="view-btn" data-view="list" onclick="switchView('list')">
-            <span class="btn-icon">☰</span>
-            List
-          </button>
+        <h2>Detailed Assessment Reports</h2>
+        <div class="report-filters">
+          <select id="categoryFilter" onchange="filterReports()">
+            <option value="all">All Categories</option>
+            <option value="identity">Identity & Access</option>
+            <option value="data">Data Protection</option>
+            <option value="devices">Device Security</option>
+            <option value="apps">Application Security</option>
+          </select>
         </div>
       </div>
-      
-      <div class="reports-container" id="reportsContainer">
-        <!-- Reports will be populated here -->
+
+      <div class="reports-grid" id="reportsGrid">
+        <!-- Identity Report -->
+        <div class="report-card" data-category="identity">
+          <div class="report-header">
+            <div class="report-icon identity">
+              <i class="fas fa-user-shield"></i>
+            </div>
+            <div class="report-meta">
+              <h3>Identity & Access Management Assessment</h3>
+              <span class="report-date">Generated: January 2025</span>
+            </div>
+            <div class="report-score critical">
+              <span class="score">62</span>
+              <span class="label">Score</span>
+            </div>
+          </div>
+          <div class="report-summary">
+            <p>Comprehensive analysis of your identity protection controls, authentication methods, and privileged access management.</p>
+            <ul class="key-findings">
+              <li>847 users without MFA (Critical)</li>
+              <li>23 over-privileged admin accounts</li>
+              <li>Legacy authentication still enabled</li>
+              <li>No Conditional Access policies</li>
+            </ul>
+          </div>
+          <div class="report-actions">
+            <button class="btn-view" onclick="viewReport('identity-assessment')">
+              <i class="fas fa-eye"></i> View Full Report
+            </button>
+            <button class="btn-download" onclick="downloadReport('identity-assessment')">
+              <i class="fas fa-download"></i> Download PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Data Protection Report -->
+        <div class="report-card" data-category="data">
+          <div class="report-header">
+            <div class="report-icon data">
+              <i class="fas fa-database"></i>
+            </div>
+            <div class="report-meta">
+              <h3>Data Protection & Compliance Report</h3>
+              <span class="report-date">Generated: January 2025</span>
+            </div>
+            <div class="report-score warning">
+              <span class="score">71</span>
+              <span class="label">Score</span>
+            </div>
+          </div>
+          <div class="report-summary">
+            <p>Evaluation of data classification, protection policies, and compliance with regulatory requirements.</p>
+            <ul class="key-findings">
+              <li>No DLP policies configured</li>
+              <li>156 sensitive files shared externally</li>
+              <li>Retention policies not configured</li>
+              <li>GDPR compliance gaps identified</li>
+            </ul>
+          </div>
+          <div class="report-actions">
+            <button class="btn-view" onclick="viewReport('data-protection')">
+              <i class="fas fa-eye"></i> View Full Report
+            </button>
+            <button class="btn-download" onclick="downloadReport('data-protection')">
+              <i class="fas fa-download"></i> Download PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- Email Security Report -->
+        <div class="report-card" data-category="apps">
+          <div class="report-header">
+            <div class="report-icon email">
+              <i class="fas fa-envelope-open-text"></i>
+            </div>
+            <div class="report-meta">
+              <h3>Email Security & Anti-Phishing Report</h3>
+              <span class="report-date">Generated: January 2025</span>
+            </div>
+            <div class="report-score warning">
+              <span class="score">68</span>
+              <span class="label">Score</span>
+            </div>
+          </div>
+          <div class="report-summary">
+            <p>Analysis of email security controls, anti-phishing measures, and user awareness levels.</p>
+            <ul class="key-findings">
+              <li>Basic spam filtering only</li>
+              <li>No safe attachments policy</li>
+              <li>68% phishing simulation failure rate</li>
+              <li>No impersonation protection</li>
+            </ul>
+          </div>
+          <div class="report-actions">
+            <button class="btn-view" onclick="viewReport('email-security')">
+              <i class="fas fa-eye"></i> View Full Report
+            </button>
+            <button class="btn-download" onclick="downloadReport('email-security')">
+              <i class="fas fa-download"></i> Download PDF
+            </button>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Report Generation Modal -->
-    <div class="modal" id="generateReportModal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Generate New Report</h3>
-          <button class="modal-close" onclick="closeModal('generateReportModal')">&times;</button>
-        </div>
-        
-        <form class="report-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Report Type</label>
-              <select id="newReportType" required>
-                <option value="">Select report type...</option>
-                <option value="executive">Executive Summary</option>
-                <option value="technical">Technical Analysis</option>
-                <option value="compliance">Compliance Report</option>
-                <option value="security">Security Assessment</option>
-                <option value="vulnerability">Vulnerability Report</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label>Organization</label>
-              <select id="newReportOrg" required>
-                <option value="">Select organization...</option>
-                <option value="contoso">Contoso Corporation</option>
-                <option value="fabrikam">Fabrikam Industries</option>
-                <option value="northwind">Northwind Traders</option>
-                <option value="tailspin">Tailspin Toys</option>
-              </select>
-            </div>
-          </div>
-          
-          <div class="form-row">
-            <div class="form-group">
-              <label>Assessment Period</label>
-              <select id="newReportPeriod">
-                <option value="current">Current State</option>
-                <option value="week">Last 7 Days</option>
-                <option value="month">Last 30 Days</option>
-                <option value="quarter">Last Quarter</option>
-                <option value="custom">Custom Range</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label>Format</label>
-              <select id="newReportFormat">
-                <option value="pdf">PDF Document</option>
-                <option value="excel">Excel Spreadsheet</option>
-                <option value="powerpoint">PowerPoint Presentation</option>
-                <option value="html">HTML Report</option>
-              </select>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label>Include Sections</label>
-            <div class="checkbox-group">
-              <label class="checkbox">
-                <input type="checkbox" checked> Executive Summary
-              </label>
-              <label class="checkbox">
-                <input type="checkbox" checked> Risk Assessment
-              </label>
-              <label class="checkbox">
-                <input type="checkbox" checked> Security Findings
-              </label>
-              <label class="checkbox">
-                <input type="checkbox"> Technical Details
-              </label>
-              <label class="checkbox">
-                <input type="checkbox" checked> Compliance Status
-              </label>
-              <label class="checkbox">
-                <input type="checkbox" checked> Recommendations
-              </label>
-              <label class="checkbox">
-                <input type="checkbox"> Evidence Screenshots
-              </label>
-              <label class="checkbox">
-                <input type="checkbox"> PowerShell Scripts
-              </label>
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <label>Report Title</label>
-            <input type="text" id="newReportTitle" placeholder="Auto-generated based on type and organization">
-          </div>
-          
-          <div class="form-group">
-            <label>Description</label>
-            <textarea id="newReportDescription" rows="3" placeholder="Optional description for this report"></textarea>
-          </div>
-          
-          <div class="form-actions">
-            <button type="button" class="btn secondary" onclick="closeModal('generateReportModal')">Cancel</button>
-            <button type="submit" class="btn primary" onclick="startReportGeneration(event)">
-              <span class="btn-icon">🚀</span>
-              Generate Report
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Report Viewer Modal -->
-    <div class="modal large" id="reportViewerModal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3 id="viewerTitle">Report Viewer</h3>
-          <div class="viewer-actions">
-            <button class="btn small secondary" onclick="downloadCurrentReport()">
-              <span class="btn-icon">📥</span>
-              Download
-            </button>
-            <button class="btn small secondary" onclick="shareReport()">
-              <span class="btn-icon">🔗</span>
-              Share
-            </button>
-            <button class="modal-close" onclick="closeModal('reportViewerModal')">&times;</button>
-          </div>
-        </div>
-        
-        <div class="modal-body">
-          <div id="reportContent">
-            <!-- Report content will be loaded here -->
-          </div>
+    <!-- Next Steps CTA -->
+    <section class="next-steps-section">
+      <div class="next-steps-content">
+        <h2>Ready to Improve Your Security Posture?</h2>
+        <p>Our security experts are ready to help you implement these recommendations and achieve a best-in-class security posture.</p>
+        <div class="cta-buttons">
+          <button class="btn primary large" onclick="scheduleConsultation()">
+            <i class="fas fa-calendar-check"></i>
+            Schedule Free Consultation
+          </button>
+          <button class="btn secondary large" onclick="downloadFullReport()">
+            <i class="fas fa-file-pdf"></i>
+            Download Complete Assessment
+          </button>
         </div>
       </div>
-    </div>
+    </section>
   </main>
 
   <style>
     main {
       padding: 2rem;
-      max-width: 1600px;
+      max-width: 1400px;
       margin: 0 auto;
       background: #f8fafc;
       min-height: 100vh;
     }
 
+    /* Professional Header */
     .reports-header {
-      text-align: center;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 3rem;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
-    .reports-header h1 {
-      font-size: 2.5rem;
+    .header-content h1 {
+      font-size: 2rem;
       color: #1e293b;
-      margin-bottom: 0.5rem;
+      margin: 0 0 0.5rem;
+      font-weight: 700;
     }
 
     .subtitle {
-      font-size: 1.125rem;
       color: #64748b;
-      margin-bottom: 2rem;
+      font-size: 1.1rem;
     }
 
     .header-actions {
       display: flex;
       gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
     }
 
-    /* Stats Dashboard */
-    .stats-dashboard {
-      margin-bottom: 3rem;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .stat-card {
-      background: white;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 1rem;
-      transition: transform 0.2s;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
     }
 
-    .stat-card:hover {
-      transform: translateY(-2px);
+    .btn.primary {
+      background: #2563eb;
+      color: white;
     }
 
-    .stat-card.critical {
-      border-left: 4px solid #dc2626;
+    .btn.primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
     }
 
-    .stat-card.warning {
-      border-left: 4px solid #f59e0b;
+    .btn.secondary {
+      background: white;
+      color: #2563eb;
+      border: 2px solid #2563eb;
     }
 
-    .stat-card.success {
-      border-left: 4px solid #10b981;
+    .btn.secondary:hover {
+      background: #eff6ff;
     }
 
-    .stat-card.info {
-      border-left: 4px solid #3b82f6;
+    /* Security Score Section */
+    .security-score-section {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
     }
 
-    .stat-icon {
-      font-size: 2rem;
+    .score-container {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 3rem;
+      align-items: center;
     }
 
-    .stat-value {
-      font-size: 2rem;
+    .score-visual {
+      position: relative;
+    }
+
+    .score-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .score-value {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #2563eb;
+    }
+
+    .score-label {
+      font-size: 0.9rem;
+      color: #64748b;
+    }
+
+    .score-details h2 {
+      margin: 0 0 1rem;
+      color: #1e293b;
+    }
+
+    .score-details p {
+      color: #475569;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .score-breakdown {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .breakdown-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .breakdown-item .label {
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+
+    .breakdown-item .value {
+      font-size: 1.5rem;
       font-weight: 700;
       color: #1e293b;
     }
 
-    .stat-label {
+    /* Findings Section */
+    .findings-section {
+      margin-bottom: 3rem;
+    }
+
+    .findings-section h2 {
+      font-size: 1.75rem;
+      color: #1e293b;
+      margin-bottom: 2rem;
+    }
+
+    .findings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .finding-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      border-left: 4px solid;
+    }
+
+    .finding-card.critical {
+      border-left-color: #dc2626;
+    }
+
+    .finding-card.high {
+      border-left-color: #f59e0b;
+    }
+
+    .finding-card.medium {
+      border-left-color: #3b82f6;
+    }
+
+    .finding-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .finding-header i {
+      font-size: 1.5rem;
+    }
+
+    .finding-card.critical .finding-header i {
+      color: #dc2626;
+    }
+
+    .finding-card.high .finding-header i {
+      color: #f59e0b;
+    }
+
+    .finding-card.medium .finding-header i {
+      color: #3b82f6;
+    }
+
+    .finding-header h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      color: #1e293b;
+    }
+
+    .finding-content p {
+      margin: 0.75rem 0;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    .finding-content p strong {
+      color: #1e293b;
+    }
+
+    .finding-impact {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .impact-label {
       font-size: 0.875rem;
       color: #64748b;
-      margin-bottom: 0.25rem;
     }
 
-    .stat-change {
-      font-size: 0.75rem;
-      color: #9ca3af;
+    .impact-value {
+      font-weight: 700;
+      color: #dc2626;
     }
 
-    /* Filters */
-    .filters-section {
+    /* Roadmap Section */
+    .roadmap-section {
       background: white;
-      border-radius: 16px;
-      padding: 2rem;
+      border-radius: 12px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    .roadmap-section h2 {
+      font-size: 1.75rem;
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+
+    .roadmap-intro {
+      color: #475569;
+      line-height: 1.6;
       margin-bottom: 2rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
-    .filters-container {
+    .roadmap-timeline {
+      display: grid;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .phase {
+      padding: 1.5rem;
+      border-radius: 8px;
+      background: #f8fafc;
+    }
+
+    .phase-header {
       display: flex;
-      gap: 1.5rem;
-      align-items: end;
-      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
     }
 
-    .filter-group {
+    .phase-number {
+      background: #2563eb;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-weight: 700;
+    }
+
+    .phase-timeframe {
+      color: #64748b;
+      font-size: 0.875rem;
+    }
+
+    .phase-cost {
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .phase h3 {
+      margin: 0 0 1rem;
+      color: #1e293b;
+      font-size: 1.25rem;
+    }
+
+    .phase ul {
+      margin: 0 0 1rem;
+      padding-left: 1.5rem;
+      color: #475569;
+    }
+
+    .phase-outcome {
+      padding: 1rem;
+      background: white;
+      border-radius: 6px;
+      border-left: 3px solid #10b981;
+    }
+
+    /* ROI Section */
+    .roadmap-roi {
+      padding: 2rem;
+      background: #eff6ff;
+      border-radius: 8px;
+    }
+
+    .roadmap-roi h3 {
+      margin: 0 0 1.5rem;
+      color: #1e293b;
+    }
+
+    .roi-metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .roi-item {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
-      min-width: 150px;
+      gap: 0.25rem;
     }
 
-    .filter-group label {
+    .roi-label {
       font-size: 0.875rem;
-      font-weight: 600;
-      color: #374151;
+      color: #64748b;
     }
 
-    .filter-group select {
-      padding: 0.75rem;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      font-size: 0.875rem;
-      background: white;
-      cursor: pointer;
+    .roi-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e293b;
     }
 
-    .filter-group select:focus {
-      outline: none;
-      border-color: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    .roi-item.highlight .roi-value {
+      color: #10b981;
     }
 
-    /* Reports Section */
+    /* Reports Grid */
     .reports-section {
-      background: white;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 3rem;
     }
 
     .section-header {
@@ -435,55 +701,35 @@ import Layout from '../layouts/Layout.astro';
     }
 
     .section-header h2 {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       color: #1e293b;
-      margin: 0;
     }
 
-    .view-controls {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .view-btn {
+    .report-filters select {
       padding: 0.5rem 1rem;
-      border: 1px solid #e5e7eb;
-      background: white;
+      border: 2px solid #e5e7eb;
       border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.2s;
+      background: white;
       font-size: 0.875rem;
     }
 
-    .view-btn.active,
-    .view-btn:hover {
-      background: #6366f1;
-      color: white;
-      border-color: #6366f1;
-    }
-
-    .reports-container {
+    .reports-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
       gap: 1.5rem;
     }
 
-    .reports-container.list-view {
-      grid-template-columns: 1fr;
-    }
-
     .report-card {
-      background: #f8fafc;
+      background: white;
       border-radius: 12px;
       padding: 1.5rem;
-      border: 2px solid #e5e7eb;
-      transition: all 0.3s;
-      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
     }
 
     .report-card:hover {
-      border-color: #6366f1;
       transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
     }
 
     .report-header {
@@ -501,1065 +747,251 @@ import Layout from '../layouts/Layout.astro';
       align-items: center;
       justify-content: center;
       font-size: 1.5rem;
-      flex-shrink: 0;
+      color: white;
     }
 
-    .report-icon.executive {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    .report-icon.identity {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
     }
 
-    .report-icon.technical {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    .report-icon.data {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
     }
 
-    .report-icon.compliance {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    }
-
-    .report-icon.security {
-      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-    }
-
-    .report-icon.vulnerability {
-      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    .report-icon.email {
+      background: linear-gradient(135deg, #06b6d4, #0891b2);
     }
 
     .report-meta {
       flex: 1;
     }
 
-    .report-title {
-      font-size: 1.125rem;
-      font-weight: 600;
+    .report-meta h3 {
+      margin: 0 0 0.25rem;
+      font-size: 1.1rem;
       color: #1e293b;
-      margin: 0 0 0.25rem 0;
-    }
-
-    .report-subtitle {
-      font-size: 0.875rem;
-      color: #64748b;
-      margin-bottom: 0.5rem;
     }
 
     .report-date {
-      font-size: 0.75rem;
-      color: #9ca3af;
+      font-size: 0.875rem;
+      color: #64748b;
     }
 
-    .report-status {
-      padding: 0.25rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      flex-shrink: 0;
+    .report-score {
+      text-align: center;
     }
 
-    .report-status.completed {
-      background: #d1fae5;
-      color: #059669;
+    .report-score .score {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
     }
 
-    .report-status.in-progress {
-      background: #dbeafe;
-      color: #1d4ed8;
-    }
-
-    .report-status.scheduled {
-      background: #fef3c7;
-      color: #f59e0b;
-    }
-
-    .report-status.failed {
-      background: #fee2e2;
+    .report-score.critical .score {
       color: #dc2626;
     }
 
-    .report-summary {
+    .report-score.warning .score {
+      color: #f59e0b;
+    }
+
+    .report-score .label {
+      font-size: 0.75rem;
       color: #64748b;
-      font-size: 0.875rem;
+    }
+
+    .report-summary {
+      margin-bottom: 1.5rem;
+    }
+
+    .report-summary p {
+      color: #475569;
       line-height: 1.5;
       margin-bottom: 1rem;
     }
 
-    .report-metrics {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .metric {
-      text-align: center;
-      flex: 1;
-    }
-
-    .metric-value {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #1e293b;
-    }
-
-    .metric-label {
-      font-size: 0.75rem;
+    .key-findings {
+      margin: 0;
+      padding-left: 1.5rem;
       color: #64748b;
+      font-size: 0.875rem;
     }
 
     .report-actions {
       display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
+      gap: 1rem;
     }
 
-    .btn-action {
-      padding: 0.5rem 1rem;
-      border: 1px solid #e5e7eb;
-      background: white;
+    .btn-view,
+    .btn-download {
+      flex: 1;
+      padding: 0.625rem 1rem;
       border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 0.875rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .btn-action:hover {
-      background: #f3f4f6;
-      border-color: #6366f1;
-    }
-
-    /* Buttons */
-    .btn {
-      padding: 0.75rem 1.5rem;
       border: none;
-      border-radius: 8px;
+      font-size: 0.875rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
-      display: inline-flex;
+      display: flex;
       align-items: center;
+      justify-content: center;
       gap: 0.5rem;
-      text-decoration: none;
-      font-size: 0.875rem;
+      transition: all 0.2s ease;
     }
 
-    .btn.primary {
-      background: #6366f1;
+    .btn-view {
+      background: #2563eb;
       color: white;
     }
 
-    .btn.primary:hover {
-      background: #4f46e5;
-      transform: translateY(-1px);
+    .btn-view:hover {
+      background: #1d4ed8;
     }
 
-    .btn.secondary {
-      background: #f1f5f9;
-      color: #475569;
-      border: 1px solid #e2e8f0;
+    .btn-download {
+      background: white;
+      color: #2563eb;
+      border: 2px solid #2563eb;
     }
 
-    .btn.secondary:hover {
-      background: #e2e8f0;
+    .btn-download:hover {
+      background: #eff6ff;
     }
 
-    .btn.small {
-      padding: 0.5rem 1rem;
-      font-size: 0.8rem;
+    /* Next Steps Section */
+    .next-steps-section {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      border-radius: 12px;
+      padding: 3rem;
+      text-align: center;
     }
 
-    .btn-icon {
+    .next-steps-content h2 {
+      font-size: 2rem;
+      margin: 0 0 1rem;
+    }
+
+    .next-steps-content p {
+      font-size: 1.125rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .btn.large {
+      padding: 1rem 2rem;
       font-size: 1rem;
     }
 
-    /* Modal */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-content {
+    .next-steps-section .btn.secondary {
       background: white;
-      border-radius: 16px;
-      width: 100%;
-      max-width: 600px;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    .modal.large .modal-content {
-      max-width: 1200px;
-    }
-
-    .modal-header {
-      padding: 2rem 2rem 1rem 2rem;
-      border-bottom: 1px solid #e5e7eb;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .modal-header h3 {
-      margin: 0;
-      font-size: 1.25rem;
-      color: #1e293b;
-    }
-
-    .viewer-actions {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-    }
-
-    .modal-close {
-      background: none;
+      color: #2563eb;
       border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #9ca3af;
-      padding: 0.5rem;
-      border-radius: 4px;
-      transition: all 0.2s;
     }
 
-    .modal-close:hover {
-      background: #f3f4f6;
-      color: #374151;
-    }
-
-    .modal-body {
-      padding: 2rem;
-    }
-
-    /* Form */
-    .report-form {
-      padding: 2rem;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .form-group label {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: #374151;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      padding: 0.75rem;
-      border: 1px solid #d1d5db;
-      border-radius: 8px;
-      font-size: 0.875rem;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-    }
-
-    .checkbox-group {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 0.5rem;
-    }
-
-    .checkbox {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-      padding: 0.25rem;
-    }
-
-    .checkbox input[type="checkbox"] {
-      margin: 0;
-    }
-
-    .form-actions {
-      display: flex;
-      gap: 1rem;
-      justify-content: flex-end;
-      margin-top: 2rem;
-      padding-top: 1rem;
-      border-top: 1px solid #e5e7eb;
-    }
-
-    /* Responsive Design */
     @media (max-width: 768px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .filters-container {
+      .reports-header {
         flex-direction: column;
-        align-items: stretch;
+        gap: 1rem;
       }
 
-      .filter-group {
-        min-width: auto;
-      }
-
-      .reports-container {
+      .score-container {
         grid-template-columns: 1fr;
-      }
-
-      .form-row {
-        grid-template-columns: 1fr;
-      }
-
-      .header-actions {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .stat-card {
         text-align: center;
+      }
+
+      .findings-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .roi-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .reports-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-buttons {
         flex-direction: column;
       }
     }
   </style>
 
   <script>
-    // Set authentication for all users (not just demo mode)
-    if (!localStorage.getItem('powerreview_auth')) {
-      localStorage.setItem('powerreview_auth', JSON.stringify({
-        token: 'session-' + Date.now(),
-        user: 'user@company.com',
-        authenticated: true
-      }));
-    }
-    
-    // Check if coming from assessment completion
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('assessment') === 'complete') {
-      // Show success message
-      const latestResults = JSON.parse(localStorage.getItem('powerreview_latest_results') || '{}');
-      if (latestResults.status === 'completed') {
-        // Create and show a success notification
-        const notification = document.createElement('div');
-        notification.style.cssText = `
-          position: fixed;
-          top: 80px;
-          right: 20px;
-          background: #10b981;
-          color: white;
-          padding: 1rem 1.5rem;
-          border-radius: 8px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-          z-index: 1000;
-          animation: slideIn 0.3s ease-out;
-        `;
-        notification.innerHTML = `
-          <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="font-size: 1.25rem;">✓</span>
-            <div>
-              <div style="font-weight: 600;">Assessment Complete!</div>
-              <div style="font-size: 0.875rem; opacity: 0.9;">View your security report below</div>
-            </div>
-          </div>
-        `;
-        document.body.appendChild(notification);
-        
-        // Remove after 5 seconds
-        setTimeout(() => notification.remove(), 5000);
-        
-        // Optionally auto-generate a new report
-        setTimeout(() => {
-          generateNewReport();
-        }, 1000);
-      }
-    }
-    
-    // Mock data for reports
-    const mockReports = [
-      {
-        id: 'exec-001',
-        type: 'executive',
-        title: 'Executive Security Summary - Q3 2024',
-        organization: 'contoso',
-        organizationName: 'Contoso Corporation',
-        status: 'completed',
-        date: '2024-07-11',
-        summary: 'Comprehensive executive analysis with Gold/Silver/Bronze recommendations, financial impact assessment, and evidence-based findings.',
-        metrics: {
-          riskScore: 78,
-          findings: 47,
-          compliance: 85
-        }
-      },
-      {
-        id: 'tech-002',
-        type: 'technical',
-        title: 'Technical Security Analysis',
-        organization: 'fabrikam',
-        organizationName: 'Fabrikam Industries', 
-        status: 'completed',
-        date: '2024-07-10',
-        summary: 'Deep technical analysis of security configurations, vulnerabilities, and recommended fixes with PowerShell scripts.',
-        metrics: {
-          riskScore: 65,
-          findings: 89,
-          compliance: 72
-        }
-      },
-      {
-        id: 'comp-003',
-        type: 'compliance',
-        title: 'GDPR Compliance Assessment',
-        organization: 'northwind',
-        organizationName: 'Northwind Traders',
-        status: 'in-progress',
-        date: '2024-07-12',
-        summary: 'Comprehensive GDPR compliance review covering data protection, user rights, and regulatory requirements.',
-        metrics: {
-          riskScore: 45,
-          findings: 23,
-          compliance: 91
-        }
-      },
-      {
-        id: 'vuln-004',
-        type: 'vulnerability',
-        title: 'Vulnerability Assessment Report',
-        organization: 'tailspin',
-        organizationName: 'Tailspin Toys',
-        status: 'completed',
-        date: '2024-07-09',
-        summary: 'Detailed vulnerability scan results with prioritized remediation steps and patch management recommendations.',
-        metrics: {
-          riskScore: 82,
-          findings: 156,
-          compliance: 68
-        }
-      },
-      {
-        id: 'sec-005',
-        type: 'security',
-        title: 'Security Posture Analysis',
-        organization: 'contoso',
-        organizationName: 'Contoso Corporation',
-        status: 'scheduled',
-        date: '2024-07-15',
-        summary: 'Scheduled monthly security assessment covering all Microsoft 365 services and security controls.',
-        metrics: {
-          riskScore: 0,
-          findings: 0,
-          compliance: 0
-        }
-      },
-      {
-        id: 'exec-006',
-        type: 'executive',
-        title: 'Quarterly Board Report',
-        organization: 'fabrikam',
-        organizationName: 'Fabrikam Industries',
-        status: 'failed',
-        date: '2024-07-08',
-        summary: 'Failed report generation due to authentication issues. Retry scheduled for next maintenance window.',
-        metrics: {
-          riskScore: 0,
-          findings: 0,
-          compliance: 0
-        }
-      }
-    ];
-
-    let currentView = 'grid';
-    let filteredReports = [...mockReports];
-
-    // Initialize dashboard
+    // Initialize security score chart
     document.addEventListener('DOMContentLoaded', () => {
-      loadReports();
-      updateStats();
+      const ctx = document.getElementById('securityScoreChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          datasets: [{
+            data: [72, 28],
+            backgroundColor: ['#2563eb', '#e5e7eb'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '75%',
+          plugins: {
+            legend: { display: false },
+            tooltip: { enabled: false }
+          }
+        }
+      });
     });
 
-    function loadReports() {
-      const container = document.getElementById('reportsContainer');
-      container.innerHTML = '';
-
-      filteredReports.forEach(report => {
-        const reportCard = createReportCard(report);
-        container.appendChild(reportCard);
-      });
-    }
-
-    function createReportCard(report) {
-      const card = document.createElement('div');
-      card.className = 'report-card';
-      card.onclick = () => viewReport(report.id);
-
-      const statusClass = report.status.replace('-', '');
-      const typeIcon = getTypeIcon(report.type);
-
-      card.innerHTML = `
-        <div class="report-header">
-          <div class="report-icon ${report.type}">
-            ${typeIcon}
-          </div>
-          <div class="report-meta">
-            <h3 class="report-title">${report.title}</h3>
-            <p class="report-subtitle">${report.organizationName}</p>
-            <p class="report-date">Generated: ${formatDate(report.date)}</p>
-          </div>
-          <span class="report-status ${statusClass}">${formatStatus(report.status)}</span>
-        </div>
-        
-        <p class="report-summary">${report.summary}</p>
-        
-        ${report.status === 'completed' ? `
-        <div class="report-metrics">
-          <div class="metric">
-            <div class="metric-value">${report.metrics.riskScore}%</div>
-            <div class="metric-label">Risk Score</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">${report.metrics.findings}</div>
-            <div class="metric-label">Findings</div>
-          </div>
-          <div class="metric">
-            <div class="metric-value">${report.metrics.compliance}%</div>
-            <div class="metric-label">Compliance</div>
-          </div>
-        </div>` : ''}
-        
-        <div class="report-actions">
-          <button class="btn-action" onclick="event.stopPropagation(); viewReport('${report.id}')">
-            👁️ View
-          </button>
-          <button class="btn-action" onclick="event.stopPropagation(); downloadReport('${report.id}')">
-            📥 Download
-          </button>
-          <button class="btn-action" onclick="event.stopPropagation(); shareReport('${report.id}')">
-            🔗 Share
-          </button>
-          ${report.status === 'failed' ? `
-          <button class="btn-action" onclick="event.stopPropagation(); retryReport('${report.id}')">
-            🔄 Retry
-          </button>` : ''}
-        </div>
-      `;
-
-      return card;
-    }
-
-    function getTypeIcon(type) {
-      const icons = {
-        executive: '👔',
-        technical: '🔧',
-        compliance: '📋',
-        security: '🛡️',
-        vulnerability: '🔍'
-      };
-      return icons[type] || '📄';
-    }
-
-    function formatDate(dateString) {
-      return new Date(dateString).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-      });
-    }
-
-    function formatStatus(status) {
-      return status.split('-').map(word => 
-        word.charAt(0).toUpperCase() + word.slice(1)
-      ).join(' ');
-    }
-
-    function filterReports() {
-      const dateFilter = document.getElementById('dateFilter').value;
-      const typeFilter = document.getElementById('typeFilter').value;
-      const statusFilter = document.getElementById('statusFilter').value;
-      const orgFilter = document.getElementById('orgFilter').value;
-
-      filteredReports = mockReports.filter(report => {
-        const matchesDate = dateFilter === 'all' || checkDateFilter(report.date, dateFilter);
-        const matchesType = typeFilter === 'all' || report.type === typeFilter;
-        const matchesStatus = statusFilter === 'all' || report.status === statusFilter;
-        const matchesOrg = orgFilter === 'all' || report.organization === orgFilter;
-
-        return matchesDate && matchesType && matchesStatus && matchesOrg;
-      });
-
-      loadReports();
-    }
-
-    function checkDateFilter(reportDate, filter) {
-      const today = new Date();
-      const reportDateObj = new Date(reportDate);
-      
-      switch (filter) {
-        case 'today':
-          return reportDateObj.toDateString() === today.toDateString();
-        case 'week':
-          const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
-          return reportDateObj >= weekAgo;
-        case 'month':
-          const monthAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
-          return reportDateObj >= monthAgo;
-        case 'quarter':
-          const quarterAgo = new Date(today.getTime() - 90 * 24 * 60 * 60 * 1000);
-          return reportDateObj >= quarterAgo;
-        default:
-          return true;
-      }
-    }
-
-    function resetFilters() {
-      document.getElementById('dateFilter').value = 'all';
-      document.getElementById('typeFilter').value = 'all';
-      document.getElementById('statusFilter').value = 'all';
-      document.getElementById('orgFilter').value = 'all';
-      filteredReports = [...mockReports];
-      loadReports();
-    }
-
-    function switchView(view) {
-      currentView = view;
-      const container = document.getElementById('reportsContainer');
-      const buttons = document.querySelectorAll('.view-btn');
-      
-      buttons.forEach(btn => btn.classList.remove('active'));
-      document.querySelector(`[data-view="${view}"]`).classList.add('active');
-      
-      if (view === 'list') {
-        container.classList.add('list-view');
-      } else {
-        container.classList.remove('list-view');
-      }
-    }
-
-    function updateStats() {
-      // Simulate real-time stats updates
-      const stats = {
-        criticalIssues: 23 + Math.floor(Math.random() * 5),
-        openFindings: 156 - Math.floor(Math.random() * 10),
-        complianceScore: 78 + Math.floor(Math.random() * 5),
-        totalAssessments: 42 + Math.floor(Math.random() * 3)
-      };
-
-      document.getElementById('criticalIssues').textContent = stats.criticalIssues;
-      document.getElementById('openFindings').textContent = stats.openFindings;
-      document.getElementById('complianceScore').textContent = stats.complianceScore + '%';
-      document.getElementById('totalAssessments').textContent = stats.totalAssessments;
-    }
-
-    // Report generation
-    function generateNewReport() {
-      document.getElementById('generateReportModal').classList.add('show');
-    }
-
-    function startReportGeneration(event) {
-      event.preventDefault();
-      
-      const type = document.getElementById('newReportType').value;
-      const org = document.getElementById('newReportOrg').value;
-      const period = document.getElementById('newReportPeriod').value;
-      const format = document.getElementById('newReportFormat').value;
-
-      if (!type || !org) {
-        alert('Please select report type and organization');
-        return;
-      }
-
-      // Simulate report generation
-      const reportId = 'new-' + Date.now();
-      showReportGenerationProgress(reportId, type, org);
-      
-      closeModal('generateReportModal');
-    }
-
-    function showReportGenerationProgress(reportId, type, org) {
-      // Create temporary progress report
-      const progressReport = {
-        id: reportId,
-        type: type,
-        title: `Generating ${formatStatus(type)} Report...`,
-        organization: org,
-        organizationName: getOrgName(org),
-        status: 'in-progress',
-        date: new Date().toISOString().split('T')[0],
-        summary: 'Report generation in progress. Please wait...',
-        metrics: { riskScore: 0, findings: 0, compliance: 0 }
-      };
-
-      mockReports.unshift(progressReport);
-      filterReports();
-
-      // Simulate completion after 3 seconds
-      setTimeout(() => {
-        const index = mockReports.findIndex(r => r.id === reportId);
-        if (index !== -1) {
-          mockReports[index].status = 'completed';
-          mockReports[index].title = mockReports[index].title.replace('Generating ', '').replace('...', '');
-          mockReports[index].summary = 'Report generated successfully with comprehensive analysis and recommendations.';
-          mockReports[index].metrics = {
-            riskScore: 60 + Math.floor(Math.random() * 30),
-            findings: 20 + Math.floor(Math.random() * 50),
-            compliance: 70 + Math.floor(Math.random() * 25)
-          };
-          filterReports();
-        }
-      }, 3000);
-    }
-
-    function getOrgName(orgCode) {
-      const orgs = {
-        contoso: 'Contoso Corporation',
-        fabrikam: 'Fabrikam Industries',
-        northwind: 'Northwind Traders',
-        tailspin: 'Tailspin Toys'
-      };
-      return orgs[orgCode] || orgCode;
-    }
-
-    // Report actions
     function viewReport(reportId) {
-      const report = mockReports.find(r => r.id === reportId);
-      if (!report) return;
-      
-      // Navigate to the dedicated report viewer page with the report data
+      // Navigate to report viewer with report data
       const params = new URLSearchParams({
-        id: report.id,
-        type: report.type,
-        org: report.organization,
-        status: report.status
+        id: reportId,
+        type: 'security',
+        professional: 'true'
       });
       
-      // Store report data in localStorage for the viewer to access
-      localStorage.setItem('currentReport', JSON.stringify(report));
+      localStorage.setItem('currentReport', JSON.stringify({
+        id: reportId,
+        type: 'security',
+        status: 'completed'
+      }));
       
-      // Navigate to the report viewer page
       window.location.href = `/report-viewer?${params.toString()}`;
     }
 
-    function generateReportContent(report) {
-      if (report.status !== 'completed') {
-        return `
-          <div style="text-align: center; padding: 3rem; color: #64748b;">
-            <h3>Report ${formatStatus(report.status)}</h3>
-            <p>This report is currently ${report.status.replace('-', ' ')}.</p>
-            ${report.status === 'failed' ? '<button class="btn primary" onclick="retryReport(\'' + report.id + '\')">Retry Generation</button>' : ''}
-          </div>
-        `;
-      }
-
-      return `
-        <div style="max-width: 800px; margin: 0 auto; line-height: 1.6;">
-          <div style="text-align: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid #e5e7eb;">
-            <h1 style="color: #1e293b; margin-bottom: 0.5rem;">${report.title}</h1>
-            <p style="color: #64748b; font-size: 1.125rem;">${report.organizationName}</p>
-            <p style="color: #9ca3af; font-size: 0.875rem;">Generated on ${formatDate(report.date)}</p>
-          </div>
-
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem;">
-            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
-              <div style="font-size: 2rem; font-weight: 700; color: #dc2626;">${report.metrics.riskScore}%</div>
-              <div style="font-size: 0.875rem; color: #64748b;">Risk Score</div>
-            </div>
-            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
-              <div style="font-size: 2rem; font-weight: 700; color: #f59e0b;">${report.metrics.findings}</div>
-              <div style="font-size: 0.875rem; color: #64748b;">Findings</div>
-            </div>
-            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
-              <div style="font-size: 2rem; font-weight: 700; color: #10b981;">${report.metrics.compliance}%</div>
-              <div style="font-size: 0.875rem; color: #64748b;">Compliance</div>
-            </div>
-          </div>
-
-          <section style="margin-bottom: 2rem;">
-            <h2 style="color: #1e293b; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;">Executive Summary</h2>
-            <p>This ${report.type} report provides a comprehensive analysis of the security posture for ${report.organizationName}. Our assessment identified ${report.metrics.findings} findings across multiple categories, with a current risk score of ${report.metrics.riskScore}% and compliance rating of ${report.metrics.compliance}%.</p>
-          </section>
-          
-          <!-- Risk Distribution Chart -->
-          <section style="margin-bottom: 2rem;">
-            <h2 style="color: #1e293b; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;">Risk Distribution</h2>
-            <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
-              <canvas id="riskChart-${report.id}" width="400" height="200"></canvas>
-            </div>
-          </section>
-          
-          <!-- Key Findings -->
-          <section style="margin-bottom: 2rem;">
-            <h2 style="color: #1e293b; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;">Critical Security Findings</h2>
-            <div style="background: #fee2e2; border-left: 4px solid #dc2626; padding: 1rem; margin: 1rem 0; border-radius: 0 8px 8px 0;">
-              <h3 style="color: #dc2626; margin-bottom: 0.5rem;">🔴 Multi-Factor Authentication Not Enforced</h3>
-              <p><strong>Impact:</strong> High risk of account compromise</p>
-              <p><strong>Affected Services:</strong> Azure AD, Exchange Online</p>
-              <p><strong>Remediation:</strong> Enable MFA for all users immediately</p>
-            </div>
-            <div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 1rem; margin: 1rem 0; border-radius: 0 8px 8px 0;">
-              <h3 style="color: #f59e0b; margin-bottom: 0.5rem;">🟡 Legacy Authentication Protocols Enabled</h3>
-              <p><strong>Impact:</strong> Security controls can be bypassed</p>
-              <p><strong>Affected Services:</strong> Exchange Online</p>
-              <p><strong>Remediation:</strong> Disable legacy authentication</p>
-            </div>
-          </section>
-          
-          <!-- Compliance Status Table -->
-          <section style="margin-bottom: 2rem;">
-            <h2 style="color: #1e293b; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;">Compliance Framework Status</h2>
-            <table style="width: 100%; border-collapse: collapse;">
-              <thead>
-                <tr style="background: #f8fafc;">
-                  <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid #e5e7eb;">Framework</th>
-                  <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid #e5e7eb;">Score</th>
-                  <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid #e5e7eb;">Status</th>
-                  <th style="padding: 0.75rem; text-align: left; border-bottom: 2px solid #e5e7eb;">Key Gaps</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="padding: 0.75rem; border-bottom: 1px solid #e5e7eb;">GDPR</td>
-                  <td style="padding: 0.75rem; border-bottom: 1px solid #e5e7eb;">85%</td>
-                  <td style="padding: 0.75rem; border-bottom: 1px solid #e5e7eb;"><span style="background: #fef3c7; color: #d97706; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">Partial</span></td>
-                  <td style="padding: 0.75rem; border-bottom: 1px solid #e5e7eb;">Data retention policies</td>
-                </tr>
-                <tr>
-                  <td style="padding: 0.75rem; border-bottom: 1px solid #e5e7eb;">ISO 27001</td>
-                  <td style="padding: 0.75rem; border-bottom: 1px solid #e5e7eb;">92%</td>
-                  <td style="padding: 0.75rem; border-bottom: 1px solid #e5e7eb;"><span style="background: #d1fae5; color: #059669; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">Compliant</span></td>
-                  <td style="padding: 0.75rem; border-bottom: 1px solid #e5e7eb;">Minor documentation</td>
-                </tr>
-                <tr>
-                  <td style="padding: 0.75rem; border-bottom: 1px solid #e5e7eb;">NIST CSF</td>
-                  <td style="padding: 0.75rem; border-bottom: 1px solid #e5e7eb;">78%</td>
-                  <td style="padding: 0.75rem; border-bottom: 1px solid #e5e7eb;"><span style="background: #fef3c7; color: #d97706; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">Partial</span></td>
-                  <td style="padding: 0.75rem; border-bottom: 1px solid #e5e7eb;">Incident response</td>
-                </tr>
-              </tbody>
-            </table>
-          </section>
-          
-          <!-- Recommendations with Visual Tiers -->
-          <section style="margin-bottom: 2rem;">
-            <h2 style="color: #1e293b; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;">Strategic Recommendations</h2>
-            
-            <div style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
-              <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                <span style="font-size: 1.5rem;">🥇</span>
-                Gold Tier - Immediate Actions (0-30 days)
-              </h3>
-              <ul style="list-style: none; padding: 0;">
-                <li style="padding: 0.25rem 0;">✓ Implement Zero Trust architecture</li>
-                <li style="padding: 0.25rem 0;">✓ Enable MFA for all users</li>
-                <li style="padding: 0.25rem 0;">✓ Deploy Microsoft Defender</li>
-                <li style="padding: 0.25rem 0;">✓ Configure conditional access</li>
-              </ul>
-              <p style="margin-top: 1rem;"><strong>Investment:</strong> $50,000 - $100,000 | <strong>ROI:</strong> 300% within 12 months</p>
-            </div>
-            
-            <div style="background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%); color: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
-              <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                <span style="font-size: 1.5rem;">🥈</span>
-                Silver Tier - Short-term (30-90 days)
-              </h3>
-              <ul style="list-style: none; padding: 0;">
-                <li style="padding: 0.25rem 0;">✓ Implement Privileged Identity Management</li>
-                <li style="padding: 0.25rem 0;">✓ Enable Cloud App Security</li>
-                <li style="padding: 0.25rem 0;">✓ Deploy DLP policies</li>
-                <li style="padding: 0.25rem 0;">✓ Configure advanced threat protection</li>
-              </ul>
-              <p style="margin-top: 1rem;"><strong>Investment:</strong> $25,000 - $50,000 | <strong>ROI:</strong> 200% within 18 months</p>
-            </div>
-          </section>
-          
-          <!-- Action Timeline -->
-          <section style="margin-bottom: 2rem;">
-            <h2 style="color: #1e293b; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;">Implementation Timeline</h2>
-            <div style="background: #f8fafc; padding: 1.5rem; border-radius: 8px;">
-              <canvas id="timelineChart-${report.id}" width="400" height="150"></canvas>
-            </div>
-          </section>
-          
-
-          <section style="margin-bottom: 2rem;">
-            <h2 style="color: #1e293b; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;">Key Findings</h2>
-            <div style="background: #fef2f2; border-left: 4px solid #dc2626; padding: 1rem; margin-bottom: 1rem;">
-              <h4 style="color: #dc2626; margin: 0 0 0.5rem 0;">🔴 Critical Issues (3)</h4>
-              <ul style="margin: 0; padding-left: 1rem;">
-                <li>Multi-factor authentication not enforced for administrative accounts</li>
-                <li>Legacy authentication protocols still enabled</li>
-                <li>External sharing enabled for sensitive SharePoint sites</li>
-              </ul>
-            </div>
-            <div style="background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem; margin-bottom: 1rem;">
-              <h4 style="color: #f59e0b; margin: 0 0 0.5rem 0;">🟡 High Priority (12)</h4>
-              <ul style="margin: 0; padding-left: 1rem;">
-                <li>Insufficient conditional access policies</li>
-                <li>Data loss prevention rules not configured</li>
-                <li>Email security policies need enhancement</li>
-              </ul>
-            </div>
-          </section>
-
-          <section style="margin-bottom: 2rem;">
-            <h2 style="color: #1e293b; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;">Recommendations</h2>
-            <div style="background: #f0fdf4; border-left: 4px solid #10b981; padding: 1rem;">
-              <h4 style="color: #10b981; margin: 0 0 0.5rem 0;">🥇 Gold Tier Recommendations</h4>
-              <ol style="margin: 0; padding-left: 1rem;">
-                <li>Implement Zero Trust architecture</li>
-                <li>Enable Microsoft Defender for Office 365</li>
-                <li>Configure comprehensive conditional access policies</li>
-              </ol>
-            </div>
-          </section>
-
-          <section>
-            <h2 style="color: #1e293b; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;">Next Steps</h2>
-            <p>We recommend prioritizing the critical findings and implementing the Gold tier recommendations within the next 30 days. Our team is available to assist with implementation and provide ongoing monitoring services.</p>
-          </section>
-        </div>
-      `;
-    }
-
     function downloadReport(reportId) {
-      const report = mockReports.find(r => r.id === reportId);
-      if (!report) return;
+      alert(`Downloading ${reportId} report as PDF...`);
+    }
+
+    function downloadExecutiveSummary() {
+      alert('Downloading executive summary...');
+    }
+
+    function scheduleConsultation() {
+      alert('Opening calendar to schedule consultation...');
+    }
+
+    function downloadFullReport() {
+      alert('Preparing complete assessment report for download...');
+    }
+
+    function filterReports() {
+      const filter = document.getElementById('categoryFilter').value;
+      const cards = document.querySelectorAll('.report-card');
       
-      // Simulate download
-      alert(`Downloading ${report.title} as PDF...`);
+      cards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
     }
-
-    function shareReport(reportId) {
-      const report = mockReports.find(r => r.id === reportId);
-      if (!report) return;
-      
-      // Simulate sharing
-      const shareUrl = `https://powerreview.com/reports/${reportId}`;
-      navigator.clipboard?.writeText(shareUrl);
-      alert(`Report link copied to clipboard: ${shareUrl}`);
-    }
-
-    function retryReport(reportId) {
-      const report = mockReports.find(r => r.id === reportId);
-      if (!report) return;
-      
-      report.status = 'in-progress';
-      report.title = report.title + ' (Retrying...)';
-      filterReports();
-      
-      // Simulate completion
-      setTimeout(() => {
-        report.status = 'completed';
-        report.title = report.title.replace(' (Retrying...)', '');
-        report.metrics = {
-          riskScore: 60 + Math.floor(Math.random() * 30),
-          findings: 20 + Math.floor(Math.random() * 50),
-          compliance: 70 + Math.floor(Math.random() * 25)
-        };
-        filterReports();
-      }, 2000);
-    }
-
-    function downloadCurrentReport() {
-      alert('Downloading current report...');
-    }
-
-    function exportAllReports() {
-      alert('Exporting all reports as ZIP archive...');
-    }
-
-    function scheduleReport() {
-      alert('Opening report scheduling interface...');
-    }
-
-    // Modal functions
-    function closeModal(modalId) {
-      document.getElementById(modalId).classList.remove('show');
-    }
-
-    // Close modal when clicking outside
-    document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('modal')) {
-        e.target.classList.remove('show');
-      }
-    });
-
-    // Initialize charts for report viewer
-    function initializeReportCharts(reportId) {
-      // Risk Distribution Chart
-      const riskCtx = document.getElementById('riskChart-' + reportId);
-      if (riskCtx && typeof Chart !== 'undefined') {
-        new Chart(riskCtx, {
-          type: 'doughnut',
-          data: {
-            labels: ['Critical', 'High', 'Medium', 'Low'],
-            datasets: [{
-              data: [12, 23, 45, 34],
-              backgroundColor: ['#dc2626', '#f59e0b', '#facc15', '#10b981']
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: { position: 'right' }
-            }
-          }
-        });
-      }
-      
-      // Timeline Chart
-      const timelineCtx = document.getElementById('timelineChart-' + reportId);
-      if (timelineCtx && typeof Chart !== 'undefined') {
-        new Chart(timelineCtx, {
-          type: 'bar',
-          data: {
-            labels: ['Week 1-2', 'Week 3-4', 'Month 2', 'Month 3'],
-            datasets: [{
-              label: 'Tasks to Complete',
-              data: [8, 12, 6, 4],
-              backgroundColor: '#6366f1'
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-              y: { beginAtZero: true }
-            }
-          }
-        });
-      }
-    }
-
-    // Update stats periodically
-    setInterval(updateStats, 30000); // Every 30 seconds
   </script>
 </Layout>

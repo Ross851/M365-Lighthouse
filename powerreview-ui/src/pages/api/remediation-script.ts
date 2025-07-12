@@ -64,7 +64,7 @@ foreach ($admin in $uniqueAdmins) {
     }
 }
 
-Write-Host "`nMFA enforcement complete!" -ForegroundColor Green
+Write-Host "MFA enforcement complete!" -ForegroundColor Green
 Write-Host "Next steps:" -ForegroundColor Yellow
 Write-Host "1. Notify admin users to set up their MFA methods"
 Write-Host "2. Monitor sign-in logs for any issues"
