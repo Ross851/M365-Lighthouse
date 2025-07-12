@@ -1,0 +1,845 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Detailed Assessment Selection - PowerReview">
+	<main>
+		<div class="container">
+			<div class="header">
+				<h1>Detailed Assessment Selection</h1>
+				<p>Select specific security areas to assess based on your requirements</p>
+			</div>
+
+			<div class="assessment-services">
+				<!-- Azure AD & Identity -->
+				<div class="service-section">
+					<div class="service-header">
+						<label class="service-toggle">
+							<input type="checkbox" id="azuread-all" checked>
+							<div class="service-info">
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+								</svg>
+								<h2>Azure AD & Identity</h2>
+								<span class="area-count">5 areas selected</span>
+							</div>
+						</label>
+					</div>
+					<div class="service-areas">
+						<label class="area-item">
+							<input type="checkbox" name="azuread" value="user-risk" checked>
+							<div class="area-content">
+								<h4>User Risk Analysis</h4>
+								<p>Risky users, sign-in risks, identity protection policies</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="azuread" value="pim" checked>
+							<div class="area-content">
+								<h4>Privileged Identity Management</h4>
+								<p>Admin roles, eligible assignments, access reviews</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="azuread" value="mfa" checked>
+							<div class="area-content">
+								<h4>MFA Coverage</h4>
+								<p>MFA status, authentication methods, registration details</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="azuread" value="conditional-access" checked>
+							<div class="area-content">
+								<h4>Conditional Access</h4>
+								<p>Policy configuration, gaps, named locations</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="azuread" value="guest" checked>
+							<div class="area-content">
+								<h4>Guest & External Access</h4>
+								<p>Guest users, B2B settings, external collaboration</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Exchange Online -->
+				<div class="service-section">
+					<div class="service-header">
+						<label class="service-toggle">
+							<input type="checkbox" id="exchange-all" checked>
+							<div class="service-info">
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+									<path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
+								</svg>
+								<h2>Exchange Online</h2>
+								<span class="area-count">5 areas selected</span>
+							</div>
+						</label>
+					</div>
+					<div class="service-areas">
+						<label class="area-item">
+							<input type="checkbox" name="exchange" value="safe-attachments" checked>
+							<div class="area-content">
+								<h4>Safe Attachments</h4>
+								<p>Policies, scanning settings, action on detection</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="exchange" value="safe-links" checked>
+							<div class="area-content">
+								<h4>Safe Links</h4>
+								<p>URL protection, click tracking, custom blocked URLs</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="exchange" value="anti-phishing" checked>
+							<div class="area-content">
+								<h4>Anti-Phishing</h4>
+								<p>Impersonation protection, spoof settings, mailbox intelligence</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="exchange" value="email-auth" checked>
+							<div class="area-content">
+								<h4>Email Authentication</h4>
+								<p>SPF, DKIM, DMARC records and policies</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="exchange" value="mail-flow" checked>
+							<div class="area-content">
+								<h4>Mail Flow Rules</h4>
+								<p>Transport rules, connectors, accepted domains</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Microsoft Defender -->
+				<div class="service-section">
+					<div class="service-header">
+						<label class="service-toggle">
+							<input type="checkbox" id="defender-all" checked>
+							<div class="service-info">
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M3 3h18v18H3zM12 8v8m-4-4h8"/>
+								</svg>
+								<h2>Microsoft Defender</h2>
+								<span class="area-count">4 areas selected</span>
+							</div>
+						</label>
+					</div>
+					<div class="service-areas">
+						<label class="area-item">
+							<input type="checkbox" name="defender" value="secure-score" checked>
+							<div class="area-content">
+								<h4>Secure Score</h4>
+								<p>Current score, improvement actions, comparison data</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="defender" value="attack-surface" checked>
+							<div class="area-content">
+								<h4>Attack Surface Reduction</h4>
+								<p>ASR rules, controlled folder access, network protection</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="defender" value="threat-analytics" checked>
+							<div class="area-content">
+								<h4>Threat Analytics</h4>
+								<p>Active threats, exposure level, mitigation status</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="defender" value="alerts" checked>
+							<div class="area-content">
+								<h4>Security Alerts & Incidents</h4>
+								<p>Active alerts, incident correlation, investigation status</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- SharePoint & OneDrive -->
+				<div class="service-section">
+					<div class="service-header">
+						<label class="service-toggle">
+							<input type="checkbox" id="sharepoint-all">
+							<div class="service-info">
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/>
+									<polyline points="13 2 13 9 20 9"/>
+								</svg>
+								<h2>SharePoint & OneDrive</h2>
+								<span class="area-count">0 areas selected</span>
+							</div>
+						</label>
+					</div>
+					<div class="service-areas">
+						<label class="area-item">
+							<input type="checkbox" name="sharepoint" value="permissions">
+							<div class="area-content">
+								<h4>Permission Analysis</h4>
+								<p>Site permissions, inheritance, unique permissions</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="sharepoint" value="external-sharing">
+							<div class="area-content">
+								<h4>External Sharing</h4>
+								<p>Sharing settings, guest access, domain restrictions</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="sharepoint" value="sensitivity">
+							<div class="area-content">
+								<h4>Sensitivity Labels</h4>
+								<p>Label policies, default labels, mandatory labeling</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="sharepoint" value="anonymous">
+							<div class="area-content">
+								<h4>Anonymous Links</h4>
+								<p>Anyone links, expiration settings, password protection</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="sharepoint" value="compliance">
+							<div class="area-content">
+								<h4>Site Compliance</h4>
+								<p>Retention policies, holds, site classifications</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Microsoft Teams -->
+				<div class="service-section">
+					<div class="service-header">
+						<label class="service-toggle">
+							<input type="checkbox" id="teams-all">
+							<div class="service-info">
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+								</svg>
+								<h2>Microsoft Teams</h2>
+								<span class="area-count">0 areas selected</span>
+							</div>
+						</label>
+					</div>
+					<div class="service-areas">
+						<label class="area-item">
+							<input type="checkbox" name="teams" value="external-access">
+							<div class="area-content">
+								<h4>External Access</h4>
+								<p>Federation settings, domain allow/block lists</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="teams" value="app-permissions">
+							<div class="area-content">
+								<h4>App Permissions</h4>
+								<p>App policies, custom apps, sideloading settings</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="teams" value="meeting-policies">
+							<div class="area-content">
+								<h4>Meeting Policies</h4>
+								<p>Recording, transcription, lobby settings, anonymous join</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="teams" value="private-channels">
+							<div class="area-content">
+								<h4>Private Channels</h4>
+								<p>Creation policies, shared channels, member management</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="teams" value="data-lifecycle">
+							<div class="area-content">
+								<h4>Data Lifecycle</h4>
+								<p>Retention policies, deletion settings, archival</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Data Loss Prevention -->
+				<div class="service-section">
+					<div class="service-header">
+						<label class="service-toggle">
+							<input type="checkbox" id="dlp-all">
+							<div class="service-info">
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<rect x="3" y="11" width="18" height="10" rx="2" ry="2"/>
+									<path d="M7 11V7a5 5 0 0110 0v4"/>
+								</svg>
+								<h2>Data Loss Prevention</h2>
+								<span class="area-count">0 areas selected</span>
+							</div>
+						</label>
+					</div>
+					<div class="service-areas">
+						<label class="area-item">
+							<input type="checkbox" name="dlp" value="policy-coverage">
+							<div class="area-content">
+								<h4>Policy Coverage</h4>
+								<p>Active policies, locations covered, policy priority</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="dlp" value="data-classification">
+							<div class="area-content">
+								<h4>Data Classification</h4>
+								<p>Sensitive info types, custom classifiers, trainable classifiers</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="dlp" value="violations">
+							<div class="area-content">
+								<h4>Policy Violations</h4>
+								<p>Recent violations, trends, user activity</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="dlp" value="endpoint">
+							<div class="area-content">
+								<h4>Endpoint DLP</h4>
+								<p>Device onboarding, file activities, removable storage</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="dlp" value="cloud-apps">
+							<div class="area-content">
+								<h4>Cloud App Security</h4>
+								<p>Third-party app control, OAuth apps, shadow IT</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Compliance & Audit -->
+				<div class="service-section">
+					<div class="service-header">
+						<label class="service-toggle">
+							<input type="checkbox" id="compliance-all">
+							<div class="service-info">
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<path d="M9 11l3 3L22 4"/>
+									<path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+								</svg>
+								<h2>Compliance & Audit</h2>
+								<span class="area-count">0 areas selected</span>
+							</div>
+						</label>
+					</div>
+					<div class="service-areas">
+						<label class="area-item">
+							<input type="checkbox" name="compliance" value="audit-coverage">
+							<div class="area-content">
+								<h4>Audit Coverage</h4>
+								<p>Audit log status, retention period, search capabilities</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="compliance" value="retention">
+							<div class="area-content">
+								<h4>Retention Policies</h4>
+								<p>Policy configuration, adaptive scopes, disposition review</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="compliance" value="ediscovery">
+							<div class="area-content">
+								<h4>eDiscovery</h4>
+								<p>Case management, holds, content search</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="compliance" value="info-governance">
+							<div class="area-content">
+								<h4>Information Governance</h4>
+								<p>Records management, file plan, disposition</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="compliance" value="compliance-score">
+							<div class="area-content">
+								<h4>Compliance Score</h4>
+								<p>Current score, improvement actions, assessments</p>
+							</div>
+						</label>
+					</div>
+				</div>
+
+				<!-- Power Platform -->
+				<div class="service-section">
+					<div class="service-header">
+						<label class="service-toggle">
+							<input type="checkbox" id="powerplatform-all">
+							<div class="service-info">
+								<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+									<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+								</svg>
+								<h2>Power Platform</h2>
+								<span class="area-count">0 areas selected</span>
+							</div>
+						</label>
+					</div>
+					<div class="service-areas">
+						<label class="area-item">
+							<input type="checkbox" name="powerplatform" value="environment">
+							<div class="area-content">
+								<h4>Environment Security</h4>
+								<p>Environment types, security groups, capacity management</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="powerplatform" value="connectors">
+							<div class="area-content">
+								<h4>Connector Policies</h4>
+								<p>Business/non-business data groups, custom connectors</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="powerplatform" value="flow-permissions">
+							<div class="area-content">
+								<h4>Flow Permissions</h4>
+								<p>Shared flows, run-only users, co-owner permissions</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="powerplatform" value="app-sharing">
+							<div class="area-content">
+								<h4>App Sharing</h4>
+								<p>App sharing settings, security roles, data permissions</p>
+							</div>
+						</label>
+						<label class="area-item">
+							<input type="checkbox" name="powerplatform" value="data-policies">
+							<div class="area-content">
+								<h4>Data Policies</h4>
+								<p>DLP policies, tenant isolation, data export restrictions</p>
+							</div>
+						</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="action-bar">
+				<div class="selection-summary">
+					<div class="total-areas">
+						<span id="total-selected">19</span> security areas selected
+					</div>
+					<button class="preset-btn" onclick="selectPreset('essential')">Essential (5)</button>
+					<button class="preset-btn" onclick="selectPreset('standard')">Standard (15)</button>
+					<button class="preset-btn" onclick="selectPreset('comprehensive')">Comprehensive (All)</button>
+				</div>
+				<div class="action-buttons">
+					<button class="btn-secondary" onclick="window.location.href='/assessment-select'">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M19 12H5M12 19l-7-7 7-7"/>
+						</svg>
+						Back
+					</button>
+					<button id="start-assessment" class="btn-primary">
+						<span>Continue</span>
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<path d="M5 12h14M12 5l7 7-7 7"/>
+						</svg>
+					</button>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		min-height: calc(100vh - 140px);
+		background: linear-gradient(180deg, #fafbfc 0%, #e9ecef 100%);
+		padding: 2rem 1rem;
+	}
+
+	.container {
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.header {
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+
+	.header h1 {
+		font-size: 2.5rem;
+		color: var(--color-dark);
+		margin-bottom: 0.5rem;
+	}
+
+	.header p {
+		font-size: 1.125rem;
+		color: var(--color-gray);
+	}
+
+	.assessment-services {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		margin-bottom: 3rem;
+	}
+
+	.service-section {
+		background: white;
+		border-radius: 12px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+		overflow: hidden;
+	}
+
+	.service-header {
+		background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+		padding: 1.5rem;
+		border-bottom: 1px solid #dee2e6;
+	}
+
+	.service-toggle {
+		display: flex;
+		cursor: pointer;
+	}
+
+	.service-toggle input[type="checkbox"] {
+		display: none;
+	}
+
+	.service-info {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		flex: 1;
+	}
+
+	.service-info svg {
+		color: var(--color-primary);
+	}
+
+	.service-info h2 {
+		font-size: 1.5rem;
+		color: var(--color-dark);
+		margin: 0;
+		flex: 1;
+	}
+
+	.area-count {
+		font-size: 0.875rem;
+		color: var(--color-gray);
+		background: white;
+		padding: 0.25rem 0.75rem;
+		border-radius: 20px;
+	}
+
+	.service-areas {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		gap: 0;
+	}
+
+	.area-item {
+		display: flex;
+		cursor: pointer;
+		border-bottom: 1px solid #f1f3f4;
+		border-right: 1px solid #f1f3f4;
+		transition: all 0.2s ease;
+	}
+
+	.area-item:hover {
+		background: #f8f9fa;
+	}
+
+	.area-item input[type="checkbox"] {
+		width: 20px;
+		height: 20px;
+		margin: 1.5rem;
+		cursor: pointer;
+		accent-color: var(--color-primary);
+	}
+
+	.area-content {
+		flex: 1;
+		padding: 1.5rem 1.5rem 1.5rem 0;
+	}
+
+	.area-content h4 {
+		font-size: 1rem;
+		color: var(--color-dark);
+		margin-bottom: 0.25rem;
+	}
+
+	.area-content p {
+		font-size: 0.875rem;
+		color: var(--color-gray);
+		margin: 0;
+	}
+
+	.area-item:has(input:checked) {
+		background: #e3f2fd;
+		border-color: #2196f3;
+	}
+
+	.area-item:has(input:checked) .area-content h4 {
+		color: #1976d2;
+	}
+
+	.action-bar {
+		position: sticky;
+		bottom: 0;
+		background: white;
+		padding: 1.5rem;
+		border-radius: 12px;
+		box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 2rem;
+	}
+
+	.selection-summary {
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+	}
+
+	.total-areas {
+		font-size: 1.125rem;
+		font-weight: 600;
+		color: var(--color-dark);
+	}
+
+	#total-selected {
+		color: var(--color-primary);
+		font-size: 1.5rem;
+	}
+
+	.preset-btn {
+		background: transparent;
+		border: 1px solid var(--color-light-gray);
+		padding: 0.5rem 1rem;
+		border-radius: 20px;
+		font-size: 0.875rem;
+		color: var(--color-gray);
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+
+	.preset-btn:hover {
+		border-color: var(--color-primary);
+		color: var(--color-primary);
+		background: #e3f2fd;
+	}
+
+	.action-buttons {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.btn-primary, .btn-secondary {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		border-radius: 8px;
+		font-size: 1rem;
+		font-weight: 500;
+		border: none;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+
+	.btn-primary {
+		background: var(--color-primary);
+		color: white;
+	}
+
+	.btn-primary:hover {
+		background: var(--color-primary-dark);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+	}
+
+	.btn-secondary {
+		background: white;
+		color: var(--color-primary);
+		border: 1px solid var(--color-primary);
+	}
+
+	.btn-secondary:hover {
+		background: #e3f2fd;
+	}
+
+	/* Responsive design */
+	@media (max-width: 768px) {
+		.service-areas {
+			grid-template-columns: 1fr;
+		}
+
+		.action-bar {
+			flex-direction: column;
+			gap: 1rem;
+			position: relative;
+		}
+
+		.selection-summary {
+			flex-direction: column;
+			text-align: center;
+			gap: 1rem;
+		}
+
+		.preset-btn {
+			font-size: 0.75rem;
+			padding: 0.375rem 0.75rem;
+		}
+	}
+</style>
+
+<script>
+	// Initialize
+	document.addEventListener('DOMContentLoaded', function() {
+		updateSelectionCounts();
+		setupEventListeners();
+	});
+
+	function setupEventListeners() {
+		// Service toggle checkboxes
+		document.querySelectorAll('.service-toggle input').forEach(toggle => {
+			toggle.addEventListener('change', function() {
+				const serviceSection = this.closest('.service-section');
+				const areaCheckboxes = serviceSection.querySelectorAll('.area-item input');
+				areaCheckboxes.forEach(cb => cb.checked = this.checked);
+				updateSelectionCounts();
+			});
+		});
+
+		// Individual area checkboxes
+		document.querySelectorAll('.area-item input').forEach(checkbox => {
+			checkbox.addEventListener('change', function() {
+				updateServiceToggle(this);
+				updateSelectionCounts();
+			});
+		});
+
+		// Start button
+		document.getElementById('start-assessment').addEventListener('click', function() {
+			const selected = collectSelectedAreas();
+			if (selected.length === 0) {
+				alert('Please select at least one security area to assess');
+				return;
+			}
+			
+			// Store selection and navigate to customer info
+			sessionStorage.setItem('selectedAreas', JSON.stringify(selected));
+			window.location.href = '/assessment-enhanced';
+		});
+	}
+
+	function updateServiceToggle(areaCheckbox) {
+		const serviceSection = areaCheckbox.closest('.service-section');
+		const serviceToggle = serviceSection.querySelector('.service-toggle input');
+		const areaCheckboxes = serviceSection.querySelectorAll('.area-item input');
+		const checkedCount = Array.from(areaCheckboxes).filter(cb => cb.checked).length;
+		
+		serviceToggle.checked = checkedCount > 0;
+		serviceToggle.indeterminate = checkedCount > 0 && checkedCount < areaCheckboxes.length;
+	}
+
+	function updateSelectionCounts() {
+		// Update each service count
+		document.querySelectorAll('.service-section').forEach(section => {
+			const checkedCount = section.querySelectorAll('.area-item input:checked').length;
+			const areaCount = section.querySelector('.area-count');
+			areaCount.textContent = `${checkedCount} areas selected`;
+		});
+
+		// Update total count
+		const totalChecked = document.querySelectorAll('.area-item input:checked').length;
+		document.getElementById('total-selected').textContent = totalChecked;
+
+		// Update start button state
+		const startBtn = document.getElementById('start-assessment');
+		startBtn.style.opacity = totalChecked === 0 ? '0.5' : '1';
+		startBtn.style.cursor = totalChecked === 0 ? 'not-allowed' : 'pointer';
+	}
+
+	function selectPreset(preset) {
+		// Clear all selections first
+		document.querySelectorAll('.area-item input').forEach(cb => cb.checked = false);
+
+		const presets = {
+			essential: [
+				'azuread.mfa',
+				'azuread.conditional-access',
+				'exchange.anti-phishing',
+				'exchange.email-auth',
+				'defender.secure-score'
+			],
+			standard: [
+				// Azure AD
+				'azuread.user-risk',
+				'azuread.pim',
+				'azuread.mfa',
+				'azuread.conditional-access',
+				'azuread.guest',
+				// Exchange
+				'exchange.safe-attachments',
+				'exchange.safe-links',
+				'exchange.anti-phishing',
+				'exchange.email-auth',
+				// Defender
+				'defender.secure-score',
+				'defender.alerts',
+				// SharePoint
+				'sharepoint.external-sharing',
+				'sharepoint.sensitivity',
+				// Teams
+				'teams.external-access',
+				'teams.meeting-policies'
+			],
+			comprehensive: 'all'
+		};
+
+		if (preset === 'comprehensive') {
+			document.querySelectorAll('.area-item input').forEach(cb => cb.checked = true);
+		} else {
+			presets[preset].forEach(area => {
+				const [service, value] = area.split('.');
+				const checkbox = document.querySelector(`input[name="${service}"][value="${value}"]`);
+				if (checkbox) checkbox.checked = true;
+			});
+		}
+
+		// Update all service toggles
+		document.querySelectorAll('.service-section').forEach(section => {
+			updateServiceToggle(section.querySelector('.area-item input'));
+		});
+
+		updateSelectionCounts();
+	}
+
+	function collectSelectedAreas() {
+		const selected = [];
+		document.querySelectorAll('.area-item input:checked').forEach(checkbox => {
+			selected.push({
+				service: checkbox.name,
+				area: checkbox.value,
+				name: checkbox.closest('.area-item').querySelector('h4').textContent
+			});
+		});
+		return selected;
+	}
+</script>
