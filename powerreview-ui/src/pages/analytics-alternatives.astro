@@ -862,29 +862,28 @@ docker run -d -p 3000:3000 \
     function simulateThreatFeed() {
       if (threatFeedPaused) return;
 
-      const threats = [
-        &#123;
-          type: 'CVE',
-          severity: 'critical',
-          title: 'CVE-2024-26167 - Microsoft Exchange Server RCE',
-          source: 'CISA',
-          time: new Date().toLocaleTimeString()
-        &#125;,
-        &#123;
-          type: 'IOC',
-          severity: 'high', 
-          title: 'Malicious Office document detected',
-          source: 'Abuse.ch',
-          time: new Date().toLocaleTimeString()
-        &#125;,
-        &#123;
-          type: 'Advisory',
-          severity: 'medium',
-          title: 'Microsoft Security Advisory MS24-001',
-          source: 'MSRC',
-          time: new Date().toLocaleTimeString()
-        &#125;
-      ];
+      const threats = [];
+      threats.push({
+        type: 'CVE',
+        severity: 'critical',
+        title: 'CVE-2024-26167 - Microsoft Exchange Server RCE',
+        source: 'CISA',
+        time: new Date().toLocaleTimeString()
+      });
+      threats.push({
+        type: 'IOC',
+        severity: 'high', 
+        title: 'Malicious Office document detected',
+        source: 'Abuse.ch',
+        time: new Date().toLocaleTimeString()
+      });
+      threats.push({
+        type: 'Advisory',
+        severity: 'medium',
+        title: 'Microsoft Security Advisory MS24-001',
+        source: 'MSRC',
+        time: new Date().toLocaleTimeString()
+      });
 
       const threat = threats[Math.floor(Math.random() * threats.length)];
       addThreatToFeed(threat);
@@ -896,16 +895,38 @@ docker run -d -p 3000:3000 \
     function addThreatToFeed(threat) {
       const container = document.getElementById('threatFeedContainer');
       const threatElement = document.createElement('div');
-      threatElement.className = `threat-item $&#123;threat.severity&#125;`;
-      threatElement.innerHTML = `
-        <div class="threat-header">
-          <span class="threat-type">$&#123;threat.type&#125;</span>
-          <span class="threat-severity $&#123;threat.severity&#125;">$&#123;threat.severity.toUpperCase()&#125;</span>
-          <span class="threat-time">$&#123;threat.time&#125;</span>
-        </div>
-        <div class="threat-title">$&#123;threat.title&#125;</div>
-        <div class="threat-source">Source: $&#123;threat.source&#125;</div>
-      `;
+      threatElement.className = 'threat-item ' + threat.severity;
+      
+      const headerDiv = document.createElement('div');
+      headerDiv.className = 'threat-header';
+      
+      const typeSpan = document.createElement('span');
+      typeSpan.className = 'threat-type';
+      typeSpan.textContent = threat.type;
+      
+      const severitySpan = document.createElement('span');
+      severitySpan.className = 'threat-severity ' + threat.severity;
+      severitySpan.textContent = threat.severity.toUpperCase();
+      
+      const timeSpan = document.createElement('span');
+      timeSpan.className = 'threat-time';
+      timeSpan.textContent = threat.time;
+      
+      headerDiv.appendChild(typeSpan);
+      headerDiv.appendChild(severitySpan);
+      headerDiv.appendChild(timeSpan);
+      
+      const titleDiv = document.createElement('div');
+      titleDiv.className = 'threat-title';
+      titleDiv.textContent = threat.title;
+      
+      const sourceDiv = document.createElement('div');
+      sourceDiv.className = 'threat-source';
+      sourceDiv.textContent = 'Source: ' + threat.source;
+      
+      threatElement.appendChild(headerDiv);
+      threatElement.appendChild(titleDiv);
+      threatElement.appendChild(sourceDiv);
       
       container.insertBefore(threatElement, container.firstChild);
       
