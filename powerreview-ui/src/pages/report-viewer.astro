@@ -3196,7 +3196,7 @@ Azure AD Sign-in Logs show:
           <div style="padding: 1rem 1.5rem; border-top: 1px solid #e5e7eb; display: flex; gap: 1rem; justify-content: space-between;">
             <div style="display: flex; gap: 1rem;">
               <button onclick="navigator.clipboard.writeText(this.getAttribute('data-script')); alert('Script copied to clipboard!')" 
-                      data-script="${scriptData.script.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}"
+                      data-script="${scriptData.script.replace(/"/g, '&quot;').replace(/\</g, '&lt;').replace(/\>/g, '&gt;')}"
                       style="background: #eff6ff; border: 1px solid #3b82f6; color: #3b82f6; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer;">
                 <i class="fas fa-copy"></i> Copy Script
               </button>
