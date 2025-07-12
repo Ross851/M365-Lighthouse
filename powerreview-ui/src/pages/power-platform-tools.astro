@@ -70,12 +70,12 @@ import Layout from '../layouts/Layout.astro';
               <h4>PowerReview Integration Scripts</h4>
               <pre><code># PowerReview Automated Security Scan
 pac auth create --name PowerReviewScan
-pac env list | ForEach-Object {
+pac env list | ForEach-Object &#123;
     Write-Host "Scanning environment: $_"
     pac solution list --environment $_ 
     pac admin app-users list --environment $_
     pac dlp list --environment $_
-}
+&#125;
 
 # Export results for analysis
 pac telemetry export --format json > power-platform-audit.json</code></pre>
@@ -223,7 +223,7 @@ pac telemetry export --format json > power-platform-audit.json</code></pre>
               <pre><code># PowerReview Master Assessment Script
 # Combines PAC CLI, CoE Kit data, and XRM analysis
 
-function Start-PowerPlatformAssessment {
+function Start-PowerPlatformAssessment &#123;
     param(
         [string]$TenantId,
         [string]$OutputPath = "./assessment-results"
@@ -236,7 +236,7 @@ function Start-PowerPlatformAssessment {
     pac auth create --tenant $TenantId
     $environments = pac env list --json | ConvertFrom-Json
     
-    foreach ($env in $environments) {
+    foreach ($env in $environments) &#123;
         Write-Host "  Scanning: $($env.displayName)"
         
         # Get solutions
@@ -250,24 +250,24 @@ function Start-PowerPlatformAssessment {
         
         # Get connectors
         pac connector list --environment $env.name --json >> "$OutputPath/connectors.json"
-    }
+    &#125;
     
     # Phase 2: Security Analysis
     Write-Host "🔒 Phase 2: Security Analysis" -ForegroundColor Yellow
     # Run XRM Toolbox scripts (automated via API)
-    & ./Invoke-XRMSecurityAudit.ps1 -Environments $environments
+    &amp; ./Invoke-XRMSecurityAudit.ps1 -Environments $environments
     
     # Phase 3: CoE Kit Integration
     Write-Host "📈 Phase 3: CoE Analytics" -ForegroundColor Yellow
     # Query CoE Dataverse tables
-    & ./Get-CoEInventory.ps1 -TenantId $TenantId
+    &amp; ./Get-CoEInventory.ps1 -TenantId $TenantId
     
     # Phase 4: Generate Report
     Write-Host "📄 Phase 4: Generating Report" -ForegroundColor Yellow
-    & ./New-AssessmentReport.ps1 -DataPath $OutputPath
+    &amp; ./New-AssessmentReport.ps1 -DataPath $OutputPath
     
     Write-Host "✅ Assessment Complete!" -ForegroundColor Green
-}
+&#125;
 
 # Execute assessment
 Start-PowerPlatformAssessment -TenantId "your-tenant-id"</code></pre>
