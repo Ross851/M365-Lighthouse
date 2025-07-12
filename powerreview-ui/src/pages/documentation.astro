@@ -41,17 +41,19 @@ import Layout from '../layouts/Layout.astro';
 					</ul>
 
 					<h3>Quick Start</h3>
-					<pre><code class="language-bash"># Clone the repository
+					<div class="code-block">
+						<pre><code class="language-bash"># Clone the repository
 git clone https://github.com/Ross851/M365-Lighthouse.git
 cd M365-Lighthouse
 
 # Install PowerShell modules
-&#46;&#47;Install-PowerReview&#46;ps1
+PowerShell -File Install-PowerReview.ps1
 
 # Start the web UI
 cd powerreview-ui
 npm install
 npm run dev</code></pre>
+					</div>
 				</section>
 
 				<section id="authentication">
@@ -85,11 +87,13 @@ Connect-AzureAD</code></pre>
 					</ol>
 
 					<h3>PowerShell Direct</h3>
-					<pre><code class="language-powershell"># Run comprehensive assessment
-&#46;&#47;Start-PowerReview-Enhanced&#46;ps1
+					<div class="code-block">
+						<pre><code class="language-powershell"># Run comprehensive assessment
+PowerShell -File Start-PowerReview-Enhanced.ps1
 
 # Run specific module
-&#46;&#47;Start-PowerReview-Enhanced&#46;ps1 -Module "AzureAD"</code></pre>
+PowerShell -File Start-PowerReview-Enhanced.ps1 -Module "AzureAD"</code></pre>
+					</div>
 
 					<h3>AI-Powered Assessment</h3>
 					<p>Use the AI Assistant for natural language queries:</p>
