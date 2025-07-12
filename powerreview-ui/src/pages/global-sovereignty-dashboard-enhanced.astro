@@ -740,7 +740,7 @@ import Layout from '../layouts/Layout.astro';
 
 	<script>
 		// Import mock data generator functions
-		import('../../lib/mock-data-generator.js').then(module => {
+		import('../../lib/mock-data-generator.ts').then(module => {
 			window.mockDataGenerator = module;
 			initializeDashboard();
 		});
