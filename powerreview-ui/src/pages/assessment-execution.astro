@@ -649,6 +649,12 @@ import Layout from '../layouts/Layout.astro';
 		simulateAssessmentProgress();
 	}
 
+	function getAssessmentsFromURL() {
+		// Get assessments from localStorage (set by loadAssessmentData)
+		const stored = localStorage.getItem('powerreview_assessments');
+		return stored ? JSON.parse(stored) : [];
+	}
+
 	function simulateAssessmentProgress() {
 		updateConnectionStatus('ps-connection', 'connected', 'Connected');
 		addLogEntry('info', 'PowerShell bridge connection established');
@@ -665,9 +671,12 @@ import Layout from '../layouts/Layout.astro';
 			updateOverallStatus('Starting Assessment', 'Beginning security analysis...', 25);
 		}, 2000);
 
-		// Get assessments from URL or use defaults
-		const urlAssessments = getAssessmentsFromURL();
-		const assessments = urlAssessments.length > 0 ? urlAssessments : ['azuread', 'exchange', 'defender', 'sharepoint', 'teams', 'compliance'];
+		// Get assessments that were set up in loadAssessmentData
+		const assessments = JSON.parse(localStorage.getItem('powerreview_assessments') || '[]');
+		if (assessments.length === 0) {
+			// Use defaults if none found
+			assessments.push('azuread', 'exchange', 'defender', 'sharepoint', 'teams', 'compliance');
+		}
 		let currentAssessment = 0;
 		let completedChecks = 0;
 		const totalChecks = assessments.length;
@@ -789,6 +798,12 @@ import Layout from '../layouts/Layout.astro';
 		const hours = Math.floor(minutes / 60);
 		
 		return `${hours.toString().padStart(2, '0')}:${(minutes % 60).toString().padStart(2, '0')}:${(seconds % 60).toString().padStart(2, '0')}`;
+	}
+
+	function startAssessment() {
+		updateOverallStatus('Starting Assessment', 'Initializing security analysis...', 10);
+		addLogEntry('info', 'Assessment started');
+		connectWebSocket();
 	}
 
 	function setupEventListeners() {
