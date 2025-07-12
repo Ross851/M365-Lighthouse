@@ -96,7 +96,7 @@ foreach ($user in $privilegedUsers) {
 }
 
 # Phase 2: Enable for all remaining users
-Write-Host "`nPhase 2: Enable for all remaining users? (Y/N)" -ForegroundColor Yellow
+Write-Host "Phase 2: Enable for all remaining users? (Y/N)" -ForegroundColor Yellow
 $confirm = Read-Host
 
 if ($confirm -eq 'Y') {
