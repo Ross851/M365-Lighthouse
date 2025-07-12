@@ -1,0 +1,741 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Real-Time Compliance Monitoring - PowerReview">
+  <main>
+    <div class="monitoring-header">
+      <h1>Real-Time Compliance Monitoring</h1>
+      <div class="connection-status">
+        <span class="status-indicator" id="connection-status"></span>
+        <span class="status-text">Connecting...</span>
+      </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-cards">
+      <div class="summary-card">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+          </svg>
+        </div>
+        <div class="card-content">
+          <h3>Average Compliance</h3>
+          <div class="metric-value" id="average-score">--</div>
+          <div class="metric-label">Global Score</div>
+        </div>
+      </div>
+
+      <div class="summary-card critical">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/>
+            <line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+        <div class="card-content">
+          <h3>Critical Violations</h3>
+          <div class="metric-value" id="critical-violations">0</div>
+          <div class="metric-label">Active Now</div>
+        </div>
+      </div>
+
+      <div class="summary-card warning">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <div class="card-content">
+          <h3>Active Warnings</h3>
+          <div class="metric-value" id="active-warnings">0</div>
+          <div class="metric-label">Attention Needed</div>
+        </div>
+      </div>
+
+      <div class="summary-card success">
+        <div class="card-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+        <div class="card-content">
+          <h3>Regions Monitored</h3>
+          <div class="metric-value" id="regions-monitored">0</div>
+          <div class="metric-label">Active Regions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Real-time Event Stream -->
+    <div class="monitoring-section">
+      <div class="section-header">
+        <h2>Live Compliance Events</h2>
+        <div class="controls">
+          <select id="severity-filter">
+            <option value="">All Severities</option>
+            <option value="critical">Critical</option>
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+            <option value="info">Info</option>
+          </select>
+          <button id="clear-events">Clear</button>
+        </div>
+      </div>
+      <div class="event-stream" id="event-stream">
+        <div class="event-placeholder">Waiting for events...</div>
+      </div>
+    </div>
+
+    <!-- Regional Compliance Grid -->
+    <div class="monitoring-section">
+      <h2>Regional Compliance Status</h2>
+      <div class="regional-grid" id="regional-grid">
+        <!-- Will be populated dynamically -->
+      </div>
+    </div>
+
+    <!-- Compliance Metrics Chart -->
+    <div class="monitoring-section">
+      <h2>Compliance Metrics Trends</h2>
+      <div class="metrics-chart">
+        <canvas id="compliance-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- Worst Performers -->
+    <div class="monitoring-section">
+      <h2>Attention Required</h2>
+      <div class="worst-performers" id="worst-performers">
+        <!-- Will be populated dynamically -->
+      </div>
+    </div>
+  </main>
+
+  <style>
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .monitoring-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    .connection-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #f1f5f9;
+      border-radius: 9999px;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #94a3b8;
+      transition: background-color 0.3s;
+    }
+
+    .status-indicator.connected {
+      background: #10b981;
+      animation: pulse 2s infinite;
+    }
+
+    .status-indicator.error {
+      background: #ef4444;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    .summary-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .summary-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 1rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .summary-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .summary-card.critical {
+      border-left: 4px solid #ef4444;
+    }
+
+    .summary-card.warning {
+      border-left: 4px solid #f59e0b;
+    }
+
+    .summary-card.success {
+      border-left: 4px solid #10b981;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      background: #f1f5f9;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .card-icon svg {
+      stroke: #64748b;
+    }
+
+    .summary-card.critical .card-icon svg {
+      stroke: #ef4444;
+    }
+
+    .summary-card.warning .card-icon svg {
+      stroke: #f59e0b;
+    }
+
+    .summary-card.success .card-icon svg {
+      stroke: #10b981;
+    }
+
+    .card-content h3 {
+      font-size: 0.875rem;
+      color: #64748b;
+      margin: 0 0 0.5rem 0;
+      font-weight: 500;
+    }
+
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 0.25rem 0;
+    }
+
+    .metric-label {
+      font-size: 0.875rem;
+      color: #94a3b8;
+    }
+
+    .monitoring-section {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .monitoring-section h2 {
+      font-size: 1.25rem;
+      color: #1e293b;
+      margin: 0 0 1.5rem 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header h2 {
+      margin: 0;
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .controls select,
+    .controls button {
+      padding: 0.5rem 1rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      background: white;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .controls select:hover,
+    .controls button:hover {
+      border-color: #cbd5e1;
+      background: #f8fafc;
+    }
+
+    .event-stream {
+      max-height: 400px;
+      overflow-y: auto;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .event-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      margin-bottom: 0.5rem;
+      background: #f8fafc;
+      border-radius: 6px;
+      border-left: 3px solid #cbd5e1;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .event-item.critical {
+      border-left-color: #ef4444;
+      background: #fef2f2;
+    }
+
+    .event-item.high {
+      border-left-color: #f97316;
+      background: #fff7ed;
+    }
+
+    .event-item.medium {
+      border-left-color: #f59e0b;
+      background: #fffbeb;
+    }
+
+    .event-item.low {
+      border-left-color: #3b82f6;
+      background: #eff6ff;
+    }
+
+    .event-item.info {
+      border-left-color: #10b981;
+      background: #f0fdf4;
+    }
+
+    .event-time {
+      font-size: 0.75rem;
+      color: #64748b;
+      white-space: nowrap;
+    }
+
+    .event-content {
+      flex: 1;
+    }
+
+    .event-title {
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.25rem;
+    }
+
+    .event-description {
+      font-size: 0.875rem;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    .event-metadata {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    .event-placeholder {
+      text-align: center;
+      color: #94a3b8;
+      padding: 3rem;
+    }
+
+    .regional-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .region-card {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .region-card:hover {
+      background: #f1f5f9;
+      transform: translateY(-2px);
+    }
+
+    .region-name {
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .region-score {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+    }
+
+    .region-score.good {
+      color: #10b981;
+    }
+
+    .region-score.warning {
+      color: #f59e0b;
+    }
+
+    .region-score.critical {
+      color: #ef4444;
+    }
+
+    .region-status {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    .metrics-chart {
+      height: 300px;
+      position: relative;
+    }
+
+    .worst-performers {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .performer-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: #fef2f2;
+      border-radius: 8px;
+      border-left: 3px solid #ef4444;
+    }
+
+    .performer-info h4 {
+      margin: 0;
+      color: #1e293b;
+      font-size: 0.875rem;
+    }
+
+    .performer-info span {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    .performer-score {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ef4444;
+    }
+  </style>
+
+  <script>
+    let eventSource: EventSource;
+    let chart: any;
+    let eventFilter = '';
+
+    // Initialize Server-Sent Events connection
+    function connectEventSource() {
+      eventSource = new EventSource('/api/compliance/events');
+
+      eventSource.onopen = () => {
+        console.log('Connected to compliance monitoring');
+        updateConnectionStatus('connected');
+      };
+
+      eventSource.onmessage = (event) => {
+        try {
+          const message = JSON.parse(event.data);
+          handleMessage(message);
+        } catch (error) {
+          console.error('Failed to parse message:', error);
+        }
+      };
+
+      eventSource.onerror = (error) => {
+        console.error('EventSource error:', error);
+        updateConnectionStatus('error');
+        
+        if (eventSource.readyState === EventSource.CLOSED) {
+          updateConnectionStatus('disconnected');
+          // Reconnect after 5 seconds
+          setTimeout(connectEventSource, 5000);
+        }
+      };
+    }
+
+    // Handle incoming messages
+    function handleMessage(message: any) {
+      switch (message.type) {
+        case 'initial-state':
+          initializeState(message.data);
+          break;
+        case 'compliance-event':
+          addEvent(message.data);
+          break;
+        case 'metrics-update':
+          updateMetrics(message.data);
+          break;
+        case 'summary-update':
+          updateSummary(message.data);
+          break;
+      }
+    }
+
+    // Initialize state
+    function initializeState(data: any) {
+      // Update summary
+      updateSummary({
+        averageScore: data.averageScore || 0,
+        criticalViolations: data.activeViolations?.filter((v: any) => v.severity === 'critical').length || 0,
+        activeWarnings: data.activeViolations?.filter((v: any) => v.severity === 'high' || v.severity === 'medium').length || 0,
+        regionsMonitored: data.metrics?.length || 0
+      });
+
+      // Load recent events
+      const eventStream = document.getElementById('event-stream')!;
+      eventStream.innerHTML = '';
+      data.recentEvents?.forEach((event: any) => addEvent(event, false));
+
+      // Update regional grid
+      updateRegionalGrid(data.metrics);
+    }
+
+    // Add event to stream
+    function addEvent(event: any, animate: boolean = true) {
+      if (eventFilter && event.severity !== eventFilter) return;
+
+      const eventStream = document.getElementById('event-stream')!;
+      const placeholder = eventStream.querySelector('.event-placeholder');
+      if (placeholder) placeholder.remove();
+
+      const eventItem = document.createElement('div');
+      eventItem.className = `event-item ${event.severity}`;
+      if (!animate) eventItem.style.animation = 'none';
+
+      const time = new Date(event.timestamp).toLocaleTimeString();
+      
+      eventItem.innerHTML = `
+        <div class="event-time">${time}</div>
+        <div class="event-content">
+          <div class="event-title">${event.title}</div>
+          <div class="event-description">${event.description}</div>
+          <div class="event-metadata">
+            <span>Client: ${event.clientId}</span>
+            <span>Region: ${event.regionCode}</span>
+            <span>Type: ${event.eventType}</span>
+          </div>
+        </div>
+      `;
+
+      eventStream.insertBefore(eventItem, eventStream.firstChild);
+
+      // Keep only last 50 events
+      while (eventStream.children.length > 50) {
+        eventStream.removeChild(eventStream.lastChild!);
+      }
+
+      // Update summary if critical
+      if (event.severity === 'critical' && event.eventType === 'violation') {
+        incrementCounter('critical-violations');
+      } else if ((event.severity === 'high' || event.severity === 'medium') && event.eventType === 'warning') {
+        incrementCounter('active-warnings');
+      }
+    }
+
+    // Update metrics
+    function updateMetrics(metrics: any) {
+      // Update regional grid
+      const regionCard = document.querySelector(`[data-region="${metrics.regionCode}"]`);
+      if (regionCard) {
+        updateRegionCard(regionCard, metrics);
+      }
+
+      // Update chart
+      if (chart) {
+        updateChart(metrics);
+      }
+    }
+
+    // Update summary cards
+    function updateSummary(summary: any) {
+      if (summary.averageScore !== undefined) {
+        updateCounter('average-score', summary.averageScore + '%');
+      }
+      if (summary.criticalViolations !== undefined) {
+        updateCounter('critical-violations', summary.criticalViolations);
+      }
+      if (summary.activeWarnings !== undefined) {
+        updateCounter('active-warnings', summary.activeWarnings);
+      }
+      if (summary.regionsMonitored !== undefined) {
+        updateCounter('regions-monitored', summary.regionsMonitored);
+      }
+    }
+
+    // Update regional grid
+    function updateRegionalGrid(metrics: any[]) {
+      const grid = document.getElementById('regional-grid')!;
+      grid.innerHTML = '';
+
+      metrics.forEach((metric: any) => {
+        const card = document.createElement('div');
+        card.className = 'region-card';
+        card.dataset.region = metric.regionCode;
+        updateRegionCard(card, metric);
+        grid.appendChild(card);
+      });
+    }
+
+    // Update region card
+    function updateRegionCard(card: Element, metrics: any) {
+      const scoreClass = metrics.overallScore >= 80 ? 'good' : 
+                        metrics.overallScore >= 60 ? 'warning' : 'critical';
+      
+      card.innerHTML = `
+        <div class="region-name">${metrics.regionCode.toUpperCase()}</div>
+        <div class="region-score ${scoreClass}">${metrics.overallScore}%</div>
+        <div class="region-status">
+          ${metrics.violations} violations, ${metrics.warnings} warnings
+        </div>
+      `;
+    }
+
+    // Update counter with animation
+    function updateCounter(id: string, value: string | number) {
+      const element = document.getElementById(id);
+      if (element) {
+        element.textContent = value.toString();
+        element.style.animation = 'none';
+        setTimeout(() => {
+          element.style.animation = 'pulse 0.5s ease-out';
+        }, 10);
+      }
+    }
+
+    // Increment counter
+    function incrementCounter(id: string) {
+      const element = document.getElementById(id);
+      if (element) {
+        const current = parseInt(element.textContent || '0');
+        updateCounter(id, current + 1);
+      }
+    }
+
+    // Update connection status
+    function updateConnectionStatus(status: string) {
+      const indicator = document.getElementById('connection-status')!;
+      const text = document.querySelector('.status-text')!;
+      
+      indicator.className = 'status-indicator';
+      
+      switch (status) {
+        case 'connected':
+          indicator.classList.add('connected');
+          text.textContent = 'Connected';
+          break;
+        case 'error':
+          indicator.classList.add('error');
+          text.textContent = 'Connection Error';
+          break;
+        default:
+          text.textContent = 'Disconnected';
+      }
+    }
+
+    // Initialize chart
+    function initializeChart() {
+      const canvas = document.getElementById('compliance-chart') as HTMLCanvasElement;
+      if (!canvas) return;
+
+      // Create chart using Canvas API (simplified version)
+      const ctx = canvas.getContext('2d')!;
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+
+      // Draw placeholder chart
+      ctx.strokeStyle = '#e2e8f0';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, canvas.height / 2);
+      ctx.lineTo(canvas.width, canvas.height / 2);
+      ctx.stroke();
+      
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '14px system-ui';
+      ctx.textAlign = 'center';
+      ctx.fillText('Compliance trends will appear here', canvas.width / 2, canvas.height / 2);
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      connectEventSource();
+      initializeChart();
+
+      // Severity filter
+      document.getElementById('severity-filter')?.addEventListener('change', (e) => {
+        eventFilter = (e.target as HTMLSelectElement).value;
+      });
+
+      // Clear events button
+      document.getElementById('clear-events')?.addEventListener('click', () => {
+        const eventStream = document.getElementById('event-stream')!;
+        eventStream.innerHTML = '<div class="event-placeholder">Waiting for events...</div>';
+      });
+    });
+
+    // Update chart (placeholder)
+    function updateChart(metrics: any) {
+      // Chart update logic would go here
+      console.log('Chart update:', metrics);
+    }
+  </script>
+</Layout>

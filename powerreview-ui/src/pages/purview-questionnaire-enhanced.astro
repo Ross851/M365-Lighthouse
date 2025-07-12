@@ -1,0 +1,2380 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Enhanced Purview Assessment - PowerReview">
+	<main>
+		<div class="container">
+			<div class="page-header">
+				<div class="telana-brand">
+					<h1>Microsoft Purview Readiness Assessment</h1>
+					<p class="brand-subtitle">Comprehensive Information Governance Discovery</p>
+				</div>
+				<p class="page-description">This discovery assessment evaluates your organization's readiness for Microsoft Purview implementation across governance, technical, and business dimensions</p>
+				
+				<!-- Stakeholder Requirements Notice -->
+				<div class="stakeholder-notice">
+					<div class="notice-icon">👥</div>
+					<div class="notice-content">
+						<h3>Required Participants for This Discovery Session</h3>
+						<p>To ensure accurate assessment, please have these key stakeholders available:</p>
+						<div class="stakeholder-grid">
+							<div class="stakeholder-role">
+								<strong>Information Governance Lead</strong>
+								<span>Records management, retention policies</span>
+							</div>
+							<div class="stakeholder-role">
+								<strong>IT Infrastructure Manager</strong>
+								<span>Technical architecture, system integration</span>
+							</div>
+							<div class="stakeholder-role">
+								<strong>Compliance Officer</strong>
+								<span>Regulatory requirements, audit processes</span>
+							</div>
+							<div class="stakeholder-role">
+								<strong>Data Protection Officer</strong>
+								<span>Privacy, security, data classification</span>
+							</div>
+							<div class="stakeholder-role">
+								<strong>Business Process Owner</strong>
+								<span>Workflow requirements, user needs</span>
+							</div>
+							<div class="stakeholder-role">
+								<strong>Executive Sponsor</strong>
+								<span>Strategic direction, budget approval</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="assessment-wizard">
+				<div class="progress-bar">
+					<div class="progress-fill" style="width: 15%"></div>
+				</div>
+				<div class="step-indicators">
+					<div class="step active">1. Current State</div>
+					<div class="step">2. Technical</div>
+					<div class="step">3. Governance</div>
+					<div class="step">4. Risk & Compliance</div>
+					<div class="step">5. Business Value</div>
+					<div class="step">6. Implementation</div>
+				</div>
+
+				<!-- Step 1: Current State Assessment -->
+				<div class="form-step active" data-step="1">
+					<div class="step-header">
+						<div class="step-visual">
+							<div class="step-diagram">
+								<div class="data-sources">
+									<div class="source-item">📁 Files</div>
+									<div class="source-item">📧 Email</div>
+									<div class="source-item">📊 Databases</div>
+									<div class="source-item">☁️ Cloud</div>
+								</div>
+								<div class="discovery-arrow">→</div>
+								<div class="discovery-process">
+									<div class="process-step">🔍 Discover</div>
+									<div class="process-step">🏷️ Classify</div>
+									<div class="process-step">📋 Catalog</div>
+								</div>
+							</div>
+						</div>
+						<div class="step-info">
+							<h2>Current State Assessment</h2>
+							<p>Understanding your current data and information governance maturity</p>
+							
+							<div class="guidance-panel">
+								<div class="guidance-icon">💡</div>
+								<div class="guidance-content">
+									<h4>What We're Discovering</h4>
+									<p>This section evaluates how well you currently know and manage your data landscape. We'll identify gaps that Purview can address.</p>
+									
+									<div class="key-stakeholders">
+										<strong>Key Stakeholders Needed:</strong>
+										<span class="stakeholder-tags">
+											<span class="tag">Data Architect</span>
+											<span class="tag">Records Manager</span>
+											<span class="tag">SharePoint Admin</span>
+										</span>
+									</div>
+									
+									<div class="risk-owner">
+										<strong>Risk Owner:</strong> Chief Information Officer / Data Protection Officer
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="questions-container">
+						<div class="question-section">
+							<h3>📊 Data Discovery & Inventory</h3>
+							<div class="question-group">
+								<div class="question">
+									<div class="question-header">
+										<label>What percentage of your organization's data has been discovered and catalogued?</label>
+										<div class="help-hint">
+											<span class="hint-icon">❓</span>
+											<div class="hint-content">
+												<h5>Why This Matters</h5>
+												<p>Data discovery is the foundation of information governance. Without knowing what data you have and where it lives, you can't protect, retain, or dispose of it properly.</p>
+												
+												<h5>Best Practice</h5>
+												<p>Organizations with >60% discovery coverage see 40% faster Purview implementation and better compliance outcomes.</p>
+												
+												<h5>Common Issues We See</h5>
+												<ul>
+													<li><strong>Shadow IT:</strong> Departments creating their own data repositories</li>
+													<li><strong>Legacy Systems:</strong> Old file shares and databases not included in inventory</li>
+													<li><strong>Personal Drives:</strong> Critical business data stored on individual machines</li>
+												</ul>
+												
+												<h5>Files to Look For</h5>
+												<div class="file-examples">
+													<span class="file-type">📄 Retention schedules</span>
+													<span class="file-type">📊 Data inventory spreadsheets</span>
+													<span class="file-type">🗂️ Information asset registers</span>
+													<span class="file-type">📋 System documentation</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="radio-options">
+										<label>
+											<input type="radio" name="dataDiscovery" value="none">
+											<div class="option-content">
+												<strong>0-10% (Minimal discovery)</strong>
+												<span class="risk-indicator high">🔴 High Risk</span>
+												<p>Significant compliance and security exposure</p>
+											</div>
+										</label>
+										<label>
+											<input type="radio" name="dataDiscovery" value="basic">
+											<div class="option-content">
+												<strong>11-30% (Basic inventory)</strong>
+												<span class="risk-indicator medium">🟡 Medium Risk</span>
+												<p>Foundation exists but major gaps remain</p>
+											</div>
+										</label>
+										<label>
+											<input type="radio" name="dataDiscovery" value="partial">
+											<div class="option-content">
+												<strong>31-60% (Partial coverage)</strong>
+												<span class="risk-indicator medium">🟡 Medium Risk</span>
+												<p>Good progress, focus on remaining areas</p>
+											</div>
+										</label>
+										<label>
+											<input type="radio" name="dataDiscovery" value="substantial">
+											<div class="option-content">
+												<strong>61-85% (Substantial coverage)</strong>
+												<span class="risk-indicator low">🟢 Low Risk</span>
+												<p>Strong foundation for Purview implementation</p>
+											</div>
+										</label>
+										<label>
+											<input type="radio" name="dataDiscovery" value="comprehensive">
+											<div class="option-content">
+												<strong>86-100% (Comprehensive inventory)</strong>
+												<span class="risk-indicator low">🟢 Low Risk</span>
+												<p>Excellent - ready for advanced governance</p>
+											</div>
+										</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>How is sensitive data currently identified across your environment?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="sensitiveDataId" value="manual-review">Manual review processes</label>
+										<label><input type="checkbox" name="sensitiveDataId" value="basic-scanning">Basic file scanning tools</label>
+										<label><input type="checkbox" name="sensitiveDataId" value="dlp-policies">Existing DLP policies</label>
+										<label><input type="checkbox" name="sensitiveDataId" value="metadata-tags">Metadata and tags</label>
+										<label><input type="checkbox" name="sensitiveDataId" value="ai-classification">AI-powered classification</label>
+										<label><input type="checkbox" name="sensitiveDataId" value="none">No systematic identification</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What is your organization's data governance maturity level?</label>
+									<div class="maturity-scale">
+										<label class="maturity-option">
+											<input type="radio" name="governanceMaturity" value="1">
+											<div class="maturity-content">
+												<h4>Level 1 - Initial</h4>
+												<p>Ad-hoc processes, no formal governance</p>
+											</div>
+										</label>
+										<label class="maturity-option">
+											<input type="radio" name="governanceMaturity" value="2">
+											<div class="maturity-content">
+												<h4>Level 2 - Developing</h4>
+												<p>Some policies exist, inconsistent application</p>
+											</div>
+										</label>
+										<label class="maturity-option">
+											<input type="radio" name="governanceMaturity" value="3">
+											<div class="maturity-content">
+												<h4>Level 3 - Defined</h4>
+												<p>Documented processes, regular enforcement</p>
+											</div>
+										</label>
+										<label class="maturity-option">
+											<input type="radio" name="governanceMaturity" value="4">
+											<div class="maturity-content">
+												<h4>Level 4 - Managed</h4>
+												<p>Metrics-driven, continuous improvement</p>
+											</div>
+										</label>
+										<label class="maturity-option">
+											<input type="radio" name="governanceMaturity" value="5">
+											<div class="maturity-content">
+												<h4>Level 5 - Optimized</h4>
+												<p>Fully automated, predictive governance</p>
+											</div>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>🏗️ Information Architecture</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>How would you describe your current SharePoint information architecture?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="spArchitecture" value="unstructured">Largely unstructured growth</label>
+										<label><input type="radio" name="spArchitecture" value="departmental">Departmental silos</label>
+										<label><input type="radio" name="spArchitecture" value="hub-spoke">Hub and spoke model</label>
+										<label><input type="radio" name="spArchitecture" value="enterprise">Enterprise content model</label>
+										<label><input type="radio" name="spArchitecture" value="modern">Modern, flat architecture</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What content management capabilities are currently in use?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="contentCapabilities" value="content-types">SharePoint content types</label>
+										<label><input type="checkbox" name="contentCapabilities" value="term-store">Managed metadata/term store</label>
+										<label><input type="checkbox" name="contentCapabilities" value="workflows">Automated workflows</label>
+										<label><input type="checkbox" name="contentCapabilities" value="document-sets">Document sets</label>
+										<label><input type="checkbox" name="contentCapabilities" value="content-organizer">Content organizer</label>
+										<label><input type="checkbox" name="contentCapabilities" value="custom-solutions">Custom development solutions</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>How standardized are your file naming and folder structures?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="namingStandards" value="none">No standards enforced</label>
+										<label><input type="radio" name="namingStandards" value="department">Department-level standards</label>
+										<label><input type="radio" name="namingStandards" value="organization">Organization-wide guidelines</label>
+										<label><input type="radio" name="namingStandards" value="enforced">Enforced naming conventions</label>
+										<label><input type="radio" name="namingStandards" value="automated">Automated naming and organization</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>📋 Current Records Management</h3>
+							
+							<!-- Document Upload Section -->
+							<div class="document-upload-section">
+								<h4>📁 Current State Documentation</h4>
+								<p>Upload existing documentation to help us understand your current state better:</p>
+								
+								<div class="upload-grid">
+									<div class="upload-category">
+										<h5>📋 Policies & Procedures</h5>
+										<div class="file-upload-area" data-category="policies">
+											<div class="upload-icon">📄</div>
+											<p>Drag & drop or click to upload</p>
+											<span class="file-types">PDF, DOC, DOCX (Max 10MB)</span>
+											<input type="file" multiple accept=".pdf,.doc,.docx" style="display: none;">
+										</div>
+										<div class="suggested-files">
+											<strong>Suggested files:</strong>
+											<ul>
+												<li>Records retention policy</li>
+												<li>Information security policy</li>
+												<li>Data classification guidelines</li>
+												<li>Email retention policy</li>
+											</ul>
+										</div>
+									</div>
+									
+									<div class="upload-category">
+										<h5>📊 Current Inventories</h5>
+										<div class="file-upload-area" data-category="inventories">
+											<div class="upload-icon">📊</div>
+											<p>Drag & drop or click to upload</p>
+											<span class="file-types">XLS, XLSX, CSV (Max 10MB)</span>
+											<input type="file" multiple accept=".xls,.xlsx,.csv" style="display: none;">
+										</div>
+										<div class="suggested-files">
+											<strong>Suggested files:</strong>
+											<ul>
+												<li>Data inventory spreadsheets</li>
+												<li>System asset registers</li>
+												<li>Application portfolios</li>
+												<li>SharePoint site collections list</li>
+											</ul>
+										</div>
+									</div>
+									
+									<div class="upload-category">
+										<h5>🏗️ Architecture Diagrams</h5>
+										<div class="file-upload-area" data-category="architecture">
+											<div class="upload-icon">🏗️</div>
+											<p>Drag & drop or click to upload</p>
+											<span class="file-types">PDF, PNG, JPG, VSDX (Max 10MB)</span>
+											<input type="file" multiple accept=".pdf,.png,.jpg,.jpeg,.vsdx" style="display: none;">
+										</div>
+										<div class="suggested-files">
+											<strong>Suggested files:</strong>
+											<ul>
+												<li>Information architecture diagrams</li>
+												<li>Data flow diagrams</li>
+												<li>SharePoint topology</li>
+												<li>Security architecture</li>
+											</ul>
+										</div>
+									</div>
+									
+									<div class="upload-category">
+										<h5>📋 Assessment Reports</h5>
+										<div class="file-upload-area" data-category="assessments">
+											<div class="upload-icon">📋</div>
+											<p>Drag & drop or click to upload</p>
+											<span class="file-types">PDF, DOC, DOCX (Max 10MB)</span>
+											<input type="file" multiple accept=".pdf,.doc,.docx" style="display: none;">
+										</div>
+										<div class="suggested-files">
+											<strong>Suggested files:</strong>
+											<ul>
+												<li>Previous audit reports</li>
+												<li>Compliance assessments</li>
+												<li>Security assessments</li>
+												<li>Gap analysis reports</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								
+								<div class="upload-benefits">
+									<div class="benefit-item">
+										<span class="benefit-icon">🎯</span>
+										<strong>More Accurate Assessment:</strong> Existing documentation helps us provide more targeted recommendations
+									</div>
+									<div class="benefit-item">
+										<span class="benefit-icon">⚡</span>
+										<strong>Faster Implementation:</strong> Understanding current state accelerates planning
+									</div>
+									<div class="benefit-item">
+										<span class="benefit-icon">💰</span>
+										<strong>Better ROI:</strong> Leverage existing investments and avoid duplication
+									</div>
+								</div>
+							</div>
+							<div class="question-group">
+								<div class="question">
+									<label>What records management systems are currently in place?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="recordsSystems" value="sharepoint-records">SharePoint records center</label>
+										<label><input type="checkbox" name="recordsSystems" value="physical-records">Physical records management</label>
+										<label><input type="checkbox" name="recordsSystems" value="email-archive">Email archiving system</label>
+										<label><input type="checkbox" name="recordsSystems" value="database-records">Database records retention</label>
+										<label><input type="checkbox" name="recordsSystems" value="third-party-ecm">Third-party ECM/EDRMS</label>
+										<label><input type="checkbox" name="recordsSystems" value="none">No formal records management</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>How are retention periods currently determined and applied?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="retentionMethod" value="manual">Manual, case-by-case decisions</label>
+										<label><input type="radio" name="retentionMethod" value="schedule">Published retention schedule</label>
+										<label><input type="radio" name="retentionMethod" value="automated">Automated based on metadata</label>
+										<label><input type="radio" name="retentionMethod" value="ai-driven">AI-driven classification and retention</label>
+										<label><input type="radio" name="retentionMethod" value="none">No systematic retention management</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Step 2: Technical Readiness -->
+				<div class="form-step" data-step="2">
+					<h2>Technical Infrastructure Readiness</h2>
+					<p>Assessing your technical capability to implement and support Purview</p>
+
+					<div class="questions-container">
+						<div class="question-section">
+							<h3>🖥️ Infrastructure & Performance</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What is your estimated data volume across all Microsoft 365 workloads?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="dataVolume" value="small">Less than 1TB</label>
+										<label><input type="radio" name="dataVolume" value="medium">1TB - 10TB</label>
+										<label><input type="radio" name="dataVolume" value="large">10TB - 100TB</label>
+										<label><input type="radio" name="dataVolume" value="enterprise">100TB - 1PB</label>
+										<label><input type="radio" name="dataVolume" value="massive">Over 1PB</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What is your monthly data growth rate?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="dataGrowth" value="stable">Less than 5% monthly growth</label>
+										<label><input type="radio" name="dataGrowth" value="moderate">5-15% monthly growth</label>
+										<label><input type="radio" name="dataGrowth" value="high">15-30% monthly growth</label>
+										<label><input type="radio" name="dataGrowth" value="exponential">Over 30% monthly growth</label>
+										<label><input type="radio" name="dataGrowth" value="unknown">Growth rate unknown</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What APIs and integration capabilities does your IT team currently use?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="apiCapabilities" value="graph-api">Microsoft Graph API</label>
+										<label><input type="checkbox" name="apiCapabilities" value="powershell">PowerShell automation</label>
+										<label><input type="checkbox" name="apiCapabilities" value="power-platform">Power Platform connectors</label>
+										<label><input type="checkbox" name="apiCapabilities" value="rest-apis">Custom REST API integrations</label>
+										<label><input type="checkbox" name="apiCapabilities" value="azure-functions">Azure Functions/Logic Apps</label>
+										<label><input type="checkbox" name="apiCapabilities" value="none">Limited API experience</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>🔧 Development & Deployment</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What development and testing environments are available?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="devEnvironments" value="dev-tenant">Dedicated development tenant</label>
+										<label><input type="checkbox" name="devEnvironments" value="test-tenant">Testing/staging environment</label>
+										<label><input type="checkbox" name="devEnvironments" value="sandbox">Sandboxed site collections</label>
+										<label><input type="checkbox" name="devEnvironments" value="local-dev">Local development tools</label>
+										<label><input type="checkbox" name="devEnvironments" value="cicd">CI/CD pipelines</label>
+										<label><input type="checkbox" name="devEnvironments" value="none">No dedicated test environments</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>How are changes currently deployed and managed?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="deploymentProcess" value="manual">Manual configuration changes</label>
+										<label><input type="radio" name="deploymentProcess" value="scripted">PowerShell scripts</label>
+										<label><input type="radio" name="deploymentProcess" value="automated">Automated deployment tools</label>
+										<label><input type="radio" name="deploymentProcess" value="devops">Full DevOps pipeline</label>
+										<label><input type="radio" name="deploymentProcess" value="managed">Managed by Microsoft Partner</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>🔍 Monitoring & Analytics</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What monitoring and reporting capabilities are currently in place?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="monitoring" value="audit-logs">Microsoft 365 audit logs</label>
+										<label><input type="checkbox" name="monitoring" value="analytics">SharePoint/Teams analytics</label>
+										<label><input type="checkbox" name="monitoring" value="power-bi">Power BI dashboards</label>
+										<label><input type="checkbox" name="monitoring" value="azure-monitor">Azure Monitor integration</label>
+										<label><input type="checkbox" name="monitoring" value="third-party">Third-party monitoring tools</label>
+										<label><input type="checkbox" name="monitoring" value="none">No systematic monitoring</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>How frequently do you review system performance and usage metrics?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="metricsReview" value="reactive">Only when issues arise</label>
+										<label><input type="radio" name="metricsReview" value="quarterly">Quarterly reviews</label>
+										<label><input type="radio" name="metricsReview" value="monthly">Monthly assessments</label>
+										<label><input type="radio" name="metricsReview" value="weekly">Weekly monitoring</label>
+										<label><input type="radio" name="metricsReview" value="realtime">Real-time dashboards</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Step 3: Governance & Organizational Readiness -->
+				<div class="form-step" data-step="3">
+					<h2>Governance & Organizational Readiness</h2>
+					<p>Evaluating organizational structures, processes, and change management capabilities</p>
+
+					<div class="questions-container">
+						<div class="question-section">
+							<h3>👥 Governance Structure</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What governance bodies currently oversee information management?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="governanceBodies" value="data-governance">Data Governance Committee</label>
+										<label><input type="checkbox" name="governanceBodies" value="records-mgmt">Records Management Team</label>
+										<label><input type="checkbox" name="governanceBodies" value="it-steering">IT Steering Committee</label>
+										<label><input type="checkbox" name="governanceBodies" value="privacy-office">Privacy Office</label>
+										<label><input type="checkbox" name="governanceBodies" value="compliance-team">Compliance Team</label>
+										<label><input type="checkbox" name="governanceBodies" value="none">No formal governance structure</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>How are information governance decisions currently made?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="decisionMaking" value="centralized">Centralized IT decisions</label>
+										<label><input type="radio" name="decisionMaking" value="departmental">Department-driven decisions</label>
+										<label><input type="radio" name="decisionMaking" value="committee">Cross-functional committee</label>
+										<label><input type="radio" name="decisionMaking" value="federated">Federated governance model</label>
+										<label><input type="radio" name="decisionMaking" value="adhoc">Ad-hoc, case-by-case</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What is the current level of executive sponsorship for information governance initiatives?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="executiveSponsorship" value="none">No executive awareness</label>
+										<label><input type="radio" name="executiveSponsorship" value="limited">Limited middle management support</label>
+										<label><input type="radio" name="executiveSponsorship" value="moderate">Some C-level awareness</label>
+										<label><input type="radio" name="executiveSponsorship" value="strong">Strong executive champion</label>
+										<label><input type="radio" name="executiveSponsorship" value="comprehensive">Board-level mandate</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>📚 Training & Change Management</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What is your organization's change management maturity?</label>
+									<div class="maturity-scale">
+										<label class="maturity-option">
+											<input type="radio" name="changeMaturity" value="1">
+											<div class="maturity-content">
+												<h4>Reactive</h4>
+												<p>Changes driven by crisis or compliance</p>
+											</div>
+										</label>
+										<label class="maturity-option">
+											<input type="radio" name="changeMaturity" value="2">
+											<div class="maturity-content">
+												<h4>Planned</h4>
+												<p>Project-based change management</p>
+											</div>
+										</label>
+										<label class="maturity-option">
+											<input type="radio" name="changeMaturity" value="3">
+											<div class="maturity-content">
+												<h4>Structured</h4>
+												<p>Formal change management processes</p>
+											</div>
+										</label>
+										<label class="maturity-option">
+											<input type="radio" name="changeMaturity" value="4">
+											<div class="maturity-content">
+												<h4>Proactive</h4>
+												<p>Anticipatory change capabilities</p>
+											</div>
+										</label>
+										<label class="maturity-option">
+											<input type="radio" name="changeMaturity" value="5">
+											<div class="maturity-content">
+												<h4>Agile</h4>
+												<p>Continuous adaptation culture</p>
+											</div>
+										</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What training delivery methods work best in your organization?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="trainingMethods" value="instructor-led">In-person instructor-led</label>
+										<label><input type="checkbox" name="trainingMethods" value="virtual-classroom">Virtual classroom sessions</label>
+										<label><input type="checkbox" name="trainingMethods" value="elearning">Self-paced e-learning</label>
+										<label><input type="checkbox" name="trainingMethods" value="microlearning">Microlearning modules</label>
+										<label><input type="checkbox" name="trainingMethods" value="peer-learning">Peer-to-peer learning</label>
+										<label><input type="checkbox" name="trainingMethods" value="champions">Champion/super-user programs</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>How receptive are users typically to new technology implementations?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="userReceptivity" value="resistant">Generally resistant to change</label>
+										<label><input type="radio" name="userReceptivity" value="cautious">Cautious adopters</label>
+										<label><input type="radio" name="userReceptivity" value="neutral">Mixed reactions</label>
+										<label><input type="radio" name="userReceptivity" value="positive">Generally positive</label>
+										<label><input type="radio" name="userReceptivity" value="enthusiastic">Enthusiastic early adopters</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Step 4: Risk & Compliance Assessment -->
+				<div class="form-step" data-step="4">
+					<h2>Risk & Compliance Assessment</h2>
+					<p>Understanding regulatory requirements, risk tolerance, and compliance obligations</p>
+
+					<div class="questions-container">
+						<div class="question-section">
+							<h3>⚖️ Regulatory Landscape</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>Which regulatory frameworks directly impact your data management? (Select all that apply)</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="regulations" value="gdpr">GDPR (General Data Protection Regulation)</label>
+										<label><input type="checkbox" name="regulations" value="ccpa">CCPA (California Consumer Privacy Act)</label>
+										<label><input type="checkbox" name="regulations" value="hipaa">HIPAA (Health Insurance Portability)</label>
+										<label><input type="checkbox" name="regulations" value="sox">SOX (Sarbanes-Oxley Act)</label>
+										<label><input type="checkbox" name="regulations" value="pci-dss">PCI DSS (Payment Card Industry)</label>
+										<label><input type="checkbox" name="regulations" value="iso27001">ISO 27001</label>
+										<label><input type="checkbox" name="regulations" value="nist">NIST Framework</label>
+										<label><input type="checkbox" name="regulations" value="fedramp">FedRAMP (Federal Risk Authorization)</label>
+										<label><input type="checkbox" name="regulations" value="industry-specific">Industry-specific regulations</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>How frequently do you undergo compliance audits?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="auditFrequency" value="none">No regular audits</label>
+										<label><input type="radio" name="auditFrequency" value="adhoc">Ad-hoc or incident-driven</label>
+										<label><input type="radio" name="auditFrequency" value="annual">Annual audits</label>
+										<label><input type="radio" name="auditFrequency" value="semi-annual">Semi-annual audits</label>
+										<label><input type="radio" name="auditFrequency" value="quarterly">Quarterly audits</label>
+										<label><input type="radio" name="auditFrequency" value="continuous">Continuous monitoring</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What is your organization's current compliance posture?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="compliancePosture" value="reactive">Reactive - respond to issues as they arise</label>
+										<label><input type="radio" name="compliancePosture" value="basic">Basic - meet minimum requirements</label>
+										<label><input type="radio" name="compliancePosture" value="proactive">Proactive - exceed minimum standards</label>
+										<label><input type="radio" name="compliancePosture" value="leading">Leading - industry best practices</label>
+										<label><input type="radio" name="compliancePosture" value="innovative">Innovative - pioneering new approaches</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>🔒 Data Protection & Privacy</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>How does your organization currently handle personal data subject requests?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="subjectRequests" value="manual">Manual, paper-based process</label>
+										<label><input type="radio" name="subjectRequests" value="email">Email-based tracking</label>
+										<label><input type="radio" name="subjectRequests" value="ticketing">IT ticketing system</label>
+										<label><input type="radio" name="subjectRequests" value="dedicated">Dedicated privacy management tool</label>
+										<label><input type="radio" name="subjectRequests" value="automated">Automated response workflows</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What data breach response capabilities are currently in place?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="breachResponse" value="incident-plan">Formal incident response plan</label>
+										<label><input type="checkbox" name="breachResponse" value="legal-counsel">Legal counsel on retainer</label>
+										<label><input type="checkbox" name="breachResponse" value="forensic-capability">Digital forensics capability</label>
+										<label><input type="checkbox" name="breachResponse" value="notification-process">Automated notification processes</label>
+										<label><input type="checkbox" name="breachResponse" value="media-relations">Crisis communication plan</label>
+										<label><input type="checkbox" name="breachResponse" value="insurance">Cyber insurance coverage</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>How comprehensive is your current data mapping and inventory?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="dataMapping" value="none">No formal data mapping</label>
+										<label><input type="radio" name="dataMapping" value="high-level">High-level system inventory</label>
+										<label><input type="radio" name="dataMapping" value="detailed">Detailed data flow mapping</label>
+										<label><input type="radio" name="dataMapping" value="comprehensive">Comprehensive data catalog</label>
+										<label><input type="radio" name="dataMapping" value="realtime">Real-time automated discovery</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>⚠️ Risk Management</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What is your organization's risk appetite for information governance initiatives?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="riskAppetite" value="conservative">Conservative - minimize all risks</label>
+										<label><input type="radio" name="riskAppetite" value="moderate">Moderate - balance risk and benefit</label>
+										<label><input type="radio" name="riskAppetite" value="aggressive">Aggressive - accept higher risks for innovation</label>
+										<label><input type="radio" name="riskAppetite" value="varies">Varies by business unit</label>
+										<label><input type="radio" name="riskAppetite" value="undefined">Risk appetite not clearly defined</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Which data-related risks are of highest concern to your organization?</label>
+									<div class="checkbox-grid priority-selection" data-max="3">
+										<label><input type="checkbox" name="topRisks" value="data-loss">Accidental data loss or deletion</label>
+										<label><input type="checkbox" name="topRisks" value="unauthorized-access">Unauthorized access to sensitive data</label>
+										<label><input type="checkbox" name="topRisks" value="regulatory-violations">Regulatory compliance violations</label>
+										<label><input type="checkbox" name="topRisks" value="data-exfiltration">Malicious data exfiltration</label>
+										<label><input type="checkbox" name="topRisks" value="privacy-breach">Personal data privacy breach</label>
+										<label><input type="checkbox" name="topRisks" value="business-disruption">Business process disruption</label>
+										<label><input type="checkbox" name="topRisks" value="reputation-damage">Reputation and brand damage</label>
+										<label><input type="checkbox" name="topRisks" value="financial-impact">Direct financial impact</label>
+									</div>
+									<p class="helper-text">Select up to 3 highest priority risks</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Step 5: Business Value & Outcomes -->
+				<div class="form-step" data-step="5">
+					<h2>Business Value & Expected Outcomes</h2>
+					<p>Defining success criteria and expected return on investment</p>
+
+					<div class="questions-container">
+						<div class="question-section">
+							<h3>🎯 Success Metrics & KPIs</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What are your primary business drivers for implementing Purview? (Rank top 3)</label>
+									<div class="ranking-list" data-max="3">
+										<div class="ranking-item">
+											<input type="checkbox" name="businessDrivers" value="cost-reduction">
+											<span class="rank-number"></span>
+											<div class="item-content">
+												<strong>Cost Reduction</strong>
+												<p>Reduce storage costs and operational overhead</p>
+											</div>
+										</div>
+										<div class="ranking-item">
+											<input type="checkbox" name="businessDrivers" value="compliance">
+											<span class="rank-number"></span>
+											<div class="item-content">
+												<strong>Regulatory Compliance</strong>
+												<p>Meet legal and regulatory requirements</p>
+											</div>
+										</div>
+										<div class="ranking-item">
+											<input type="checkbox" name="businessDrivers" value="risk-mitigation">
+											<span class="rank-number"></span>
+											<div class="item-content">
+												<strong>Risk Mitigation</strong>
+												<p>Reduce data security and privacy risks</p>
+											</div>
+										</div>
+										<div class="ranking-item">
+											<input type="checkbox" name="businessDrivers" value="efficiency">
+											<span class="rank-number"></span>
+											<div class="item-content">
+												<strong>Operational Efficiency</strong>
+												<p>Automate manual processes and workflows</p>
+											</div>
+										</div>
+										<div class="ranking-item">
+											<input type="checkbox" name="businessDrivers" value="decision-making">
+											<span class="rank-number"></span>
+											<div class="item-content">
+												<strong>Better Decision Making</strong>
+												<p>Improve data discovery and insights</p>
+											</div>
+										</div>
+										<div class="ranking-item">
+											<input type="checkbox" name="businessDrivers" value="innovation">
+											<span class="rank-number"></span>
+											<div class="item-content">
+												<strong>Innovation Enablement</strong>
+												<p>Enable new business capabilities</p>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>How will you measure the success of your Purview implementation?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="successMetrics" value="storage-reduction">Storage cost reduction percentage</label>
+										<label><input type="checkbox" name="successMetrics" value="compliance-score">Compliance assessment scores</label>
+										<label><input type="checkbox" name="successMetrics" value="automation-rate">Process automation rate</label>
+										<label><input type="checkbox" name="successMetrics" value="user-adoption">User adoption and engagement</label>
+										<label><input type="checkbox" name="successMetrics" value="incident-reduction">Security incident reduction</label>
+										<label><input type="checkbox" name="successMetrics" value="response-time">Audit response time improvement</label>
+										<label><input type="checkbox" name="successMetrics" value="data-quality">Data quality improvements</label>
+										<label><input type="checkbox" name="successMetrics" value="roi">Return on investment (ROI)</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What is your expected timeline to see measurable business value?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="valueTimeline" value="immediate">Immediate (0-3 months)</label>
+										<label><input type="radio" name="valueTimeline" value="short-term">Short-term (3-6 months)</label>
+										<label><input type="radio" name="valueTimeline" value="medium-term">Medium-term (6-12 months)</label>
+										<label><input type="radio" name="valueTimeline" value="long-term">Long-term (12+ months)</label>
+										<label><input type="radio" name="valueTimeline" value="uncertain">Timeline uncertain</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>💰 Investment & Resources</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What is your anticipated budget range for Purview implementation and ongoing operations?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="budgetRange" value="minimal">Under $50K annually</label>
+										<label><input type="radio" name="budgetRange" value="modest">$50K - $200K annually</label>
+										<label><input type="radio" name="budgetRange" value="substantial">$200K - $500K annually</label>
+										<label><input type="radio" name="budgetRange" value="significant">$500K - $1M annually</label>
+										<label><input type="radio" name="budgetRange" value="major">Over $1M annually</label>
+										<label><input type="radio" name="budgetRange" value="undefined">Budget not yet defined</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What resources can be dedicated to the Purview implementation?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="dedicatedResources" value="project-manager">Dedicated project manager</label>
+										<label><input type="checkbox" name="dedicatedResources" value="technical-lead">Technical implementation lead</label>
+										<label><input type="checkbox" name="dedicatedResources" value="business-analyst">Business analyst</label>
+										<label><input type="checkbox" name="dedicatedResources" value="change-manager">Change management specialist</label>
+										<label><input type="checkbox" name="dedicatedResources" value="trainer">Training coordinator</label>
+										<label><input type="checkbox" name="dedicatedResources" value="external-consultant">External consultant/partner</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Step 6: Implementation Planning -->
+				<div class="form-step" data-step="6">
+					<h2>Implementation Planning & Roadmap</h2>
+					<p>Defining implementation approach, timeline, and success factors</p>
+
+					<div class="questions-container">
+						<div class="question-section">
+							<h3>🚀 Implementation Approach</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What implementation approach would work best for your organization?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="implementationApproach" value="big-bang">Big bang - implement everything at once</label>
+										<label><input type="radio" name="implementationApproach" value="phased">Phased - gradual rollout by workload</label>
+										<label><input type="radio" name="implementationApproach" value="pilot">Pilot - start with test group</label>
+										<label><input type="radio" name="implementationApproach" value="departmental">Department by department</label>
+										<label><input type="radio" name="implementationApproach" value="geography">Geographic regions</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What is your preferred implementation timeline?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="implementationTimeline" value="aggressive">Aggressive (3-6 months)</label>
+										<label><input type="radio" name="implementationTimeline" value="standard">Standard (6-12 months)</label>
+										<label><input type="radio" name="implementationTimeline" value="conservative">Conservative (12-18 months)</label>
+										<label><input type="radio" name="implementationTimeline" value="extended">Extended (18+ months)</label>
+										<label><input type="radio" name="implementationTimeline" value="flexible">Flexible based on readiness</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>Which Purview capabilities should be prioritized in the initial implementation?</label>
+									<div class="checkbox-grid priority-selection" data-max="5">
+										<label><input type="checkbox" name="priorityCapabilities" value="retention-policies">Retention policies and labels</label>
+										<label><input type="checkbox" name="priorityCapabilities" value="sensitivity-labels">Sensitivity labels and protection</label>
+										<label><input type="checkbox" name="priorityCapabilities" value="dlp">Data Loss Prevention (DLP)</label>
+										<label><input type="checkbox" name="priorityCapabilities" value="data-classification">Automated data classification</label>
+										<label><input type="checkbox" name="priorityCapabilities" value="records-management">Records management</label>
+										<label><input type="checkbox" name="priorityCapabilities" value="compliance-manager">Compliance Manager assessments</label>
+										<label><input type="checkbox" name="priorityCapabilities" value="ediscovery">eDiscovery capabilities</label>
+										<label><input type="checkbox" name="priorityCapabilities" value="insider-risk">Insider Risk Management</label>
+										<label><input type="checkbox" name="priorityCapabilities" value="communication-compliance">Communication Compliance</label>
+										<label><input type="checkbox" name="priorityCapabilities" value="data-governance">Data governance reporting</label>
+									</div>
+									<p class="helper-text">Select up to 5 priority capabilities</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>📈 Success Factors & Challenges</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What factors are most critical for implementation success?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="successFactors" value="executive-support">Strong executive sponsorship</label>
+										<label><input type="checkbox" name="successFactors" value="user-adoption">High user adoption rates</label>
+										<label><input type="checkbox" name="successFactors" value="technical-expertise">Technical expertise and support</label>
+										<label><input type="checkbox" name="successFactors" value="change-management">Effective change management</label>
+										<label><input type="checkbox" name="successFactors" value="training-program">Comprehensive training program</label>
+										<label><input type="checkbox" name="successFactors" value="clear-governance">Clear governance and policies</label>
+										<label><input type="checkbox" name="successFactors" value="pilot-success">Successful pilot demonstrations</label>
+										<label><input type="checkbox" name="successFactors" value="integration">Smooth technical integration</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What are your biggest concerns about implementing Purview?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="implementationConcerns" value="user-resistance">User resistance to change</label>
+										<label><input type="checkbox" name="implementationConcerns" value="complexity">Technical complexity</label>
+										<label><input type="checkbox" name="implementationConcerns" value="performance">Performance impact</label>
+										<label><input type="checkbox" name="implementationConcerns" value="cost-overrun">Budget overruns</label>
+										<label><input type="checkbox" name="implementationConcerns" value="timeline">Timeline delays</label>
+										<label><input type="checkbox" name="implementationConcerns" value="integration">Integration challenges</label>
+										<label><input type="checkbox" name="implementationConcerns" value="data-quality">Data quality issues</label>
+										<label><input type="checkbox" name="implementationConcerns" value="regulatory-gaps">Regulatory compliance gaps</label>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="question-section">
+							<h3>🤝 Support & Partnership</h3>
+							<div class="question-group">
+								<div class="question">
+									<label>What level of external support do you anticipate needing?</label>
+									<div class="radio-options">
+										<label><input type="radio" name="externalSupport" value="none">No external support needed</label>
+										<label><input type="radio" name="externalSupport" value="consultation">Initial consultation and planning</label>
+										<label><input type="radio" name="externalSupport" value="implementation">Implementation partnership</label>
+										<label><input type="radio" name="externalSupport" value="managed">Ongoing managed services</label>
+										<label><input type="radio" name="externalSupport" value="full-outsource">Complete outsourced solution</label>
+									</div>
+								</div>
+
+								<div class="question">
+									<label>What ongoing support capabilities will be most valuable?</label>
+									<div class="checkbox-grid">
+										<label><input type="checkbox" name="ongoingSupport" value="technical-support">24/7 technical support</label>
+										<label><input type="checkbox" name="ongoingSupport" value="training">Continuous training and education</label>
+										<label><input type="checkbox" name="ongoingSupport" value="governance-review">Periodic governance reviews</label>
+										<label><input type="checkbox" name="ongoingSupport" value="policy-updates">Policy and configuration updates</label>
+										<label><input type="checkbox" name="ongoingSupport" value="performance-monitoring">Performance monitoring and optimization</label>
+										<label><input type="checkbox" name="ongoingSupport" value="compliance-reporting">Compliance reporting and auditing</label>
+										<label><input type="checkbox" name="ongoingSupport" value="strategic-guidance">Strategic roadmap guidance</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Navigation -->
+				<div class="form-navigation">
+					<button type="button" id="prev-btn" class="btn btn-secondary" style="display: none;">Previous</button>
+					<button type="button" id="next-btn" class="btn btn-primary">Next</button>
+					<button type="button" id="complete-btn" class="btn btn-primary" style="display: none;">Complete Assessment</button>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	/* Enhanced styles for the improved questionnaire */
+	:root {
+		--telana-primary: #0A243B;
+		--telana-secondary: #E30613;
+		--telana-accent: #1E5BA8;
+		--purview-purple: #6f42c1;
+		--success-green: #28a745;
+		--warning-orange: #ffc107;
+		--info-blue: #17a2b8;
+	}
+
+	main {
+		min-height: calc(100vh - 200px);
+		background: var(--color-bg);
+		padding: 2rem;
+	}
+
+	.container {
+		max-width: 1100px;
+		margin: 0 auto;
+	}
+
+	.page-header {
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+
+	.telana-brand h1 {
+		font-size: 2.5rem;
+		font-weight: 800;
+		color: var(--purview-purple);
+		margin-bottom: 0.5rem;
+	}
+
+	.brand-subtitle {
+		font-size: 1rem;
+		color: var(--color-gray);
+		font-weight: 500;
+		margin-bottom: 1rem;
+	}
+
+	.page-description {
+		font-size: 1.125rem;
+		color: var(--color-gray);
+		max-width: 700px;
+		margin: 0 auto;
+		line-height: 1.6;
+	}
+
+	.assessment-wizard {
+		background: white;
+		border-radius: 16px;
+		box-shadow: var(--shadow-lg);
+		padding: 2rem;
+	}
+
+	.progress-bar {
+		height: 8px;
+		background: var(--color-light-gray);
+		border-radius: 4px;
+		margin-bottom: 1rem;
+		overflow: hidden;
+	}
+
+	.progress-fill {
+		height: 100%;
+		background: linear-gradient(90deg, var(--purview-purple), var(--telana-accent));
+		transition: width 0.3s ease;
+	}
+
+	.step-indicators {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 3rem;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.step {
+		font-size: 0.75rem;
+		font-weight: 600;
+		color: var(--color-gray);
+		text-align: center;
+		flex: 1;
+		min-width: 120px;
+		padding: 0.5rem;
+	}
+
+	.step.active {
+		color: var(--purview-purple);
+	}
+
+	/* Form Steps */
+	.form-step {
+		display: none;
+		animation: fadeIn 0.3s ease;
+	}
+
+	.form-step.active {
+		display: block;
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(10px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	.form-step h2 {
+		font-size: 2rem;
+		font-weight: 700;
+		color: var(--color-dark);
+		margin-bottom: 0.5rem;
+	}
+
+	.form-step > p {
+		color: var(--color-gray);
+		margin-bottom: 2rem;
+		font-size: 1.125rem;
+		line-height: 1.6;
+	}
+
+	/* Questions Container */
+	.questions-container {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.question-section {
+		margin-bottom: 2.5rem;
+		padding: 2rem;
+		background: #f8f9fa;
+		border-radius: 12px;
+		border-left: 4px solid var(--purview-purple);
+	}
+
+	.question-section h3 {
+		font-size: 1.25rem;
+		font-weight: 600;
+		color: var(--color-dark);
+		margin-bottom: 1.5rem;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.question {
+		margin-bottom: 2rem;
+	}
+
+	.question:last-child {
+		margin-bottom: 0;
+	}
+
+	.question > label {
+		display: block;
+		font-weight: 600;
+		color: var(--color-dark);
+		margin-bottom: 1rem;
+		font-size: 1.05rem;
+		line-height: 1.4;
+	}
+
+	/* Enhanced Input Styles */
+	.radio-options {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.radio-options label {
+		font-weight: normal;
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.75rem;
+		border: 2px solid #e9ecef;
+		border-radius: 8px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		background: white;
+	}
+
+	.radio-options label:hover {
+		border-color: var(--purview-purple);
+		background: rgba(111, 66, 193, 0.05);
+	}
+
+	.radio-options input:checked + * {
+		border-color: var(--purview-purple);
+		background: rgba(111, 66, 193, 0.1);
+	}
+
+	.checkbox-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 0.75rem;
+	}
+
+	.checkbox-grid label {
+		font-weight: normal;
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.75rem;
+		border: 2px solid #e9ecef;
+		border-radius: 8px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		background: white;
+	}
+
+	.checkbox-grid label:hover {
+		border-color: var(--purview-purple);
+		background: rgba(111, 66, 193, 0.05);
+	}
+
+	.checkbox-grid input:checked + * {
+		border-color: var(--purview-purple);
+		background: rgba(111, 66, 193, 0.1);
+	}
+
+	/* Maturity Scale */
+	.maturity-scale {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+		gap: 1rem;
+	}
+
+	.maturity-option {
+		cursor: pointer;
+	}
+
+	.maturity-option input {
+		display: none;
+	}
+
+	.maturity-content {
+		padding: 1.5rem;
+		border: 2px solid #e9ecef;
+		border-radius: 12px;
+		text-align: center;
+		transition: all 0.3s ease;
+		background: white;
+		height: 100%;
+	}
+
+	.maturity-option input:checked ~ .maturity-content {
+		border-color: var(--purview-purple);
+		background: rgba(111, 66, 193, 0.1);
+	}
+
+	.maturity-content h4 {
+		font-size: 1rem;
+		font-weight: 600;
+		color: var(--color-dark);
+		margin-bottom: 0.5rem;
+	}
+
+	.maturity-content p {
+		font-size: 0.875rem;
+		color: var(--color-gray);
+		margin: 0;
+		line-height: 1.4;
+	}
+
+	/* Priority Selection */
+	.priority-selection {
+		position: relative;
+	}
+
+	.priority-selection.max-reached label:not(:has(input:checked)) {
+		opacity: 0.5;
+		pointer-events: none;
+	}
+
+	.helper-text {
+		font-size: 0.875rem;
+		color: var(--color-gray);
+		font-style: italic;
+		margin-top: 0.5rem;
+	}
+
+	/* Ranking List */
+	.ranking-list {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.ranking-item {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1rem;
+		border: 2px solid #e9ecef;
+		border-radius: 8px;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		background: white;
+	}
+
+	.ranking-item:hover {
+		border-color: var(--purview-purple);
+		background: rgba(111, 66, 193, 0.05);
+	}
+
+	.ranking-item input:checked ~ .rank-number {
+		background: var(--purview-purple);
+		color: white;
+	}
+
+	.rank-number {
+		width: 32px;
+		height: 32px;
+		border-radius: 50%;
+		background: #e9ecef;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: 600;
+		font-size: 0.875rem;
+		flex-shrink: 0;
+	}
+
+	.item-content {
+		flex: 1;
+	}
+
+	.item-content strong {
+		display: block;
+		font-weight: 600;
+		color: var(--color-dark);
+		margin-bottom: 0.25rem;
+	}
+
+	.item-content p {
+		font-size: 0.875rem;
+		color: var(--color-gray);
+		margin: 0;
+	}
+
+	/* Navigation */
+	.form-navigation {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 3rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--color-light-gray);
+	}
+
+	.btn {
+		padding: 0.75rem 1.5rem;
+		border-radius: 8px;
+		font-weight: 600;
+		border: none;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		font-size: 1rem;
+	}
+
+	.btn-primary {
+		background: var(--purview-purple);
+		color: white;
+	}
+
+	.btn-primary:hover {
+		background: #5a3399;
+		transform: translateY(-2px);
+	}
+
+	.btn-secondary {
+		background: white;
+		color: var(--purview-purple);
+		border: 2px solid var(--purview-purple);
+	}
+
+	.btn-secondary:hover {
+		background: var(--purview-purple);
+		color: white;
+	}
+
+	/* Stakeholder Notice Styles */
+	.stakeholder-notice {
+		background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+		border: 2px solid #1976d2;
+		border-radius: 16px;
+		padding: 2rem;
+		margin: 2rem 0;
+		display: flex;
+		gap: 1.5rem;
+		align-items: flex-start;
+	}
+
+	.notice-icon {
+		font-size: 3rem;
+		flex-shrink: 0;
+	}
+
+	.notice-content h3 {
+		margin: 0 0 1rem;
+		color: var(--color-dark);
+		font-size: 1.25rem;
+	}
+
+	.stakeholder-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+
+	.stakeholder-role {
+		background: white;
+		padding: 1rem;
+		border-radius: 8px;
+		border-left: 4px solid var(--purview-purple);
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.stakeholder-role strong {
+		color: var(--color-dark);
+		font-size: 0.875rem;
+	}
+
+	.stakeholder-role span {
+		color: var(--color-gray);
+		font-size: 0.75rem;
+	}
+
+	/* Step Visual Styles */
+	.step-header {
+		display: flex;
+		gap: 2rem;
+		margin-bottom: 2rem;
+		align-items: flex-start;
+	}
+
+	.step-visual {
+		flex: 1;
+		background: #f8f9fa;
+		padding: 1.5rem;
+		border-radius: 12px;
+		border: 2px solid #e9ecef;
+	}
+
+	.step-diagram {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		justify-content: center;
+	}
+
+	.data-sources, .discovery-process {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.source-item, .process-step {
+		background: white;
+		padding: 0.5rem 1rem;
+		border-radius: 8px;
+		text-align: center;
+		font-size: 0.875rem;
+		border: 2px solid #e9ecef;
+		font-weight: 500;
+	}
+
+	.discovery-arrow {
+		font-size: 2rem;
+		color: var(--purview-purple);
+		font-weight: bold;
+	}
+
+	.step-info {
+		flex: 2;
+	}
+
+	.guidance-panel {
+		background: #fff3cd;
+		border: 1px solid #ffeaa7;
+		border-radius: 8px;
+		padding: 1.5rem;
+		display: flex;
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+
+	.guidance-icon {
+		font-size: 1.5rem;
+		flex-shrink: 0;
+	}
+
+	.guidance-content h4 {
+		margin: 0 0 0.5rem;
+		color: #856404;
+		font-size: 1rem;
+	}
+
+	.guidance-content p {
+		margin: 0 0 1rem;
+		color: #856404;
+		font-size: 0.875rem;
+		line-height: 1.4;
+	}
+
+	.key-stakeholders, .risk-owner {
+		margin-bottom: 1rem;
+	}
+
+	.stakeholder-tags {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+		margin-top: 0.25rem;
+	}
+
+	.tag {
+		background: var(--purview-purple);
+		color: white;
+		padding: 0.25rem 0.75rem;
+		border-radius: 12px;
+		font-size: 0.75rem;
+		font-weight: 500;
+	}
+
+	.risk-owner {
+		font-size: 0.875rem;
+		color: #856404;
+	}
+
+	/* Enhanced Question Styles */
+	.question-header {
+		display: flex;
+		align-items: flex-start;
+		gap: 1rem;
+		margin-bottom: 1rem;
+	}
+
+	.question-header label {
+		flex: 1;
+	}
+
+	.help-hint {
+		position: relative;
+		flex-shrink: 0;
+	}
+
+	.hint-icon {
+		width: 24px;
+		height: 24px;
+		background: var(--info-blue);
+		color: white;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		font-size: 0.75rem;
+	}
+
+	.hint-content {
+		position: absolute;
+		top: 100%;
+		right: 0;
+		width: 400px;
+		background: white;
+		border: 2px solid var(--info-blue);
+		border-radius: 12px;
+		padding: 1.5rem;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+		z-index: 1000;
+		display: none;
+	}
+
+	.help-hint:hover .hint-content {
+		display: block;
+	}
+
+	.hint-content h5 {
+		margin: 0 0 0.5rem;
+		color: var(--color-dark);
+		font-size: 0.875rem;
+		font-weight: 600;
+	}
+
+	.hint-content p {
+		margin: 0 0 1rem;
+		font-size: 0.8rem;
+		line-height: 1.4;
+		color: var(--color-gray);
+	}
+
+	.hint-content ul {
+		margin: 0 0 1rem;
+		padding-left: 1rem;
+		font-size: 0.8rem;
+	}
+
+	.hint-content li {
+		margin-bottom: 0.25rem;
+		color: var(--color-gray);
+	}
+
+	.file-examples {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.file-type {
+		background: #f8f9fa;
+		padding: 0.25rem 0.5rem;
+		border-radius: 4px;
+		font-size: 0.7rem;
+		border: 1px solid #e9ecef;
+	}
+
+	/* Enhanced Radio Option Styles */
+	.option-content {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.option-content strong {
+		font-weight: 600;
+		color: var(--color-dark);
+	}
+
+	.option-content p {
+		font-size: 0.8rem;
+		color: var(--color-gray);
+		margin: 0;
+	}
+
+	.risk-indicator {
+		align-self: flex-start;
+		padding: 0.125rem 0.5rem;
+		border-radius: 12px;
+		font-size: 0.7rem;
+		font-weight: 600;
+		margin-left: auto;
+	}
+
+	.risk-indicator.high {
+		background: #fee2e2;
+		color: #dc2626;
+	}
+
+	.risk-indicator.medium {
+		background: #fef3c7;
+		color: #d97706;
+	}
+
+	.risk-indicator.low {
+		background: #d1fae5;
+		color: #059669;
+	}
+
+	/* Document Upload Styles */
+	.document-upload-section {
+		background: #f8f9fa;
+		padding: 2rem;
+		border-radius: 12px;
+		margin-bottom: 2rem;
+		border: 2px dashed #dee2e6;
+	}
+
+	.document-upload-section h4 {
+		margin: 0 0 1rem;
+		color: var(--color-dark);
+		font-size: 1.25rem;
+	}
+
+	.upload-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 1.5rem;
+		margin: 2rem 0;
+	}
+
+	.upload-category {
+		background: white;
+		border-radius: 12px;
+		padding: 1.5rem;
+		border: 2px solid #e9ecef;
+	}
+
+	.upload-category h5 {
+		margin: 0 0 1rem;
+		color: var(--color-dark);
+		font-size: 1rem;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.file-upload-area {
+		border: 2px dashed #dee2e6;
+		border-radius: 8px;
+		padding: 2rem 1rem;
+		text-align: center;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		margin-bottom: 1rem;
+		position: relative;
+	}
+
+	.file-upload-area:hover {
+		border-color: var(--purview-purple);
+		background: rgba(111, 66, 193, 0.05);
+	}
+
+	.upload-icon {
+		font-size: 2rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.file-upload-area p {
+		margin: 0 0 0.25rem;
+		font-weight: 500;
+		color: var(--color-dark);
+	}
+
+	.file-types {
+		font-size: 0.8rem;
+		color: var(--color-gray);
+	}
+
+	.suggested-files {
+		font-size: 0.875rem;
+	}
+
+	.suggested-files strong {
+		color: var(--color-dark);
+		display: block;
+		margin-bottom: 0.5rem;
+	}
+
+	.suggested-files ul {
+		margin: 0;
+		padding-left: 1rem;
+		color: var(--color-gray);
+	}
+
+	.suggested-files li {
+		margin-bottom: 0.25rem;
+	}
+
+	/* Drag and Drop States */
+	.file-upload-area.drag-over {
+		border-color: var(--purview-purple);
+		background: rgba(111, 66, 193, 0.1);
+		transform: scale(1.02);
+	}
+
+	.file-upload-area input[type="file"] {
+		position: absolute;
+		opacity: 0;
+		width: 100%;
+		height: 100%;
+		cursor: pointer;
+	}
+
+	/* Uploaded Files Display */
+	.file-list {
+		margin-top: 1rem;
+	}
+
+	.uploaded-file {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0.75rem;
+		background: #f8f9fa;
+		border: 1px solid #e9ecef;
+		border-radius: 6px;
+		margin-bottom: 0.5rem;
+	}
+
+	.file-info {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		flex: 1;
+	}
+
+	.file-icon {
+		font-size: 1.5rem;
+		flex-shrink: 0;
+	}
+
+	.file-details {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.file-name {
+		font-weight: 500;
+		color: var(--color-dark);
+		font-size: 0.875rem;
+	}
+
+	.file-meta {
+		font-size: 0.75rem;
+		color: var(--color-gray);
+	}
+
+	.remove-file {
+		background: none;
+		border: none;
+		color: #dc3545;
+		font-size: 1.5rem;
+		cursor: pointer;
+		padding: 0.25rem;
+		line-height: 1;
+		border-radius: 4px;
+		transition: background-color 0.2s;
+	}
+
+	.remove-file:hover {
+		background: rgba(220, 53, 69, 0.1);
+	}
+
+	/* Help Hints Enhancement */
+	.help-hint {
+		position: relative;
+		display: inline-block;
+	}
+
+	.help-hint.active .hint-content {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+
+	.hint-icon {
+		width: 24px;
+		height: 24px;
+		background: var(--purview-purple);
+		color: white;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 0.875rem;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		font-weight: bold;
+	}
+
+	.hint-icon:hover {
+		background: var(--purview-dark);
+		transform: scale(1.1);
+	}
+
+	.hint-content {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%) translateY(10px);
+		background: white;
+		border: 1px solid #e9ecef;
+		border-radius: 8px;
+		padding: 1rem;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+		width: 320px;
+		z-index: 1000;
+		opacity: 0;
+		visibility: hidden;
+		transition: all 0.3s ease;
+	}
+
+	.hint-content::before {
+		content: '';
+		position: absolute;
+		top: -8px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 0;
+		height: 0;
+		border-left: 8px solid transparent;
+		border-right: 8px solid transparent;
+		border-bottom: 8px solid white;
+	}
+
+	.hint-content h5 {
+		margin: 0 0 0.5rem;
+		color: var(--color-dark);
+		font-size: 0.875rem;
+		font-weight: 600;
+	}
+
+	.hint-content p {
+		margin: 0 0 1rem;
+		color: var(--color-gray);
+		font-size: 0.8rem;
+		line-height: 1.4;
+	}
+
+	.hint-content p:last-child {
+		margin-bottom: 0;
+	}
+
+	.upload-benefits {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 1rem;
+		margin-top: 2rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid #dee2e6;
+	}
+
+	.benefit-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.75rem;
+		font-size: 0.875rem;
+	}
+
+	.benefit-icon {
+		font-size: 1.5rem;
+		flex-shrink: 0;
+	}
+
+	.benefit-item strong {
+		color: var(--color-dark);
+		display: block;
+		margin-bottom: 0.25rem;
+	}
+
+	/* File Upload States */
+	.file-upload-area.dragover {
+		border-color: var(--purview-purple);
+		background: rgba(111, 66, 193, 0.1);
+	}
+
+	.uploaded-file {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.5rem;
+		background: #d1fae5;
+		border-radius: 4px;
+		margin-top: 0.5rem;
+		font-size: 0.8rem;
+	}
+
+	.uploaded-file .remove-file {
+		margin-left: auto;
+		cursor: pointer;
+		color: #dc2626;
+		font-weight: bold;
+	}
+
+	/* Responsive Design */
+	@media (max-width: 768px) {
+		.step-indicators {
+			font-size: 0.65rem;
+		}
+
+		.step {
+			min-width: 80px;
+		}
+
+		.checkbox-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.maturity-scale {
+			grid-template-columns: 1fr;
+		}
+
+		.form-navigation {
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		.questions-container {
+			padding: 0;
+		}
+
+		.question-section {
+			padding: 1.5rem;
+		}
+	}
+
+	/* Progress Indicators */
+	.section-progress {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		background: var(--purview-purple);
+		color: white;
+		padding: 0.25rem 0.75rem;
+		border-radius: 20px;
+		font-size: 0.75rem;
+		font-weight: 600;
+	}
+
+	/* Validation States */
+	.invalid {
+		border-color: #dc3545 !important;
+		background: rgba(220, 53, 69, 0.1) !important;
+	}
+
+	.valid {
+		border-color: var(--success-green) !important;
+		background: rgba(40, 167, 69, 0.1) !important;
+	}
+</style>
+
+<script>
+	let currentStep = 1;
+	const totalSteps = 6;
+	let responses = {};
+
+	// Initialize
+	document.addEventListener('DOMContentLoaded', function() {
+		updateStep(currentStep);
+		setupEventListeners();
+		setupPrioritySelection();
+		setupRankingList();
+		setupFileUploads();
+		setupHelpHints();
+	});
+
+	function setupEventListeners() {
+		document.getElementById('next-btn').addEventListener('click', nextStep);
+		document.getElementById('prev-btn').addEventListener('click', prevStep);
+		document.getElementById('complete-btn').addEventListener('click', completeAssessment);
+
+		// Auto-save responses
+		document.addEventListener('change', (e) => {
+			if (e.target.type === 'radio' || e.target.type === 'checkbox') {
+				saveResponse(e.target);
+				validateCurrentStep();
+			}
+		});
+	}
+
+	function setupPrioritySelection() {
+		document.querySelectorAll('.priority-selection').forEach(container => {
+			const maxSelections = parseInt(container.dataset.max) || 3;
+			
+			container.addEventListener('change', (e) => {
+				if (e.target.type === 'checkbox') {
+					const checked = container.querySelectorAll('input:checked').length;
+					
+					if (checked >= maxSelections) {
+						container.classList.add('max-reached');
+					} else {
+						container.classList.remove('max-reached');
+					}
+				}
+			});
+		});
+	}
+
+	function setupRankingList() {
+		document.querySelectorAll('.ranking-list').forEach(container => {
+			let rankCounter = 1;
+			
+			container.addEventListener('change', (e) => {
+				if (e.target.type === 'checkbox') {
+					updateRankNumbers(container);
+				}
+			});
+		});
+	}
+
+	function updateRankNumbers(container) {
+		const checkedItems = container.querySelectorAll('input:checked');
+		const uncheckedItems = container.querySelectorAll('input:not(:checked)');
+		
+		// Update rank numbers for checked items
+		checkedItems.forEach((checkbox, index) => {
+			const rankNumber = checkbox.parentElement.querySelector('.rank-number');
+			rankNumber.textContent = index + 1;
+		});
+		
+		// Clear rank numbers for unchecked items
+		uncheckedItems.forEach(checkbox => {
+			const rankNumber = checkbox.parentElement.querySelector('.rank-number');
+			rankNumber.textContent = '';
+		});
+	}
+
+	function saveResponse(input) {
+		const name = input.name;
+		const value = input.value;
+		
+		if (input.type === 'radio') {
+			responses[name] = value;
+		} else if (input.type === 'checkbox') {
+			if (!responses[name]) responses[name] = [];
+			
+			if (input.checked) {
+				if (!responses[name].includes(value)) {
+					responses[name].push(value);
+				}
+			} else {
+				responses[name] = responses[name].filter(v => v !== value);
+			}
+		}
+		
+		// Save to localStorage
+		localStorage.setItem('purview_enhanced_responses', JSON.stringify(responses));
+	}
+
+	function updateStep(step) {
+		// Update progress
+		const progress = (step / totalSteps) * 100;
+		document.querySelector('.progress-fill').style.width = `${progress}%`;
+
+		// Update step indicators
+		document.querySelectorAll('.step').forEach((s, index) => {
+			s.classList.toggle('active', index < step);
+		});
+
+		// Show/hide form steps
+		document.querySelectorAll('.form-step').forEach((fs, index) => {
+			fs.classList.toggle('active', index === step - 1);
+		});
+
+		// Update navigation
+		document.getElementById('prev-btn').style.display = step === 1 ? 'none' : 'block';
+		
+		if (step === totalSteps) {
+			document.getElementById('next-btn').style.display = 'none';
+			document.getElementById('complete-btn').style.display = 'block';
+		} else {
+			document.getElementById('next-btn').style.display = 'block';
+			document.getElementById('complete-btn').style.display = 'none';
+		}
+	}
+
+	function validateCurrentStep() {
+		// Add validation logic based on step
+		const step = currentStep;
+		let isValid = true;
+		
+		// Implement step-specific validation
+		if (step === 1) {
+			// Ensure key maturity questions are answered
+			const requiredFields = ['dataDiscovery', 'governanceMaturity'];
+			isValid = requiredFields.every(field => responses[field]);
+		}
+		
+		// Update visual feedback
+		updateValidationState(isValid);
+		
+		return isValid;
+	}
+
+	function updateValidationState(isValid) {
+		const nextBtn = document.getElementById('next-btn');
+		if (isValid) {
+			nextBtn.style.opacity = '1';
+			nextBtn.disabled = false;
+		} else {
+			nextBtn.style.opacity = '0.6';
+			nextBtn.disabled = true;
+		}
+	}
+
+	function nextStep() {
+		if (validateCurrentStep() && currentStep < totalSteps) {
+			currentStep++;
+			updateStep(currentStep);
+			
+			// Scroll to top
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		}
+	}
+
+	function prevStep() {
+		if (currentStep > 1) {
+			currentStep--;
+			updateStep(currentStep);
+			
+			// Scroll to top
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		}
+	}
+
+	function completeAssessment() {
+		// Store comprehensive responses
+		const assessmentData = {
+			id: `PURVIEW-${Date.now()}`,
+			timestamp: new Date().toISOString(),
+			responses: responses,
+			completionTime: Date.now()
+		};
+		
+		localStorage.setItem('purview_enhanced_assessment', JSON.stringify(assessmentData));
+		localStorage.setItem('purview_assessment_completed', 'true');
+		
+		// Redirect to results or continue with main assessment
+		window.location.href = '/assessment-execution';
+	}
+
+	// Load saved responses on page load
+	function loadSavedResponses() {
+		const saved = localStorage.getItem('purview_enhanced_responses');
+		if (saved) {
+			responses = JSON.parse(saved);
+			
+			// Restore form state
+			Object.keys(responses).forEach(name => {
+				const value = responses[name];
+				
+				if (Array.isArray(value)) {
+					// Checkbox values
+					value.forEach(v => {
+						const checkbox = document.querySelector(`input[name="${name}"][value="${v}"]`);
+						if (checkbox) checkbox.checked = true;
+					});
+				} else {
+					// Radio values
+					const radio = document.querySelector(`input[name="${name}"][value="${value}"]`);
+					if (radio) radio.checked = true;
+				}
+			});
+		}
+	}
+
+	// File Upload Functionality
+	function setupFileUploads() {
+		document.querySelectorAll('.file-upload-area').forEach(uploadArea => {
+			const input = uploadArea.querySelector('input[type="file"]');
+			const dropZone = uploadArea.querySelector('.drop-zone');
+			const fileList = uploadArea.querySelector('.file-list');
+
+			// Drag and drop events
+			['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+				dropZone.addEventListener(eventName, preventDefaults, false);
+			});
+
+			['dragenter', 'dragover'].forEach(eventName => {
+				dropZone.addEventListener(eventName, highlight, false);
+			});
+
+			['dragleave', 'drop'].forEach(eventName => {
+				dropZone.addEventListener(eventName, unhighlight, false);
+			});
+
+			dropZone.addEventListener('drop', handleDrop, false);
+			dropZone.addEventListener('click', () => input.click());
+			input.addEventListener('change', handleFileSelect);
+
+			function preventDefaults(e) {
+				e.preventDefault();
+				e.stopPropagation();
+			}
+
+			function highlight() {
+				dropZone.classList.add('drag-over');
+			}
+
+			function unhighlight() {
+				dropZone.classList.remove('drag-over');
+			}
+
+			function handleDrop(e) {
+				const dt = e.dataTransfer;
+				const files = dt.files;
+				handleFiles(files);
+			}
+
+			function handleFileSelect(e) {
+				const files = e.target.files;
+				handleFiles(files);
+			}
+
+			function handleFiles(files) {
+				Array.from(files).forEach(file => {
+					if (validateFile(file)) {
+						addFileToList(file, fileList);
+					}
+				});
+			}
+
+			function validateFile(file) {
+				const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
+				const maxSize = 10 * 1024 * 1024; // 10MB
+
+				if (!allowedTypes.includes(file.type)) {
+					alert(`File type not supported: ${file.name}`);
+					return false;
+				}
+
+				if (file.size > maxSize) {
+					alert(`File too large: ${file.name}. Maximum size is 10MB.`);
+					return false;
+				}
+
+				return true;
+			}
+
+			function addFileToList(file, container) {
+				const fileItem = document.createElement('div');
+				fileItem.className = 'uploaded-file';
+				
+				const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+				const fileIcon = getFileIcon(file.type);
+				
+				fileItem.innerHTML = `
+					<div class="file-info">
+						<span class="file-icon">${fileIcon}</span>
+						<div class="file-details">
+							<span class="file-name">${file.name}</span>
+							<span class="file-meta">${sizeInMB} MB • ${new Date().toLocaleDateString()}</span>
+						</div>
+					</div>
+					<button type="button" class="remove-file" onclick="this.parentElement.remove()">×</button>
+				`;
+				
+				container.appendChild(fileItem);
+			}
+
+			function getFileIcon(fileType) {
+				const iconMap = {
+					'application/pdf': '📄',
+					'application/msword': '📝',
+					'application/vnd.openxmlformats-officedocument.wordprocessingml.document': '📝',
+					'text/plain': '📄',
+					'application/vnd.ms-excel': '📊',
+					'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': '📊'
+				};
+				return iconMap[fileType] || '📎';
+			}
+		});
+	}
+
+	// Help Hints Functionality
+	function setupHelpHints() {
+		document.querySelectorAll('.help-hint').forEach(hint => {
+			const icon = hint.querySelector('.hint-icon');
+			const content = hint.querySelector('.hint-content');
+			
+			icon.addEventListener('click', () => {
+				// Close other open hints
+				document.querySelectorAll('.help-hint').forEach(otherHint => {
+					if (otherHint !== hint) {
+						otherHint.classList.remove('active');
+					}
+				});
+				
+				// Toggle current hint
+				hint.classList.toggle('active');
+			});
+
+			// Close hint when clicking outside
+			document.addEventListener('click', (e) => {
+				if (!hint.contains(e.target)) {
+					hint.classList.remove('active');
+				}
+			});
+		});
+
+		// Add keyboard support for accessibility
+		document.querySelectorAll('.hint-icon').forEach(icon => {
+			icon.setAttribute('tabindex', '0');
+			icon.setAttribute('role', 'button');
+			icon.setAttribute('aria-label', 'Show help information');
+			
+			icon.addEventListener('keydown', (e) => {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					icon.click();
+				}
+			});
+		});
+	}
+
+	// Load responses after DOM is ready
+	document.addEventListener('DOMContentLoaded', loadSavedResponses);
+</script>

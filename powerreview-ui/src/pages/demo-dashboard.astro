@@ -1,0 +1,1257 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="PowerReview Demo Dashboard - Client Presentation">
+  <main>
+    <div class="demo-header">
+      <h1>PowerReview Security Assessment Demo</h1>
+      <p class="subtitle">Interactive demonstration showing the comprehensive insights we provide</p>
+      <div class="demo-controls">
+        <button class="demo-btn active" data-view="overview">Overview</button>
+        <button class="demo-btn" data-view="findings">Key Findings</button>
+        <button class="demo-btn" data-view="metrics">Live Metrics</button>
+        <button class="demo-btn" data-view="roadmap">Security Roadmap</button>
+      </div>
+    </div>
+
+    <!-- Overview Section -->
+    <section id="overview-section" class="demo-section active">
+      <div class="overview-grid">
+        <!-- Organization Profile -->
+        <div class="overview-card">
+          <h2>Organization Profile</h2>
+          <div class="profile-info">
+            <div class="info-row">
+              <span class="label">Company:</span>
+              <span class="value">Contoso Corporation</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Industry:</span>
+              <span class="value">Financial Services</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Employees:</span>
+              <span class="value">5,000</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Locations:</span>
+              <span class="value">14 Countries</span>
+            </div>
+            <div class="info-row">
+              <span class="label">Annual Revenue:</span>
+              <span class="value">$500M</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Security Score -->
+        <div class="overview-card highlight">
+          <h2>Security Posture Score</h2>
+          <div class="score-display">
+            <div class="score-circle" data-score="78">
+              <svg viewBox="0 0 200 200">
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#e5e7eb" stroke-width="20"/>
+                <circle cx="100" cy="100" r="90" fill="none" stroke="#6366f1" stroke-width="20"
+                        stroke-dasharray="565.48" stroke-dashoffset="124" stroke-linecap="round"
+                        transform="rotate(-90 100 100)"/>
+              </svg>
+              <div class="score-text">
+                <span class="score-value">78</span>
+                <span class="score-label">out of 100</span>
+              </div>
+            </div>
+            <div class="score-breakdown">
+              <div class="breakdown-item">
+                <span class="breakdown-label">Identity & Access:</span>
+                <div class="breakdown-bar">
+                  <div class="bar-fill" style="width: 85%; background: #10b981;"></div>
+                </div>
+              </div>
+              <div class="breakdown-item">
+                <span class="breakdown-label">Data Protection:</span>
+                <div class="breakdown-bar">
+                  <div class="bar-fill" style="width: 65%; background: #f59e0b;"></div>
+                </div>
+              </div>
+              <div class="breakdown-item">
+                <span class="breakdown-label">Threat Protection:</span>
+                <div class="breakdown-bar">
+                  <div class="bar-fill" style="width: 72%; background: #f59e0b;"></div>
+                </div>
+              </div>
+              <div class="breakdown-item">
+                <span class="breakdown-label">Compliance:</span>
+                <div class="breakdown-bar">
+                  <div class="bar-fill" style="width: 45%; background: #ef4444;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Financial Impact -->
+        <div class="overview-card">
+          <h2>Financial Risk Analysis</h2>
+          <div class="financial-metrics">
+            <div class="metric-item critical">
+              <div class="metric-icon">💰</div>
+              <div class="metric-details">
+                <span class="metric-value">$7.5M</span>
+                <span class="metric-label">Current Exposure</span>
+              </div>
+            </div>
+            <div class="metric-item warning">
+              <div class="metric-icon">⚠️</div>
+              <div class="metric-details">
+                <span class="metric-value">$12.3M</span>
+                <span class="metric-label">Potential Breach Cost</span>
+              </div>
+            </div>
+            <div class="metric-item success">
+              <div class="metric-icon">🛡️</div>
+              <div class="metric-details">
+                <span class="metric-value">$450K</span>
+                <span class="metric-label">Recommended Investment</span>
+              </div>
+            </div>
+            <div class="metric-item info">
+              <div class="metric-icon">📈</div>
+              <div class="metric-details">
+                <span class="metric-value">320%</span>
+                <span class="metric-label">3-Year ROI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Findings Section -->
+    <section id="findings-section" class="demo-section">
+      <div class="findings-container">
+        <div class="findings-summary">
+          <h2>Critical Security Findings</h2>
+          <div class="findings-stats">
+            <div class="stat-card critical">
+              <span class="stat-number">3</span>
+              <span class="stat-label">Critical</span>
+            </div>
+            <div class="stat-card high">
+              <span class="stat-number">12</span>
+              <span class="stat-label">High</span>
+            </div>
+            <div class="stat-card medium">
+              <span class="stat-number">28</span>
+              <span class="stat-label">Medium</span>
+            </div>
+            <div class="stat-card low">
+              <span class="stat-number">45</span>
+              <span class="stat-label">Low</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="findings-list">
+          <div class="finding-item critical">
+            <div class="finding-header">
+              <span class="finding-icon">🚨</span>
+              <h3>12% of Users Without Multi-Factor Authentication</h3>
+              <span class="finding-badge">CRITICAL</span>
+            </div>
+            <p>Accounts without MFA are 99.9% more likely to be compromised. This affects 600 users including 23 administrators.</p>
+            <div class="finding-impact">
+              <span><strong>Business Impact:</strong> $2.1M potential exposure</span>
+              <span><strong>Fix Time:</strong> 2 hours</span>
+              <span><strong>Fix Cost:</strong> $0</span>
+            </div>
+          </div>
+
+          <div class="finding-item high">
+            <div class="finding-header">
+              <span class="finding-icon">⚠️</span>
+              <h3>Unrestricted External Sharing in SharePoint</h3>
+              <span class="finding-badge high">HIGH</span>
+            </div>
+            <p>234 SharePoint sites allow anonymous link sharing. 1,567 files are currently shared externally without tracking.</p>
+            <div class="finding-impact">
+              <span><strong>Business Impact:</strong> Data leak risk</span>
+              <span><strong>Fix Time:</strong> 4 hours</span>
+              <span><strong>Fix Cost:</strong> $0</span>
+            </div>
+          </div>
+
+          <div class="finding-item high">
+            <div class="finding-header">
+              <span class="finding-icon">⚠️</span>
+              <h3>No Data Loss Prevention Policies</h3>
+              <span class="finding-badge high">HIGH</span>
+            </div>
+            <p>Sensitive data types like credit cards, SSNs, and confidential documents are not protected from external sharing.</p>
+            <div class="finding-impact">
+              <span><strong>Business Impact:</strong> Compliance violations</span>
+              <span><strong>Fix Time:</strong> 8 hours</span>
+              <span><strong>Fix Cost:</strong> Included in E5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Live Metrics Section -->
+    <section id="metrics-section" class="demo-section">
+      <div class="metrics-container">
+        <h2>Real-Time Security Metrics</h2>
+        
+        <!-- Live Activity Feed -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <h3>Security Events (Last 24 Hours)</h3>
+            <div class="live-feed">
+              <div class="feed-item success">
+                <span class="feed-time">2 min ago</span>
+                <span class="feed-text">MFA enabled for finance@contoso.com</span>
+              </div>
+              <div class="feed-item warning">
+                <span class="feed-time">15 min ago</span>
+                <span class="feed-text">Suspicious login attempt blocked from Russia</span>
+              </div>
+              <div class="feed-item info">
+                <span class="feed-time">1 hour ago</span>
+                <span class="feed-text">DLP policy created for Credit Card data</span>
+              </div>
+              <div class="feed-item critical">
+                <span class="feed-time">3 hours ago</span>
+                <span class="feed-text">Admin account without MFA detected</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Regional Compliance -->
+          <div class="metric-card">
+            <h3>Regional Compliance Status</h3>
+            <div class="region-grid">
+              <div class="region-item">
+                <div class="region-score good">94%</div>
+                <span class="region-name">Singapore (PDPA)</span>
+              </div>
+              <div class="region-item">
+                <div class="region-score medium">78%</div>
+                <span class="region-name">EU Central (GDPR)</span>
+              </div>
+              <div class="region-item">
+                <div class="region-score poor">62%</div>
+                <span class="region-name">US East (HIPAA)</span>
+              </div>
+              <div class="region-item">
+                <div class="region-score good">88%</div>
+                <span class="region-name">Japan (APPI)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- User Protection Status -->
+          <div class="metric-card">
+            <h3>User Protection Coverage</h3>
+            <canvas id="protectionChart" width="300" height="200"></canvas>
+            <div class="protection-legend">
+              <div class="legend-item">
+                <span class="legend-color" style="background: #10b981;"></span>
+                <span>Fully Protected (4,400)</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color" style="background: #f59e0b;"></span>
+                <span>Partial Protection (400)</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-color" style="background: #ef4444;"></span>
+                <span>Unprotected (200)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security Roadmap Section -->
+    <section id="roadmap-section" class="demo-section">
+      <div class="roadmap-container">
+        <h2>Your Security Enhancement Roadmap</h2>
+        
+        <div class="roadmap-options">
+          <!-- Gold Package -->
+          <div class="package-card gold">
+            <div class="package-header">
+              <span class="package-icon">🏆</span>
+              <h3>Gold Package</h3>
+              <div class="package-price">$450K</div>
+            </div>
+            <div class="package-benefits">
+              <h4>Complete Enterprise Protection</h4>
+              <ul>
+                <li>✓ Zero Trust Architecture</li>
+                <li>✓ Advanced Threat Protection</li>
+                <li>✓ 24/7 SOC Monitoring</li>
+                <li>✓ Automated Incident Response</li>
+                <li>✓ Quarterly Security Reviews</li>
+                <li>✓ Employee Security Training</li>
+              </ul>
+            </div>
+            <div class="package-metrics">
+              <div class="metric">
+                <span class="metric-label">Security Score:</span>
+                <span class="metric-value">95+</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">Risk Reduction:</span>
+                <span class="metric-value">94%</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">ROI:</span>
+                <span class="metric-value">320%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Silver Package -->
+          <div class="package-card silver">
+            <div class="package-header">
+              <span class="package-icon">🥈</span>
+              <h3>Silver Package</h3>
+              <div class="package-price">$250K</div>
+            </div>
+            <div class="package-benefits">
+              <h4>Enhanced Security Posture</h4>
+              <ul>
+                <li>✓ MFA for All Users</li>
+                <li>✓ DLP Implementation</li>
+                <li>✓ Conditional Access</li>
+                <li>✓ Security Monitoring</li>
+                <li>✓ Monthly Reviews</li>
+              </ul>
+            </div>
+            <div class="package-metrics">
+              <div class="metric">
+                <span class="metric-label">Security Score:</span>
+                <span class="metric-value">85+</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">Risk Reduction:</span>
+                <span class="metric-value">78%</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">ROI:</span>
+                <span class="metric-value">240%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bronze Package -->
+          <div class="package-card bronze">
+            <div class="package-header">
+              <span class="package-icon">🥉</span>
+              <h3>Bronze Package</h3>
+              <div class="package-price">$100K</div>
+            </div>
+            <div class="package-benefits">
+              <h4>Essential Protection</h4>
+              <ul>
+                <li>✓ Critical Fixes</li>
+                <li>✓ Basic MFA</li>
+                <li>✓ Patch Management</li>
+                <li>✓ Security Policies</li>
+              </ul>
+            </div>
+            <div class="package-metrics">
+              <div class="metric">
+                <span class="metric-label">Security Score:</span>
+                <span class="metric-value">70+</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">Risk Reduction:</span>
+                <span class="metric-value">55%</span>
+              </div>
+              <div class="metric">
+                <span class="metric-label">ROI:</span>
+                <span class="metric-value">180%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Implementation Timeline -->
+        <div class="timeline-section">
+          <h3>Implementation Timeline</h3>
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-marker">Week 1-2</div>
+              <div class="timeline-content">
+                <h4>Immediate Actions</h4>
+                <p>Enable MFA, patch critical vulnerabilities, review admin accounts</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker">Week 3-4</div>
+              <div class="timeline-content">
+                <h4>Quick Wins</h4>
+                <p>Configure DLP policies, implement conditional access, secure external sharing</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker">Month 2</div>
+              <div class="timeline-content">
+                <h4>Foundation Building</h4>
+                <p>Deploy security monitoring, establish incident response, conduct training</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <div class="timeline-marker">Month 3+</div>
+              <div class="timeline-content">
+                <h4>Continuous Improvement</h4>
+                <p>Regular reviews, threat hunting, security optimization</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    main {
+      padding: 0;
+      background: #f8fafc;
+      min-height: 100vh;
+    }
+
+    .demo-header {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: white;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .demo-header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: 2rem;
+    }
+
+    .demo-controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .demo-btn {
+      padding: 0.75rem 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .demo-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .demo-btn.active {
+      background: white;
+      color: #6366f1;
+    }
+
+    .demo-section {
+      display: none;
+      padding: 3rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .demo-section.active {
+      display: block;
+    }
+
+    /* Overview Section */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+    }
+
+    .overview-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .overview-card.highlight {
+      border: 2px solid #6366f1;
+    }
+
+    .overview-card h2 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .info-row:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .value {
+      color: #1e293b;
+      font-weight: 600;
+    }
+
+    /* Score Display */
+    .score-display {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .score-circle {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .score-circle svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .score-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .score-value {
+      display: block;
+      font-size: 3rem;
+      font-weight: 700;
+      color: #6366f1;
+    }
+
+    .score-label {
+      display: block;
+      color: #64748b;
+      font-size: 0.875rem;
+    }
+
+    .score-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .breakdown-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .breakdown-label {
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+
+    .breakdown-bar {
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1s ease;
+    }
+
+    /* Financial Metrics */
+    .financial-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .metric-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 2px solid transparent;
+    }
+
+    .metric-item.critical {
+      border-color: #ef4444;
+      background: #fef2f2;
+    }
+
+    .metric-item.warning {
+      border-color: #f59e0b;
+      background: #fffbeb;
+    }
+
+    .metric-item.success {
+      border-color: #10b981;
+      background: #f0fdf4;
+    }
+
+    .metric-item.info {
+      border-color: #6366f1;
+      background: #f0f9ff;
+    }
+
+    .metric-icon {
+      font-size: 2rem;
+    }
+
+    .metric-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .metric-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .metric-label {
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+
+    /* Findings Section */
+    .findings-container {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .findings-summary {
+      margin-bottom: 2rem;
+    }
+
+    .findings-summary h2 {
+      font-size: 2rem;
+      color: #1e293b;
+      margin-bottom: 1.5rem;
+    }
+
+    .findings-stats {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-card {
+      flex: 1;
+      min-width: 120px;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .stat-card.critical {
+      background: #fef2f2;
+      border: 2px solid #ef4444;
+    }
+
+    .stat-card.high {
+      background: #fffbeb;
+      border: 2px solid #f59e0b;
+    }
+
+    .stat-card.medium {
+      background: #fefce8;
+      border: 2px solid #facc15;
+    }
+
+    .stat-card.low {
+      background: #f0f9ff;
+      border: 2px solid #3b82f6;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 0.875rem;
+      color: #64748b;
+      margin-top: 0.5rem;
+    }
+
+    .findings-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .finding-item {
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .finding-item:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .finding-item.critical {
+      border-left: 6px solid #ef4444;
+    }
+
+    .finding-item.high {
+      border-left: 6px solid #f59e0b;
+    }
+
+    .finding-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .finding-icon {
+      font-size: 1.5rem;
+    }
+
+    .finding-header h3 {
+      flex: 1;
+      font-size: 1.25rem;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    .finding-badge {
+      padding: 0.25rem 0.75rem;
+      background: #ef4444;
+      color: white;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .finding-badge.high {
+      background: #f59e0b;
+    }
+
+    .finding-item p {
+      color: #64748b;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .finding-impact {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      font-size: 0.875rem;
+      color: #475569;
+    }
+
+    /* Metrics Section */
+    .metrics-container {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .metrics-container h2 {
+      font-size: 2rem;
+      color: #1e293b;
+      margin-bottom: 2rem;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .metric-card {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .metric-card h3 {
+      font-size: 1.125rem;
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+
+    .live-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .feed-item {
+      padding: 0.75rem;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+    }
+
+    .feed-item.success {
+      background: #f0fdf4;
+      border-left: 3px solid #10b981;
+    }
+
+    .feed-item.warning {
+      background: #fffbeb;
+      border-left: 3px solid #f59e0b;
+    }
+
+    .feed-item.info {
+      background: #f0f9ff;
+      border-left: 3px solid #3b82f6;
+    }
+
+    .feed-item.critical {
+      background: #fef2f2;
+      border-left: 3px solid #ef4444;
+    }
+
+    .feed-time {
+      color: #94a3b8;
+      font-size: 0.75rem;
+    }
+
+    .feed-text {
+      flex: 1;
+      margin-left: 1rem;
+      color: #475569;
+    }
+
+    .region-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .region-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+    }
+
+    .region-score {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.125rem;
+    }
+
+    .region-score.good {
+      background: #d1fae5;
+      color: #059669;
+      border: 2px solid #10b981;
+    }
+
+    .region-score.medium {
+      background: #fed7aa;
+      color: #c2410c;
+      border: 2px solid #f59e0b;
+    }
+
+    .region-score.poor {
+      background: #fee2e2;
+      color: #dc2626;
+      border: 2px solid #ef4444;
+    }
+
+    .region-name {
+      flex: 1;
+      color: #475569;
+      font-size: 0.875rem;
+    }
+
+    .protection-legend {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+    }
+
+    /* Roadmap Section */
+    .roadmap-container {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .roadmap-container h2 {
+      font-size: 2rem;
+      color: #1e293b;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .roadmap-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .package-card {
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .package-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    }
+
+    .package-card.gold {
+      background: linear-gradient(135deg, #fef3c7 0%, #fbbf24 100%);
+      border: 2px solid #f59e0b;
+    }
+
+    .package-card.silver {
+      background: linear-gradient(135deg, #e5e7eb 0%, #94a3b8 100%);
+      border: 2px solid #64748b;
+    }
+
+    .package-card.bronze {
+      background: linear-gradient(135deg, #fed7aa 0%, #ea580c 100%);
+      border: 2px solid #c2410c;
+    }
+
+    .package-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .package-icon {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    .package-header h3 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .package-price {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .package-benefits {
+      margin-bottom: 1.5rem;
+    }
+
+    .package-benefits h4 {
+      font-size: 1rem;
+      color: #475569;
+      margin-bottom: 1rem;
+    }
+
+    .package-benefits ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .package-benefits li {
+      padding: 0.5rem 0;
+      color: #1e293b;
+      font-size: 0.875rem;
+    }
+
+    .package-metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .package-metrics .metric {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+    }
+
+    .metric-label {
+      color: #475569;
+    }
+
+    .metric-value {
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    /* Timeline */
+    .timeline-section {
+      margin-top: 3rem;
+    }
+
+    .timeline-section h3 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      position: relative;
+    }
+
+    .timeline-item {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .timeline-marker {
+      background: #6366f1;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .timeline-content h4 {
+      font-size: 1.125rem;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-content p {
+      color: #64748b;
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .demo-header h1 {
+        font-size: 2rem;
+      }
+
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .score-display {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .score-circle {
+        margin: 0 auto;
+      }
+
+      .financial-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .region-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .roadmap-options {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script>
+    // View switching
+    document.querySelectorAll('.demo-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const view = btn.dataset.view;
+        
+        // Update active button
+        document.querySelectorAll('.demo-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Update active section
+        document.querySelectorAll('.demo-section').forEach(section => {
+          section.classList.remove('active');
+        });
+        document.getElementById(`${view}-section`).classList.add('active');
+      });
+    });
+
+    // Animate score circle on load
+    window.addEventListener('load', () => {
+      const scoreCircle = document.querySelector('.score-circle circle:nth-child(2)');
+      if (scoreCircle) {
+        setTimeout(() => {
+          scoreCircle.style.transition = 'stroke-dashoffset 2s ease-in-out';
+        }, 500);
+      }
+    });
+
+    // Draw protection chart
+    const canvas = document.getElementById('protectionChart');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      const width = 300;
+      const height = 200;
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, width, height);
+      
+      // Data
+      const data = [
+        { label: 'Fully Protected', value: 4400, color: '#10b981' },
+        { label: 'Partial', value: 400, color: '#f59e0b' },
+        { label: 'Unprotected', value: 200, color: '#ef4444' }
+      ];
+      
+      const total = data.reduce((sum, item) => sum + item.value, 0);
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const radius = Math.min(width, height) / 2 - 20;
+      
+      let startAngle = -Math.PI / 2;
+      
+      data.forEach(item => {
+        const sliceAngle = (item.value / total) * 2 * Math.PI;
+        
+        // Draw slice
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+        ctx.closePath();
+        ctx.fillStyle = item.color;
+        ctx.fill();
+        
+        // Draw white border
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        startAngle += sliceAngle;
+      });
+    }
+
+    // Simulate live feed updates
+    function updateLiveFeed() {
+      const feedItems = [
+        { type: 'success', text: 'Security policy updated successfully' },
+        { type: 'warning', text: 'Unusual sign-in activity detected' },
+        { type: 'info', text: 'Compliance scan completed' },
+        { type: 'critical', text: 'Privileged account without MFA' }
+      ];
+      
+      const feed = document.querySelector('.live-feed');
+      if (feed && Math.random() > 0.7) {
+        const randomItem = feedItems[Math.floor(Math.random() * feedItems.length)];
+        const newItem = document.createElement('div');
+        newItem.className = `feed-item ${randomItem.type}`;
+        newItem.innerHTML = `
+          <span class="feed-time">Just now</span>
+          <span class="feed-text">${randomItem.text}</span>
+        `;
+        
+        feed.insertBefore(newItem, feed.firstChild);
+        if (feed.children.length > 4) {
+          feed.removeChild(feed.lastChild);
+        }
+      }
+    }
+    
+    // Update feed every 5 seconds
+    setInterval(updateLiveFeed, 5000);
+  </script>
+</Layout>

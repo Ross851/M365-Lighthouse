@@ -1,0 +1,1261 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Global Data Sovereignty Dashboard - PowerReview">
+	<main class="sovereignty-main">
+		<div class="container">
+			<!-- Client Selection Dropdown -->
+			<div class="client-selector">
+				<label for="client-select">Select Client:</label>
+				<select id="client-select" class="client-dropdown">
+					<option value="globalcorp-apac">GlobalCorp Asia-Pacific (Financial Services)</option>
+					<option value="eurotech-global">EuroTech Global Solutions (Technology)</option>
+					<option value="manufacturing-usa">American Manufacturing Corp (Manufacturing)</option>
+					<option value="pharma-global">Global Pharma Research Ltd (Pharmaceutical)</option>
+				</select>
+			</div>
+
+			<!-- Dynamic Header with Client Info -->
+			<div class="dashboard-header">
+				<div class="client-badge">
+					<div class="client-avatar" id="client-avatar">🏢</div>
+					<div class="client-info">
+						<h1 id="client-name">GlobalCorp Asia-Pacific</h1>
+						<p id="client-details">
+							<span id="client-headquarters">Singapore</span> • 
+							<span id="client-industry">Financial Services</span> • 
+							<span id="client-employees">15,000 employees</span>
+						</p>
+						<div class="compliance-status">
+							<span class="status-indicator compliant" id="overall-status">●</span>
+							<span id="compliance-text">Fully Compliant Across All Jurisdictions</span>
+						</div>
+					</div>
+				</div>
+				<div class="dashboard-controls">
+					<button class="control-btn" id="workshop-mode" title="Workshop Presentation Mode">
+						📊 Workshop View
+					</button>
+					<button class="control-btn" id="audit-mode" title="Audit & Compliance View">
+						🔍 Audit View
+					</button>
+					<button class="control-btn" id="realtime-toggle" title="Real-time Updates">
+						⚡ Live Updates: ON
+					</button>
+					<button class="control-btn" id="export-btn" title="Export Dashboard">
+						📄 Export
+					</button>
+				</div>
+			</div>
+
+			<!-- Global Statistics Bar -->
+			<div class="global-stats">
+				<div class="stat-item">
+					<div class="stat-value" id="total-regions">9</div>
+					<div class="stat-label">Active Regions</div>
+				</div>
+				<div class="stat-item">
+					<div class="stat-value" id="total-records">9,280</div>
+					<div class="stat-label">Total Records</div>
+				</div>
+				<div class="stat-item">
+					<div class="stat-value" id="total-storage">12.8 GB</div>
+					<div class="stat-label">Total Storage</div>
+				</div>
+				<div class="stat-item">
+					<div class="stat-value" id="compliance-score">97%</div>
+					<div class="stat-label">Avg Compliance</div>
+				</div>
+				<div class="stat-item">
+					<div class="stat-value" id="active-flows">5</div>
+					<div class="stat-label">Data Flows</div>
+				</div>
+			</div>
+
+			<!-- Enhanced Global Map Visualization -->
+			<div class="global-map-container">
+				<div class="map-header">
+					<h2>Global Data Distribution & Sovereignty</h2>
+					<div class="map-legend">
+						<div class="legend-item">
+							<div class="legend-color primary"></div>
+							<span>Primary Region</span>
+						</div>
+						<div class="legend-item">
+							<div class="legend-color backup"></div>
+							<span>Backup Regions</span>
+						</div>
+						<div class="legend-item">
+							<div class="legend-color restricted"></div>
+							<span>Restricted/Isolated</span>
+						</div>
+						<div class="legend-item">
+							<div class="legend-color flow"></div>
+							<span>Data Flows</span>
+						</div>
+						<div class="legend-item">
+							<div class="legend-color inactive"></div>
+							<span>No Data</span>
+						</div>
+					</div>
+					<div class="map-controls">
+						<button id="zoom-in">🔍+</button>
+						<button id="zoom-out">🔍-</button>
+						<button id="reset-view">⌂</button>
+					</div>
+				</div>
+
+				<div class="interactive-world-map" id="world-map">
+					<!-- Enhanced SVG World Map -->
+					<svg viewBox="0 0 1200 600" class="world-svg" id="world-svg">
+						<!-- Background -->
+						<rect width="1200" height="600" fill="#f8fafc"/>
+						
+						<!-- Grid lines for reference -->
+						<defs>
+							<pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+								<path d="M 50 0 L 0 0 0 50" fill="none" stroke="#e5e7eb" stroke-width="1" opacity="0.3"/>
+							</pattern>
+							<marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+								<polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6" opacity="0.8"/>
+							</marker>
+							<marker id="blocked-marker" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+								<circle cx="4" cy="4" r="3" fill="#ef4444"/>
+								<path d="M2,2 L6,6 M6,2 L2,6" stroke="white" stroke-width="1.5"/>
+							</marker>
+						</defs>
+						<rect width="1200" height="600" fill="url(#grid)"/>
+
+						<!-- North America -->
+						<g class="region-group" data-region="us-west" data-region-name="US West">
+							<rect x="60" y="120" width="140" height="90" rx="15" class="region us-region clickable" />
+							<text x="130" y="155" text-anchor="middle" class="region-label">🇺🇸 US West</text>
+							<text x="130" y="175" text-anchor="middle" class="region-data" id="us-west-data">Loading...</text>
+							<text x="130" y="190" text-anchor="middle" class="region-compliance" id="us-west-compliance">--</text>
+						</g>
+
+						<g class="region-group" data-region="us-east" data-region-name="US East">
+							<rect x="220" y="140" width="120" height="80" rx="12" class="region us-region clickable" />
+							<text x="280" y="170" text-anchor="middle" class="region-label">🇺🇸 US East</text>
+							<text x="280" y="190" text-anchor="middle" class="region-data" id="us-east-data">Loading...</text>
+							<text x="280" y="205" text-anchor="middle" class="region-compliance" id="us-east-compliance">--</text>
+						</g>
+
+						<g class="region-group" data-region="canada" data-region-name="Canada">
+							<rect x="140" y="80" width="120" height="70" rx="12" class="region ca-region clickable" />
+							<text x="200" y="110" text-anchor="middle" class="region-label">🇨🇦 Canada</text>
+							<text x="200" y="125" text-anchor="middle" class="region-data" id="canada-data">Loading...</text>
+							<text x="200" y="140" text-anchor="middle" class="region-compliance" id="canada-compliance">--</text>
+						</g>
+
+						<!-- Europe -->
+						<g class="region-group" data-region="eu-central" data-region-name="EU Central">
+							<rect x="540" y="100" width="100" height="75" rx="12" class="region eu-region clickable" />
+							<text x="590" y="130" text-anchor="middle" class="region-label">🇪🇺 EU Central</text>
+							<text x="590" y="150" text-anchor="middle" class="region-data" id="eu-central-data">Loading...</text>
+							<text x="590" y="165" text-anchor="middle" class="region-compliance" id="eu-central-compliance">--</text>
+						</g>
+
+						<g class="region-group" data-region="eu-west" data-region-name="EU West">
+							<rect x="480" y="120" width="90" height="70" rx="12" class="region eu-region clickable" />
+							<text x="525" y="145" text-anchor="middle" class="region-label">🇮🇪 EU West</text>
+							<text x="525" y="160" text-anchor="middle" class="region-data" id="eu-west-data">Loading...</text>
+							<text x="525" y="175" text-anchor="middle" class="region-compliance" id="eu-west-compliance">--</text>
+						</g>
+
+						<g class="region-group" data-region="uk" data-region-name="United Kingdom">
+							<rect x="450" y="110" width="80" height="60" rx="10" class="region uk-region clickable" />
+							<text x="490" y="135" text-anchor="middle" class="region-label">🇬🇧 UK</text>
+							<text x="490" y="150" text-anchor="middle" class="region-data" id="uk-data">Loading...</text>
+							<text x="490" y="165" text-anchor="middle" class="region-compliance" id="uk-compliance">--</text>
+						</g>
+
+						<!-- Asia Pacific -->
+						<g class="region-group primary-region" data-region="singapore" data-region-name="Singapore">
+							<rect x="850" y="340" width="110" height="85" rx="15" class="region apac-region primary clickable" />
+							<text x="905" y="370" text-anchor="middle" class="region-label">🇸🇬 Singapore</text>
+							<text x="905" y="390" text-anchor="middle" class="region-data" id="singapore-data">Loading...</text>
+							<text x="905" y="405" text-anchor="middle" class="region-compliance" id="singapore-compliance">--</text>
+							<text x="905" y="420" text-anchor="middle" class="primary-badge">PRIMARY</text>
+						</g>
+
+						<g class="region-group restricted-region" data-region="japan" data-region-name="Japan">
+							<rect x="950" y="240" width="100" height="75" rx="15" class="region apac-region restricted clickable" />
+							<text x="1000" y="270" text-anchor="middle" class="region-label">🇯🇵 Japan</text>
+							<text x="1000" y="290" text-anchor="middle" class="region-data" id="japan-data">Loading...</text>
+							<text x="1000" y="305" text-anchor="middle" class="region-compliance" id="japan-compliance">--</text>
+							<text x="1000" y="320" text-anchor="middle" class="restricted-badge">ISOLATED</text>
+						</g>
+
+						<g class="region-group backup-region" data-region="australia" data-region-name="Australia">
+							<rect x="920" y="440" width="120" height="85" rx="15" class="region apac-region backup clickable" />
+							<text x="980" y="475" text-anchor="middle" class="region-label">🇦🇺 Australia</text>
+							<text x="980" y="495" text-anchor="middle" class="region-data" id="australia-data">Loading...</text>
+							<text x="980" y="510" text-anchor="middle" class="region-compliance" id="australia-compliance">--</text>
+						</g>
+
+						<g class="region-group" data-region="south-korea" data-region-name="South Korea">
+							<rect x="920" y="200" width="90" height="70" rx="12" class="region apac-region clickable" />
+							<text x="965" y="225" text-anchor="middle" class="region-label">🇰🇷 Korea</text>
+							<text x="965" y="245" text-anchor="middle" class="region-data" id="south-korea-data">Loading...</text>
+							<text x="965" y="260" text-anchor="middle" class="region-compliance" id="south-korea-compliance">--</text>
+						</g>
+
+						<!-- Southeast Asia -->
+						<g class="region-group" data-region="thailand" data-region-name="Thailand">
+							<rect x="800" y="300" width="85" height="60" rx="10" class="region sea-region clickable" />
+							<text x="842" y="325" text-anchor="middle" class="region-label">🇹🇭 Thailand</text>
+							<text x="842" y="340" text-anchor="middle" class="region-data" id="thailand-data">Loading...</text>
+							<text x="842" y="355" text-anchor="middle" class="region-compliance" id="thailand-compliance">--</text>
+						</g>
+
+						<g class="region-group backup-region" data-region="malaysia" data-region-name="Malaysia">
+							<rect x="820" y="360" width="85" height="60" rx="10" class="region sea-region backup clickable" />
+							<text x="862" y="385" text-anchor="middle" class="region-label">🇲🇾 Malaysia</text>
+							<text x="862" y="400" text-anchor="middle" class="region-data" id="malaysia-data">Loading...</text>
+							<text x="862" y="415" text-anchor="middle" class="region-compliance" id="malaysia-compliance">--</text>
+						</g>
+
+						<g class="region-group" data-region="philippines" data-region-name="Philippines">
+							<rect x="890" y="320" width="85" height="60" rx="10" class="region sea-region clickable" />
+							<text x="932" y="345" text-anchor="middle" class="region-label">🇵🇭 Philippines</text>
+							<text x="932" y="360" text-anchor="middle" class="region-data" id="philippines-data">Loading...</text>
+							<text x="932" y="375" text-anchor="middle" class="region-compliance" id="philippines-compliance">--</text>
+						</g>
+
+						<g class="region-group" data-region="indonesia" data-region-name="Indonesia">
+							<rect x="860" y="390" width="85" height="60" rx="10" class="region sea-region clickable" />
+							<text x="902" y="415" text-anchor="middle" class="region-label">🇮🇩 Indonesia</text>
+							<text x="902" y="430" text-anchor="middle" class="region-data" id="indonesia-data">Loading...</text>
+							<text x="902" y="445" text-anchor="middle" class="region-compliance" id="indonesia-compliance">--</text>
+						</g>
+
+						<g class="region-group" data-region="vietnam" data-region-name="Vietnam">
+							<rect x="810" y="280" width="80" height="55" rx="10" class="region sea-region clickable" />
+							<text x="850" y="305" text-anchor="middle" class="region-label">🇻🇳 Vietnam</text>
+							<text x="850" y="320" text-anchor="middle" class="region-data" id="vietnam-data">Loading...</text>
+							<text x="850" y="330" text-anchor="middle" class="region-compliance" id="vietnam-compliance">--</text>
+						</g>
+
+						<!-- Dynamic Data Flow Lines (will be populated by JavaScript) -->
+						<g id="data-flows-container">
+							<!-- Data flows will be dynamically generated here -->
+						</g>
+
+						<!-- Risk Indicators -->
+						<g id="risk-indicators">
+							<!-- Risk indicators will be dynamically placed -->
+						</g>
+					</svg>
+				</div>
+			</div>
+
+			<!-- Enhanced Detail Panels -->
+			<div class="sovereignty-panels">
+				<!-- Real-time Activity Feed -->
+				<div class="panel activity-panel">
+					<div class="panel-header">
+						<h3>🔄 Real-time Activity</h3>
+						<div class="activity-controls">
+							<button id="pause-activity">⏸️ Pause</button>
+							<button id="filter-activity">🔍 Filter</button>
+						</div>
+					</div>
+					<div class="activity-feed" id="activity-feed">
+						<div class="activity-item loading">
+							<div class="activity-time">Loading...</div>
+							<div class="activity-content">Initializing real-time feed...</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Compliance Status -->
+				<div class="panel compliance-panel">
+					<div class="panel-header">
+						<h3>🛡️ Compliance Dashboard</h3>
+						<div class="status-badge" id="overall-compliance-badge">LOADING</div>
+					</div>
+					<div class="compliance-grid" id="compliance-grid">
+						<!-- Will be populated dynamically -->
+					</div>
+				</div>
+
+				<!-- Data Flow Analysis -->
+				<div class="panel dataflow-panel">
+					<div class="panel-header">
+						<h3>🌐 Cross-Border Data Flows</h3>
+						<select id="flow-filter">
+							<option value="all">All Flows</option>
+							<option value="active">Active Only</option>
+							<option value="blocked">Blocked Only</option>
+							<option value="backup">Backups Only</option>
+						</select>
+					</div>
+					<div class="dataflow-list" id="dataflow-list">
+						<!-- Will be populated dynamically -->
+					</div>
+				</div>
+
+				<!-- Risk Assessment -->
+				<div class="panel risk-panel">
+					<div class="panel-header">
+						<h3>⚠️ Risk Assessment</h3>
+						<div class="risk-score" id="overall-risk-score">LOW</div>
+					</div>
+					<div class="risk-factors" id="risk-factors">
+						<!-- Will be populated dynamically -->
+					</div>
+				</div>
+			</div>
+
+			<!-- Region Detail Modal -->
+			<div id="region-detail-modal" class="modal">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h2 id="modal-region-name">Region Details</h2>
+						<span class="close-modal">&times;</span>
+					</div>
+					<div class="modal-body" id="modal-body">
+						<!-- Dynamic content -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<style>
+		.sovereignty-main {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			min-height: 100vh;
+			padding: 20px;
+		}
+
+		.container {
+			max-width: 1400px;
+			margin: 0 auto;
+		}
+
+		.client-selector {
+			background: white;
+			padding: 15px;
+			border-radius: 10px;
+			margin-bottom: 20px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		.client-dropdown {
+			width: 100%;
+			padding: 10px;
+			border: 2px solid #e5e7eb;
+			border-radius: 8px;
+			font-size: 16px;
+			font-weight: 500;
+		}
+
+		.dashboard-header {
+			background: white;
+			border-radius: 15px;
+			padding: 25px;
+			margin-bottom: 20px;
+			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.client-badge {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+		}
+
+		.client-avatar {
+			width: 80px;
+			height: 80px;
+			background: linear-gradient(135deg, #667eea, #764ba2);
+			border-radius: 20px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 40px;
+		}
+
+		.client-info h1 {
+			margin: 0;
+			font-size: 2.2em;
+			color: #1f2937;
+			font-weight: 700;
+		}
+
+		.client-info p {
+			margin: 8px 0;
+			font-size: 1.1em;
+			color: #6b7280;
+			font-weight: 500;
+		}
+
+		.compliance-status {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			margin-top: 10px;
+		}
+
+		.status-indicator {
+			font-size: 1.5em;
+		}
+
+		.status-indicator.compliant { color: #10b981; }
+		.status-indicator.warning { color: #f59e0b; }
+		.status-indicator.error { color: #ef4444; }
+
+		.dashboard-controls {
+			display: flex;
+			gap: 15px;
+		}
+
+		.control-btn {
+			background: linear-gradient(135deg, #667eea, #764ba2);
+			color: white;
+			border: none;
+			padding: 12px 20px;
+			border-radius: 10px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.control-btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+		}
+
+		.global-stats {
+			display: grid;
+			grid-template-columns: repeat(5, 1fr);
+			gap: 20px;
+			margin-bottom: 25px;
+		}
+
+		.stat-item {
+			background: white;
+			padding: 20px;
+			border-radius: 12px;
+			text-align: center;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		.stat-value {
+			font-size: 2.5em;
+			font-weight: 800;
+			color: #1f2937;
+			margin-bottom: 5px;
+		}
+
+		.stat-label {
+			font-size: 0.9em;
+			color: #6b7280;
+			font-weight: 600;
+		}
+
+		.global-map-container {
+			background: white;
+			border-radius: 15px;
+			padding: 25px;
+			margin-bottom: 25px;
+			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+		}
+
+		.map-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 20px;
+		}
+
+		.map-header h2 {
+			margin: 0;
+			color: #1f2937;
+			font-size: 1.8em;
+			font-weight: 700;
+		}
+
+		.map-legend {
+			display: flex;
+			gap: 20px;
+			align-items: center;
+		}
+
+		.legend-item {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.legend-color {
+			width: 16px;
+			height: 16px;
+			border-radius: 4px;
+		}
+
+		.legend-color.primary { background: #10b981; }
+		.legend-color.backup { background: #3b82f6; }
+		.legend-color.restricted { background: #ef4444; }
+		.legend-color.flow { background: #8b5cf6; }
+		.legend-color.inactive { background: #d1d5db; }
+
+		.map-controls {
+			display: flex;
+			gap: 10px;
+		}
+
+		.map-controls button {
+			background: #f3f4f6;
+			border: 1px solid #d1d5db;
+			padding: 8px 12px;
+			border-radius: 6px;
+			cursor: pointer;
+		}
+
+		.interactive-world-map {
+			width: 100%;
+			height: 600px;
+			border: 2px solid #e5e7eb;
+			border-radius: 12px;
+			overflow: hidden;
+		}
+
+		.world-svg {
+			width: 100%;
+			height: 100%;
+		}
+
+		.region.clickable {
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.region.clickable:hover {
+			stroke: #1f2937;
+			stroke-width: 3;
+			filter: brightness(1.1);
+		}
+
+		.region.us-region { fill: #ddd6fe; }
+		.region.ca-region { fill: #fecaca; }
+		.region.eu-region { fill: #bfdbfe; }
+		.region.uk-region { fill: #a7f3d0; }
+		.region.apac-region { fill: #fed7aa; }
+		.region.sea-region { fill: #fde68a; }
+
+		.region.primary { fill: #10b981; }
+		.region.backup { fill: #3b82f6; }
+		.region.restricted { fill: #ef4444; }
+
+		.region-label {
+			font-weight: 600;
+			font-size: 12px;
+			fill: #1f2937;
+		}
+
+		.region-data {
+			font-size: 10px;
+			fill: #4b5563;
+			font-weight: 500;
+		}
+
+		.region-compliance {
+			font-size: 9px;
+			fill: #059669;
+			font-weight: 600;
+		}
+
+		.primary-badge, .restricted-badge {
+			font-size: 8px;
+			font-weight: 700;
+			fill: white;
+		}
+
+		.sovereignty-panels {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 20px;
+		}
+
+		.panel {
+			background: white;
+			border-radius: 12px;
+			padding: 20px;
+			box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		}
+
+		.panel-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 15px;
+			padding-bottom: 10px;
+			border-bottom: 2px solid #f3f4f6;
+		}
+
+		.panel-header h3 {
+			margin: 0;
+			color: #1f2937;
+			font-size: 1.3em;
+			font-weight: 700;
+		}
+
+		.status-badge {
+			padding: 6px 12px;
+			border-radius: 20px;
+			font-size: 0.8em;
+			font-weight: 700;
+			text-transform: uppercase;
+		}
+
+		.status-badge.compliant {
+			background: #d1fae5;
+			color: #059669;
+		}
+
+		.activity-feed {
+			max-height: 300px;
+			overflow-y: auto;
+		}
+
+		.activity-item {
+			padding: 12px;
+			border-left: 4px solid #e5e7eb;
+			margin-bottom: 10px;
+			background: #f9fafb;
+			border-radius: 0 8px 8px 0;
+		}
+
+		.activity-item.success { border-left-color: #10b981; }
+		.activity-item.warning { border-left-color: #f59e0b; }
+		.activity-item.error { border-left-color: #ef4444; }
+		.activity-item.info { border-left-color: #3b82f6; }
+
+		.activity-time {
+			font-size: 0.8em;
+			color: #6b7280;
+			font-weight: 600;
+		}
+
+		.activity-content {
+			margin-top: 4px;
+			color: #1f2937;
+			font-weight: 500;
+		}
+
+		.compliance-grid {
+			display: grid;
+			gap: 15px;
+		}
+
+		.compliance-item {
+			display: flex;
+			align-items: center;
+			gap: 15px;
+			padding: 15px;
+			background: #f9fafb;
+			border-radius: 10px;
+		}
+
+		.compliance-flag {
+			font-size: 2em;
+		}
+
+		.compliance-info h4 {
+			margin: 0;
+			color: #1f2937;
+			font-weight: 600;
+		}
+
+		.compliance-score {
+			font-size: 1.5em;
+			font-weight: 800;
+			color: #10b981;
+		}
+
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1000;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		.modal-content {
+			background-color: white;
+			margin: 5% auto;
+			padding: 0;
+			border-radius: 15px;
+			width: 80%;
+			max-width: 800px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+		}
+
+		.modal-header {
+			background: linear-gradient(135deg, #667eea, #764ba2);
+			color: white;
+			padding: 20px;
+			border-radius: 15px 15px 0 0;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.close-modal {
+			font-size: 28px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+
+		.modal-body {
+			padding: 20px;
+			max-height: 500px;
+			overflow-y: auto;
+		}
+
+		@media (max-width: 768px) {
+			.global-stats {
+				grid-template-columns: repeat(2, 1fr);
+			}
+			
+			.sovereignty-panels {
+				grid-template-columns: 1fr;
+			}
+			
+			.dashboard-header {
+				flex-direction: column;
+				gap: 20px;
+			}
+		}
+	</style>
+
+	<script>
+		// Import mock data generator functions
+		import('../../lib/mock-data-generator.js').then(module => {
+			window.mockDataGenerator = module;
+			initializeDashboard();
+		});
+
+		let currentClient = 'globalcorp-apac';
+		let activityPaused = false;
+
+		function initializeDashboard() {
+			// Initialize client selector
+			const clientSelect = document.getElementById('client-select');
+			clientSelect.addEventListener('change', (e) => {
+				currentClient = e.target.value;
+				loadClientData();
+			});
+
+			// Load initial data
+			loadClientData();
+
+			// Start real-time updates
+			startRealTimeUpdates();
+
+			// Add event listeners
+			setupEventListeners();
+		}
+
+		function loadClientData() {
+			const clientData = window.mockDataGenerator.getClientData(currentClient);
+			if (!clientData) return;
+
+			// Update header
+			updateClientHeader(clientData);
+
+			// Update global stats
+			updateGlobalStats(clientData);
+
+			// Update map regions
+			updateMapRegions(clientData);
+
+			// Update data flows
+			updateDataFlows(clientData);
+
+			// Update compliance panel
+			updateCompliancePanel(clientData);
+
+			// Update risk assessment
+			updateRiskAssessment(clientData);
+
+			// Update data flow list
+			updateDataFlowList(clientData);
+		}
+
+		function updateClientHeader(clientData) {
+			document.getElementById('client-name').textContent = clientData.organizationName;
+			document.getElementById('client-headquarters').textContent = clientData.headquarters;
+			document.getElementById('client-industry').textContent = clientData.industry;
+			document.getElementById('client-employees').textContent = `${clientData.employeeCount.toLocaleString()} employees`;
+			
+			// Set industry-specific avatar
+			const avatarMap = {
+				'Financial Services': '🏦',
+				'Technology': '💻',
+				'Manufacturing': '🏭',
+				'Pharmaceutical': '💊'
+			};
+			document.getElementById('client-avatar').textContent = avatarMap[clientData.industry] || '🏢';
+		}
+
+		function updateGlobalStats(clientData) {
+			const activeRegions = Object.keys(clientData.dataDistribution).length;
+			const totalRecords = Object.values(clientData.dataDistribution).reduce((sum, region) => 
+				sum + region.customer + region.assessment + region.files, 0);
+			const totalStorage = Object.values(clientData.dataDistribution).reduce((sum, region) => 
+				sum + region.totalGB, 0);
+			const avgCompliance = Math.round(
+				Object.values(clientData.complianceScores).reduce((sum, scores) => 
+					sum + Object.values(scores).reduce((s, score) => s + score, 0) / Object.keys(scores).length, 0) / 
+				Object.keys(clientData.complianceScores).length
+			);
+
+			document.getElementById('total-regions').textContent = activeRegions;
+			document.getElementById('total-records').textContent = totalRecords.toLocaleString();
+			document.getElementById('total-storage').textContent = `${totalStorage.toFixed(1)} GB`;
+			document.getElementById('compliance-score').textContent = `${avgCompliance}%`;
+			document.getElementById('active-flows').textContent = clientData.dataFlows.filter(f => f.status === 'active').length;
+		}
+
+		function updateMapRegions(clientData) {
+			// Clear all regions first
+			const allRegions = ['us-west', 'us-east', 'canada', 'eu-central', 'eu-west', 'uk', 
+							  'singapore', 'japan', 'australia', 'south-korea', 'thailand', 
+							  'malaysia', 'philippines', 'indonesia', 'vietnam'];
+
+			allRegions.forEach(region => {
+				const dataElement = document.getElementById(`${region}-data`);
+				const complianceElement = document.getElementById(`${region}-compliance`);
+				const regionElement = document.querySelector(`[data-region="${region}"] .region`);
+				
+				if (clientData.dataDistribution[region]) {
+					const data = clientData.dataDistribution[region];
+					const totalRecords = data.customer + data.assessment + data.files;
+					
+					if (dataElement) {
+						dataElement.textContent = totalRecords > 0 ? `${totalRecords.toLocaleString()} records` : 'Backup only';
+					}
+					
+					if (complianceElement && clientData.complianceScores[region]) {
+						const scores = Object.values(clientData.complianceScores[region]);
+						const avgScore = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+						complianceElement.textContent = `${avgScore}% compliant`;
+					}
+					
+					// Update region styling based on role
+					if (regionElement) {
+						regionElement.classList.remove('inactive');
+						// Primary region styling is handled by existing classes
+					}
+				} else {
+					if (dataElement) dataElement.textContent = 'No data';
+					if (complianceElement) complianceElement.textContent = '--';
+					if (regionElement) regionElement.classList.add('inactive');
+				}
+			});
+		}
+
+		function updateDataFlows(clientData) {
+			const flowContainer = document.getElementById('data-flows-container');
+			flowContainer.innerHTML = '';
+
+			clientData.dataFlows.forEach((flow, index) => {
+				if (flow.status === 'active') {
+					const path = createDataFlowPath(flow.source, flow.target, flow.type);
+					if (path) {
+						flowContainer.appendChild(path);
+					}
+				}
+			});
+		}
+
+		function createDataFlowPath(source, target, type) {
+			// Simplified coordinate mapping - in production, use precise coordinates
+			const coordinates = {
+				'singapore': { x: 905, y: 380 },
+				'australia': { x: 980, y: 480 },
+				'malaysia': { x: 862, y: 390 },
+				'japan': { x: 1000, y: 280 },
+				'thailand': { x: 842, y: 330 },
+				'us-east': { x: 280, y: 180 },
+				'us-west': { x: 130, y: 160 },
+				'eu-central': { x: 590, y: 140 }
+			};
+
+			const sourceCoords = coordinates[source];
+			const targetCoords = coordinates[target];
+
+			if (!sourceCoords || !targetCoords) return null;
+
+			const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+			const d = `M${sourceCoords.x},${sourceCoords.y} Q${(sourceCoords.x + targetCoords.x) / 2},${Math.min(sourceCoords.y, targetCoords.y) - 50} ${targetCoords.x},${targetCoords.y}`;
+			
+			path.setAttribute('d', d);
+			path.setAttribute('stroke', type === 'backup' ? '#10b981' : type === 'sync' ? '#3b82f6' : '#8b5cf6');
+			path.setAttribute('stroke-width', '3');
+			path.setAttribute('fill', 'none');
+			path.setAttribute('marker-end', 'url(#arrowhead)');
+			path.classList.add('data-flow', `${type}-flow`);
+
+			// Add animation
+			const length = path.getTotalLength();
+			path.style.strokeDasharray = `${length}`;
+			path.style.strokeDashoffset = `${length}`;
+			path.style.animation = 'drawPath 2s ease-in-out forwards';
+
+			return path;
+		}
+
+		function updateCompliancePanel(clientData) {
+			const grid = document.getElementById('compliance-grid');
+			grid.innerHTML = '';
+
+			Object.entries(clientData.complianceScores).forEach(([region, scores]) => {
+				const avgScore = Math.round(Object.values(scores).reduce((a, b) => a + b, 0) / Object.values(scores).length);
+				const totalRecords = clientData.dataDistribution[region] ? 
+					Object.values(clientData.dataDistribution[region]).reduce((a, b) => typeof b === 'number' ? a + b : a, 0) : 0;
+
+				const item = document.createElement('div');
+				item.className = 'compliance-item';
+				
+				const regionFlags = {
+					'singapore': '🇸🇬', 'japan': '🇯🇵', 'australia': '🇦🇺', 'us-east': '🇺🇸',
+					'us-west': '🇺🇸', 'eu-central': '🇪🇺', 'eu-west': '🇮🇪', 'uk': '🇬🇧',
+					'canada': '🇨🇦', 'south-korea': '🇰🇷', 'thailand': '🇹🇭', 'malaysia': '🇲🇾',
+					'philippines': '🇵🇭', 'indonesia': '🇮🇩', 'vietnam': '🇻🇳'
+				};
+
+				const standards = Object.keys(scores).join(', ');
+				
+				item.innerHTML = `
+					<div class="compliance-flag">${regionFlags[region] || '🌍'}</div>
+					<div class="compliance-info">
+						<h4>${region.replace('-', ' ').toUpperCase()}</h4>
+						<div class="compliance-score">${avgScore}%</div>
+						<p>${standards}</p>
+						<small>${totalRecords.toLocaleString()} records</small>
+					</div>
+				`;
+
+				grid.appendChild(item);
+			});
+
+			// Update overall compliance badge
+			const overallScore = Math.round(
+				Object.values(clientData.complianceScores).reduce((sum, scores) => 
+					sum + Object.values(scores).reduce((s, score) => s + score, 0) / Object.keys(scores).length, 0) / 
+				Object.keys(clientData.complianceScores).length
+			);
+
+			const badge = document.getElementById('overall-compliance-badge');
+			badge.textContent = overallScore >= 95 ? 'FULLY COMPLIANT' : overallScore >= 90 ? 'MOSTLY COMPLIANT' : 'NEEDS ATTENTION';
+			badge.className = `status-badge ${overallScore >= 95 ? 'compliant' : 'warning'}`;
+		}
+
+		function updateRiskAssessment(clientData) {
+			const container = document.getElementById('risk-factors');
+			container.innerHTML = '';
+
+			clientData.riskFactors.forEach(risk => {
+				const item = document.createElement('div');
+				item.className = `risk-item risk-${risk.level}`;
+				item.innerHTML = `
+					<div class="risk-header">
+						<span class="risk-region">${risk.region.toUpperCase()}</span>
+						<span class="risk-level risk-${risk.level}">${risk.level.toUpperCase()}</span>
+					</div>
+					<div class="risk-description">${risk.description}</div>
+					<div class="risk-impact">Impact: ${risk.impact}</div>
+					<div class="risk-mitigation">Mitigation: ${risk.mitigation}</div>
+				`;
+				container.appendChild(item);
+			});
+
+			// Calculate overall risk
+			const riskLevels = { low: 1, medium: 2, high: 3, critical: 4 };
+			const avgRisk = clientData.riskFactors.reduce((sum, risk) => sum + riskLevels[risk.level], 0) / clientData.riskFactors.length;
+			const overallRisk = avgRisk <= 1.5 ? 'LOW' : avgRisk <= 2.5 ? 'MEDIUM' : 'HIGH';
+			
+			document.getElementById('overall-risk-score').textContent = overallRisk;
+		}
+
+		function updateDataFlowList(clientData) {
+			const container = document.getElementById('dataflow-list');
+			container.innerHTML = '';
+
+			clientData.dataFlows.forEach(flow => {
+				const item = document.createElement('div');
+				item.className = `dataflow-item flow-${flow.status}`;
+				item.innerHTML = `
+					<div class="flow-header">
+						<span class="flow-route">${flow.source.toUpperCase()} → ${flow.target.toUpperCase()}</span>
+						<span class="flow-status status-${flow.status}">${flow.status.toUpperCase()}</span>
+					</div>
+					<div class="flow-details">
+						<span class="flow-type">${flow.type.toUpperCase()}</span> • 
+						<span class="flow-volume">${flow.dataVolume} records</span> • 
+						<span class="flow-frequency">${flow.frequency}</span>
+					</div>
+					<div class="flow-encryption">${flow.encryption}</div>
+				`;
+				container.appendChild(item);
+			});
+		}
+
+		function startRealTimeUpdates() {
+			// Generate real-time activity
+			setInterval(() => {
+				if (!activityPaused) {
+					addActivityItem();
+				}
+			}, 5000);
+
+			// Initial activity load
+			loadRecentActivity();
+		}
+
+		function loadRecentActivity() {
+			const activities = window.mockDataGenerator.generateRecentActivity(currentClient, 24);
+			const feed = document.getElementById('activity-feed');
+			feed.innerHTML = '';
+
+			activities.slice(0, 10).forEach(activity => {
+				addActivityItemToFeed(activity);
+			});
+		}
+
+		function addActivityItem() {
+			const activities = window.mockDataGenerator.generateRecentActivity(currentClient, 1);
+			if (activities.length > 0) {
+				addActivityItemToFeed(activities[0]);
+			}
+		}
+
+		function addActivityItemToFeed(activity) {
+			const feed = document.getElementById('activity-feed');
+			const item = document.createElement('div');
+			item.className = `activity-item ${activity.severity}`;
+			
+			const timeAgo = getTimeAgo(new Date(activity.timestamp));
+			item.innerHTML = `
+				<div class="activity-time">${timeAgo} • ${activity.region.toUpperCase()}</div>
+				<div class="activity-content">${activity.details}</div>
+			`;
+
+			feed.insertBefore(item, feed.firstChild);
+
+			// Limit to 20 items
+			while (feed.children.length > 20) {
+				feed.removeChild(feed.lastChild);
+			}
+		}
+
+		function getTimeAgo(date) {
+			const now = new Date();
+			const diff = Math.floor((now - date) / 1000);
+			
+			if (diff < 60) return `${diff}s ago`;
+			if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+			if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+			return `${Math.floor(diff / 86400)}d ago`;
+		}
+
+		function setupEventListeners() {
+			// Region click handlers
+			document.querySelectorAll('.region.clickable').forEach(region => {
+				region.addEventListener('click', (e) => {
+					const regionGroup = e.target.closest('.region-group');
+					const regionCode = regionGroup.dataset.region;
+					const regionName = regionGroup.dataset.regionName;
+					showRegionDetail(regionCode, regionName);
+				});
+			});
+
+			// Activity controls
+			document.getElementById('pause-activity').addEventListener('click', () => {
+				activityPaused = !activityPaused;
+				const btn = document.getElementById('pause-activity');
+				btn.textContent = activityPaused ? '▶️ Resume' : '⏸️ Pause';
+			});
+
+			// Modal close
+			document.querySelector('.close-modal').addEventListener('click', () => {
+				document.getElementById('region-detail-modal').style.display = 'none';
+			});
+
+			// Click outside modal to close
+			window.addEventListener('click', (e) => {
+				const modal = document.getElementById('region-detail-modal');
+				if (e.target === modal) {
+					modal.style.display = 'none';
+				}
+			});
+		}
+
+		function showRegionDetail(regionCode, regionName) {
+			const clientData = window.mockDataGenerator.getClientData(currentClient);
+			const modal = document.getElementById('region-detail-modal');
+			const modalBody = document.getElementById('modal-body');
+			
+			document.getElementById('modal-region-name').textContent = `${regionName} Details`;
+
+			const regionData = clientData.dataDistribution[regionCode];
+			const complianceData = clientData.complianceScores[regionCode];
+
+			let content = `<h3>Data Distribution</h3>`;
+			
+			if (regionData) {
+				content += `
+					<div class="detail-stats">
+						<div class="detail-stat">
+							<span class="stat-label">Customer Records:</span>
+							<span class="stat-value">${regionData.customer.toLocaleString()}</span>
+						</div>
+						<div class="detail-stat">
+							<span class="stat-label">Assessments:</span>
+							<span class="stat-value">${regionData.assessment.toLocaleString()}</span>
+						</div>
+						<div class="detail-stat">
+							<span class="stat-label">Files:</span>
+							<span class="stat-value">${regionData.files.toLocaleString()}</span>
+						</div>
+						<div class="detail-stat">
+							<span class="stat-label">Total Storage:</span>
+							<span class="stat-value">${regionData.totalGB} GB</span>
+						</div>
+					</div>
+				`;
+			} else {
+				content += `<p>No data stored in this region.</p>`;
+			}
+
+			if (complianceData) {
+				content += `<h3>Compliance Standards</h3>`;
+				Object.entries(complianceData).forEach(([standard, score]) => {
+					content += `
+						<div class="compliance-detail">
+							<span class="standard-name">${standard}:</span>
+							<span class="standard-score">${score}%</span>
+						</div>
+					`;
+				});
+			}
+
+			// Add relevant data flows
+			const flows = clientData.dataFlows.filter(f => f.source === regionCode || f.target === regionCode);
+			if (flows.length > 0) {
+				content += `<h3>Data Flows</h3>`;
+				flows.forEach(flow => {
+					content += `
+						<div class="flow-detail">
+							<strong>${flow.source.toUpperCase()} → ${flow.target.toUpperCase()}</strong>
+							<br>Type: ${flow.type} • Volume: ${flow.dataVolume} records
+							<br>Status: ${flow.status} • Encryption: ${flow.encryption}
+						</div>
+					`;
+				});
+			}
+
+			modalBody.innerHTML = content;
+			modal.style.display = 'block';
+		}
+
+		// Add CSS for animations
+		const style = document.createElement('style');
+		style.textContent = `
+			@keyframes drawPath {
+				to {
+					stroke-dashoffset: 0;
+				}
+			}
+			
+			.risk-item {
+				padding: 15px;
+				border-radius: 8px;
+				margin-bottom: 10px;
+				border-left: 4px solid;
+			}
+			
+			.risk-item.risk-low { border-left-color: #10b981; background: #ecfdf5; }
+			.risk-item.risk-medium { border-left-color: #f59e0b; background: #fffbeb; }
+			.risk-item.risk-high { border-left-color: #ef4444; background: #fef2f2; }
+			
+			.risk-header {
+				display: flex;
+				justify-content: space-between;
+				font-weight: 600;
+				margin-bottom: 8px;
+			}
+			
+			.risk-level.risk-low { color: #059669; }
+			.risk-level.risk-medium { color: #d97706; }
+			.risk-level.risk-high { color: #dc2626; }
+			
+			.dataflow-item {
+				padding: 12px;
+				border-radius: 8px;
+				margin-bottom: 10px;
+				background: #f9fafb;
+				border-left: 4px solid;
+			}
+			
+			.flow-active { border-left-color: #10b981; }
+			.flow-paused { border-left-color: #f59e0b; }
+			.flow-error { border-left-color: #ef4444; }
+			
+			.flow-header {
+				display: flex;
+				justify-content: space-between;
+				font-weight: 600;
+				margin-bottom: 4px;
+			}
+			
+			.detail-stats {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 10px;
+				margin-bottom: 20px;
+			}
+			
+			.detail-stat {
+				display: flex;
+				justify-content: space-between;
+				padding: 8px;
+				background: #f3f4f6;
+				border-radius: 6px;
+			}
+			
+			.compliance-detail {
+				display: flex;
+				justify-content: space-between;
+				padding: 8px;
+				border-bottom: 1px solid #e5e7eb;
+			}
+			
+			.flow-detail {
+				padding: 10px;
+				background: #f3f4f6;
+				border-radius: 6px;
+				margin-bottom: 8px;
+			}
+		`;
+		document.head.appendChild(style);
+
+		// Initialize when DOM is loaded
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initializeDashboard);
+		} else {
+			initializeDashboard();
+		}
+	</script>
+</Layout>

@@ -16,8 +16,9 @@ import Layout from '../layouts/Layout.astro';
 					Comprehensive analysis with evidence-based reporting and executive insights.
 				</p>
 				<div class="cta-buttons">
-					<a href="/login" class="btn btn-primary">Start Assessment</a>
-					<a href="#features" class="btn btn-secondary">Learn More</a>
+					<a href="/assessment-execution" class="btn btn-primary">View Live Demo</a>
+					<a href="/assessment-select" class="btn btn-secondary">Start Assessment</a>
+					<a href="/features" class="btn btn-secondary">View All Features</a>
 				</div>
 				<div class="hero-stats">
 					<div class="stat">
@@ -130,6 +131,64 @@ import Layout from '../layouts/Layout.astro';
 			</div>
 		</section>
 
+		<!-- Interactive Dashboards Section -->
+		<section class="dashboards-section">
+			<div class="container">
+				<h2>Interactive Data Visualization</h2>
+				<p class="section-subtitle">PowerBI-style analytics with real-time drill-down capabilities</p>
+				<div class="dashboard-showcase">
+					<div class="dashboard-card">
+						<div class="dashboard-preview">
+							<div class="mini-chart">
+								<svg viewBox="0 0 200 100" style="width: 100%; height: 100px;">
+									<rect x="10" y="60" width="20" height="30" fill="#6366f1" opacity="0.8"/>
+									<rect x="40" y="40" width="20" height="50" fill="#3b82f6" opacity="0.8"/>
+									<rect x="70" y="20" width="20" height="70" fill="#06b6d4" opacity="0.8"/>
+									<rect x="100" y="30" width="20" height="60" fill="#10b981" opacity="0.8"/>
+									<rect x="130" y="45" width="20" height="45" fill="#f59e0b" opacity="0.8"/>
+									<rect x="160" y="35" width="20" height="55" fill="#ef4444" opacity="0.8"/>
+								</svg>
+							</div>
+						</div>
+						<h3>Interactive Analytics Dashboard</h3>
+						<p>Real-time security metrics with animated charts, heat maps, and drill-down capabilities</p>
+						<a href="/interactive-dashboard" class="dashboard-link">Explore Dashboard →</a>
+					</div>
+					<div class="dashboard-card">
+						<div class="dashboard-preview">
+							<div class="mini-chart">
+								<svg viewBox="0 0 200 100" style="width: 100%; height: 100px;">
+									<circle cx="100" cy="50" r="40" fill="none" stroke="#e5e7eb" stroke-width="8"/>
+									<circle cx="100" cy="50" r="40" fill="none" stroke="#6366f1" stroke-width="8"
+											stroke-dasharray="200" stroke-dashoffset="50" stroke-linecap="round"
+											transform="rotate(-90 100 50)"/>
+									<text x="100" y="55" text-anchor="middle" font-size="20" font-weight="bold" fill="#1e293b">78%</text>
+								</svg>
+							</div>
+						</div>
+						<h3>PowerBI-Style Analytics</h3>
+						<p>Advanced visualizations with export capabilities and professional reporting features</p>
+						<a href="/powerbi-analytics" class="dashboard-link">View Analytics →</a>
+					</div>
+					<div class="dashboard-card">
+						<div class="dashboard-preview">
+							<div class="mini-chart">
+								<svg viewBox="0 0 200 100" style="width: 100%; height: 100px;">
+									<polyline points="10,80 40,70 70,50 100,60 130,30 160,40 190,20" 
+											  fill="none" stroke="#10b981" stroke-width="3"/>
+									<polyline points="10,70 40,60 70,65 100,50 130,45 160,30 190,35" 
+											  fill="none" stroke="#ef4444" stroke-width="3"/>
+								</svg>
+							</div>
+						</div>
+						<h3>Executive Demo Dashboard</h3>
+						<p>Client-ready demonstration with realistic scenarios and impressive visualizations</p>
+						<a href="/demo-dashboard" class="dashboard-link">Launch Demo →</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
 		<!-- Executive Reporting Section -->
 		<section class="executive-section">
 			<div class="container">
@@ -154,6 +213,40 @@ import Layout from '../layouts/Layout.astro';
 							<p>Automatic mapping to GDPR, HIPAA, SOC2, and more</p>
 						</div>
 					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Demo Showcase Section -->
+		<section class="demo-showcase">
+			<div class="container">
+				<h2>Interactive Demo Experiences</h2>
+				<p class="section-subtitle">Explore our comprehensive security dashboards and reports without touching real data</p>
+				<div class="demo-grid">
+					<a href="/demo-dashboard" class="demo-card">
+						<div class="demo-icon">📊</div>
+						<h3>Client Presentation Dashboard</h3>
+						<p>Complete demo with dummy data for client presentations</p>
+						<span class="demo-link">Explore Demo →</span>
+					</a>
+					<a href="/sample-reports" class="demo-card">
+						<div class="demo-icon">📈</div>
+						<h3>Sample Reports Gallery</h3>
+						<p>Executive, technical, and compliance report examples</p>
+						<span class="demo-link">View Reports →</span>
+					</a>
+					<a href="/threat-intelligence" class="demo-card">
+						<div class="demo-icon">🛡️</div>
+						<h3>Threat Intelligence Center</h3>
+						<p>Real-time threat monitoring and AI predictions</p>
+						<span class="demo-link">See Threats →</span>
+					</a>
+					<a href="/powerbi-export" class="demo-card">
+						<div class="demo-icon">📤</div>
+						<h3>PowerBI Integration</h3>
+						<p>Export capabilities and dashboard templates</p>
+						<span class="demo-link">Learn More →</span>
+					</a>
 				</div>
 			</div>
 		</section>
@@ -458,6 +551,83 @@ import Layout from '../layouts/Layout.astro';
 		line-height: 1.6;
 	}
 
+	/* Dashboard Section */
+	.dashboards-section {
+		padding: 5rem 2rem;
+		background: var(--color-bg);
+	}
+
+	.dashboard-showcase {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		gap: 2rem;
+		margin-top: 3rem;
+	}
+
+	.dashboard-card {
+		background: white;
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: var(--shadow-md);
+		transition: all 0.3s ease;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.dashboard-card:hover {
+		transform: translateY(-5px);
+		box-shadow: var(--shadow-lg);
+	}
+
+	.dashboard-preview {
+		height: 200px;
+		background: linear-gradient(135deg, #f8fafc 0%, #e5e7eb 100%);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 2rem;
+	}
+
+	.mini-chart {
+		width: 100%;
+		max-width: 250px;
+	}
+
+	.dashboard-card h3 {
+		font-size: 1.5rem;
+		font-weight: 600;
+		color: var(--color-dark);
+		padding: 1.5rem 2rem 0.5rem;
+	}
+
+	.dashboard-card p {
+		color: var(--color-gray);
+		padding: 0 2rem 1.5rem;
+		line-height: 1.6;
+		flex: 1;
+	}
+
+	.dashboard-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 1rem 2rem;
+		background: var(--color-primary);
+		color: white;
+		text-decoration: none;
+		font-weight: 600;
+		transition: all 0.3s ease;
+		margin: 0 2rem 2rem;
+		border-radius: 8px;
+		text-align: center;
+		justify-content: center;
+	}
+
+	.dashboard-link:hover {
+		background: var(--color-primary-dark);
+		transform: translateX(4px);
+	}
+
 	/* Executive Section */
 	.executive-section {
 		padding: 5rem 2rem;
@@ -493,6 +663,81 @@ import Layout from '../layouts/Layout.astro';
 	.report-feature p {
 		color: var(--color-gray);
 		line-height: 1.6;
+	}
+
+	/* Demo Showcase Section */
+	.demo-showcase {
+		padding: 5rem 2rem;
+		background: #f8fafc;
+	}
+
+	.demo-showcase h2 {
+		text-align: center;
+		font-size: 2.5rem;
+		color: var(--color-dark);
+		margin-bottom: 1rem;
+	}
+
+	.section-subtitle {
+		text-align: center;
+		font-size: 1.125rem;
+		color: var(--color-gray);
+		margin-bottom: 3rem;
+	}
+
+	.demo-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+		gap: 2rem;
+	}
+
+	.demo-card {
+		background: white;
+		border-radius: 16px;
+		padding: 2rem;
+		text-align: center;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+		transition: all 0.3s ease;
+		text-decoration: none;
+		color: inherit;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.demo-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+	}
+
+	.demo-icon {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+
+	.demo-card h3 {
+		font-size: 1.25rem;
+		color: var(--color-dark);
+		margin-bottom: 0.5rem;
+	}
+
+	.demo-card p {
+		color: var(--color-gray);
+		font-size: 0.875rem;
+		margin-bottom: 1rem;
+		flex-grow: 1;
+	}
+
+	.demo-link {
+		color: var(--color-primary);
+		font-weight: 600;
+		font-size: 0.875rem;
+		transition: all 0.2s;
+	}
+
+	.demo-card:hover .demo-link {
+		text-decoration: underline;
+		transform: translateX(4px);
 	}
 
 	/* CTA Section */

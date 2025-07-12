@@ -1,0 +1,809 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Threat Intelligence Dashboard - PowerReview">
+  <main>
+    <div class="dashboard-header">
+      <h1>Threat Intelligence & Security Operations Center</h1>
+      <div class="header-controls">
+        <div class="time-selector">
+          <button class="time-btn active" data-range="24h">24 Hours</button>
+          <button class="time-btn" data-range="7d">7 Days</button>
+          <button class="time-btn" data-range="30d">30 Days</button>
+        </div>
+        <button class="export-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Export Intel Report
+        </button>
+      </div>
+    </div>
+
+    <!-- Global Threat Map -->
+    <section class="threat-map-section">
+      <h2>Global Threat Activity</h2>
+      <div class="threat-map-container">
+        <svg id="worldMap" viewBox="0 0 1000 500">
+          <!-- Simplified world map -->
+          <rect x="0" y="0" width="1000" height="500" fill="#0f172a" />
+          
+          <!-- Attack origins -->
+          <circle cx="200" cy="200" r="5" fill="#ef4444" class="threat-origin" data-country="Russia" data-attacks="1,234">
+            <animate attributeName="r" values="5;15;5" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          
+          <circle cx="850" cy="250" r="5" fill="#f59e0b" class="threat-origin" data-country="China" data-attacks="856">
+            <animate attributeName="r" values="5;12;5" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          
+          <circle cx="150" cy="350" r="5" fill="#ef4444" class="threat-origin" data-country="Brazil" data-attacks="423">
+            <animate attributeName="r" values="5;10;5" dur="3s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          
+          <!-- Attack paths -->
+          <path d="M200,200 Q500,150 600,220" stroke="#ef4444" stroke-width="2" fill="none" opacity="0.6">
+            <animate attributeName="stroke-dasharray" values="0 1000;500 500;0 1000" dur="4s" repeatCount="indefinite"/>
+          </path>
+          
+          <path d="M850,250 Q600,200 600,220" stroke="#f59e0b" stroke-width="2" fill="none" opacity="0.6">
+            <animate attributeName="stroke-dasharray" values="0 1000;500 500;0 1000" dur="4s" repeatCount="indefinite"/>
+          </path>
+          
+          <!-- Target (your organization) -->
+          <circle cx="600" cy="220" r="8" fill="#10b981" stroke="#10b981" stroke-width="2" fill-opacity="0.3"/>
+          <text x="620" y="225" fill="#10b981" font-size="12">Your Organization</text>
+        </svg>
+        
+        <div class="threat-stats">
+          <div class="threat-stat">
+            <span class="stat-value">3,513</span>
+            <span class="stat-label">Blocked Attacks Today</span>
+          </div>
+          <div class="threat-stat">
+            <span class="stat-value">47</span>
+            <span class="stat-label">Active Threats</span>
+          </div>
+          <div class="threat-stat">
+            <span class="stat-value">12</span>
+            <span class="stat-label">Countries of Origin</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real-time Threat Feed -->
+    <section class="threat-feed-section">
+      <h2>Live Threat Intelligence Feed</h2>
+      <div class="threat-feed-container">
+        <div class="threat-feed" id="threatFeed">
+          <!-- Threats will be dynamically added here -->
+        </div>
+        <div class="threat-analysis">
+          <h3>Threat Analysis</h3>
+          <canvas id="threatTypeChart" width="300" height="200"></canvas>
+          <div class="threat-legend">
+            <div class="legend-item">
+              <span class="legend-color" style="background: #ef4444;"></span>
+              <span>Malware (45%)</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color" style="background: #f59e0b;"></span>
+              <span>Phishing (30%)</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color" style="background: #8b5cf6;"></span>
+              <span>DDoS (15%)</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color" style="background: #3b82f6;"></span>
+              <span>Other (10%)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Security Metrics Grid -->
+    <section class="metrics-grid">
+      <div class="metric-card">
+        <h3>Attack Velocity</h3>
+        <canvas id="velocityChart" width="400" height="200"></canvas>
+        <div class="metric-summary">
+          <span class="trend up">↑ 23%</span>
+          <span>vs last week</span>
+        </div>
+      </div>
+      
+      <div class="metric-card">
+        <h3>Defense Effectiveness</h3>
+        <div class="effectiveness-gauge">
+          <svg viewBox="0 0 200 100">
+            <path d="M 20 80 A 60 60 0 0 1 180 80" fill="none" stroke="#e5e7eb" stroke-width="20"/>
+            <path d="M 20 80 A 60 60 0 0 1 180 80" fill="none" stroke="#10b981" stroke-width="20"
+                  stroke-dasharray="188.5" stroke-dashoffset="47.125" stroke-linecap="round"/>
+            <text x="100" y="80" text-anchor="middle" font-size="32" font-weight="bold" fill="#10b981">94%</text>
+          </svg>
+        </div>
+        <p class="metric-description">Successfully blocked threats</p>
+      </div>
+      
+      <div class="metric-card">
+        <h3>Top Attack Vectors</h3>
+        <div class="attack-vectors">
+          <div class="vector-item">
+            <div class="vector-bar">
+              <div class="bar-fill" style="width: 85%; background: #ef4444;"></div>
+            </div>
+            <span>Email Attachments (85%)</span>
+          </div>
+          <div class="vector-item">
+            <div class="vector-bar">
+              <div class="bar-fill" style="width: 72%; background: #f59e0b;"></div>
+            </div>
+            <span>Web Downloads (72%)</span>
+          </div>
+          <div class="vector-item">
+            <div class="vector-bar">
+              <div class="bar-fill" style="width: 45%; background: #8b5cf6;"></div>
+            </div>
+            <span>USB Devices (45%)</span>
+          </div>
+          <div class="vector-item">
+            <div class="vector-bar">
+              <div class="bar-fill" style="width: 23%; background: #3b82f6;"></div>
+            </div>
+            <span>Network Intrusion (23%)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI-Powered Predictions -->
+    <section class="predictions-section">
+      <h2>AI Threat Predictions</h2>
+      <div class="predictions-grid">
+        <div class="prediction-card high-risk">
+          <div class="prediction-header">
+            <span class="risk-icon">⚠️</span>
+            <h3>Ransomware Campaign</h3>
+            <span class="probability">87% Probability</span>
+          </div>
+          <p>Machine learning models detect patterns consistent with pre-ransomware reconnaissance activities.</p>
+          <div class="prediction-timeline">
+            <span>Expected: Next 48-72 hours</span>
+          </div>
+          <div class="recommended-actions">
+            <h4>Recommended Actions:</h4>
+            <ul>
+              <li>✓ Verify all backups are current and isolated</li>
+              <li>✓ Review and restrict RDP access</li>
+              <li>✓ Deploy additional EDR monitoring</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prediction-card medium-risk">
+          <div class="prediction-header">
+            <span class="risk-icon">⚡</span>
+            <h3>Phishing Wave</h3>
+            <span class="probability">65% Probability</span>
+          </div>
+          <p>Increased dark web chatter about your industry suggests targeted phishing campaign preparation.</p>
+          <div class="prediction-timeline">
+            <span>Expected: Next 7 days</span>
+          </div>
+          <div class="recommended-actions">
+            <h4>Recommended Actions:</h4>
+            <ul>
+              <li>✓ Deploy user awareness training</li>
+              <li>✓ Update email filtering rules</li>
+              <li>✓ Enable advanced threat protection</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="prediction-card low-risk">
+          <div class="prediction-header">
+            <span class="risk-icon">🔍</span>
+            <h3>Vulnerability Scanning</h3>
+            <span class="probability">42% Probability</span>
+          </div>
+          <p>Detected reconnaissance patterns suggest automated vulnerability scanning of external assets.</p>
+          <div class="prediction-timeline">
+            <span>Ongoing Activity</span>
+          </div>
+          <div class="recommended-actions">
+            <h4>Recommended Actions:</h4>
+            <ul>
+              <li>✓ Review exposed services</li>
+              <li>✓ Update WAF rules</li>
+              <li>✓ Patch critical vulnerabilities</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    main {
+      padding: 2rem;
+      background: #0f172a;
+      min-height: 100vh;
+      color: #e2e8f0;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .dashboard-header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .header-controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .time-selector {
+      display: flex;
+      background: #1e293b;
+      border-radius: 8px;
+      padding: 4px;
+    }
+
+    .time-btn {
+      padding: 0.5rem 1rem;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.875rem;
+    }
+
+    .time-btn:hover {
+      color: #e2e8f0;
+    }
+
+    .time-btn.active {
+      background: #3b82f6;
+      color: white;
+    }
+
+    .export-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #8b5cf6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .export-btn:hover {
+      background: #7c3aed;
+      transform: translateY(-1px);
+    }
+
+    /* Threat Map Section */
+    .threat-map-section {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .threat-map-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: #f8fafc;
+    }
+
+    .threat-map-container {
+      position: relative;
+    }
+
+    #worldMap {
+      width: 100%;
+      height: auto;
+      max-height: 500px;
+      border-radius: 12px;
+      background: #0f172a;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .threat-origin {
+      cursor: pointer;
+    }
+
+    .threat-origin:hover {
+      filter: brightness(1.5);
+    }
+
+    .threat-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .threat-stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      display: block;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #60a5fa;
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 0.875rem;
+      color: #94a3b8;
+      margin-top: 0.25rem;
+    }
+
+    /* Threat Feed Section */
+    .threat-feed-section {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .threat-feed-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: #f8fafc;
+    }
+
+    .threat-feed-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+    }
+
+    .threat-feed {
+      height: 400px;
+      overflow-y: auto;
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 1rem;
+    }
+
+    .threat-item {
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      background: #1e293b;
+      border-radius: 8px;
+      border-left: 4px solid #ef4444;
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .threat-item.blocked {
+      border-left-color: #10b981;
+      opacity: 0.7;
+    }
+
+    .threat-item.warning {
+      border-left-color: #f59e0b;
+    }
+
+    .threat-details {
+      flex: 1;
+    }
+
+    .threat-type {
+      font-weight: 600;
+      color: #f8fafc;
+      margin-bottom: 0.25rem;
+    }
+
+    .threat-source {
+      font-size: 0.875rem;
+      color: #94a3b8;
+    }
+
+    .threat-time {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    .threat-analysis {
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .threat-analysis h3 {
+      font-size: 1.125rem;
+      margin-bottom: 1rem;
+      color: #f8fafc;
+    }
+
+    .threat-legend {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: #94a3b8;
+    }
+
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+    }
+
+    /* Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .metric-card {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .metric-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 1.5rem;
+      color: #f8fafc;
+    }
+
+    .metric-summary {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: #94a3b8;
+    }
+
+    .trend {
+      font-weight: 600;
+    }
+
+    .trend.up {
+      color: #ef4444;
+    }
+
+    .trend.down {
+      color: #10b981;
+    }
+
+    .effectiveness-gauge {
+      width: 200px;
+      height: 100px;
+      margin: 0 auto;
+    }
+
+    .metric-description {
+      text-align: center;
+      color: #94a3b8;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .attack-vectors {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .vector-item {
+      font-size: 0.875rem;
+      color: #94a3b8;
+    }
+
+    .vector-bar {
+      height: 8px;
+      background: #334155;
+      border-radius: 4px;
+      margin-bottom: 0.25rem;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 1s ease-out;
+    }
+
+    /* Predictions Section */
+    .predictions-section {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 2rem;
+    }
+
+    .predictions-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: #f8fafc;
+    }
+
+    .predictions-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .prediction-card {
+      background: #0f172a;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .prediction-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+
+    .prediction-card.high-risk {
+      border-color: #ef4444;
+    }
+
+    .prediction-card.medium-risk {
+      border-color: #f59e0b;
+    }
+
+    .prediction-card.low-risk {
+      border-color: #3b82f6;
+    }
+
+    .prediction-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .risk-icon {
+      font-size: 1.5rem;
+    }
+
+    .prediction-header h3 {
+      flex: 1;
+      font-size: 1.125rem;
+      color: #f8fafc;
+      margin: 0;
+    }
+
+    .probability {
+      background: #334155;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+
+    .prediction-card p {
+      color: #cbd5e1;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .prediction-timeline {
+      font-size: 0.875rem;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+    }
+
+    .recommended-actions h4 {
+      font-size: 0.875rem;
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+    }
+
+    .recommended-actions ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .recommended-actions li {
+      font-size: 0.875rem;
+      color: #94a3b8;
+      padding: 0.25rem 0;
+    }
+
+    @media (max-width: 768px) {
+      .threat-feed-container {
+        grid-template-columns: 1fr;
+      }
+
+      .predictions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script>
+    // Generate threat feed items
+    const threatTypes = [
+      { type: 'Malware Detected', severity: 'critical', icon: '🦠' },
+      { type: 'Phishing Attempt', severity: 'warning', icon: '🎣' },
+      { type: 'Brute Force Attack', severity: 'critical', icon: '🔨' },
+      { type: 'SQL Injection', severity: 'warning', icon: '💉' },
+      { type: 'DDoS Attack', severity: 'critical', icon: '🌊' },
+      { type: 'Suspicious Login', severity: 'warning', icon: '🔐' }
+    ];
+
+    const sources = [
+      'Russia (185.220.100.252)',
+      'China (116.62.123.45)',
+      'Brazil (177.54.145.67)',
+      'Nigeria (197.210.226.34)',
+      'India (103.21.125.89)',
+      'USA (104.198.14.52)'
+    ];
+
+    function addThreatItem() {
+      const feed = document.getElementById('threatFeed');
+      const threat = threatTypes[Math.floor(Math.random() * threatTypes.length)];
+      const source = sources[Math.floor(Math.random() * sources.length)];
+      const blocked = Math.random() > 0.2;
+      
+      const item = document.createElement('div');
+      item.className = `threat-item ${blocked ? 'blocked' : threat.severity}`;
+      item.innerHTML = `
+        <div class="threat-details">
+          <div class="threat-type">${threat.icon} ${threat.type}</div>
+          <div class="threat-source">Source: ${source}</div>
+        </div>
+        <div class="threat-time">${blocked ? '✓ Blocked' : '⚠️ Active'} • Just now</div>
+      `;
+      
+      feed.insertBefore(item, feed.firstChild);
+      
+      // Remove old items
+      while (feed.children.length > 10) {
+        feed.removeChild(feed.lastChild);
+      }
+    }
+
+    // Add initial threat items
+    for (let i = 0; i < 5; i++) {
+      addThreatItem();
+    }
+
+    // Add new threats periodically
+    setInterval(addThreatItem, 3000);
+
+    // Draw threat type chart
+    const ctx = document.getElementById('threatTypeChart').getContext('2d');
+    const data = [45, 30, 15, 10];
+    const colors = ['#ef4444', '#f59e0b', '#8b5cf6', '#3b82f6'];
+    
+    let total = data.reduce((a, b) => a + b, 0);
+    let currentAngle = -Math.PI / 2;
+    
+    data.forEach((value, i) => {
+      const sliceAngle = (value / total) * 2 * Math.PI;
+      
+      // Draw slice
+      ctx.beginPath();
+      ctx.moveTo(150, 100);
+      ctx.arc(150, 100, 80, currentAngle, currentAngle + sliceAngle);
+      ctx.closePath();
+      ctx.fillStyle = colors[i];
+      ctx.fill();
+      
+      currentAngle += sliceAngle;
+    });
+
+    // Draw velocity chart
+    const velocityCtx = document.getElementById('velocityChart').getContext('2d');
+    const hours = Array.from({length: 24}, (_, i) => i);
+    const attacks = hours.map(() => Math.floor(Math.random() * 100) + 50);
+    
+    // Draw axes
+    velocityCtx.strokeStyle = '#334155';
+    velocityCtx.lineWidth = 2;
+    velocityCtx.beginPath();
+    velocityCtx.moveTo(40, 160);
+    velocityCtx.lineTo(40, 20);
+    velocityCtx.lineTo(380, 160);
+    velocityCtx.stroke();
+    
+    // Draw line chart
+    velocityCtx.strokeStyle = '#ef4444';
+    velocityCtx.lineWidth = 3;
+    velocityCtx.beginPath();
+    
+    attacks.forEach((value, i) => {
+      const x = 40 + (i * 340 / 23);
+      const y = 160 - (value * 140 / 150);
+      
+      if (i === 0) {
+        velocityCtx.moveTo(x, y);
+      } else {
+        velocityCtx.lineTo(x, y);
+      }
+    });
+    
+    velocityCtx.stroke();
+
+    // Add tooltip to threat origins
+    document.querySelectorAll('.threat-origin').forEach(circle => {
+      circle.addEventListener('mouseenter', (e) => {
+        const country = e.target.dataset.country;
+        const attacks = e.target.dataset.attacks;
+        console.log(`${country}: ${attacks} attacks`);
+      });
+    });
+
+    // Export functionality
+    document.querySelector('.export-btn').addEventListener('click', () => {
+      alert('Exporting threat intelligence report...');
+    });
+
+    // Time range selector
+    document.querySelectorAll('.time-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        console.log(`Switching to ${btn.dataset.range} view`);
+      });
+    });
+  </script>
+</Layout>

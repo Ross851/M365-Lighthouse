@@ -1,0 +1,495 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Visualization Components Demo - PowerReview">
+  <main>
+    <div class="demo-header">
+      <h1>Data Visualization Components</h1>
+      <p>Reusable chart components for PowerReview dashboards</p>
+    </div>
+
+    <div class="demo-container">
+      <!-- Donut Chart Demo -->
+      <div class="chart-section">
+        <h2>Security Score Distribution</h2>
+        <div class="chart-wrapper" id="donutChart"></div>
+        <div class="chart-controls">
+          <button onclick="updateDonutChart()">Update Data</button>
+          <button onclick="exportDonutChart()">Export Chart</button>
+        </div>
+      </div>
+
+      <!-- Bar Chart Demo -->
+      <div class="chart-section">
+        <h2>Department Security Scores</h2>
+        <div class="chart-wrapper" id="barChart"></div>
+        <div class="chart-controls">
+          <button onclick="animateBarChart()">Animate</button>
+          <button onclick="exportBarData()">Export Data</button>
+        </div>
+      </div>
+
+      <!-- Line Chart Demo -->
+      <div class="chart-section wide">
+        <h2>Security Trends Over Time</h2>
+        <div class="chart-wrapper" id="lineChart"></div>
+        <div class="chart-controls">
+          <label>
+            <input type="checkbox" id="showScoreSeries" checked> Security Score
+          </label>
+          <label>
+            <input type="checkbox" id="showThreatSeries" checked> Threat Level
+          </label>
+          <label>
+            <input type="checkbox" id="showComplianceSeries" checked> Compliance
+          </label>
+        </div>
+      </div>
+
+      <!-- Heat Map Demo -->
+      <div class="chart-section">
+        <h2>User Activity Heat Map</h2>
+        <div class="chart-wrapper" id="heatMap"></div>
+      </div>
+
+      <!-- Gauge Chart Demo -->
+      <div class="chart-section">
+        <h2>Risk Assessment Gauge</h2>
+        <div class="chart-wrapper" id="gaugeChart"></div>
+        <div class="chart-controls">
+          <input type="range" id="gaugeValue" min="0" max="100" value="72" 
+                 oninput="updateGauge(this.value)">
+          <span id="gaugeValueDisplay">72</span>
+        </div>
+      </div>
+
+      <!-- Live Data Feed -->
+      <div class="chart-section">
+        <h2>Real-time Updates</h2>
+        <div class="live-feed" id="liveFeed">
+          <div class="feed-header">
+            <span class="live-indicator">
+              <span class="pulse"></span>
+              LIVE
+            </span>
+            <button onclick="toggleLiveFeed()">Pause</button>
+          </div>
+          <div class="feed-content" id="feedContent"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    background: #f8fafc;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .demo-header {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    color: white;
+    padding: 3rem 2rem;
+    text-align: center;
+  }
+
+  .demo-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .demo-header p {
+    font-size: 1.125rem;
+    opacity: 0.9;
+  }
+
+  .demo-container {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+  }
+
+  .chart-section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .chart-section.wide {
+    grid-column: span 2;
+  }
+
+  .chart-section h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+  }
+
+  .chart-wrapper {
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .chart-controls {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .chart-controls button {
+    padding: 0.5rem 1rem;
+    background: #6366f1;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+
+  .chart-controls button:hover {
+    background: #4f46e5;
+  }
+
+  .chart-controls label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #475569;
+    font-size: 0.875rem;
+  }
+
+  .chart-controls input[type="checkbox"] {
+    cursor: pointer;
+  }
+
+  .chart-controls input[type="range"] {
+    width: 200px;
+  }
+
+  #gaugeValueDisplay {
+    font-weight: 600;
+    color: #1e293b;
+    min-width: 30px;
+    text-align: center;
+  }
+
+  .live-feed {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feed-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .live-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #ef4444;
+  }
+
+  .pulse {
+    width: 8px;
+    height: 8px;
+    background: #ef4444;
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+    0% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.2); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  .feed-content {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .feed-item {
+    padding: 0.75rem;
+    background: #f8fafc;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    color: #475569;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  .feed-item.alert {
+    border-left: 3px solid #ef4444;
+  }
+
+  .feed-item.success {
+    border-left: 3px solid #10b981;
+  }
+
+  .feed-item.warning {
+    border-left: 3px solid #f59e0b;
+  }
+
+  @media (max-width: 768px) {
+    .demo-container {
+      grid-template-columns: 1fr;
+    }
+
+    .chart-section.wide {
+      grid-column: 1;
+    }
+  }
+</style>
+
+<script type="module">
+  import {
+    createDonutChart,
+    createBarChart,
+    createLineChart,
+    createHeatMap,
+    createGaugeChart,
+    exportChartAsImage,
+    exportChartData
+  } from '../lib/visualization-components.ts';
+
+  // Initialize charts on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeAllCharts();
+    startLiveFeed();
+  });
+
+  function initializeAllCharts() {
+    // Donut Chart
+    const donutData = [
+      { label: 'Protected', value: 4234, color: '#10b981' },
+      { label: 'Partial', value: 567, color: '#f59e0b' },
+      { label: 'Unprotected', value: 199, color: '#ef4444' }
+    ];
+    createDonutChart(document.getElementById('donutChart'), donutData);
+
+    // Bar Chart
+    const barData = [
+      { label: 'IT', value: 92, color: '#6366f1' },
+      { label: 'Finance', value: 78, color: '#3b82f6' },
+      { label: 'HR', value: 85, color: '#06b6d4' },
+      { label: 'Sales', value: 65, color: '#10b981' },
+      { label: 'Operations', value: 88, color: '#8b5cf6' }
+    ];
+    createBarChart(document.getElementById('barChart'), barData);
+
+    // Line Chart
+    const lineData = generateTimeSeriesData();
+    createLineChart(document.getElementById('lineChart'), lineData);
+
+    // Heat Map
+    const heatMapData = generateHeatMapData();
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const hours = Array.from({ length: 24 }, (_, i) => `${i}:00`);
+    createHeatMap(document.getElementById('heatMap'), heatMapData, days, hours);
+
+    // Gauge Chart
+    createGaugeChart(document.getElementById('gaugeChart'), 72);
+  }
+
+  function generateTimeSeriesData() {
+    const data = [];
+    const now = new Date();
+    const series = ['Security Score', 'Threat Level', 'Compliance'];
+    
+    for (let i = 30; i >= 0; i--) {
+      const date = new Date(now);
+      date.setDate(date.getDate() - i);
+      
+      data.push({
+        timestamp: date,
+        value: 70 + Math.random() * 20,
+        series: series[0]
+      });
+      
+      data.push({
+        timestamp: date,
+        value: 30 + Math.random() * 30,
+        series: series[1]
+      });
+      
+      data.push({
+        timestamp: date,
+        value: 80 + Math.random() * 15,
+        series: series[2]
+      });
+    }
+    
+    return data;
+  }
+
+  function generateHeatMapData() {
+    const data = [];
+    for (let day = 0; day < 7; day++) {
+      const row = [];
+      for (let hour = 0; hour < 24; hour++) {
+        // Simulate higher activity during business hours
+        const isBusinessHour = hour >= 9 && hour <= 17;
+        const isWeekday = day >= 1 && day <= 5;
+        const baseValue = isBusinessHour && isWeekday ? 60 : 20;
+        row.push(baseValue + Math.random() * 40);
+      }
+      data.push(row);
+    }
+    return data;
+  }
+
+  // Live feed functionality
+  let liveFeedInterval;
+  let feedPaused = false;
+
+  function startLiveFeed() {
+    addFeedItem();
+    liveFeedInterval = setInterval(() => {
+      if (!feedPaused) {
+        addFeedItem();
+      }
+    }, 3000);
+  }
+
+  function addFeedItem() {
+    const feedContent = document.getElementById('feedContent');
+    const events = [
+      { type: 'alert', message: 'Security alert detected' },
+      { type: 'success', message: 'Backup completed successfully' },
+      { type: 'warning', message: 'License expiring soon' },
+      { type: 'success', message: 'User authenticated via MFA' },
+      { type: 'alert', message: 'Suspicious login attempt blocked' }
+    ];
+
+    const event = events[Math.floor(Math.random() * events.length)];
+    const item = document.createElement('div');
+    item.className = `feed-item ${event.type}`;
+    item.innerHTML = `
+      <span>${event.message}</span>
+      <span>${new Date().toLocaleTimeString()}</span>
+    `;
+
+    feedContent.insertBefore(item, feedContent.firstChild);
+
+    // Keep only last 10 items
+    while (feedContent.children.length > 10) {
+      feedContent.removeChild(feedContent.lastChild);
+    }
+  }
+
+  // Global functions for button clicks
+  window.updateDonutChart = () => {
+    const container = document.getElementById('donutChart');
+    container.innerHTML = '';
+    
+    const newData = [
+      { label: 'Protected', value: Math.floor(Math.random() * 4000) + 1000, color: '#10b981' },
+      { label: 'Partial', value: Math.floor(Math.random() * 800) + 200, color: '#f59e0b' },
+      { label: 'Unprotected', value: Math.floor(Math.random() * 300) + 100, color: '#ef4444' }
+    ];
+    
+    createDonutChart(container, newData);
+  };
+
+  window.exportDonutChart = () => {
+    exportChartAsImage(document.getElementById('donutChart'), 'security-distribution');
+  };
+
+  window.animateBarChart = () => {
+    const container = document.getElementById('barChart');
+    container.innerHTML = '';
+    
+    const barData = [
+      { label: 'IT', value: Math.floor(Math.random() * 30) + 70, color: '#6366f1' },
+      { label: 'Finance', value: Math.floor(Math.random() * 30) + 60, color: '#3b82f6' },
+      { label: 'HR', value: Math.floor(Math.random() * 30) + 65, color: '#06b6d4' },
+      { label: 'Sales', value: Math.floor(Math.random() * 30) + 50, color: '#10b981' },
+      { label: 'Operations', value: Math.floor(Math.random() * 30) + 70, color: '#8b5cf6' }
+    ];
+    
+    createBarChart(container, barData, { animate: true });
+  };
+
+  window.exportBarData = () => {
+    const data = [
+      { Department: 'IT', Score: 92 },
+      { Department: 'Finance', Score: 78 },
+      { Department: 'HR', Score: 85 },
+      { Department: 'Sales', Score: 65 },
+      { Department: 'Operations', Score: 88 }
+    ];
+    
+    exportChartData(data, 'department-scores');
+  };
+
+  window.updateGauge = (value) => {
+    document.getElementById('gaugeValueDisplay').textContent = value;
+    const container = document.getElementById('gaugeChart');
+    container.innerHTML = '';
+    createGaugeChart(container, parseInt(value));
+  };
+
+  window.toggleLiveFeed = () => {
+    feedPaused = !feedPaused;
+    const button = event.target;
+    button.textContent = feedPaused ? 'Resume' : 'Pause';
+  };
+
+  // Handle line chart series toggles
+  document.getElementById('showScoreSeries')?.addEventListener('change', updateLineChart);
+  document.getElementById('showThreatSeries')?.addEventListener('change', updateLineChart);
+  document.getElementById('showComplianceSeries')?.addEventListener('change', updateLineChart);
+
+  function updateLineChart() {
+    const container = document.getElementById('lineChart');
+    container.innerHTML = '';
+    
+    const allData = generateTimeSeriesData();
+    const filteredData = allData.filter(d => {
+      if (d.series === 'Security Score' && !document.getElementById('showScoreSeries').checked) return false;
+      if (d.series === 'Threat Level' && !document.getElementById('showThreatSeries').checked) return false;
+      if (d.series === 'Compliance' && !document.getElementById('showComplianceSeries').checked) return false;
+      return true;
+    });
+    
+    createLineChart(container, filteredData);
+  }
+</script>

@@ -1,0 +1,830 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="PowerBI Export & Integration - PowerReview">
+  <main>
+    <div class="export-header">
+      <h1>PowerBI Integration Hub</h1>
+      <p>Export your security data to PowerBI for advanced analytics and custom reporting</p>
+    </div>
+
+    <!-- Export Options -->
+    <section class="export-options">
+      <div class="option-card">
+        <div class="option-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </div>
+        <h3>Direct PowerBI Export</h3>
+        <p>Export all assessment data directly to PowerBI format (.pbix)</p>
+        <button class="export-btn primary" onclick="exportToPowerBI()">
+          Export to PowerBI
+        </button>
+      </div>
+
+      <div class="option-card">
+        <div class="option-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v3"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <path d="M2 17v-3a4 4 0 0 1 8 0v3"/>
+            <circle cx="6" cy="17" r="1"/>
+          </svg>
+        </div>
+        <h3>API Integration</h3>
+        <p>Connect PowerBI directly to our API for real-time data</p>
+        <button class="export-btn secondary" onclick="showAPIDetails()">
+          View API Details
+        </button>
+      </div>
+
+      <div class="option-card">
+        <div class="option-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <rect x="7" y="7" width="3" height="9"/>
+            <rect x="14" y="7" width="3" height="5"/>
+          </svg>
+        </div>
+        <h3>Excel Export</h3>
+        <p>Export data to Excel format for custom analysis</p>
+        <button class="export-btn tertiary" onclick="exportToExcel()">
+          Export to Excel
+        </button>
+      </div>
+    </section>
+
+    <!-- Data Preview -->
+    <section class="data-preview">
+      <h2>Data Preview & Selection</h2>
+      <div class="preview-controls">
+        <div class="data-selector">
+          <label>
+            <input type="checkbox" checked> Executive Summary
+          </label>
+          <label>
+            <input type="checkbox" checked> Security Findings
+          </label>
+          <label>
+            <input type="checkbox" checked> Compliance Metrics
+          </label>
+          <label>
+            <input type="checkbox" checked> Risk Assessment
+          </label>
+          <label>
+            <input type="checkbox" checked> User Analytics
+          </label>
+          <label>
+            <input type="checkbox"> Raw Logs
+          </label>
+        </div>
+        <div class="date-range">
+          <input type="date" id="startDate" value="2024-01-01">
+          <span>to</span>
+          <input type="date" id="endDate" value="2024-12-31">
+        </div>
+      </div>
+
+      <div class="preview-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Current Value</th>
+              <th>Previous Period</th>
+              <th>Change</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Security Score</td>
+              <td>78%</td>
+              <td>65%</td>
+              <td class="positive">+13%</td>
+              <td><span class="status improving">Improving</span></td>
+            </tr>
+            <tr>
+              <td>MFA Coverage</td>
+              <td>88%</td>
+              <td>45%</td>
+              <td class="positive">+43%</td>
+              <td><span class="status good">Good</span></td>
+            </tr>
+            <tr>
+              <td>Compliance Score</td>
+              <td>72%</td>
+              <td>68%</td>
+              <td class="positive">+4%</td>
+              <td><span class="status warning">Needs Work</span></td>
+            </tr>
+            <tr>
+              <td>Critical Risks</td>
+              <td>3</td>
+              <td>15</td>
+              <td class="positive">-12</td>
+              <td><span class="status improving">Improving</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PowerBI Templates -->
+    <section class="templates-section">
+      <h2>PowerBI Dashboard Templates</h2>
+      <div class="templates-grid">
+        <div class="template-card">
+          <div class="template-preview">
+            <img src="/api/placeholder/300/200" alt="Executive Dashboard">
+          </div>
+          <h3>Executive Dashboard</h3>
+          <p>High-level security overview with KPIs and trend analysis</p>
+          <button class="download-btn" onclick="downloadTemplate('executive')">
+            Download Template
+          </button>
+        </div>
+
+        <div class="template-card">
+          <div class="template-preview">
+            <img src="/api/placeholder/300/200" alt="Compliance Dashboard">
+          </div>
+          <h3>Compliance Tracker</h3>
+          <p>Track compliance across multiple frameworks and regions</p>
+          <button class="download-btn" onclick="downloadTemplate('compliance')">
+            Download Template
+          </button>
+        </div>
+
+        <div class="template-card">
+          <div class="template-preview">
+            <img src="/api/placeholder/300/200" alt="Risk Analysis">
+          </div>
+          <h3>Risk Analysis</h3>
+          <p>Detailed risk assessment with heat maps and trending</p>
+          <button class="download-btn" onclick="downloadTemplate('risk')">
+            Download Template
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- API Documentation -->
+    <section id="api-section" class="api-section" style="display: none;">
+      <h2>PowerBI API Integration</h2>
+      <div class="api-docs">
+        <div class="api-endpoint">
+          <h3>REST API Endpoint</h3>
+          <code class="endpoint-url">https://api.powerreview.com/v1/powerbi/data</code>
+          <p>Use this endpoint to connect PowerBI to real-time PowerReview data.</p>
+        </div>
+
+        <div class="api-auth">
+          <h3>Authentication</h3>
+          <pre><code>{
+  "method": "Bearer Token",
+  "header": "Authorization: Bearer YOUR_API_KEY",
+  "expires": "24 hours"
+}</code></pre>
+        </div>
+
+        <div class="api-example">
+          <h3>Sample Query</h3>
+          <pre><code>GET /v1/powerbi/data?metrics=security_score,compliance,risks&period=30d
+Authorization: Bearer YOUR_API_KEY
+
+Response:
+{
+  "data": {
+    "security_score": {
+      "current": 78,
+      "previous": 65,
+      "trend": "improving"
+    },
+    "compliance": {
+      "frameworks": {
+        "gdpr": 85,
+        "hipaa": 72,
+        "soc2": 68
+      }
+    },
+    "risks": {
+      "critical": 3,
+      "high": 12,
+      "medium": 28,
+      "low": 45
+    }
+  },
+  "timestamp": "2024-01-15T10:30:00Z"
+}</code></pre>
+        </div>
+
+        <div class="api-actions">
+          <button class="copy-btn" onclick="copyAPIKey()">Copy API Key</button>
+          <button class="test-btn" onclick="testAPI()">Test Connection</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Export Status Modal -->
+    <div id="exportModal" class="modal" style="display: none;">
+      <div class="modal-content">
+        <h2>Export Progress</h2>
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <span class="progress-text" id="progressText">Preparing export...</span>
+        </div>
+        <div class="export-details" id="exportDetails"></div>
+        <button class="close-modal" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    main {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      background: #f8fafc;
+      min-height: 100vh;
+    }
+
+    .export-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .export-header h1 {
+      font-size: 2.5rem;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #f59e0b 0%, #dc2626 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .export-header p {
+      font-size: 1.125rem;
+      color: #64748b;
+    }
+
+    /* Export Options */
+    .export-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .option-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: all 0.3s;
+    }
+
+    .option-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .option-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      background: #fef3c7;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option-icon svg {
+      stroke: #f59e0b;
+    }
+
+    .option-card h3 {
+      font-size: 1.25rem;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .option-card p {
+      color: #64748b;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+    }
+
+    .export-btn {
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .export-btn.primary {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .export-btn.primary:hover {
+      background: #d97706;
+    }
+
+    .export-btn.secondary {
+      background: #6366f1;
+      color: white;
+    }
+
+    .export-btn.secondary:hover {
+      background: #4f46e5;
+    }
+
+    .export-btn.tertiary {
+      background: #10b981;
+      color: white;
+    }
+
+    .export-btn.tertiary:hover {
+      background: #059669;
+    }
+
+    /* Data Preview */
+    .data-preview {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .data-preview h2 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 1.5rem;
+    }
+
+    .preview-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .data-selector {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .data-selector label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #475569;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+
+    .data-selector input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+
+    .date-range {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .date-range input[type="date"] {
+      padding: 0.5rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      font-size: 0.875rem;
+    }
+
+    .preview-table {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: #f8fafc;
+    }
+
+    th {
+      text-align: left;
+      padding: 1rem;
+      font-weight: 600;
+      color: #475569;
+      border-bottom: 2px solid #e5e7eb;
+    }
+
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid #f1f5f9;
+      color: #1e293b;
+    }
+
+    .positive {
+      color: #10b981;
+      font-weight: 600;
+    }
+
+    .negative {
+      color: #ef4444;
+      font-weight: 600;
+    }
+
+    .status {
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .status.good {
+      background: #d1fae5;
+      color: #059669;
+    }
+
+    .status.warning {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .status.improving {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    /* Templates */
+    .templates-section {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .templates-section h2 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 2rem;
+    }
+
+    .templates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .template-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .template-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    .template-preview {
+      height: 200px;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .template-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .template-card h3 {
+      font-size: 1.125rem;
+      color: #1e293b;
+      padding: 1rem 1rem 0.5rem;
+    }
+
+    .template-card p {
+      color: #64748b;
+      padding: 0 1rem;
+      font-size: 0.875rem;
+    }
+
+    .download-btn {
+      width: calc(100% - 2rem);
+      margin: 1rem;
+      padding: 0.75rem;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      color: #475569;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .download-btn:hover {
+      background: #f59e0b;
+      color: white;
+      border-color: #f59e0b;
+    }
+
+    /* API Section */
+    .api-section {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .api-section h2 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 2rem;
+    }
+
+    .api-docs {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .api-endpoint, .api-auth, .api-example {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .api-endpoint h3, .api-auth h3, .api-example h3 {
+      font-size: 1.125rem;
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+
+    .endpoint-url {
+      display: block;
+      background: #1e293b;
+      color: #60a5fa;
+      padding: 1rem;
+      border-radius: 6px;
+      font-family: 'Monaco', 'Consolas', monospace;
+      margin: 1rem 0;
+    }
+
+    pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+
+    code {
+      font-family: 'Monaco', 'Consolas', monospace;
+    }
+
+    .api-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .copy-btn, .test-btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .copy-btn {
+      background: #6366f1;
+      color: white;
+    }
+
+    .copy-btn:hover {
+      background: #4f46e5;
+    }
+
+    .test-btn {
+      background: #10b981;
+      color: white;
+    }
+
+    .test-btn:hover {
+      background: #059669;
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    .modal-content h2 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-container {
+      margin-bottom: 2rem;
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: #e5e7eb;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #f59e0b 0%, #dc2626 100%);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+
+    .export-details {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      color: #475569;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .close-modal {
+      width: 100%;
+      padding: 0.75rem;
+      background: #1e293b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .close-modal:hover {
+      background: #0f172a;
+    }
+
+    @media (max-width: 768px) {
+      .export-options {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .data-selector {
+        flex-direction: column;
+      }
+
+      .templates-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script>
+    function exportToPowerBI() {
+      showExportModal();
+      simulateExport('PowerBI');
+    }
+
+    function exportToExcel() {
+      showExportModal();
+      simulateExport('Excel');
+    }
+
+    function showAPIDetails() {
+      const apiSection = document.getElementById('api-section');
+      apiSection.style.display = 'block';
+      apiSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function showExportModal() {
+      document.getElementById('exportModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('exportModal').style.display = 'none';
+    }
+
+    function simulateExport(format) {
+      const progressFill = document.getElementById('progressFill');
+      const progressText = document.getElementById('progressText');
+      const exportDetails = document.getElementById('exportDetails');
+      
+      let progress = 0;
+      const steps = [
+        'Collecting security metrics...',
+        'Processing compliance data...',
+        'Analyzing risk assessments...',
+        'Formatting for ' + format + '...',
+        'Finalizing export...'
+      ];
+      
+      let currentStep = 0;
+      exportDetails.innerHTML = '';
+      
+      const interval = setInterval(() => {
+        progress += 20;
+        progressFill.style.width = progress + '%';
+        
+        if (currentStep < steps.length) {
+          progressText.textContent = steps[currentStep];
+          exportDetails.innerHTML += `✓ ${steps[currentStep]}<br>`;
+          currentStep++;
+        }
+        
+        if (progress >= 100) {
+          clearInterval(interval);
+          progressText.textContent = 'Export complete!';
+          exportDetails.innerHTML += '<br><strong>File ready for download: PowerReview_Export_' + format + '_' + new Date().toISOString().split('T')[0] + '</strong>';
+          
+          // Simulate download
+          setTimeout(() => {
+            alert(`Downloading ${format} file...`);
+          }, 1000);
+        }
+      }, 1000);
+    }
+
+    function downloadTemplate(type) {
+      alert(`Downloading ${type} dashboard template...`);
+    }
+
+    function copyAPIKey() {
+      navigator.clipboard.writeText('YOUR_API_KEY_HERE');
+      alert('API key copied to clipboard!');
+    }
+
+    function testAPI() {
+      alert('Testing API connection...\n\nConnection successful! ✓');
+    }
+
+    // Set default date range
+    document.getElementById('startDate').valueAsDate = new Date(new Date().setMonth(new Date().getMonth() - 1));
+    document.getElementById('endDate').valueAsDate = new Date();
+  </script>
+</Layout>

@@ -1,0 +1,1061 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Mock Data Test - PowerReview Global Compliance">
+	<main class="test-main">
+		<div class="container">
+			<div class="test-header">
+				<h1>🧪 Mock Data Testing Dashboard</h1>
+				<p>Comprehensive testing of all 4 global client scenarios across 14 regions</p>
+			</div>
+
+			<!-- Client Overview Cards -->
+			<div class="client-overview">
+				<div class="client-card" data-client="globalcorp-apac">
+					<div class="card-header">
+						<div class="client-icon">🏦</div>
+						<div class="client-info">
+							<h3>GlobalCorp Asia-Pacific</h3>
+							<p>Financial Services • Singapore HQ</p>
+							<div class="employee-count">15,000 employees</div>
+						</div>
+					</div>
+					<div class="card-stats">
+						<div class="stat">
+							<span class="stat-value" id="globalcorp-regions">9</span>
+							<span class="stat-label">Regions</span>
+						</div>
+						<div class="stat">
+							<span class="stat-value" id="globalcorp-records">9,280</span>
+							<span class="stat-label">Records</span>
+						</div>
+						<div class="stat">
+							<span class="stat-value" id="globalcorp-compliance">97%</span>
+							<span class="stat-label">Compliance</span>
+						</div>
+					</div>
+					<button class="load-client-btn" data-client="globalcorp-apac">Load Data</button>
+				</div>
+
+				<div class="client-card" data-client="eurotech-global">
+					<div class="card-header">
+						<div class="client-icon">💻</div>
+						<div class="client-info">
+							<h3>EuroTech Global Solutions</h3>
+							<p>Technology • Frankfurt HQ</p>
+							<div class="employee-count">8,500 employees</div>
+						</div>
+					</div>
+					<div class="card-stats">
+						<div class="stat">
+							<span class="stat-value" id="eurotech-regions">8</span>
+							<span class="stat-label">Regions</span>
+						</div>
+						<div class="stat">
+							<span class="stat-value" id="eurotech-records">8,910</span>
+							<span class="stat-label">Records</span>
+						</div>
+						<div class="stat">
+							<span class="stat-value" id="eurotech-compliance">95%</span>
+							<span class="stat-label">Compliance</span>
+						</div>
+					</div>
+					<button class="load-client-btn" data-client="eurotech-global">Load Data</button>
+				</div>
+
+				<div class="client-card" data-client="manufacturing-usa">
+					<div class="card-header">
+						<div class="client-icon">🏭</div>
+						<div class="client-info">
+							<h3>American Manufacturing Corp</h3>
+							<p>Manufacturing • Chicago HQ</p>
+							<div class="employee-count">12,000 employees</div>
+						</div>
+					</div>
+					<div class="card-stats">
+						<div class="stat">
+							<span class="stat-value" id="manufacturing-regions">6</span>
+							<span class="stat-label">Regions</span>
+						</div>
+						<div class="stat">
+							<span class="stat-value" id="manufacturing-records">12,445</span>
+							<span class="stat-label">Records</span>
+						</div>
+						<div class="stat">
+							<span class="stat-value" id="manufacturing-compliance">94%</span>
+							<span class="stat-label">Compliance</span>
+						</div>
+					</div>
+					<button class="load-client-btn" data-client="manufacturing-usa">Load Data</button>
+				</div>
+
+				<div class="client-card" data-client="pharma-global">
+					<div class="card-header">
+						<div class="client-icon">💊</div>
+						<div class="client-info">
+							<h3>Global Pharma Research Ltd</h3>
+							<p>Pharmaceutical • London HQ</p>
+							<div class="employee-count">25,000 employees</div>
+						</div>
+					</div>
+					<div class="card-stats">
+						<div class="stat">
+							<span class="stat-value" id="pharma-regions">9</span>
+							<span class="stat-label">Regions</span>
+						</div>
+						<div class="stat">
+							<span class="stat-value" id="pharma-records">28,190</span>
+							<span class="stat-label">Records</span>
+						</div>
+						<div class="stat">
+							<span class="stat-value" id="pharma-compliance">96%</span>
+							<span class="stat-label">Compliance</span>
+						</div>
+					</div>
+					<button class="load-client-btn" data-client="pharma-global">Load Data</button>
+				</div>
+			</div>
+
+			<!-- Detailed Data Display -->
+			<div class="data-display" id="data-display" style="display: none;">
+				<div class="display-header">
+					<h2 id="selected-client-name">Client Data</h2>
+					<div class="display-controls">
+						<button id="show-raw-data">📄 Raw JSON</button>
+						<button id="show-visual-data">📊 Visual Data</button>
+						<button id="test-powerapp">🔗 Test Power App</button>
+					</div>
+				</div>
+
+				<!-- Regional Data Grid -->
+				<div class="regional-grid" id="regional-grid">
+					<!-- Will be populated by JavaScript -->
+				</div>
+
+				<!-- Data Flows Visualization -->
+				<div class="flows-section">
+					<h3>🌐 Cross-Border Data Flows</h3>
+					<div class="flows-container" id="flows-container">
+						<!-- Will be populated by JavaScript -->
+					</div>
+				</div>
+
+				<!-- Risk Assessment -->
+				<div class="risk-section">
+					<h3>⚠️ Risk Assessment</h3>
+					<div class="risk-grid" id="risk-grid">
+						<!-- Will be populated by JavaScript -->
+					</div>
+				</div>
+
+				<!-- Real-time Activity Simulation -->
+				<div class="activity-section">
+					<h3>🔄 Real-time Activity (Last 24h)</h3>
+					<div class="activity-controls">
+						<button id="generate-activity">Generate New Activity</button>
+						<button id="export-activity">Export Activity Log</button>
+					</div>
+					<div class="activity-list" id="activity-list">
+						<!-- Will be populated by JavaScript -->
+					</div>
+				</div>
+
+				<!-- Raw Data Modal -->
+				<div id="raw-data-modal" class="modal">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3>Raw Client Data (JSON)</h3>
+							<span class="close-modal">&times;</span>
+						</div>
+						<div class="modal-body">
+							<pre id="raw-data-content"></pre>
+						</div>
+					</div>
+				</div>
+
+				<!-- Power App Test Modal -->
+				<div id="powerapp-modal" class="modal">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h3>Power Apps Integration Test</h3>
+							<span class="close-modal">&times;</span>
+						</div>
+						<div class="modal-body">
+							<div class="powerapp-test" id="powerapp-test">
+								<!-- Will be populated by JavaScript -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<style>
+		.test-main {
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			min-height: 100vh;
+			padding: 20px;
+		}
+
+		.container {
+			max-width: 1400px;
+			margin: 0 auto;
+		}
+
+		.test-header {
+			text-align: center;
+			color: white;
+			margin-bottom: 40px;
+		}
+
+		.test-header h1 {
+			font-size: 3em;
+			margin-bottom: 10px;
+			text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+		}
+
+		.test-header p {
+			font-size: 1.2em;
+			opacity: 0.9;
+		}
+
+		.client-overview {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 25px;
+			margin-bottom: 40px;
+		}
+
+		.client-card {
+			background: white;
+			border-radius: 15px;
+			padding: 25px;
+			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+			transition: all 0.3s ease;
+			cursor: pointer;
+		}
+
+		.client-card:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2);
+		}
+
+		.card-header {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			margin-bottom: 20px;
+		}
+
+		.client-icon {
+			width: 60px;
+			height: 60px;
+			background: linear-gradient(135deg, #667eea, #764ba2);
+			border-radius: 15px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 30px;
+		}
+
+		.client-info h3 {
+			margin: 0;
+			color: #1f2937;
+			font-size: 1.3em;
+			font-weight: 700;
+		}
+
+		.client-info p {
+			margin: 5px 0;
+			color: #6b7280;
+			font-weight: 500;
+		}
+
+		.employee-count {
+			font-size: 0.9em;
+			color: #8b5cf6;
+			font-weight: 600;
+		}
+
+		.card-stats {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 15px;
+			margin-bottom: 20px;
+		}
+
+		.stat {
+			text-align: center;
+			padding: 15px;
+			background: #f8fafc;
+			border-radius: 10px;
+		}
+
+		.stat-value {
+			display: block;
+			font-size: 1.8em;
+			font-weight: 800;
+			color: #1f2937;
+			margin-bottom: 5px;
+		}
+
+		.stat-label {
+			font-size: 0.8em;
+			color: #6b7280;
+			font-weight: 600;
+			text-transform: uppercase;
+		}
+
+		.load-client-btn {
+			width: 100%;
+			background: linear-gradient(135deg, #667eea, #764ba2);
+			color: white;
+			border: none;
+			padding: 15px;
+			border-radius: 10px;
+			font-weight: 600;
+			font-size: 1.1em;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.load-client-btn:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+		}
+
+		.data-display {
+			background: white;
+			border-radius: 15px;
+			padding: 30px;
+			box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+		}
+
+		.display-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 30px;
+			padding-bottom: 20px;
+			border-bottom: 2px solid #f3f4f6;
+		}
+
+		.display-header h2 {
+			margin: 0;
+			color: #1f2937;
+			font-size: 2em;
+			font-weight: 700;
+		}
+
+		.display-controls {
+			display: flex;
+			gap: 15px;
+		}
+
+		.display-controls button {
+			background: #f3f4f6;
+			border: 1px solid #d1d5db;
+			padding: 10px 20px;
+			border-radius: 8px;
+			font-weight: 600;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+
+		.display-controls button:hover {
+			background: linear-gradient(135deg, #667eea, #764ba2);
+			color: white;
+		}
+
+		.regional-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+			gap: 20px;
+			margin-bottom: 40px;
+		}
+
+		.region-card {
+			background: #f8fafc;
+			border-radius: 12px;
+			padding: 20px;
+			border-left: 5px solid;
+		}
+
+		.region-card.primary { border-left-color: #10b981; }
+		.region-card.backup { border-left-color: #3b82f6; }
+		.region-card.restricted { border-left-color: #ef4444; }
+		.region-card.normal { border-left-color: #6b7280; }
+
+		.region-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 15px;
+		}
+
+		.region-name {
+			font-weight: 700;
+			color: #1f2937;
+			font-size: 1.1em;
+		}
+
+		.region-flag {
+			font-size: 1.5em;
+		}
+
+		.region-stats {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 10px;
+			margin-bottom: 15px;
+		}
+
+		.region-stat {
+			text-align: center;
+			padding: 8px;
+			background: white;
+			border-radius: 6px;
+		}
+
+		.region-stat-value {
+			display: block;
+			font-weight: 700;
+			color: #1f2937;
+		}
+
+		.region-stat-label {
+			font-size: 0.8em;
+			color: #6b7280;
+		}
+
+		.compliance-badges {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 5px;
+		}
+
+		.compliance-badge {
+			padding: 4px 8px;
+			background: #e5e7eb;
+			border-radius: 12px;
+			font-size: 0.75em;
+			font-weight: 600;
+			color: #4b5563;
+		}
+
+		.flows-section, .risk-section, .activity-section {
+			margin-bottom: 40px;
+		}
+
+		.flows-section h3, .risk-section h3, .activity-section h3 {
+			color: #1f2937;
+			font-size: 1.5em;
+			margin-bottom: 20px;
+			font-weight: 700;
+		}
+
+		.flow-item {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 15px;
+			background: #f8fafc;
+			border-radius: 10px;
+			margin-bottom: 10px;
+			border-left: 4px solid;
+		}
+
+		.flow-item.active { border-left-color: #10b981; }
+		.flow-item.paused { border-left-color: #f59e0b; }
+		.flow-item.error { border-left-color: #ef4444; }
+
+		.flow-info {
+			flex: 1;
+		}
+
+		.flow-route {
+			font-weight: 700;
+			color: #1f2937;
+			margin-bottom: 5px;
+		}
+
+		.flow-details {
+			font-size: 0.9em;
+			color: #6b7280;
+		}
+
+		.flow-status {
+			padding: 6px 12px;
+			border-radius: 15px;
+			font-size: 0.8em;
+			font-weight: 700;
+			text-transform: uppercase;
+		}
+
+		.flow-status.active { background: #d1fae5; color: #059669; }
+		.flow-status.paused { background: #fef3c7; color: #d97706; }
+		.flow-status.error { background: #fee2e2; color: #dc2626; }
+
+		.risk-grid {
+			display: grid;
+			gap: 15px;
+		}
+
+		.risk-item {
+			padding: 20px;
+			border-radius: 12px;
+			border-left: 5px solid;
+		}
+
+		.risk-item.low { 
+			background: #ecfdf5; 
+			border-left-color: #10b981; 
+		}
+		.risk-item.medium { 
+			background: #fffbeb; 
+			border-left-color: #f59e0b; 
+		}
+		.risk-item.high { 
+			background: #fef2f2; 
+			border-left-color: #ef4444; 
+		}
+
+		.risk-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 10px;
+		}
+
+		.risk-region {
+			font-weight: 700;
+			color: #1f2937;
+		}
+
+		.risk-level {
+			padding: 4px 12px;
+			border-radius: 12px;
+			font-size: 0.8em;
+			font-weight: 700;
+			text-transform: uppercase;
+		}
+
+		.risk-level.low { background: #d1fae5; color: #059669; }
+		.risk-level.medium { background: #fef3c7; color: #d97706; }
+		.risk-level.high { background: #fee2e2; color: #dc2626; }
+
+		.activity-controls {
+			display: flex;
+			gap: 15px;
+			margin-bottom: 20px;
+		}
+
+		.activity-controls button {
+			background: linear-gradient(135deg, #667eea, #764ba2);
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 8px;
+			font-weight: 600;
+			cursor: pointer;
+		}
+
+		.activity-list {
+			max-height: 400px;
+			overflow-y: auto;
+			border: 1px solid #e5e7eb;
+			border-radius: 10px;
+			padding: 15px;
+		}
+
+		.activity-item {
+			padding: 12px;
+			border-left: 4px solid;
+			margin-bottom: 10px;
+			background: #f9fafb;
+			border-radius: 0 8px 8px 0;
+		}
+
+		.activity-item.success { border-left-color: #10b981; }
+		.activity-item.warning { border-left-color: #f59e0b; }
+		.activity-item.error { border-left-color: #ef4444; }
+		.activity-item.info { border-left-color: #3b82f6; }
+
+		.activity-time {
+			font-size: 0.8em;
+			color: #6b7280;
+			font-weight: 600;
+		}
+
+		.activity-content {
+			margin-top: 4px;
+			color: #1f2937;
+			font-weight: 500;
+		}
+
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 1000;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
+		}
+
+		.modal-content {
+			background-color: white;
+			margin: 5% auto;
+			padding: 0;
+			border-radius: 15px;
+			width: 90%;
+			max-width: 800px;
+			max-height: 80vh;
+			overflow: hidden;
+		}
+
+		.modal-header {
+			background: linear-gradient(135deg, #667eea, #764ba2);
+			color: white;
+			padding: 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		.close-modal {
+			font-size: 28px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+
+		.modal-body {
+			padding: 20px;
+			max-height: 60vh;
+			overflow-y: auto;
+		}
+
+		#raw-data-content {
+			background: #f8fafc;
+			padding: 15px;
+			border-radius: 8px;
+			border: 1px solid #e5e7eb;
+			font-family: 'Courier New', monospace;
+			font-size: 0.9em;
+			line-height: 1.4;
+			white-space: pre-wrap;
+			word-wrap: break-word;
+		}
+
+		.powerapp-test {
+			display: grid;
+			gap: 20px;
+		}
+
+		.powerapp-section {
+			padding: 15px;
+			background: #f8fafc;
+			border-radius: 10px;
+			border: 1px solid #e5e7eb;
+		}
+
+		.powerapp-section h4 {
+			margin: 0 0 10px 0;
+			color: #1f2937;
+			font-weight: 700;
+		}
+
+		@media (max-width: 768px) {
+			.client-overview {
+				grid-template-columns: 1fr;
+			}
+			
+			.regional-grid {
+				grid-template-columns: 1fr;
+			}
+			
+			.display-header {
+				flex-direction: column;
+				gap: 20px;
+				align-items: flex-start;
+			}
+		}
+	</style>
+
+	<script>
+		let mockDataGenerator;
+		let powerAppConnector;
+		let currentClientData = null;
+
+		// Initialize the test dashboard
+		async function initializeTestDashboard() {
+			try {
+				// Import modules
+				const [mockModule, powerAppModule] = await Promise.all([
+					import('../../lib/mock-data-generator.js'),
+					import('../../lib/powerapp-connector.js')
+				]);
+				
+				mockDataGenerator = mockModule;
+				powerAppConnector = powerAppModule.powerAppConnector;
+
+				// Setup event listeners
+				setupEventListeners();
+				
+				// Update client cards with actual data
+				updateClientCards();
+				
+				console.log('✅ Test dashboard initialized successfully');
+			} catch (error) {
+				console.error('❌ Failed to initialize test dashboard:', error);
+			}
+		}
+
+		function setupEventListeners() {
+			// Client card click handlers
+			document.querySelectorAll('.load-client-btn').forEach(btn => {
+				btn.addEventListener('click', (e) => {
+					const clientId = e.target.dataset.client;
+					loadClientData(clientId);
+				});
+			});
+
+			// Control buttons
+			document.getElementById('show-raw-data').addEventListener('click', showRawData);
+			document.getElementById('show-visual-data').addEventListener('click', showVisualData);
+			document.getElementById('test-powerapp').addEventListener('click', testPowerAppIntegration);
+			document.getElementById('generate-activity').addEventListener('click', generateNewActivity);
+			document.getElementById('export-activity').addEventListener('click', exportActivity);
+
+			// Modal close handlers
+			document.querySelectorAll('.close-modal').forEach(btn => {
+				btn.addEventListener('click', () => {
+					btn.closest('.modal').style.display = 'none';
+				});
+			});
+
+			// Click outside modal to close
+			window.addEventListener('click', (e) => {
+				if (e.target.classList.contains('modal')) {
+					e.target.style.display = 'none';
+				}
+			});
+		}
+
+		function updateClientCards() {
+			if (!mockDataGenerator) return;
+
+			mockDataGenerator.getAllClients().forEach(client => {
+				const clientData = mockDataGenerator.getClientData(client.id);
+				if (!clientData) return;
+
+				// Calculate stats
+				const regions = Object.keys(clientData.dataDistribution).length;
+				const totalRecords = Object.values(clientData.dataDistribution).reduce((sum, region) => 
+					sum + region.customer + region.assessment + region.files, 0);
+				const avgCompliance = Math.round(
+					Object.values(clientData.complianceScores).reduce((sum, scores) => 
+						sum + Object.values(scores).reduce((s, score) => s + score, 0) / Object.keys(scores).length, 0) / 
+					Object.keys(clientData.complianceScores).length
+				);
+
+				// Update card
+				const prefix = client.id.replace('-', '');
+				document.getElementById(`${prefix}-regions`).textContent = regions;
+				document.getElementById(`${prefix}-records`).textContent = totalRecords.toLocaleString();
+				document.getElementById(`${prefix}-compliance`).textContent = `${avgCompliance}%`;
+			});
+		}
+
+		function loadClientData(clientId) {
+			if (!mockDataGenerator) return;
+
+			currentClientData = mockDataGenerator.getClientData(clientId);
+			if (!currentClientData) {
+				alert('Client data not found!');
+				return;
+			}
+
+			// Show data display section
+			document.getElementById('data-display').style.display = 'block';
+			document.getElementById('selected-client-name').textContent = currentClientData.organizationName;
+
+			// Populate regional grid
+			populateRegionalGrid();
+
+			// Populate data flows
+			populateDataFlows();
+
+			// Populate risk assessment
+			populateRiskAssessment();
+
+			// Load activity
+			loadActivity();
+
+			// Scroll to data display
+			document.getElementById('data-display').scrollIntoView({ behavior: 'smooth' });
+		}
+
+		function populateRegionalGrid() {
+			const grid = document.getElementById('regional-grid');
+			grid.innerHTML = '';
+
+			Object.entries(currentClientData.dataDistribution).forEach(([region, data]) => {
+				const complianceScores = currentClientData.complianceScores[region] || {};
+				const avgCompliance = Object.keys(complianceScores).length > 0 ? 
+					Math.round(Object.values(complianceScores).reduce((a, b) => a + b, 0) / Object.keys(complianceScores).length) : 0;
+
+				// Determine region type
+				const isPrimary = isRegionPrimary(region);
+				const isBackup = isRegionBackup(region);
+				const isRestricted = region === 'japan'; // Japan is typically isolated
+				
+				let regionType = 'normal';
+				if (isPrimary) regionType = 'primary';
+				else if (isBackup) regionType = 'backup';
+				else if (isRestricted) regionType = 'restricted';
+
+				const totalRecords = data.customer + data.assessment + data.files;
+
+				const regionFlags = {
+					'singapore': '🇸🇬', 'japan': '🇯🇵', 'australia': '🇦🇺', 'us-east': '🇺🇸',
+					'us-west': '🇺🇸', 'eu-central': '🇪🇺', 'eu-west': '🇮🇪', 'uk': '🇬🇧',
+					'canada': '🇨🇦', 'south-korea': '🇰🇷', 'thailand': '🇹🇭', 'malaysia': '🇲🇾',
+					'philippines': '🇵🇭', 'indonesia': '🇮🇩', 'vietnam': '🇻🇳'
+				};
+
+				const card = document.createElement('div');
+				card.className = `region-card ${regionType}`;
+				card.innerHTML = `
+					<div class="region-header">
+						<div class="region-name">${region.replace('-', ' ').toUpperCase()}</div>
+						<div class="region-flag">${regionFlags[region] || '🌍'}</div>
+					</div>
+					<div class="region-stats">
+						<div class="region-stat">
+							<span class="region-stat-value">${totalRecords.toLocaleString()}</span>
+							<span class="region-stat-label">Total Records</span>
+						</div>
+						<div class="region-stat">
+							<span class="region-stat-value">${data.totalGB} GB</span>
+							<span class="region-stat-label">Storage</span>
+						</div>
+						<div class="region-stat">
+							<span class="region-stat-value">${data.customer.toLocaleString()}</span>
+							<span class="region-stat-label">Customers</span>
+						</div>
+						<div class="region-stat">
+							<span class="region-stat-value">${avgCompliance}%</span>
+							<span class="region-stat-label">Compliance</span>
+						</div>
+					</div>
+					<div class="compliance-badges">
+						${Object.keys(complianceScores).map(standard => 
+							`<span class="compliance-badge">${standard}</span>`
+						).join('')}
+					</div>
+				`;
+
+				grid.appendChild(card);
+			});
+		}
+
+		function populateDataFlows() {
+			const container = document.getElementById('flows-container');
+			container.innerHTML = '';
+
+			currentClientData.dataFlows.forEach(flow => {
+				const item = document.createElement('div');
+				item.className = `flow-item ${flow.status}`;
+				item.innerHTML = `
+					<div class="flow-info">
+						<div class="flow-route">${flow.source.toUpperCase()} → ${flow.target.toUpperCase()}</div>
+						<div class="flow-details">
+							${flow.type.toUpperCase()} • ${flow.dataVolume} records • ${flow.frequency} • ${flow.encryption}
+						</div>
+					</div>
+					<div class="flow-status ${flow.status}">${flow.status}</div>
+				`;
+				container.appendChild(item);
+			});
+		}
+
+		function populateRiskAssessment() {
+			const grid = document.getElementById('risk-grid');
+			grid.innerHTML = '';
+
+			currentClientData.riskFactors.forEach(risk => {
+				const item = document.createElement('div');
+				item.className = `risk-item ${risk.level}`;
+				item.innerHTML = `
+					<div class="risk-header">
+						<div class="risk-region">${risk.region.toUpperCase()}</div>
+						<div class="risk-level ${risk.level}">${risk.level}</div>
+					</div>
+					<div class="risk-description"><strong>${risk.category}:</strong> ${risk.description}</div>
+					<div class="risk-impact"><strong>Impact:</strong> ${risk.impact}</div>
+					<div class="risk-mitigation"><strong>Mitigation:</strong> ${risk.mitigation}</div>
+				`;
+				grid.appendChild(item);
+			});
+		}
+
+		function loadActivity() {
+			const activities = mockDataGenerator.generateRecentActivity(currentClientData.clientId, 24);
+			const list = document.getElementById('activity-list');
+			list.innerHTML = '';
+
+			activities.slice(0, 20).forEach(activity => {
+				const item = document.createElement('div');
+				item.className = `activity-item ${activity.severity}`;
+				
+				const timeAgo = getTimeAgo(new Date(activity.timestamp));
+				item.innerHTML = `
+					<div class="activity-time">${timeAgo} • ${activity.region.toUpperCase()} • ${activity.userId}</div>
+					<div class="activity-content"><strong>${activity.action}:</strong> ${activity.details}</div>
+				`;
+				list.appendChild(item);
+			});
+		}
+
+		function isRegionPrimary(region) {
+			// Find region with most customer data
+			let maxCustomers = 0;
+			let primaryRegion = '';
+			
+			Object.entries(currentClientData.dataDistribution).forEach(([r, data]) => {
+				if (data.customer > maxCustomers) {
+					maxCustomers = data.customer;
+					primaryRegion = r;
+				}
+			});
+			
+			return region === primaryRegion;
+		}
+
+		function isRegionBackup(region) {
+			// Check if region has backup flows
+			return currentClientData.dataFlows.some(flow => 
+				flow.target === region && flow.type === 'backup'
+			);
+		}
+
+		function showRawData() {
+			document.getElementById('raw-data-content').textContent = JSON.stringify(currentClientData, null, 2);
+			document.getElementById('raw-data-modal').style.display = 'block';
+		}
+
+		function showVisualData() {
+			// Open the enhanced dashboard in a new tab
+			window.open('/global-sovereignty-dashboard-enhanced', '_blank');
+		}
+
+		async function testPowerAppIntegration() {
+			if (!powerAppConnector || !currentClientData) return;
+
+			try {
+				// Get Power Apps data
+				const powerAppData = await powerAppConnector.getGlobalSovereigntyData(currentClientData.clientId);
+				
+				const testContainer = document.getElementById('powerapp-test');
+				testContainer.innerHTML = `
+					<div class="powerapp-section">
+						<h4>🔗 Connection Status</h4>
+						<p><strong>Success:</strong> ${powerAppData.success ? '✅ Connected' : '❌ Failed'}</p>
+						<p><strong>Client:</strong> ${powerAppData.metadata.clientId}</p>
+						<p><strong>Timestamp:</strong> ${new Date(powerAppData.metadata.timestamp).toLocaleString()}</p>
+					</div>
+					
+					<div class="powerapp-section">
+						<h4>📊 Visualization Config</h4>
+						<p><strong>Type:</strong> ${powerAppData.visualization.type}</p>
+						<p><strong>Interactive Elements:</strong> ${powerAppData.visualization.interactiveElements.length}</p>
+						<p><strong>Map Projection:</strong> ${powerAppData.visualization.config?.projection || 'N/A'}</p>
+					</div>
+
+					<div class="powerapp-section">
+						<h4>🛡️ Compliance Data</h4>
+						<p><strong>Status:</strong> ${powerAppData.metadata.compliance.status}</p>
+						<p><strong>Last Audit:</strong> ${new Date(powerAppData.metadata.compliance.lastAudit).toLocaleString()}</p>
+						<p><strong>Next Audit:</strong> ${new Date(powerAppData.metadata.compliance.nextAudit).toLocaleString()}</p>
+					</div>
+
+					<div class="powerapp-section">
+						<h4>📈 Regional Data</h4>
+						<p><strong>Total Regions:</strong> ${powerAppData.data.visualizationData?.length || 0}</p>
+						<p><strong>Risk Level:</strong> ${powerAppData.data.riskAssessment?.overallRisk || 'Unknown'}</p>
+						<p><strong>Recommendations:</strong> ${powerAppData.data.recommendations?.length || 0} items</p>
+					</div>
+
+					<div class="powerapp-section">
+						<h4>🔧 Connector Definition</h4>
+						<pre style="background: #f3f4f6; padding: 10px; border-radius: 5px; font-size: 0.8em;">
+${JSON.stringify(powerAppConnector.exportConnectorDefinition(), null, 2).substring(0, 500)}...
+						</pre>
+					</div>
+				`;
+
+				document.getElementById('powerapp-modal').style.display = 'block';
+				
+			} catch (error) {
+				alert('Power App integration test failed: ' + error.message);
+			}
+		}
+
+		function generateNewActivity() {
+			const newActivities = mockDataGenerator.generateRecentActivity(currentClientData.clientId, 1);
+			if (newActivities.length > 0) {
+				const list = document.getElementById('activity-list');
+				const item = document.createElement('div');
+				item.className = `activity-item ${newActivities[0].severity}`;
+				
+				const timeAgo = getTimeAgo(new Date(newActivities[0].timestamp));
+				item.innerHTML = `
+					<div class="activity-time">${timeAgo} • ${newActivities[0].region.toUpperCase()} • ${newActivities[0].userId}</div>
+					<div class="activity-content"><strong>${newActivities[0].action}:</strong> ${newActivities[0].details}</div>
+				`;
+				
+				list.insertBefore(item, list.firstChild);
+				
+				// Limit to 20 items
+				while (list.children.length > 20) {
+					list.removeChild(list.lastChild);
+				}
+			}
+		}
+
+		function exportActivity() {
+			const activities = mockDataGenerator.generateRecentActivity(currentClientData.clientId, 72); // Last 3 days
+			const csv = 'Timestamp,Region,Action,Details,User,Severity\n' + 
+				activities.map(a => `"${a.timestamp}","${a.region}","${a.action}","${a.details}","${a.userId}","${a.severity}"`).join('\n');
+			
+			const blob = new Blob([csv], { type: 'text/csv' });
+			const url = window.URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = `${currentClientData.clientId}-activity-${new Date().toISOString().split('T')[0]}.csv`;
+			a.click();
+			window.URL.revokeObjectURL(url);
+		}
+
+		function getTimeAgo(date) {
+			const now = new Date();
+			const diff = Math.floor((now - date) / 1000);
+			
+			if (diff < 60) return `${diff}s ago`;
+			if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+			if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+			return `${Math.floor(diff / 86400)}d ago`;
+		}
+
+		// Initialize when DOM is loaded
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initializeTestDashboard);
+		} else {
+			initializeTestDashboard();
+		}
+	</script>
+</Layout>

@@ -1996,8 +1996,12 @@ import Layout from '../layouts/Layout.astro';
 				localStorage.setItem('current-session-id', result.sessionId);
 				localStorage.setItem('websocket-url', result.websocketUrl || 'ws://localhost:8080');
 				
+				// Store assessment configuration for execution page
+				localStorage.setItem('powerreview_customer', JSON.stringify(assessmentConfig.customer));
+				localStorage.setItem('powerreview_assessments', JSON.stringify(assessmentConfig.environment.services));
+				
 				// Redirect to execution monitoring page
-				window.location.href = `/execute?session=${result.sessionId}`;
+				window.location.href = '/assessment-execution';
 			} else {
 				throw new Error(result.error || 'Failed to start assessment');
 			}

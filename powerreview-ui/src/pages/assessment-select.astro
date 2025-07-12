@@ -9,6 +9,14 @@ import Layout from '../layouts/Layout.astro';
 				<h1>Select Your Assessments</h1>
 				<p>Choose which security assessments to run on your Microsoft 365 tenant</p>
 				<div class="selection-options">
+					<div class="info-callout">
+						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+							<circle cx="12" cy="12" r="10"/>
+							<path d="M12 16v-4"/>
+							<path d="M12 8h.01"/>
+						</svg>
+						<strong>Selecting Purview</strong> includes a comprehensive information governance questionnaire
+					</div>
 					<a href="/assessment-detailed" class="detailed-selection-link">
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 							<path d="M21 18V6H8L2 12l6 6h13z"/>
@@ -240,6 +248,36 @@ import Layout from '../layouts/Layout.astro';
 						</label>
 
 						<label class="assessment-card">
+							<input type="checkbox" name="assessment" value="purview">
+							<div class="card-content">
+								<div class="special-badge">📋 Includes Detailed Questionnaire</div>
+								<div class="card-header">
+									<div class="card-icon purview">
+										<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+											<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+											<polyline points="14 2 14 8 20 8"/>
+											<line x1="16" y1="13" x2="8" y2="13"/>
+											<line x1="16" y1="17" x2="8" y2="17"/>
+											<polyline points="10 9 9 9 8 9"/>
+										</svg>
+									</div>
+									<div class="card-info">
+										<h3>Microsoft Purview</h3>
+										<span class="duration">Information Governance</span>
+									</div>
+								</div>
+								<p>Comprehensive information governance assessment including retention, classification, and compliance policies</p>
+								<div class="card-features">
+									<span class="feature">Retention Policies</span>
+									<span class="feature">Sensitivity Labels</span>
+									<span class="feature">Data Classification</span>
+									<span class="feature">Records Management</span>
+									<span class="feature">Compliance Manager</span>
+								</div>
+							</div>
+						</label>
+
+						<label class="assessment-card">
 							<input type="checkbox" name="assessment" value="powerplatform">
 							<div class="card-content">
 								<div class="card-header">
@@ -362,6 +400,37 @@ import Layout from '../layouts/Layout.astro';
 		box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
 	}
 
+	.info-callout {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background: rgba(124, 58, 237, 0.1);
+		color: #7c3aed;
+		border-radius: 8px;
+		font-size: 0.875rem;
+		border: 1px solid rgba(124, 58, 237, 0.3);
+		margin-bottom: 1rem;
+	}
+
+	.info-callout svg {
+		flex-shrink: 0;
+	}
+
+	.special-badge {
+		position: absolute;
+		top: -8px;
+		right: 12px;
+		background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+		color: white;
+		padding: 0.25rem 0.75rem;
+		border-radius: 20px;
+		font-size: 0.75rem;
+		font-weight: 600;
+		z-index: 10;
+		box-shadow: 0 2px 4px rgba(124, 58, 237, 0.3);
+	}
+
 	.assessment-grid {
 		display: flex;
 		flex-direction: column;
@@ -473,6 +542,7 @@ import Layout from '../layouts/Layout.astro';
 	.card-icon.teams { background: linear-gradient(135deg, #5558af 0%, #3d3e8e 100%); }
 	.card-icon.dlp { background: linear-gradient(135deg, #f39c12 0%, #d68910 100%); }
 	.card-icon.compliance { background: linear-gradient(135deg, #27ae60 0%, #229954 100%); }
+	.card-icon.purview { background: linear-gradient(135deg, #6f42c1 0%, #563d7c 100%); }
 	.card-icon.power { background: linear-gradient(135deg, #742774 0%, #5a1d5a 100%); }
 
 	.card-info h3 {
@@ -693,11 +763,23 @@ import Layout from '../layouts/Layout.astro';
 			return;
 		}
 
-		// Store selected assessments
+		// Store selected assessments for execution
 		localStorage.setItem('powerreview_assessments', JSON.stringify(selected));
-
-		// Redirect to enhanced assessment page for customer info
-		window.location.href = '/assessment-enhanced';
+		
+		// Check if Purview is selected - if so, go to enhanced questionnaire first
+		if (selected.includes('purview')) {
+			localStorage.setItem('purview_assessment_requested', 'true');
+			window.location.href = '/purview-questionnaire-enhanced';
+		} else {
+			// Set default customer info if not going through Purview questionnaire
+			const defaultCustomer = {
+				organization: 'Customer Assessment',
+				contact: 'IT Administrator',
+				purpose: 'Security Review'
+			};
+			localStorage.setItem('powerreview_customer', JSON.stringify(defaultCustomer));
+			window.location.href = '/assessment-execution';
+		}
 	});
 
 	// Initialize

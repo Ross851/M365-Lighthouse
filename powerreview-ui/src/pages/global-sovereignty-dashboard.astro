@@ -1,0 +1,1395 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Global Data Sovereignty Dashboard - PowerReview">
+	<main class="sovereignty-main">
+		<div class="container">
+			<!-- Header with Client Info -->
+			<div class="dashboard-header">
+				<div class="client-badge">
+					<div class="client-avatar">🏢</div>
+					<div class="client-info">
+						<h1 id="client-name">GlobalCorp Asia-Pacific</h1>
+						<p id="client-headquarters">Headquarters: Singapore</p>
+						<div class="compliance-status">
+							<span class="status-indicator compliant">●</span>
+							<span>Fully Compliant Across All Jurisdictions</span>
+						</div>
+					</div>
+				</div>
+				<div class="dashboard-controls">
+					<button class="control-btn" id="workshop-mode" title="Workshop Presentation Mode">
+						📊 Workshop View
+					</button>
+					<button class="control-btn" id="audit-mode" title="Audit & Compliance View">
+						🔍 Audit View
+					</button>
+					<button class="control-btn" id="realtime-toggle" title="Real-time Updates">
+						⚡ Live Updates: ON
+					</button>
+				</div>
+			</div>
+
+			<!-- Global Map Visualization -->
+			<div class="global-map-container">
+				<div class="map-header">
+					<h2>Global Data Distribution & Sovereignty</h2>
+					<div class="map-legend">
+						<div class="legend-item">
+							<div class="legend-color primary"></div>
+							<span>Primary Region</span>
+						</div>
+						<div class="legend-item">
+							<div class="legend-color backup"></div>
+							<span>Backup Regions</span>
+						</div>
+						<div class="legend-item">
+							<div class="legend-color restricted"></div>
+							<span>Restricted Data</span>
+						</div>
+						<div class="legend-item">
+							<div class="legend-color flow"></div>
+							<span>Data Flows</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="interactive-world-map" id="world-map">
+					<!-- SVG World Map with Interactive Regions -->
+					<svg viewBox="0 0 1000 500" class="world-svg">
+						<!-- Background -->
+						<rect width="1000" height="500" fill="#f8fafc"/>
+						
+						<!-- Simplified world regions for demonstration -->
+						<!-- North America -->
+						<g class="region-group" data-region="us-west" data-region-name="US West">
+							<rect x="50" y="100" width="120" height="80" rx="10" class="region us-region" />
+							<text x="110" y="135" text-anchor="middle" class="region-label">🇺🇸 US West</text>
+							<text x="110" y="150" text-anchor="middle" class="region-data">300 records</text>
+						</g>
+
+						<g class="region-group" data-region="us-east" data-region-name="US East">
+							<rect x="180" y="120" width="100" height="70" rx="10" class="region us-region" />
+							<text x="230" y="150" text-anchor="middle" class="region-label">🇺🇸 US East</text>
+							<text x="230" y="165" text-anchor="middle" class="region-data">150 records</text>
+						</g>
+
+						<!-- Europe -->
+						<g class="region-group" data-region="eu-central" data-region-name="EU Central">
+							<rect x="450" y="80" width="80" height="60" rx="10" class="region eu-region" />
+							<text x="490" y="105" text-anchor="middle" class="region-label">🇪🇺 EU</text>
+							<text x="490" y="120" text-anchor="middle" class="region-data">0 records</text>
+						</g>
+
+						<g class="region-group" data-region="uk" data-region-name="United Kingdom">
+							<rect x="420" y="90" width="60" height="50" rx="10" class="region eu-region" />
+							<text x="450" y="110" text-anchor="middle" class="region-label">🇬🇧 UK</text>
+							<text x="450" y="125" text-anchor="middle" class="region-data">0 records</text>
+						</g>
+
+						<!-- Asia Pacific -->
+						<g class="region-group primary-region" data-region="singapore" data-region-name="Singapore">
+							<rect x="720" y="280" width="90" height="70" rx="10" class="region apac-region primary" />
+							<text x="765" y="305" text-anchor="middle" class="region-label">🇸🇬 Singapore</text>
+							<text x="765" y="320" text-anchor="middle" class="region-data">1,250 records</text>
+							<text x="765" y="335" text-anchor="middle" class="primary-badge">PRIMARY</text>
+						</g>
+
+						<g class="region-group restricted-region" data-region="japan" data-region-name="Japan">
+							<rect x="820" y="200" width="80" height="60" rx="10" class="region apac-region restricted" />
+							<text x="860" y="225" text-anchor="middle" class="region-label">🇯🇵 Japan</text>
+							<text x="860" y="240" text-anchor="middle" class="region-data">450 records</text>
+							<text x="860" y="255" text-anchor="middle" class="restricted-badge">ISOLATED</text>
+						</g>
+
+						<g class="region-group backup-region" data-region="australia" data-region-name="Australia">
+							<rect x="800" y="360" width="100" height="70" rx="10" class="region apac-region backup" />
+							<text x="850" y="390" text-anchor="middle" class="region-label">🇦🇺 Australia</text>
+							<text x="850" y="405" text-anchor="middle" class="region-data">89 backups</text>
+						</g>
+
+						<!-- Southeast Asia -->
+						<g class="region-group" data-region="thailand" data-region-name="Thailand">
+							<rect x="680" y="250" width="70" height="50" rx="10" class="region sea-region" />
+							<text x="715" y="270" text-anchor="middle" class="region-label">🇹🇭 TH</text>
+							<text x="715" y="285" text-anchor="middle" class="region-data">45 records</text>
+						</g>
+
+						<g class="region-group backup-region" data-region="malaysia" data-region-name="Malaysia">
+							<rect x="700" y="300" width="70" height="50" rx="10" class="region sea-region backup" />
+							<text x="735" y="320" text-anchor="middle" class="region-label">🇲🇾 MY</text>
+							<text x="735" y="335" text-anchor="middle" class="region-data">230 archives</text>
+						</g>
+
+						<g class="region-group" data-region="philippines" data-region-name="Philippines">
+							<rect x="760" y="270" width="70" height="50" rx="10" class="region sea-region" />
+							<text x="795" y="290" text-anchor="middle" class="region-label">🇵🇭 PH</text>
+							<text x="795" y="305" text-anchor="middle" class="region-data">67 records</text>
+						</g>
+
+						<!-- Data Flow Lines -->
+						<defs>
+							<marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+								<polygon points="0 0, 10 3.5, 0 7" fill="#3b82f6" opacity="0.7"/>
+							</marker>
+						</defs>
+
+						<!-- Flow from Singapore to Australia (backup) -->
+						<path d="M765,350 Q820,370 850,360" stroke="#10b981" stroke-width="3" fill="none" 
+						      marker-end="url(#arrowhead)" class="data-flow backup-flow" 
+						      data-flow="singapore-australia">
+							<title>Encrypted Backup Flow: Singapore → Australia</title>
+						</path>
+
+						<!-- Flow from Singapore to Malaysia (archive) -->
+						<path d="M765,330 Q750,340 735,330" stroke="#6366f1" stroke-width="2" fill="none" 
+						      marker-end="url(#arrowhead)" class="data-flow archive-flow"
+						      data-flow="singapore-malaysia">
+							<title>Archive Flow: Singapore → Malaysia</title>
+						</path>
+
+						<!-- Isolated Japan (no flows) -->
+						<circle cx="860" cy="195" r="5" fill="#ef4444" class="isolation-indicator">
+							<title>Japan: Cryptographically Isolated</title>
+						</circle>
+					</svg>
+				</div>
+			</div>
+
+			<!-- Data Sovereignty Panel -->
+			<div class="sovereignty-panels">
+				<!-- Compliance Overview -->
+				<div class="panel compliance-panel">
+					<div class="panel-header">
+						<h3>🛡️ Compliance Status</h3>
+						<div class="status-badge compliant">ALL COMPLIANT</div>
+					</div>
+					<div class="compliance-grid">
+						<div class="compliance-item">
+							<div class="compliance-flag">🇸🇬</div>
+							<div class="compliance-info">
+								<h4>Singapore PDPA</h4>
+								<div class="compliance-score">98%</div>
+								<p>1,250 records secure</p>
+							</div>
+						</div>
+						<div class="compliance-item">
+							<div class="compliance-flag">🇯🇵</div>
+							<div class="compliance-info">
+								<h4>Japan APPI</h4>
+								<div class="compliance-score">99%</div>
+								<p>450 records isolated</p>
+							</div>
+						</div>
+						<div class="compliance-item">
+							<div class="compliance-flag">🇺🇸</div>
+							<div class="compliance-info">
+								<h4>US FIPS 140-2</h4>
+								<div class="compliance-score">97%</div>
+								<p>450 records secure</p>
+							</div>
+						</div>
+						<div class="compliance-item">
+							<div class="compliance-flag">🇹🇭</div>
+							<div class="compliance-info">
+								<h4>Thailand PDPA</h4>
+								<div class="compliance-score">96%</div>
+								<p>45 records compliant</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Data Distribution -->
+				<div class="panel distribution-panel">
+					<div class="panel-header">
+						<h3>📊 Data Distribution</h3>
+						<button class="panel-action" id="export-distribution">Export Data</button>
+					</div>
+					<div class="distribution-chart">
+						<div class="chart-item">
+							<div class="chart-bar" style="height: 80%;" data-value="1250">
+								<div class="bar-fill singapore"></div>
+							</div>
+							<div class="chart-label">
+								<div class="chart-flag">🇸🇬</div>
+								<div class="chart-count">1,250</div>
+								<div class="chart-type">Customer Data</div>
+							</div>
+						</div>
+						<div class="chart-item">
+							<div class="chart-bar" style="height: 30%;" data-value="450">
+								<div class="bar-fill japan"></div>
+							</div>
+							<div class="chart-label">
+								<div class="chart-flag">🇯🇵</div>
+								<div class="chart-count">450</div>
+								<div class="chart-type">Isolated</div>
+							</div>
+						</div>
+						<div class="chart-item">
+							<div class="chart-bar" style="height: 30%;" data-value="450">
+								<div class="bar-fill us"></div>
+							</div>
+							<div class="chart-label">
+								<div class="chart-flag">🇺🇸</div>
+								<div class="chart-count">450</div>
+								<div class="chart-type">Regional</div>
+							</div>
+						</div>
+						<div class="chart-item">
+							<div class="chart-bar" style="height: 15%;" data-value="230">
+								<div class="bar-fill backup"></div>
+							</div>
+							<div class="chart-label">
+								<div class="chart-flag">🇦🇺</div>
+								<div class="chart-count">230</div>
+								<div class="chart-type">Backups</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Connection Analysis -->
+				<div class="panel connections-panel">
+					<div class="panel-header">
+						<h3>🔗 Cross-Border Connections</h3>
+						<div class="risk-indicator low">LOW RISK</div>
+					</div>
+					<div class="connections-list">
+						<div class="connection-item allowed">
+							<div class="connection-path">
+								<span class="connection-flag">🇸🇬</span>
+								<div class="connection-arrow">→</div>
+								<span class="connection-flag">🇦🇺</span>
+							</div>
+							<div class="connection-info">
+								<h4>Singapore → Australia</h4>
+								<p>Encrypted backup flow</p>
+								<div class="connection-status">✅ COMPLIANT</div>
+							</div>
+						</div>
+						<div class="connection-item blocked">
+							<div class="connection-path">
+								<span class="connection-flag">🇯🇵</span>
+								<div class="connection-block">✕</div>
+								<span class="connection-flag">🇸🇬</span>
+							</div>
+							<div class="connection-info">
+								<h4>Japan ✕ Cross-Border</h4>
+								<p>APPI isolation enforced</p>
+								<div class="connection-status">🔒 ISOLATED</div>
+							</div>
+						</div>
+						<div class="connection-item monitored">
+							<div class="connection-path">
+								<span class="connection-flag">🇸🇬</span>
+								<div class="connection-arrow">⟷</div>
+								<span class="connection-flag">🇹🇭</span>
+							</div>
+							<div class="connection-info">
+								<h4>Singapore ⟷ Thailand</h4>
+								<p>Regional operations sync</p>
+								<div class="connection-status">👁️ MONITORED</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Detailed Region Panel (Hidden by default) -->
+			<div class="region-detail-panel" id="region-detail-panel" style="display: none;">
+				<div class="detail-header">
+					<h2 id="detail-region-name">Singapore</h2>
+					<button class="close-detail" id="close-detail">✕</button>
+				</div>
+				<div class="detail-content">
+					<div class="detail-section">
+						<h3>📍 Jurisdiction Details</h3>
+						<div class="detail-grid">
+							<div class="detail-item">
+								<strong>Data Center:</strong>
+								<span id="detail-datacenter">Singapore</span>
+							</div>
+							<div class="detail-item">
+								<strong>Encryption Standard:</strong>
+								<span id="detail-encryption">CSA-approved AES-256-GCM</span>
+							</div>
+							<div class="detail-item">
+								<strong>Compliance Standards:</strong>
+								<span id="detail-compliance">PDPA, MAS Guidelines</span>
+							</div>
+							<div class="detail-item">
+								<strong>Data Residency Laws:</strong>
+								<span id="detail-laws">Personal Data Protection Act</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="detail-section">
+						<h3>📊 Data Breakdown</h3>
+						<div class="data-breakdown">
+							<div class="breakdown-item">
+								<div class="breakdown-type">Customer Data</div>
+								<div class="breakdown-count" id="detail-customer">1,250 records</div>
+								<div class="breakdown-bar">
+									<div class="breakdown-fill" style="width: 85%"></div>
+								</div>
+							</div>
+							<div class="breakdown-item">
+								<div class="breakdown-type">Assessment Data</div>
+								<div class="breakdown-count" id="detail-assessment">89 assessments</div>
+								<div class="breakdown-bar">
+									<div class="breakdown-fill" style="width: 60%"></div>
+								</div>
+							</div>
+							<div class="breakdown-item">
+								<div class="breakdown-type">Uploaded Files</div>
+								<div class="breakdown-count" id="detail-files">340 files</div>
+								<div class="breakdown-bar">
+									<div class="breakdown-fill" style="width: 45%"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="detail-section">
+						<h3>🔒 Security Status</h3>
+						<div class="security-status">
+							<div class="security-item">
+								<div class="security-indicator success"></div>
+								<span>Encryption: Active</span>
+							</div>
+							<div class="security-item">
+								<div class="security-indicator success"></div>
+								<span>Access Control: Enforced</span>
+							</div>
+							<div class="security-item">
+								<div class="security-indicator success"></div>
+								<span>Audit Logging: Complete</span>
+							</div>
+							<div class="security-item">
+								<div class="security-indicator success"></div>
+								<span>Backup Status: Current</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="detail-section">
+						<h3>📋 Recent Activity</h3>
+						<div class="activity-log">
+							<div class="activity-item">
+								<div class="activity-time">14:30 UTC</div>
+								<div class="activity-action">Customer data stored (PDPA compliant)</div>
+							</div>
+							<div class="activity-item">
+								<div class="activity-time">14:25 UTC</div>
+								<div class="activity-action">Assessment completed for GlobalCorp-SG</div>
+							</div>
+							<div class="activity-item">
+								<div class="activity-time">14:20 UTC</div>
+								<div class="activity-action">Backup synchronized to Australia</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.sovereignty-main {
+		min-height: 100vh;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		padding: 2rem 1rem;
+	}
+
+	.container {
+		max-width: 1400px;
+		margin: 0 auto;
+	}
+
+	/* Header */
+	.dashboard-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background: white;
+		padding: 2rem;
+		border-radius: 16px;
+		margin-bottom: 2rem;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+	}
+
+	.client-badge {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+	}
+
+	.client-avatar {
+		width: 80px;
+		height: 80px;
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		border-radius: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 2rem;
+		color: white;
+	}
+
+	.client-info h1 {
+		margin: 0 0 0.5rem;
+		color: #1f2937;
+		font-size: 1.75rem;
+		font-weight: 700;
+	}
+
+	.client-info p {
+		margin: 0 0 0.75rem;
+		color: #6b7280;
+		font-size: 1rem;
+	}
+
+	.compliance-status {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: #059669;
+		font-weight: 600;
+	}
+
+	.status-indicator {
+		font-size: 1.2rem;
+	}
+
+	.status-indicator.compliant {
+		color: #10b981;
+	}
+
+	.dashboard-controls {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.control-btn {
+		padding: 0.75rem 1.5rem;
+		background: #f8fafc;
+		border: 2px solid #e5e7eb;
+		border-radius: 10px;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.control-btn:hover {
+		background: #667eea;
+		color: white;
+		border-color: #667eea;
+		transform: translateY(-2px);
+	}
+
+	/* Global Map */
+	.global-map-container {
+		background: white;
+		border-radius: 16px;
+		padding: 2rem;
+		margin-bottom: 2rem;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+	}
+
+	.map-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 2rem;
+	}
+
+	.map-header h2 {
+		margin: 0;
+		color: #1f2937;
+		font-size: 1.5rem;
+		font-weight: 700;
+	}
+
+	.map-legend {
+		display: flex;
+		gap: 2rem;
+	}
+
+	.legend-item {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.875rem;
+		color: #6b7280;
+	}
+
+	.legend-color {
+		width: 16px;
+		height: 16px;
+		border-radius: 4px;
+	}
+
+	.legend-color.primary {
+		background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+	}
+
+	.legend-color.backup {
+		background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+	}
+
+	.legend-color.restricted {
+		background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+	}
+
+	.legend-color.flow {
+		background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+	}
+
+	/* Interactive Map */
+	.interactive-world-map {
+		width: 100%;
+		height: 500px;
+	}
+
+	.world-svg {
+		width: 100%;
+		height: 100%;
+	}
+
+	.region {
+		cursor: pointer;
+		transition: all 0.3s ease;
+		stroke: #e5e7eb;
+		stroke-width: 2;
+	}
+
+	.region.us-region {
+		fill: #dbeafe;
+	}
+
+	.region.eu-region {
+		fill: #f3f4f6;
+	}
+
+	.region.apac-region {
+		fill: #dcfce7;
+	}
+
+	.region.sea-region {
+		fill: #fef3c7;
+	}
+
+	.region.primary {
+		fill: #10b981;
+		stroke: #059669;
+		stroke-width: 3;
+	}
+
+	.region.backup {
+		fill: #3b82f6;
+		stroke: #1d4ed8;
+	}
+
+	.region.restricted {
+		fill: #ef4444;
+		stroke: #dc2626;
+	}
+
+	.region:hover {
+		transform: scale(1.05);
+		filter: brightness(1.1);
+		stroke-width: 4;
+	}
+
+	.region-label {
+		font-size: 12px;
+		font-weight: 600;
+		fill: #1f2937;
+		pointer-events: none;
+	}
+
+	.region-data {
+		font-size: 10px;
+		fill: #6b7280;
+		pointer-events: none;
+	}
+
+	.primary-badge, .restricted-badge {
+		font-size: 8px;
+		font-weight: 700;
+		fill: white;
+		pointer-events: none;
+	}
+
+	.data-flow {
+		opacity: 0.7;
+		cursor: pointer;
+		transition: opacity 0.3s ease;
+	}
+
+	.data-flow:hover {
+		opacity: 1;
+		stroke-width: 4;
+	}
+
+	.isolation-indicator {
+		cursor: pointer;
+		animation: pulse 2s infinite;
+	}
+
+	@keyframes pulse {
+		0%, 100% { opacity: 1; }
+		50% { opacity: 0.5; }
+	}
+
+	/* Sovereignty Panels */
+	.sovereignty-panels {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+		gap: 2rem;
+		margin-bottom: 2rem;
+	}
+
+	.panel {
+		background: white;
+		border-radius: 16px;
+		padding: 2rem;
+		box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+	}
+
+	.panel-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1.5rem;
+	}
+
+	.panel-header h3 {
+		margin: 0;
+		color: #1f2937;
+		font-size: 1.25rem;
+		font-weight: 700;
+	}
+
+	.status-badge {
+		padding: 0.5rem 1rem;
+		border-radius: 20px;
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.status-badge.compliant {
+		background: #d1fae5;
+		color: #059669;
+	}
+
+	.panel-action {
+		padding: 0.5rem 1rem;
+		background: #667eea;
+		color: white;
+		border: none;
+		border-radius: 8px;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+
+	.panel-action:hover {
+		background: #5a67d8;
+		transform: translateY(-1px);
+	}
+
+	/* Compliance Grid */
+	.compliance-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		gap: 1rem;
+	}
+
+	.compliance-item {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1rem;
+		background: #f8fafc;
+		border-radius: 12px;
+		border: 2px solid #e5e7eb;
+		transition: all 0.3s ease;
+	}
+
+	.compliance-item:hover {
+		border-color: #10b981;
+		transform: translateY(-2px);
+	}
+
+	.compliance-flag {
+		font-size: 2rem;
+	}
+
+	.compliance-info h4 {
+		margin: 0 0 0.25rem;
+		font-size: 0.875rem;
+		color: #1f2937;
+	}
+
+	.compliance-score {
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: #10b981;
+		margin-bottom: 0.25rem;
+	}
+
+	.compliance-info p {
+		margin: 0;
+		font-size: 0.75rem;
+		color: #6b7280;
+	}
+
+	/* Distribution Chart */
+	.distribution-chart {
+		display: flex;
+		align-items: end;
+		gap: 1rem;
+		height: 200px;
+		padding: 1rem 0;
+	}
+
+	.chart-item {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.chart-bar {
+		width: 100%;
+		background: #f3f4f6;
+		border-radius: 8px 8px 0 0;
+		position: relative;
+		transition: all 0.3s ease;
+	}
+
+	.chart-bar:hover {
+		transform: scale(1.05);
+	}
+
+	.bar-fill {
+		width: 100%;
+		height: 100%;
+		border-radius: 8px 8px 0 0;
+	}
+
+	.bar-fill.singapore {
+		background: linear-gradient(180deg, #10b981 0%, #059669 100%);
+	}
+
+	.bar-fill.japan {
+		background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
+	}
+
+	.bar-fill.us {
+		background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+	}
+
+	.bar-fill.backup {
+		background: linear-gradient(180deg, #8b5cf6 0%, #7c3aed 100%);
+	}
+
+	.chart-label {
+		text-align: center;
+	}
+
+	.chart-flag {
+		font-size: 1.5rem;
+		margin-bottom: 0.25rem;
+	}
+
+	.chart-count {
+		font-weight: 700;
+		color: #1f2937;
+		font-size: 0.875rem;
+	}
+
+	.chart-type {
+		font-size: 0.75rem;
+		color: #6b7280;
+	}
+
+	/* Connections */
+	.connections-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.connection-item {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 1rem;
+		border-radius: 12px;
+		border: 2px solid #e5e7eb;
+		transition: all 0.3s ease;
+	}
+
+	.connection-item.allowed {
+		background: #f0fdf4;
+		border-color: #10b981;
+	}
+
+	.connection-item.blocked {
+		background: #fef2f2;
+		border-color: #ef4444;
+	}
+
+	.connection-item.monitored {
+		background: #eff6ff;
+		border-color: #3b82f6;
+	}
+
+	.connection-path {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		min-width: 120px;
+	}
+
+	.connection-flag {
+		font-size: 1.5rem;
+	}
+
+	.connection-arrow {
+		color: #10b981;
+		font-weight: 700;
+	}
+
+	.connection-block {
+		color: #ef4444;
+		font-weight: 700;
+	}
+
+	.connection-info h4 {
+		margin: 0 0 0.25rem;
+		font-size: 0.875rem;
+		color: #1f2937;
+	}
+
+	.connection-info p {
+		margin: 0 0 0.25rem;
+		font-size: 0.75rem;
+		color: #6b7280;
+	}
+
+	.connection-status {
+		font-size: 0.75rem;
+		font-weight: 600;
+		padding: 0.25rem 0.5rem;
+		border-radius: 12px;
+	}
+
+	.risk-indicator {
+		padding: 0.5rem 1rem;
+		border-radius: 20px;
+		font-size: 0.75rem;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.risk-indicator.low {
+		background: #d1fae5;
+		color: #059669;
+	}
+
+	/* Region Detail Panel */
+	.region-detail-panel {
+		position: fixed;
+		top: 0;
+		right: 0;
+		width: 500px;
+		height: 100vh;
+		background: white;
+		box-shadow: -8px 0 32px rgba(0, 0, 0, 0.2);
+		z-index: 1000;
+		overflow-y: auto;
+		transform: translateX(100%);
+		transition: transform 0.3s ease;
+	}
+
+	.region-detail-panel.active {
+		transform: translateX(0);
+	}
+
+	.detail-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 2rem;
+		border-bottom: 1px solid #e5e7eb;
+		background: #f8fafc;
+	}
+
+	.detail-header h2 {
+		margin: 0;
+		color: #1f2937;
+		font-size: 1.5rem;
+	}
+
+	.close-detail {
+		background: none;
+		border: none;
+		font-size: 1.5rem;
+		cursor: pointer;
+		color: #6b7280;
+		padding: 0.5rem;
+		border-radius: 8px;
+		transition: all 0.3s ease;
+	}
+
+	.close-detail:hover {
+		background: #e5e7eb;
+		color: #1f2937;
+	}
+
+	.detail-content {
+		padding: 2rem;
+	}
+
+	.detail-section {
+		margin-bottom: 2rem;
+	}
+
+	.detail-section h3 {
+		margin: 0 0 1rem;
+		color: #1f2937;
+		font-size: 1.125rem;
+		font-weight: 700;
+	}
+
+	.detail-grid {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.detail-item {
+		display: flex;
+		justify-content: space-between;
+		padding: 0.75rem;
+		background: #f8fafc;
+		border-radius: 8px;
+	}
+
+	.detail-item strong {
+		color: #374151;
+	}
+
+	.detail-item span {
+		color: #6b7280;
+	}
+
+	/* Data Breakdown */
+	.data-breakdown {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.breakdown-item {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.breakdown-type {
+		font-weight: 600;
+		color: #374151;
+	}
+
+	.breakdown-count {
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: #1f2937;
+	}
+
+	.breakdown-bar {
+		height: 8px;
+		background: #f3f4f6;
+		border-radius: 4px;
+		overflow: hidden;
+	}
+
+	.breakdown-fill {
+		height: 100%;
+		background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+		border-radius: 4px;
+		transition: width 0.3s ease;
+	}
+
+	/* Security Status */
+	.security-status {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.security-item {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+
+	.security-indicator {
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+	}
+
+	.security-indicator.success {
+		background: #10b981;
+	}
+
+	/* Activity Log */
+	.activity-log {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.activity-item {
+		display: flex;
+		gap: 1rem;
+		padding: 0.75rem;
+		background: #f8fafc;
+		border-radius: 8px;
+		border-left: 4px solid #10b981;
+	}
+
+	.activity-time {
+		font-size: 0.75rem;
+		color: #6b7280;
+		min-width: 80px;
+	}
+
+	.activity-action {
+		font-size: 0.875rem;
+		color: #374151;
+	}
+
+	@media (max-width: 768px) {
+		.dashboard-header {
+			flex-direction: column;
+			gap: 1rem;
+			text-align: center;
+		}
+
+		.sovereignty-panels {
+			grid-template-columns: 1fr;
+		}
+
+		.region-detail-panel {
+			width: 100%;
+		}
+
+		.map-header {
+			flex-direction: column;
+			gap: 1rem;
+		}
+
+		.map-legend {
+			flex-wrap: wrap;
+			gap: 1rem;
+		}
+	}
+</style>
+
+<script>
+	// Regional data for detail panel
+	const regionalData = {
+		'singapore': {
+			name: 'Singapore',
+			datacenter: 'Singapore',
+			encryption: 'CSA-approved AES-256-GCM',
+			compliance: 'PDPA, MAS Guidelines',
+			laws: 'Personal Data Protection Act',
+			customer: 1250,
+			assessment: 89,
+			files: 340
+		},
+		'japan': {
+			name: 'Japan',
+			datacenter: 'Tokyo, Japan',
+			encryption: 'CRYPTREC-approved AES-256-GCM',
+			compliance: 'APPI, ISMS',
+			laws: 'Personal Information Protection Act',
+			customer: 450,
+			assessment: 23,
+			files: 120
+		},
+		'australia': {
+			name: 'Australia',
+			datacenter: 'Sydney, Australia',
+			encryption: 'ASD-approved AES-256-GCM',
+			compliance: 'Privacy Act',
+			laws: 'Privacy Act 1988',
+			customer: 0,
+			assessment: 89,
+			files: 200
+		},
+		'us-west': {
+			name: 'US West',
+			datacenter: 'California, USA',
+			encryption: 'FIPS 140-2 Level 3',
+			compliance: 'SOC2, NIST, CCPA',
+			laws: 'US CLOUD Act, CCPA',
+			customer: 300,
+			assessment: 45,
+			files: 150
+		},
+		'thailand': {
+			name: 'Thailand',
+			datacenter: 'Bangkok, Thailand',
+			encryption: 'ETDA-approved AES-256-GCM',
+			compliance: 'PDPA TH',
+			laws: 'Personal Data Protection Act B.E. 2562',
+			customer: 45,
+			assessment: 12,
+			files: 67
+		}
+	};
+
+	// Initialize interactive elements
+	document.addEventListener('DOMContentLoaded', () => {
+		setupRegionInteractions();
+		setupControlButtons();
+		setupRealTimeUpdates();
+	});
+
+	function setupRegionInteractions() {
+		// Region click handlers
+		document.querySelectorAll('.region-group').forEach(region => {
+			region.addEventListener('click', (e) => {
+				const regionCode = region.dataset.region;
+				const regionName = region.dataset.regionName;
+				showRegionDetail(regionCode, regionName);
+			});
+
+			// Hover effects
+			region.addEventListener('mouseenter', (e) => {
+				region.style.transform = 'scale(1.05)';
+				region.style.filter = 'brightness(1.1)';
+			});
+
+			region.addEventListener('mouseleave', (e) => {
+				region.style.transform = 'scale(1)';
+				region.style.filter = 'brightness(1)';
+			});
+		});
+
+		// Data flow hover effects
+		document.querySelectorAll('.data-flow').forEach(flow => {
+			flow.addEventListener('mouseenter', (e) => {
+				flow.style.strokeWidth = '5';
+				flow.style.opacity = '1';
+			});
+
+			flow.addEventListener('mouseleave', (e) => {
+				flow.style.strokeWidth = '3';
+				flow.style.opacity = '0.7';
+			});
+		});
+
+		// Close detail panel
+		document.getElementById('close-detail')?.addEventListener('click', () => {
+			hideRegionDetail();
+		});
+	}
+
+	function showRegionDetail(regionCode, regionName) {
+		const panel = document.getElementById('region-detail-panel');
+		const data = regionalData[regionCode];
+
+		if (!data) return;
+
+		// Update panel content
+		document.getElementById('detail-region-name').textContent = data.name;
+		document.getElementById('detail-datacenter').textContent = data.datacenter;
+		document.getElementById('detail-encryption').textContent = data.encryption;
+		document.getElementById('detail-compliance').textContent = data.compliance;
+		document.getElementById('detail-laws').textContent = data.laws;
+		document.getElementById('detail-customer').textContent = `${data.customer} records`;
+		document.getElementById('detail-assessment').textContent = `${data.assessment} assessments`;
+		document.getElementById('detail-files').textContent = `${data.files} files`;
+
+		// Show panel
+		panel.style.display = 'block';
+		setTimeout(() => {
+			panel.classList.add('active');
+		}, 10);
+	}
+
+	function hideRegionDetail() {
+		const panel = document.getElementById('region-detail-panel');
+		panel.classList.remove('active');
+		setTimeout(() => {
+			panel.style.display = 'none';
+		}, 300);
+	}
+
+	function setupControlButtons() {
+		// Workshop mode
+		document.getElementById('workshop-mode')?.addEventListener('click', () => {
+			// Toggle workshop presentation mode
+			document.body.classList.toggle('workshop-mode');
+			showNotification('Workshop presentation mode toggled');
+		});
+
+		// Audit mode
+		document.getElementById('audit-mode')?.addEventListener('click', () => {
+			// Toggle audit view
+			document.body.classList.toggle('audit-mode');
+			showNotification('Audit view activated');
+		});
+
+		// Real-time toggle
+		document.getElementById('realtime-toggle')?.addEventListener('click', (e) => {
+			const button = e.target;
+			const isActive = button.textContent.includes('ON');
+			
+			if (isActive) {
+				button.textContent = '⚡ Live Updates: OFF';
+				button.style.opacity = '0.6';
+				stopRealTimeUpdates();
+			} else {
+				button.textContent = '⚡ Live Updates: ON';
+				button.style.opacity = '1';
+				startRealTimeUpdates();
+			}
+		});
+
+		// Export data
+		document.getElementById('export-distribution')?.addEventListener('click', () => {
+			exportDataDistribution();
+		});
+	}
+
+	function setupRealTimeUpdates() {
+		// Simulate real-time updates
+		setInterval(() => {
+			updateDataCounts();
+			updateComplianceScores();
+		}, 30000); // Update every 30 seconds
+	}
+
+	function updateDataCounts() {
+		// Simulate small changes in data counts
+		const charts = document.querySelectorAll('.chart-count');
+		charts.forEach(chart => {
+			const currentCount = parseInt(chart.textContent);
+			const variation = Math.floor(Math.random() * 10) - 5; // ±5
+			const newCount = Math.max(0, currentCount + variation);
+			
+			if (newCount !== currentCount) {
+				chart.style.transition = 'all 0.5s ease';
+				chart.style.transform = 'scale(1.1)';
+				chart.textContent = newCount.toLocaleString();
+				
+				setTimeout(() => {
+					chart.style.transform = 'scale(1)';
+				}, 200);
+			}
+		});
+	}
+
+	function updateComplianceScores() {
+		// Simulate compliance score updates
+		const scores = document.querySelectorAll('.compliance-score');
+		scores.forEach(score => {
+			const currentScore = parseInt(score.textContent);
+			const variation = Math.floor(Math.random() * 3) - 1; // ±1
+			const newScore = Math.min(100, Math.max(90, currentScore + variation));
+			
+			if (newScore !== currentScore) {
+				score.style.transition = 'all 0.5s ease';
+				score.style.color = newScore >= 98 ? '#10b981' : newScore >= 95 ? '#f59e0b' : '#ef4444';
+				score.textContent = `${newScore}%`;
+			}
+		});
+	}
+
+	function exportDataDistribution() {
+		// Create export data
+		const exportData = {
+			timestamp: new Date().toISOString(),
+			client: 'GlobalCorp Asia-Pacific',
+			dataDistribution: {
+				singapore: { customer: 1250, assessment: 89, files: 340 },
+				japan: { customer: 450, assessment: 23, files: 120 },
+				'us-west': { customer: 300, assessment: 45, files: 150 },
+				australia: { customer: 0, assessment: 89, files: 200 }
+			},
+			complianceStatus: 'COMPLIANT',
+			totalRecords: 2474
+		};
+
+		// Download as JSON
+		const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+		const url = URL.createObjectURL(blob);
+		const a = document.createElement('a');
+		a.href = url;
+		a.download = `data-distribution-${new Date().toISOString().split('T')[0]}.json`;
+		a.click();
+		URL.revokeObjectURL(url);
+
+		showNotification('Data distribution exported successfully');
+	}
+
+	function showNotification(message) {
+		// Create notification toast
+		const notification = document.createElement('div');
+		notification.style.cssText = `
+			position: fixed;
+			top: 20px;
+			right: 20px;
+			background: #10b981;
+			color: white;
+			padding: 1rem 1.5rem;
+			border-radius: 8px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+			z-index: 10000;
+			font-weight: 600;
+			transform: translateX(100%);
+			transition: transform 0.3s ease;
+		`;
+		notification.textContent = message;
+		
+		document.body.appendChild(notification);
+		
+		setTimeout(() => {
+			notification.style.transform = 'translateX(0)';
+		}, 10);
+		
+		setTimeout(() => {
+			notification.style.transform = 'translateX(100%)';
+			setTimeout(() => {
+				document.body.removeChild(notification);
+			}, 300);
+		}, 3000);
+	}
+
+	function startRealTimeUpdates() {
+		// Resume real-time updates
+		console.log('Real-time updates started');
+	}
+
+	function stopRealTimeUpdates() {
+		// Stop real-time updates
+		console.log('Real-time updates stopped');
+	}
+</script>
+</Layout>

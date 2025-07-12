@@ -1,0 +1,1718 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Interactive Security Dashboard - PowerReview">
+  <main>
+    <div class="dashboard-header">
+      <h1>Interactive Security Analytics Dashboard</h1>
+      <p class="subtitle">Real-time security insights with PowerBI-style visualizations</p>
+      
+      <!-- Date Range Selector -->
+      <div class="controls-bar">
+        <div class="date-range-selector">
+          <button class="date-btn active" data-range="7d">Last 7 Days</button>
+          <button class="date-btn" data-range="30d">Last 30 Days</button>
+          <button class="date-btn" data-range="90d">Last 90 Days</button>
+          <button class="date-btn" data-range="1y">Last Year</button>
+        </div>
+        <div class="view-controls">
+          <button class="view-btn active" data-view="overview">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"/>
+              <rect x="14" y="3" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/>
+            </svg>
+            Overview
+          </button>
+          <button class="view-btn" data-view="trends">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+            Trends
+          </button>
+          <button class="view-btn" data-view="alerts">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            Alerts
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overview Dashboard -->
+    <div id="overview-view" class="dashboard-view active">
+      <div class="metrics-grid">
+        <!-- Security Score Gauge -->
+        <div class="metric-card">
+          <h3>Overall Security Score</h3>
+          <div class="gauge-container">
+            <canvas id="securityGauge" width="300" height="200"></canvas>
+            <div class="gauge-details">
+              <div class="score-trend">
+                <span class="trend-value positive">+5.2%</span>
+                <span class="trend-label">vs last month</span>
+              </div>
+              <button class="drill-down-btn" onclick="drillDown('security-score')">
+                View Details →
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Threat Detection Radar -->
+        <div class="metric-card">
+          <h3>Threat Detection by Category</h3>
+          <canvas id="threatRadar" width="300" height="300"></canvas>
+          <div class="radar-legend" id="radarLegend"></div>
+        </div>
+
+        <!-- User Activity Heatmap -->
+        <div class="metric-card wide">
+          <h3>User Activity Heatmap</h3>
+          <div class="heatmap-controls">
+            <select id="heatmapMetric">
+              <option value="logins">Login Attempts</option>
+              <option value="failures">Failed Logins</option>
+              <option value="downloads">File Downloads</option>
+              <option value="shares">External Shares</option>
+            </select>
+          </div>
+          <div id="activityHeatmap" class="heatmap-container"></div>
+        </div>
+
+        <!-- Risk Distribution Sunburst -->
+        <div class="metric-card">
+          <h3>Risk Distribution</h3>
+          <div id="riskSunburst" class="sunburst-container"></div>
+          <div class="sunburst-info">
+            <div class="info-item">
+              <span class="info-label">Total Risks:</span>
+              <span class="info-value">247</span>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Critical:</span>
+              <span class="info-value critical">12</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Data Table -->
+      <div class="data-section">
+        <h2>Security Events Timeline</h2>
+        <div class="table-controls">
+          <input type="text" id="eventSearch" placeholder="Search events..." class="search-input">
+          <select id="eventFilter" class="filter-select">
+            <option value="all">All Events</option>
+            <option value="critical">Critical Only</option>
+            <option value="high">High Priority</option>
+            <option value="resolved">Resolved</option>
+          </select>
+          <button class="export-btn" onclick="exportData('events')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Export
+          </button>
+        </div>
+        <div id="eventsTable" class="interactive-table"></div>
+      </div>
+    </div>
+
+    <!-- Trends View -->
+    <div id="trends-view" class="dashboard-view">
+      <div class="trends-grid">
+        <!-- Multi-Series Line Chart -->
+        <div class="trend-card full-width">
+          <h3>Security Metrics Over Time</h3>
+          <div class="chart-controls">
+            <div class="metric-toggles">
+              <label class="toggle-label">
+                <input type="checkbox" value="score" checked> Security Score
+              </label>
+              <label class="toggle-label">
+                <input type="checkbox" value="threats" checked> Threats Detected
+              </label>
+              <label class="toggle-label">
+                <input type="checkbox" value="compliance" checked> Compliance Rate
+              </label>
+              <label class="toggle-label">
+                <input type="checkbox" value="incidents"> Incidents Resolved
+              </label>
+            </div>
+          </div>
+          <canvas id="trendsChart" width="1200" height="400"></canvas>
+        </div>
+
+        <!-- Animated Progress Bars -->
+        <div class="trend-card">
+          <h3>Remediation Progress</h3>
+          <div class="progress-list">
+            <div class="progress-item">
+              <div class="progress-header">
+                <span class="progress-title">MFA Deployment</span>
+                <span class="progress-percent">88%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" data-progress="88"></div>
+              </div>
+              <span class="progress-eta">ETA: 2 days</span>
+            </div>
+            <div class="progress-item">
+              <div class="progress-header">
+                <span class="progress-title">DLP Policy Implementation</span>
+                <span class="progress-percent">65%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" data-progress="65"></div>
+              </div>
+              <span class="progress-eta">ETA: 1 week</span>
+            </div>
+            <div class="progress-item">
+              <div class="progress-header">
+                <span class="progress-title">Conditional Access Setup</span>
+                <span class="progress-percent">45%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" data-progress="45"></div>
+              </div>
+              <span class="progress-eta">ETA: 2 weeks</span>
+            </div>
+            <div class="progress-item">
+              <div class="progress-header">
+                <span class="progress-title">Legacy Auth Blocked</span>
+                <span class="progress-percent">92%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill success" data-progress="92"></div>
+              </div>
+              <span class="progress-eta">ETA: Tomorrow</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparison Chart -->
+        <div class="trend-card">
+          <h3>Department Comparison</h3>
+          <canvas id="comparisonChart" width="400" height="300"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Alerts View -->
+    <div id="alerts-view" class="dashboard-view">
+      <div class="alerts-header">
+        <div class="alert-summary">
+          <div class="summary-item critical">
+            <span class="summary-count">3</span>
+            <span class="summary-label">Critical</span>
+          </div>
+          <div class="summary-item high">
+            <span class="summary-count">12</span>
+            <span class="summary-label">High</span>
+          </div>
+          <div class="summary-item medium">
+            <span class="summary-count">28</span>
+            <span class="summary-label">Medium</span>
+          </div>
+          <div class="summary-item low">
+            <span class="summary-count">45</span>
+            <span class="summary-label">Low</span>
+          </div>
+        </div>
+        <div class="alert-actions">
+          <button class="action-btn" onclick="acknowledgeAll()">Acknowledge All</button>
+          <button class="action-btn primary" onclick="exportAlerts()">Export Report</button>
+        </div>
+      </div>
+
+      <div class="alerts-container" id="alertsContainer">
+        <!-- Alerts will be dynamically populated -->
+      </div>
+    </div>
+
+    <!-- Drill-down Modal -->
+    <div id="drillDownModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeDrillDown()">&times;</span>
+        <h2 id="drillDownTitle">Detailed Analysis</h2>
+        <div id="drillDownContent"></div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  main {
+    background: #f0f2f5;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .dashboard-header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+    color: white;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .dashboard-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+  }
+
+  .controls-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .date-range-selector {
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.25rem;
+    border-radius: 8px;
+  }
+
+  .date-btn {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+  }
+
+  .date-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .date-btn.active {
+    background: white;
+    color: #1e3a8a;
+  }
+
+  .view-controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .view-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+  }
+
+  .view-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .view-btn.active {
+    background: white;
+    color: #1e3a8a;
+    border-color: white;
+  }
+
+  .dashboard-view {
+    display: none;
+    padding: 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .dashboard-view.active {
+    display: block;
+  }
+
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .metric-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s;
+  }
+
+  .metric-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .metric-card.wide {
+    grid-column: span 2;
+  }
+
+  .metric-card h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1rem;
+  }
+
+  .gauge-container {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .gauge-details {
+    flex: 1;
+  }
+
+  .score-trend {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .trend-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .trend-value.positive {
+    color: #10b981;
+  }
+
+  .trend-value.negative {
+    color: #ef4444;
+  }
+
+  .trend-label {
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+
+  .drill-down-btn {
+    background: #3730a3;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+
+  .drill-down-btn:hover {
+    background: #1e3a8a;
+    transform: translateX(4px);
+  }
+
+  .radar-legend {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .heatmap-controls {
+    margin-bottom: 1rem;
+  }
+
+  .heatmap-controls select {
+    padding: 0.5rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 0.875rem;
+  }
+
+  .heatmap-container {
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sunburst-container {
+    height: 300px;
+    position: relative;
+  }
+
+  .sunburst-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-label {
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+
+  .info-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .info-value.critical {
+    color: #ef4444;
+  }
+
+  .data-section {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .data-section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+  }
+
+  .table-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .search-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 0.5rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 0.875rem;
+  }
+
+  .filter-select {
+    padding: 0.5rem 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 0.875rem;
+  }
+
+  .export-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #3730a3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+
+  .export-btn:hover {
+    background: #1e3a8a;
+  }
+
+  .interactive-table {
+    overflow-x: auto;
+  }
+
+  /* Trends View Styles */
+  .trends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .trend-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+
+  .trend-card.full-width {
+    grid-column: 1 / -1;
+  }
+
+  .trend-card h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1rem;
+  }
+
+  .chart-controls {
+    margin-bottom: 1rem;
+  }
+
+  .metric-toggles {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .toggle-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #475569;
+    cursor: pointer;
+  }
+
+  .toggle-label input {
+    cursor: pointer;
+  }
+
+  .progress-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .progress-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .progress-title {
+    font-weight: 500;
+    color: #1e293b;
+  }
+
+  .progress-percent {
+    font-weight: 700;
+    color: #3730a3;
+  }
+
+  .progress-bar {
+    height: 8px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3730a3 0%, #6366f1 100%);
+    border-radius: 4px;
+    width: 0;
+    transition: width 1.5s ease-out;
+  }
+
+  .progress-fill.success {
+    background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+  }
+
+  .progress-eta {
+    font-size: 0.75rem;
+    color: #64748b;
+  }
+
+  /* Alerts View Styles */
+  .alerts-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .alert-summary {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .summary-item {
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    min-width: 100px;
+  }
+
+  .summary-item.critical {
+    border-left: 4px solid #ef4444;
+  }
+
+  .summary-item.high {
+    border-left: 4px solid #f59e0b;
+  }
+
+  .summary-item.medium {
+    border-left: 4px solid #eab308;
+  }
+
+  .summary-item.low {
+    border-left: 4px solid #3b82f6;
+  }
+
+  .summary-count {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  .summary-label {
+    display: block;
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-top: 0.25rem;
+  }
+
+  .alert-actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .action-btn {
+    padding: 0.5rem 1rem;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+  }
+
+  .action-btn:hover {
+    background: #f8fafc;
+  }
+
+  .action-btn.primary {
+    background: #3730a3;
+    color: white;
+    border-color: #3730a3;
+  }
+
+  .action-btn.primary:hover {
+    background: #1e3a8a;
+  }
+
+  .alerts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s;
+  }
+
+  .modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideIn 0.3s;
+  }
+
+  .close {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #64748b;
+    transition: color 0.3s;
+  }
+
+  .close:hover {
+    color: #1e293b;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @media (max-width: 768px) {
+    .metrics-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .metric-card.wide {
+      grid-column: 1;
+    }
+
+    .controls-bar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .date-range-selector,
+    .view-controls {
+      justify-content: center;
+    }
+
+    .alert-summary {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+
+<script>
+  // Initialize dashboard
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeGauges();
+    initializeRadarChart();
+    initializeHeatmap();
+    initializeSunburst();
+    initializeTrendsChart();
+    initializeComparisonChart();
+    initializeProgressBars();
+    initializeEventListeners();
+    loadEventsTable();
+    loadAlerts();
+  });
+
+  // View switching
+  function initializeEventListeners() {
+    // View buttons
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const view = btn.dataset.view;
+        switchView(view);
+      });
+    });
+
+    // Date range buttons
+    document.querySelectorAll('.date-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const range = btn.dataset.range;
+        updateDateRange(range);
+      });
+    });
+
+    // Heatmap metric selector
+    document.getElementById('heatmapMetric')?.addEventListener('change', (e) => {
+      updateHeatmap(e.target.value);
+    });
+
+    // Search and filter
+    document.getElementById('eventSearch')?.addEventListener('input', (e) => {
+      filterEvents(e.target.value);
+    });
+
+    document.getElementById('eventFilter')?.addEventListener('change', (e) => {
+      filterEventsByType(e.target.value);
+    });
+  }
+
+  function switchView(view) {
+    // Update buttons
+    document.querySelectorAll('.view-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.view === view);
+    });
+
+    // Update views
+    document.querySelectorAll('.dashboard-view').forEach(v => {
+      v.classList.remove('active');
+    });
+    document.getElementById(`${view}-view`)?.classList.add('active');
+
+    // Trigger animations for the new view
+    if (view === 'trends') {
+      setTimeout(animateProgressBars, 100);
+    }
+  }
+
+  function updateDateRange(range) {
+    // Update buttons
+    document.querySelectorAll('.date-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.range === range);
+    });
+
+    // Refresh data based on new range
+    refreshDashboardData(range);
+  }
+
+  // Security Score Gauge
+  function initializeGauges() {
+    const canvas = document.getElementById('securityGauge');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const score = 78;
+    const centerX = 150;
+    const centerY = 150;
+    const radius = 120;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw background arc
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, Math.PI * 0.75, Math.PI * 2.25);
+    ctx.strokeStyle = '#e5e7eb';
+    ctx.lineWidth = 30;
+    ctx.stroke();
+
+    // Draw score arc
+    const scoreAngle = (score / 100) * Math.PI * 1.5 + Math.PI * 0.75;
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, Math.PI * 0.75, scoreAngle);
+    ctx.strokeStyle = getScoreColor(score);
+    ctx.lineWidth = 30;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+
+    // Draw score text
+    ctx.font = 'bold 48px Inter';
+    ctx.fillStyle = '#1e293b';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(score, centerX, centerY - 10);
+
+    ctx.font = '16px Inter';
+    ctx.fillStyle = '#64748b';
+    ctx.fillText('out of 100', centerX, centerY + 25);
+
+    // Draw scale markers
+    for (let i = 0; i <= 100; i += 20) {
+      const angle = (i / 100) * Math.PI * 1.5 + Math.PI * 0.75;
+      const x1 = centerX + Math.cos(angle) * (radius - 35);
+      const y1 = centerY + Math.sin(angle) * (radius - 35);
+      const x2 = centerX + Math.cos(angle) * (radius - 25);
+      const y2 = centerY + Math.sin(angle) * (radius - 25);
+
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.strokeStyle = '#94a3b8';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Draw scale numbers
+      const textX = centerX + Math.cos(angle) * (radius - 50);
+      const textY = centerY + Math.sin(angle) * (radius - 50);
+      ctx.font = '12px Inter';
+      ctx.fillStyle = '#64748b';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(i.toString(), textX, textY);
+    }
+  }
+
+  function getScoreColor(score) {
+    if (score >= 80) return '#10b981';
+    if (score >= 60) return '#f59e0b';
+    if (score >= 40) return '#ef4444';
+    return '#dc2626';
+  }
+
+  // Threat Detection Radar Chart
+  function initializeRadarChart() {
+    const canvas = document.getElementById('threatRadar');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const centerX = 150;
+    const centerY = 150;
+    const radius = 100;
+
+    const categories = [
+      { label: 'Malware', value: 85, color: '#ef4444' },
+      { label: 'Phishing', value: 92, color: '#f59e0b' },
+      { label: 'Data Loss', value: 78, color: '#eab308' },
+      { label: 'Account Breach', value: 65, color: '#10b981' },
+      { label: 'Insider Threat', value: 45, color: '#3b82f6' },
+      { label: 'Network Attack', value: 72, color: '#8b5cf6' }
+    ];
+
+    const angleStep = (Math.PI * 2) / categories.length;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw grid circles
+    for (let i = 20; i <= 100; i += 20) {
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, (radius * i) / 100, 0, Math.PI * 2);
+      ctx.strokeStyle = '#e5e7eb';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    // Draw axes
+    categories.forEach((cat, index) => {
+      const angle = index * angleStep - Math.PI / 2;
+      const x = centerX + Math.cos(angle) * radius;
+      const y = centerY + Math.sin(angle) * radius;
+
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(x, y);
+      ctx.strokeStyle = '#e5e7eb';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Draw labels
+      const labelX = centerX + Math.cos(angle) * (radius + 30);
+      const labelY = centerY + Math.sin(angle) * (radius + 30);
+      ctx.font = '12px Inter';
+      ctx.fillStyle = '#475569';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(cat.label, labelX, labelY);
+    });
+
+    // Draw data polygon
+    ctx.beginPath();
+    categories.forEach((cat, index) => {
+      const angle = index * angleStep - Math.PI / 2;
+      const distance = (radius * cat.value) / 100;
+      const x = centerX + Math.cos(angle) * distance;
+      const y = centerY + Math.sin(angle) * distance;
+
+      if (index === 0) {
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+      }
+    });
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(99, 102, 241, 0.2)';
+    ctx.fill();
+    ctx.strokeStyle = '#6366f1';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    // Draw data points
+    categories.forEach((cat, index) => {
+      const angle = index * angleStep - Math.PI / 2;
+      const distance = (radius * cat.value) / 100;
+      const x = centerX + Math.cos(angle) * distance;
+      const y = centerY + Math.sin(angle) * distance;
+
+      ctx.beginPath();
+      ctx.arc(x, y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = cat.color;
+      ctx.fill();
+    });
+
+    // Update legend
+    const legend = document.getElementById('radarLegend');
+    if (legend) {
+      legend.innerHTML = categories.map(cat => `
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <div style="width: 12px; height: 12px; background: ${cat.color}; border-radius: 2px;"></div>
+          <span style="color: #475569;">${cat.label}: ${cat.value}%</span>
+        </div>
+      `).join('');
+    }
+  }
+
+  // Activity Heatmap
+  function initializeHeatmap() {
+    const container = document.getElementById('activityHeatmap');
+    if (!container) return;
+
+    const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const hours = Array.from({ length: 24 }, (_, i) => i);
+
+    // Generate sample data
+    const data = [];
+    for (let day = 0; day < 7; day++) {
+      for (let hour = 0; hour < 24; hour++) {
+        const value = Math.random() * 100;
+        data.push({ day, hour, value });
+      }
+    }
+
+    // Create heatmap HTML
+    const cellSize = 30;
+    const html = `
+      <div style="display: flex; gap: 10px;">
+        <div style="display: flex; flex-direction: column; justify-content: space-between; padding-top: 20px;">
+          ${days.map(d => `<div style="height: ${cellSize}px; display: flex; align-items: center; font-size: 12px; color: #64748b;">${d}</div>`).join('')}
+        </div>
+        <div>
+          <div style="display: flex; gap: 1px; margin-bottom: 5px;">
+            ${hours.map(h => `<div style="width: ${cellSize}px; text-align: center; font-size: 10px; color: #64748b;">${h}</div>`).join('')}
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(24, ${cellSize}px); gap: 1px;">
+            ${data.map(d => {
+              const color = getHeatmapColor(d.value);
+              return `<div class="heatmap-cell" style="width: ${cellSize}px; height: ${cellSize}px; background: ${color}; border-radius: 2px; cursor: pointer;" data-day="${days[d.day]}" data-hour="${d.hour}" data-value="${Math.round(d.value)}"></div>`;
+            }).join('')}
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem; margin-top: 1rem; justify-content: center;">
+        <span style="font-size: 12px; color: #64748b;">Low</span>
+        <div style="display: flex; gap: 2px;">
+          ${[0, 25, 50, 75, 100].map(v => `<div style="width: 20px; height: 10px; background: ${getHeatmapColor(v)}; border-radius: 2px;"></div>`).join('')}
+        </div>
+        <span style="font-size: 12px; color: #64748b;">High</span>
+      </div>
+    `;
+
+    container.innerHTML = html;
+
+    // Add hover tooltips
+    container.querySelectorAll('.heatmap-cell').forEach(cell => {
+      cell.addEventListener('mouseenter', (e) => {
+        const tooltip = document.createElement('div');
+        tooltip.className = 'heatmap-tooltip';
+        tooltip.style.cssText = `
+          position: absolute;
+          background: #1e293b;
+          color: white;
+          padding: 0.5rem;
+          border-radius: 4px;
+          font-size: 12px;
+          pointer-events: none;
+          z-index: 100;
+        `;
+        tooltip.textContent = `${e.target.dataset.day} ${e.target.dataset.hour}:00 - ${e.target.dataset.value} events`;
+        document.body.appendChild(tooltip);
+
+        const rect = e.target.getBoundingClientRect();
+        tooltip.style.left = rect.left + rect.width / 2 - tooltip.offsetWidth / 2 + 'px';
+        tooltip.style.top = rect.top - tooltip.offsetHeight - 5 + 'px';
+      });
+
+      cell.addEventListener('mouseleave', () => {
+        document.querySelectorAll('.heatmap-tooltip').forEach(t => t.remove());
+      });
+    });
+  }
+
+  function getHeatmapColor(value) {
+    const colors = [
+      { threshold: 0, color: '#dbeafe' },
+      { threshold: 25, color: '#93c5fd' },
+      { threshold: 50, color: '#60a5fa' },
+      { threshold: 75, color: '#3b82f6' },
+      { threshold: 90, color: '#2563eb' }
+    ];
+
+    for (let i = colors.length - 1; i >= 0; i--) {
+      if (value >= colors[i].threshold) {
+        return colors[i].color;
+      }
+    }
+    return colors[0].color;
+  }
+
+  // Risk Distribution Sunburst
+  function initializeSunburst() {
+    const container = document.getElementById('riskSunburst');
+    if (!container) return;
+
+    // Simple sunburst visualization using divs
+    const data = {
+      name: 'Total Risk',
+      value: 247,
+      color: '#6366f1',
+      children: [
+        {
+          name: 'Critical',
+          value: 12,
+          color: '#ef4444',
+          children: [
+            { name: 'Access Control', value: 5, color: '#dc2626' },
+            { name: 'Data Exposure', value: 4, color: '#b91c1c' },
+            { name: 'Compliance', value: 3, color: '#991b1b' }
+          ]
+        },
+        {
+          name: 'High',
+          value: 45,
+          color: '#f59e0b',
+          children: [
+            { name: 'Configuration', value: 20, color: '#d97706' },
+            { name: 'Authentication', value: 15, color: '#b45309' },
+            { name: 'Network', value: 10, color: '#92400e' }
+          ]
+        },
+        {
+          name: 'Medium',
+          value: 80,
+          color: '#eab308',
+          children: [
+            { name: 'Policies', value: 40, color: '#ca8a04' },
+            { name: 'Updates', value: 25, color: '#a16207' },
+            { name: 'Training', value: 15, color: '#854d0e' }
+          ]
+        },
+        {
+          name: 'Low',
+          value: 110,
+          color: '#3b82f6',
+          children: [
+            { name: 'Monitoring', value: 60, color: '#2563eb' },
+            { name: 'Documentation', value: 30, color: '#1d4ed8' },
+            { name: 'Best Practices', value: 20, color: '#1e40af' }
+          ]
+        }
+      ]
+    };
+
+    // Create visual representation
+    const html = `
+      <div style="position: relative; width: 100%; height: 100%;">
+        <svg width="100%" height="100%" viewBox="0 0 400 300">
+          ${createSunburstPaths(data, 200, 150, 0, 360, 0, 100)}
+        </svg>
+      </div>
+    `;
+
+    container.innerHTML = html;
+  }
+
+  function createSunburstPaths(data, cx, cy, startAngle, endAngle, innerRadius, outerRadius) {
+    if (!data.children || data.children.length === 0) {
+      return createArcPath(cx, cy, startAngle, endAngle, innerRadius, outerRadius, data.color, data.name, data.value);
+    }
+
+    let paths = '';
+    let currentAngle = startAngle;
+    const totalValue = data.children.reduce((sum, child) => sum + child.value, 0);
+
+    data.children.forEach(child => {
+      const childAngle = (child.value / totalValue) * (endAngle - startAngle);
+      const childEndAngle = currentAngle + childAngle;
+
+      paths += createArcPath(cx, cy, currentAngle, childEndAngle, innerRadius, outerRadius, child.color, child.name, child.value);
+
+      if (child.children) {
+        paths += createSunburstPaths(child, cx, cy, currentAngle, childEndAngle, outerRadius, outerRadius + 40);
+      }
+
+      currentAngle = childEndAngle;
+    });
+
+    return paths;
+  }
+
+  function createArcPath(cx, cy, startAngle, endAngle, innerRadius, outerRadius, color, label, value) {
+    const startAngleRad = (startAngle - 90) * Math.PI / 180;
+    const endAngleRad = (endAngle - 90) * Math.PI / 180;
+
+    const x1 = cx + innerRadius * Math.cos(startAngleRad);
+    const y1 = cy + innerRadius * Math.sin(startAngleRad);
+    const x2 = cx + outerRadius * Math.cos(startAngleRad);
+    const y2 = cy + outerRadius * Math.sin(startAngleRad);
+    const x3 = cx + outerRadius * Math.cos(endAngleRad);
+    const y3 = cy + outerRadius * Math.sin(endAngleRad);
+    const x4 = cx + innerRadius * Math.cos(endAngleRad);
+    const y4 = cy + innerRadius * Math.sin(endAngleRad);
+
+    const largeArcFlag = endAngle - startAngle > 180 ? 1 : 0;
+
+    const path = `
+      <path d="
+        M ${x1} ${y1}
+        L ${x2} ${y2}
+        A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${x3} ${y3}
+        L ${x4} ${y4}
+        A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${x1} ${y1}
+      " fill="${color}" stroke="white" stroke-width="2" opacity="0.9" style="cursor: pointer;">
+        <title>${label}: ${value}</title>
+      </path>
+    `;
+
+    return path;
+  }
+
+  // Trends Chart
+  function initializeTrendsChart() {
+    const canvas = document.getElementById('trendsChart');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const width = canvas.width;
+    const height = canvas.height;
+
+    // Sample data
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+    const datasets = [
+      {
+        label: 'Security Score',
+        data: [65, 68, 72, 74, 76, 78],
+        color: '#6366f1',
+        visible: true
+      },
+      {
+        label: 'Threats Detected',
+        data: [120, 135, 128, 142, 138, 145],
+        color: '#ef4444',
+        visible: true
+      },
+      {
+        label: 'Compliance Rate',
+        data: [88, 89, 91, 90, 92, 94],
+        color: '#10b981',
+        visible: true
+      }
+    ];
+
+    // Clear canvas
+    ctx.clearRect(0, 0, width, height);
+
+    // Draw grid
+    ctx.strokeStyle = '#e5e7eb';
+    ctx.lineWidth = 1;
+
+    // Horizontal grid lines
+    for (let i = 0; i <= 5; i++) {
+      const y = (height - 60) * (i / 5) + 30;
+      ctx.beginPath();
+      ctx.moveTo(60, y);
+      ctx.lineTo(width - 30, y);
+      ctx.stroke();
+    }
+
+    // Draw axes
+    ctx.strokeStyle = '#94a3b8';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(60, 30);
+    ctx.lineTo(60, height - 30);
+    ctx.lineTo(width - 30, height - 30);
+    ctx.stroke();
+
+    // Draw month labels
+    ctx.font = '12px Inter';
+    ctx.fillStyle = '#64748b';
+    ctx.textAlign = 'center';
+    months.forEach((month, index) => {
+      const x = 60 + (width - 90) * (index / (months.length - 1));
+      ctx.fillText(month, x, height - 10);
+    });
+
+    // Draw datasets
+    datasets.forEach((dataset) => {
+      if (!dataset.visible) return;
+
+      ctx.strokeStyle = dataset.color;
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+
+      dataset.data.forEach((value, index) => {
+        const x = 60 + (width - 90) * (index / (months.length - 1));
+        const normalizedValue = (value - Math.min(...dataset.data)) / (Math.max(...dataset.data) - Math.min(...dataset.data));
+        const y = height - 30 - normalizedValue * (height - 60);
+
+        if (index === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+
+        // Draw data point
+        ctx.fillStyle = dataset.color;
+        ctx.beginPath();
+        ctx.arc(x, y, 4, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      ctx.stroke();
+    });
+
+    // Handle metric toggles
+    document.querySelectorAll('.metric-toggles input').forEach(checkbox => {
+      checkbox.addEventListener('change', (e) => {
+        const metric = e.target.value;
+        const dataset = datasets.find(d => d.label.toLowerCase().includes(metric));
+        if (dataset) {
+          dataset.visible = e.target.checked;
+          initializeTrendsChart(); // Redraw
+        }
+      });
+    });
+  }
+
+  // Comparison Chart
+  function initializeComparisonChart() {
+    const canvas = document.getElementById('comparisonChart');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const departments = ['IT', 'Finance', 'HR', 'Sales', 'Operations'];
+    const scores = [85, 72, 78, 65, 80];
+
+    const barWidth = 50;
+    const barGap = 30;
+    const startX = 50;
+    const startY = 250;
+    const maxHeight = 180;
+
+    // Clear canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw bars
+    scores.forEach((score, index) => {
+      const x = startX + index * (barWidth + barGap);
+      const height = (score / 100) * maxHeight;
+      const y = startY - height;
+
+      // Draw bar
+      const gradient = ctx.createLinearGradient(0, y, 0, startY);
+      gradient.addColorStop(0, '#6366f1');
+      gradient.addColorStop(1, '#3730a3');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(x, y, barWidth, height);
+
+      // Draw score
+      ctx.font = 'bold 14px Inter';
+      ctx.fillStyle = '#1e293b';
+      ctx.textAlign = 'center';
+      ctx.fillText(score + '%', x + barWidth / 2, y - 10);
+
+      // Draw department label
+      ctx.font = '12px Inter';
+      ctx.fillStyle = '#64748b';
+      ctx.fillText(departments[index], x + barWidth / 2, startY + 20);
+    });
+
+    // Draw baseline
+    ctx.strokeStyle = '#e5e7eb';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(startX - 10, startY);
+    ctx.lineTo(startX + departments.length * (barWidth + barGap) - barGap + 10, startY);
+    ctx.stroke();
+  }
+
+  // Progress Bars Animation
+  function animateProgressBars() {
+    document.querySelectorAll('.progress-fill').forEach(bar => {
+      const progress = bar.dataset.progress;
+      setTimeout(() => {
+        bar.style.width = progress + '%';
+      }, 100);
+    });
+  }
+
+  // Events Table
+  function loadEventsTable() {
+    const events = [
+      { time: '2 min ago', severity: 'critical', event: 'Multiple failed login attempts', user: 'john.doe@company.com', status: 'investigating' },
+      { time: '15 min ago', severity: 'high', event: 'Unusual data download volume', user: 'jane.smith@company.com', status: 'resolved' },
+      { time: '1 hour ago', severity: 'medium', event: 'Outdated security patch detected', user: 'System', status: 'pending' },
+      { time: '3 hours ago', severity: 'low', event: 'New device registered', user: 'mike.johnson@company.com', status: 'approved' }
+    ];
+
+    const tableHTML = `
+      <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+          <tr style="border-bottom: 2px solid #e5e7eb;">
+            <th style="text-align: left; padding: 12px; font-weight: 600; color: #475569;">Time</th>
+            <th style="text-align: left; padding: 12px; font-weight: 600; color: #475569;">Severity</th>
+            <th style="text-align: left; padding: 12px; font-weight: 600; color: #475569;">Event</th>
+            <th style="text-align: left; padding: 12px; font-weight: 600; color: #475569;">User</th>
+            <th style="text-align: left; padding: 12px; font-weight: 600; color: #475569;">Status</th>
+            <th style="text-align: center; padding: 12px; font-weight: 600; color: #475569;">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${events.map(event => `
+            <tr style="border-bottom: 1px solid #f1f5f9;">
+              <td style="padding: 12px; color: #64748b;">${event.time}</td>
+              <td style="padding: 12px;">
+                <span style="padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; background: ${getSeverityColor(event.severity)}; color: white;">
+                  ${event.severity.toUpperCase()}
+                </span>
+              </td>
+              <td style="padding: 12px; color: #1e293b;">${event.event}</td>
+              <td style="padding: 12px; color: #475569;">${event.user}</td>
+              <td style="padding: 12px;">
+                <span style="padding: 4px 8px; border-radius: 4px; font-size: 12px; background: ${getStatusColor(event.status)};">
+                  ${event.status}
+                </span>
+              </td>
+              <td style="padding: 12px; text-align: center;">
+                <button onclick="viewEventDetails('${event.event}')" style="padding: 4px 12px; background: #3730a3; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                  Details
+                </button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `;
+
+    document.getElementById('eventsTable').innerHTML = tableHTML;
+  }
+
+  function getSeverityColor(severity) {
+    const colors = {
+      critical: '#ef4444',
+      high: '#f59e0b',
+      medium: '#eab308',
+      low: '#3b82f6'
+    };
+    return colors[severity] || '#6b7280';
+  }
+
+  function getStatusColor(status) {
+    const colors = {
+      investigating: 'rgba(239, 68, 68, 0.1); color: #dc2626',
+      resolved: 'rgba(16, 185, 129, 0.1); color: #059669',
+      pending: 'rgba(245, 158, 11, 0.1); color: #d97706',
+      approved: 'rgba(59, 130, 246, 0.1); color: #2563eb'
+    };
+    return colors[status] || 'rgba(107, 114, 128, 0.1); color: #4b5563';
+  }
+
+  // Alerts
+  function loadAlerts() {
+    const alerts = [
+      {
+        severity: 'critical',
+        title: 'Potential Data Breach Detected',
+        description: 'Unusual data access pattern detected from external IP address. 2.3GB of sensitive data accessed.',
+        time: '5 minutes ago',
+        affected: '12 users',
+        action: 'Immediate investigation required'
+      },
+      {
+        severity: 'critical',
+        title: 'Admin Account Compromise',
+        description: 'Administrator account showing signs of compromise. Multiple login attempts from different locations.',
+        time: '12 minutes ago',
+        affected: '1 admin account',
+        action: 'Account locked, password reset required'
+      },
+      {
+        severity: 'high',
+        title: 'Ransomware Detection',
+        description: 'Suspicious file encryption activity detected on endpoint devices.',
+        time: '1 hour ago',
+        affected: '3 devices',
+        action: 'Devices isolated from network'
+      }
+    ];
+
+    const container = document.getElementById('alertsContainer');
+    container.innerHTML = alerts.map(alert => `
+      <div style="background: white; border-radius: 8px; padding: 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-left: 4px solid ${getSeverityColor(alert.severity)};">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+          <div>
+            <h3 style="font-size: 1.125rem; font-weight: 600; color: #1e293b; margin-bottom: 0.5rem;">${alert.title}</h3>
+            <p style="color: #64748b; line-height: 1.5;">${alert.description}</p>
+          </div>
+          <span style="padding: 4px 12px; background: ${getSeverityColor(alert.severity)}; color: white; border-radius: 4px; font-size: 12px; font-weight: 600;">
+            ${alert.severity.toUpperCase()}
+          </span>
+        </div>
+        <div style="display: flex; gap: 2rem; margin-bottom: 1rem; font-size: 0.875rem;">
+          <div>
+            <span style="color: #64748b;">Time:</span>
+            <span style="color: #1e293b; font-weight: 500; margin-left: 0.5rem;">${alert.time}</span>
+          </div>
+          <div>
+            <span style="color: #64748b;">Affected:</span>
+            <span style="color: #1e293b; font-weight: 500; margin-left: 0.5rem;">${alert.affected}</span>
+          </div>
+        </div>
+        <div style="background: #f8fafc; padding: 0.75rem; border-radius: 6px; margin-bottom: 1rem;">
+          <span style="font-weight: 600; color: #475569;">Recommended Action:</span>
+          <span style="color: #64748b; margin-left: 0.5rem;">${alert.action}</span>
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <button onclick="investigateAlert('${alert.title}')" style="padding: 0.5rem 1rem; background: #3730a3; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 500;">
+            Investigate
+          </button>
+          <button onclick="dismissAlert(this)" style="padding: 0.5rem 1rem; background: white; color: #64748b; border: 1px solid #e5e7eb; border-radius: 6px; cursor: pointer; font-weight: 500;">
+            Dismiss
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Export functions
+  function exportData(type) {
+    const timestamp = new Date().toISOString().split('T')[0];
+    const filename = `powerreview-${type}-export-${timestamp}.csv`;
+    
+    // Simulate export
+    console.log(`Exporting ${type} data to ${filename}`);
+    
+    // Show success message
+    const btn = event.target.closest('button');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = 'Exported!';
+    btn.disabled = true;
+    
+    setTimeout(() => {
+      btn.innerHTML = originalText;
+      btn.disabled = false;
+    }, 2000);
+  }
+
+  function drillDown(metric) {
+    const modal = document.getElementById('drillDownModal');
+    const title = document.getElementById('drillDownTitle');
+    const content = document.getElementById('drillDownContent');
+
+    if (metric === 'security-score') {
+      title.textContent = 'Security Score Breakdown';
+      content.innerHTML = `
+        <div style="display: grid; gap: 1.5rem;">
+          <div>
+            <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">Score Components</h3>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+                <span>Identity & Access Management</span>
+                <span style="font-weight: 600; color: #10b981;">85/100</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+                <span>Data Protection</span>
+                <span style="font-weight: 600; color: #f59e0b;">72/100</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+                <span>Threat Protection</span>
+                <span style="font-weight: 600; color: #f59e0b;">78/100</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+                <span>Compliance</span>
+                <span style="font-weight: 600; color: #ef4444;">65/100</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem;">Improvement Recommendations</h3>
+            <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+              <li style="padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: #ef4444;">•</span>
+                Enable MFA for all users to improve Identity score by 15 points
+              </li>
+              <li style="padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: #f59e0b;">•</span>
+                Implement DLP policies to boost Data Protection by 20 points
+              </li>
+              <li style="padding-left: 1.5rem; position: relative;">
+                <span style="position: absolute; left: 0; color: #10b981;">•</span>
+                Complete security awareness training for 10 point increase
+              </li>
+            </ul>
+          </div>
+        </div>
+      `;
+    }
+
+    modal.style.display = 'block';
+  }
+
+  function closeDrillDown() {
+    document.getElementById('drillDownModal').style.display = 'none';
+  }
+
+  function viewEventDetails(event) {
+    console.log('Viewing details for:', event);
+    drillDown('event-details');
+  }
+
+  function investigateAlert(alert) {
+    console.log('Investigating alert:', alert);
+  }
+
+  function dismissAlert(button) {
+    button.closest('div').style.opacity = '0';
+    setTimeout(() => {
+      button.closest('div').remove();
+    }, 300);
+  }
+
+  function acknowledgeAll() {
+    console.log('Acknowledging all alerts');
+  }
+
+  function exportAlerts() {
+    exportData('alerts');
+  }
+
+  function filterEvents(searchTerm) {
+    console.log('Filtering events by:', searchTerm);
+  }
+
+  function filterEventsByType(type) {
+    console.log('Filtering events by type:', type);
+  }
+
+  function updateHeatmap(metric) {
+    console.log('Updating heatmap for metric:', metric);
+    initializeHeatmap(); // Reinitialize with new data
+  }
+
+  function refreshDashboardData(range) {
+    console.log('Refreshing dashboard data for range:', range);
+    // Refresh all visualizations with new data range
+  }
+
+  // Close modal when clicking outside
+  window.onclick = function(event) {
+    const modal = document.getElementById('drillDownModal');
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  }
+</script>

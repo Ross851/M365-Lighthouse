@@ -1,0 +1,1271 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Sample Reports - PowerReview">
+  <main>
+    <div class="reports-header">
+      <h1>PowerReview Sample Reports</h1>
+      <p>Explore different report types and see the comprehensive data we provide</p>
+    </div>
+
+    <!-- Report Types Grid -->
+    <div class="reports-grid">
+      <!-- Executive Summary Report -->
+      <div class="report-type-card">
+        <div class="report-icon executive">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 7h-9"/>
+            <path d="M14 17H5"/>
+            <circle cx="17" cy="17" r="3"/>
+            <circle cx="9" cy="7" r="3"/>
+          </svg>
+        </div>
+        <h2>Executive Summary Report</h2>
+        <p>High-level business-focused overview with financial impact analysis and strategic recommendations</p>
+        <div class="report-features">
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Risk scores in business terms</span>
+          </div>
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Financial exposure calculations</span>
+          </div>
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Gold/Silver/Bronze options</span>
+          </div>
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>ROI projections</span>
+          </div>
+        </div>
+        <div class="report-actions">
+          <a href="/executive-dashboard" class="btn btn-primary">View Live Example</a>
+          <button class="btn btn-secondary" onclick="showSampleData('executive')">See Sample Data</button>
+        </div>
+      </div>
+
+      <!-- Technical Assessment Report -->
+      <div class="report-type-card">
+        <div class="report-icon technical">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
+        <h2>Technical Assessment Report</h2>
+        <p>Detailed technical findings with evidence screenshots, configuration issues, and remediation scripts</p>
+        <div class="report-features">
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Configuration screenshots</span>
+          </div>
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>PowerShell remediation scripts</span>
+          </div>
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Step-by-step fixes</span>
+          </div>
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Security benchmarks</span>
+          </div>
+        </div>
+        <div class="report-actions">
+          <button class="btn btn-primary" onclick="showTechnicalReport()">View Sample Report</button>
+          <button class="btn btn-secondary" onclick="showSampleData('technical')">See Raw Data</button>
+        </div>
+      </div>
+
+      <!-- Compliance Audit Report -->
+      <div class="report-type-card">
+        <div class="report-icon compliance">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 11l3 3L22 4"/>
+            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+          </svg>
+        </div>
+        <h2>Compliance Audit Report</h2>
+        <p>Regulatory compliance mapping for GDPR, HIPAA, SOC2, ISO27001 with gap analysis</p>
+        <div class="report-features">
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Compliance framework mapping</span>
+          </div>
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Control effectiveness scores</span>
+          </div>
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Audit evidence collection</span>
+          </div>
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Remediation priorities</span>
+          </div>
+        </div>
+        <div class="report-actions">
+          <a href="/compliance-monitoring" class="btn btn-primary">View Compliance Dashboard</a>
+          <button class="btn btn-secondary" onclick="showSampleData('compliance')">See Sample Data</button>
+        </div>
+      </div>
+
+      <!-- Risk Assessment Report -->
+      <div class="report-type-card">
+        <div class="report-icon risk">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M12 8v4"/>
+            <path d="M12 16h.01"/>
+          </svg>
+        </div>
+        <h2>Risk Assessment Report</h2>
+        <p>Threat modeling, vulnerability assessment, and risk quantification with mitigation strategies</p>
+        <div class="report-features">
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Risk heat maps</span>
+          </div>
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Threat likelihood analysis</span>
+          </div>
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Impact assessments</span>
+          </div>
+          <div class="feature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Mitigation roadmaps</span>
+          </div>
+        </div>
+        <div class="report-actions">
+          <button class="btn btn-primary" onclick="showRiskMatrix()">View Risk Matrix</button>
+          <button class="btn btn-secondary" onclick="showSampleData('risk')">See Sample Data</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sample Data Section -->
+    <section class="data-showcase" id="data-showcase" style="display: none;">
+      <div class="data-header">
+        <h2 id="data-title">Sample Data</h2>
+        <button class="btn-close" onclick="closeDataShowcase()">×</button>
+      </div>
+      <div class="data-content" id="data-content">
+        <!-- Data will be populated here -->
+      </div>
+    </section>
+
+    <!-- Interactive Features -->
+    <section class="interactive-features">
+      <h2>Interactive Report Features</h2>
+      <div class="features-grid">
+        <div class="feature-demo">
+          <h3>📊 Real-Time Dashboards</h3>
+          <p>Live data visualization with drill-down capabilities</p>
+          <a href="/compliance-monitoring" class="demo-link">Try Live Dashboard →</a>
+        </div>
+        <div class="feature-demo">
+          <h3>🗺️ Global Compliance Map</h3>
+          <p>Interactive regional compliance and data sovereignty tracking</p>
+          <a href="/global-sovereignty-dashboard-enhanced" class="demo-link">Explore Map →</a>
+        </div>
+        <div class="feature-demo">
+          <h3>📈 Trend Analysis</h3>
+          <p>Historical security posture tracking and predictions</p>
+          <a href="#" class="demo-link" onclick="showTrendData()">View Trends →</a>
+        </div>
+        <div class="feature-demo">
+          <h3>🎯 Prioritized Actions</h3>
+          <p>AI-powered recommendation engine with implementation guides</p>
+          <a href="#" class="demo-link" onclick="showRecommendations()">See Recommendations →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    main {
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .reports-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .reports-header h1 {
+      font-size: 2.5rem;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .reports-header p {
+      font-size: 1.25rem;
+      color: #64748b;
+    }
+
+    .reports-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .report-type-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+
+    .report-type-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .report-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .report-icon.executive {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+
+    .report-icon.technical {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+    }
+
+    .report-icon.compliance {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+    }
+
+    .report-icon.risk {
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      color: white;
+    }
+
+    .report-type-card h2 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 0.75rem;
+    }
+
+    .report-type-card p {
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .report-features {
+      margin-bottom: 1.5rem;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature svg {
+      color: #10b981;
+      flex-shrink: 0;
+    }
+
+    .feature span {
+      color: #475569;
+      font-size: 0.875rem;
+    }
+
+    .report-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+      font-size: 0.875rem;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: #6366f1;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #4f46e5;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .data-showcase {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .data-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .data-header h2 {
+      font-size: 1.75rem;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    .btn-close {
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: #64748b;
+      cursor: pointer;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-close:hover {
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    .data-content {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1.5rem;
+      font-family: 'Monaco', 'Consolas', monospace;
+      font-size: 0.875rem;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .interactive-features {
+      margin-top: 4rem;
+    }
+
+    .interactive-features h2 {
+      font-size: 2rem;
+      color: #1e293b;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-demo {
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .feature-demo h3 {
+      font-size: 1.25rem;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-demo p {
+      color: #64748b;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .demo-link {
+      color: #6366f1;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    .demo-link:hover {
+      text-decoration: underline;
+    }
+
+    pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .json-key {
+      color: #0969da;
+    }
+
+    .json-string {
+      color: #032f62;
+    }
+
+    .json-number {
+      color: #0550ae;
+    }
+
+    .json-boolean {
+      color: #cf222e;
+    }
+
+    /* Risk Matrix Modal */
+    .risk-matrix-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 800px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: #64748b;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .close-modal:hover {
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    .risk-matrix {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: 1fr auto;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .matrix-axis-y {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      text-align: right;
+      padding-right: 1rem;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(4, 120px);
+      gap: 0.5rem;
+    }
+
+    .risk-cell {
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .risk-cell:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .risk-cell.critical.high {
+      background: #dc2626;
+      color: white;
+    }
+
+    .risk-cell.critical.medium {
+      background: #ef4444;
+      color: white;
+    }
+
+    .risk-cell.critical.low {
+      background: #f87171;
+      color: white;
+    }
+
+    .risk-cell.high.high {
+      background: #f59e0b;
+      color: white;
+    }
+
+    .risk-cell.high.medium {
+      background: #fbbf24;
+      color: #1e293b;
+    }
+
+    .risk-cell.medium.medium {
+      background: #fde047;
+      color: #1e293b;
+    }
+
+    .risk-count {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .risk-label {
+      font-size: 0.75rem;
+      line-height: 1.2;
+    }
+
+    .matrix-axis-x {
+      grid-column: 2;
+      display: flex;
+      justify-content: space-around;
+      padding-top: 1rem;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    /* Trend Visualization */
+    .trend-visualization {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .trend-insights {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .trend-insights h3 {
+      font-size: 1.125rem;
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+
+    .trend-insights ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .trend-insights li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #f3f4f6;
+      font-size: 0.875rem;
+      color: #475569;
+    }
+
+    .trend-insights li:last-child {
+      border-bottom: none;
+    }
+
+    #trendChart {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Recommendations */
+    .recommendations-view {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .rec-category h3 {
+      font-size: 1.25rem;
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+
+    .rec-item {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      border: 2px solid #e5e7eb;
+      transition: all 0.3s ease;
+    }
+
+    .rec-item:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .rec-item.critical {
+      border-left: 4px solid #ef4444;
+    }
+
+    .rec-item.high {
+      border-left: 4px solid #f59e0b;
+    }
+
+    .rec-item.medium {
+      border-left: 4px solid #3b82f6;
+    }
+
+    .rec-item h4 {
+      font-size: 1.125rem;
+      color: #1e293b;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .rec-item p {
+      color: #64748b;
+      margin: 0 0 1rem 0;
+      font-size: 0.875rem;
+    }
+
+    .rec-details {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .rec-details span {
+      background: #f3f4f6;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      color: #475569;
+    }
+
+    .rec-details .impact {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .rec-details .effort {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .rec-details .cost {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    @media (max-width: 768px) {
+      .reports-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .report-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .matrix-grid {
+        grid-template-rows: repeat(4, 100px);
+      }
+
+      .risk-cell {
+        padding: 0.5rem;
+      }
+
+      .risk-count {
+        font-size: 1.5rem;
+      }
+
+      .risk-label {
+        font-size: 0.625rem;
+      }
+
+      .trend-visualization {
+        grid-template-columns: 1fr;
+      }
+
+      #trendChart {
+        width: 100%;
+        height: 200px;
+      }
+    }
+  </style>
+
+  <script>
+    // Sample data for different report types
+    const sampleData = {
+      executive: {
+        title: "Executive Summary Sample Data",
+        data: {
+          "organizationProfile": {
+            "name": "Contoso Corporation",
+            "industry": "Financial Services",
+            "employees": 5000,
+            "annualRevenue": "$500M",
+            "complianceRequirements": ["SOC2", "GDPR", "HIPAA"]
+          },
+          "securityPosture": {
+            "overallScore": 78,
+            "trend": "improving",
+            "criticalFindings": 3,
+            "highFindings": 12,
+            "mediumFindings": 28
+          },
+          "financialImpact": {
+            "currentExposure": "$7.5M",
+            "potentialBreachCost": "$12.3M",
+            "recommendedInvestment": {
+              "gold": "$450K",
+              "silver": "$250K",
+              "bronze": "$100K"
+            },
+            "roiProjection": {
+              "gold": "320% over 3 years",
+              "silver": "240% over 3 years",
+              "bronze": "180% over 3 years"
+            }
+          },
+          "recommendations": {
+            "immediate": [
+              "Enable MFA for all users",
+              "Patch critical vulnerabilities",
+              "Review external sharing policies"
+            ],
+            "shortTerm": [
+              "Implement DLP policies",
+              "Upgrade legacy systems",
+              "Conduct security training"
+            ],
+            "longTerm": [
+              "Zero Trust architecture",
+              "Advanced threat protection",
+              "Compliance automation"
+            ]
+          }
+        }
+      },
+      technical: {
+        title: "Technical Assessment Sample Data",
+        data: {
+          "azureAD": {
+            "totalUsers": 5000,
+            "mfaEnabled": 4400,
+            "privilegedUsers": 50,
+            "guestAccounts": 234,
+            "staleAccounts": 156,
+            "issues": [
+              {
+                "severity": "critical",
+                "finding": "12% users without MFA",
+                "affected": ["finance@contoso.com", "hr@contoso.com"],
+                "remediation": "Set-MsolUser -UserPrincipalName $user -StrongAuthenticationRequirements $mfa"
+              }
+            ]
+          },
+          "exchange": {
+            "mailboxes": 5000,
+            "externalForwarding": 23,
+            "spoofingProtection": "partial",
+            "dkimEnabled": false,
+            "spfRecord": "valid",
+            "issues": [
+              {
+                "severity": "high",
+                "finding": "DKIM not configured",
+                "impact": "Email spoofing risk",
+                "remediation": "New-DkimSigningConfig -DomainName contoso.com -Enabled $true"
+              }
+            ]
+          },
+          "sharePoint": {
+            "sites": 450,
+            "externalSharingEnabled": 234,
+            "anonymousLinks": 1567,
+            "sensitivityLabels": "not configured",
+            "dlpPolicies": 0
+          }
+        }
+      },
+      compliance: {
+        title: "Compliance Audit Sample Data",
+        data: {
+          "frameworks": {
+            "GDPR": {
+              "overallCompliance": 72,
+              "dataMapping": "incomplete",
+              "privacyControls": 45,
+              "breachResponse": "defined",
+              "gaps": [
+                "Data retention policies",
+                "Right to erasure process",
+                "Cross-border transfers"
+              ]
+            },
+            "SOC2": {
+              "overallCompliance": 68,
+              "controls": {
+                "security": 75,
+                "availability": 82,
+                "processingIntegrity": 65,
+                "confidentiality": 70,
+                "privacy": 60
+              }
+            },
+            "HIPAA": {
+              "overallCompliance": 45,
+              "technicalSafeguards": 55,
+              "administrativeSafeguards": 40,
+              "physicalSafeguards": 35
+            }
+          },
+          "auditFindings": {
+            "critical": 5,
+            "high": 15,
+            "medium": 32,
+            "low": 45
+          },
+          "remediationPlan": {
+            "phase1": "Address critical gaps (30 days)",
+            "phase2": "Implement controls (90 days)",
+            "phase3": "Continuous monitoring (ongoing)"
+          }
+        }
+      },
+      risk: {
+        title: "Risk Assessment Sample Data",
+        data: {
+          "threatLandscape": {
+            "ransomware": {
+              "likelihood": "high",
+              "impact": "critical",
+              "currentControls": ["backup", "EDR"],
+              "gaps": ["user training", "network segmentation"]
+            },
+            "dataBreaches": {
+              "likelihood": "medium",
+              "impact": "high",
+              "currentControls": ["DLP", "encryption"],
+              "gaps": ["access reviews", "data classification"]
+            },
+            "insiderThreats": {
+              "likelihood": "medium",
+              "impact": "high",
+              "currentControls": ["monitoring"],
+              "gaps": ["behavioral analytics", "privileged access management"]
+            }
+          },
+          "vulnerabilities": {
+            "critical": 3,
+            "high": 24,
+            "medium": 156,
+            "low": 423
+          },
+          "riskMatrix": {
+            "critical": ["unpatched systems", "no MFA", "external sharing"],
+            "high": ["stale accounts", "weak passwords", "no DLP"],
+            "medium": ["outdated policies", "limited monitoring"],
+            "low": ["documentation gaps", "training needs"]
+          }
+        }
+      }
+    };
+
+    function showSampleData(type) {
+      const showcase = document.getElementById('data-showcase');
+      const title = document.getElementById('data-title');
+      const content = document.getElementById('data-content');
+      
+      const data = sampleData[type];
+      title.textContent = data.title;
+      content.innerHTML = `<pre>${JSON.stringify(data.data, null, 2)}</pre>`;
+      
+      showcase.style.display = 'block';
+      showcase.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function closeDataShowcase() {
+      document.getElementById('data-showcase').style.display = 'none';
+    }
+
+    function showTechnicalReport() {
+      // In a real implementation, this would open a detailed technical report
+      window.location.href = '/assessment-execution';
+    }
+
+    function showLiveExecution() {
+      // Navigate to the assessment execution page
+      window.location.href = '/assessment-execution';
+    }
+
+    function showRiskMatrix() {
+      // Create a dynamic risk matrix popup
+      const modal = document.createElement('div');
+      modal.className = 'risk-matrix-modal';
+      modal.innerHTML = `
+        <div class="modal-content">
+          <h2>Risk Assessment Matrix</h2>
+          <button class="close-modal" onclick="this.parentElement.parentElement.remove()">×</button>
+          <div class="risk-matrix">
+            <div class="matrix-axis-y">
+              <div>Critical</div>
+              <div>High</div>
+              <div>Medium</div>
+              <div>Low</div>
+            </div>
+            <div class="matrix-grid">
+              <div class="risk-cell critical high">
+                <div class="risk-count">3</div>
+                <div class="risk-label">No MFA<br>External Sharing<br>Admin Rights</div>
+              </div>
+              <div class="risk-cell critical medium">
+                <div class="risk-count">2</div>
+                <div class="risk-label">Unpatched Systems<br>Weak Passwords</div>
+              </div>
+              <div class="risk-cell critical low">
+                <div class="risk-count">1</div>
+                <div class="risk-label">Legacy Protocols</div>
+              </div>
+              <div class="risk-cell high high">
+                <div class="risk-count">5</div>
+                <div class="risk-label">Data Leakage<br>Stale Accounts<br>No DLP<br>Guest Access<br>Shadow IT</div>
+              </div>
+              <div class="risk-cell high medium">
+                <div class="risk-count">4</div>
+                <div class="risk-label">Compliance Gaps<br>Audit Logging<br>Incident Response<br>Training</div>
+              </div>
+              <div class="risk-cell medium medium">
+                <div class="risk-count">8</div>
+                <div class="risk-label">Policy Updates<br>Documentation<br>Monitoring<br>Reviews</div>
+              </div>
+            </div>
+            <div class="matrix-axis-x">
+              <div>High Impact</div>
+              <div>Medium Impact</div>
+              <div>Low Impact</div>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+    }
+
+    function showTrendData() {
+      const showcase = document.getElementById('data-showcase');
+      const title = document.getElementById('data-title');
+      const content = document.getElementById('data-content');
+      
+      title.textContent = 'Security Posture Trend Analysis';
+      content.innerHTML = `
+        <div class="trend-visualization">
+          <canvas id="trendChart" width="600" height="300"></canvas>
+          <div class="trend-insights">
+            <h3>Key Insights</h3>
+            <ul>
+              <li>🟢 <strong>MFA Adoption:</strong> Increased from 45% to 88% over 6 months</li>
+              <li>🟡 <strong>Compliance Score:</strong> Steady improvement from 62% to 78%</li>
+              <li>🔴 <strong>Critical Vulnerabilities:</strong> Reduced from 15 to 3</li>
+              <li>🟢 <strong>Data Protection:</strong> DLP policies now cover 92% of sensitive data</li>
+            </ul>
+          </div>
+        </div>
+      `;
+      
+      showcase.style.display = 'block';
+      showcase.scrollIntoView({ behavior: 'smooth' });
+      
+      // Draw simple trend chart
+      const canvas = document.getElementById('trendChart');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        drawTrendChart(ctx);
+      }
+    }
+
+    function drawTrendChart(ctx) {
+      const width = 600;
+      const height = 300;
+      const padding = 40;
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, width, height);
+      
+      // Sample data points
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+      const securityScore = [45, 52, 58, 65, 72, 78];
+      const compliance = [62, 65, 68, 71, 75, 78];
+      const risks = [15, 13, 10, 8, 5, 3];
+      
+      // Draw axes
+      ctx.strokeStyle = '#e5e7eb';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(padding, padding);
+      ctx.lineTo(padding, height - padding);
+      ctx.lineTo(width - padding, height - padding);
+      ctx.stroke();
+      
+      // Draw grid lines
+      ctx.strokeStyle = '#f3f4f6';
+      ctx.lineWidth = 1;
+      for (let i = 0; i <= 5; i++) {
+        const y = padding + (height - 2 * padding) * i / 5;
+        ctx.beginPath();
+        ctx.moveTo(padding, y);
+        ctx.lineTo(width - padding, y);
+        ctx.stroke();
+      }
+      
+      // Draw data lines
+      const chartWidth = width - 2 * padding;
+      const chartHeight = height - 2 * padding;
+      
+      // Security Score line
+      ctx.strokeStyle = '#3b82f6';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      securityScore.forEach((score, i) => {
+        const x = padding + (chartWidth / (months.length - 1)) * i;
+        const y = height - padding - (score / 100) * chartHeight;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+      
+      // Compliance line
+      ctx.strokeStyle = '#10b981';
+      ctx.beginPath();
+      compliance.forEach((score, i) => {
+        const x = padding + (chartWidth / (months.length - 1)) * i;
+        const y = height - padding - (score / 100) * chartHeight;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+      
+      // Risk count line (inverted scale)
+      ctx.strokeStyle = '#ef4444';
+      ctx.beginPath();
+      risks.forEach((count, i) => {
+        const x = padding + (chartWidth / (months.length - 1)) * i;
+        const y = height - padding - ((15 - count) / 15 * 0.8) * chartHeight;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      });
+      ctx.stroke();
+      
+      // Draw labels
+      ctx.fillStyle = '#6b7280';
+      ctx.font = '12px sans-serif';
+      months.forEach((month, i) => {
+        const x = padding + (chartWidth / (months.length - 1)) * i;
+        ctx.fillText(month, x - 15, height - padding + 20);
+      });
+      
+      // Draw legend
+      ctx.fillStyle = '#3b82f6';
+      ctx.fillRect(width - 150, 20, 20, 3);
+      ctx.fillStyle = '#374151';
+      ctx.fillText('Security Score', width - 120, 25);
+      
+      ctx.fillStyle = '#10b981';
+      ctx.fillRect(width - 150, 40, 20, 3);
+      ctx.fillStyle = '#374151';
+      ctx.fillText('Compliance', width - 120, 45);
+      
+      ctx.fillStyle = '#ef4444';
+      ctx.fillRect(width - 150, 60, 20, 3);
+      ctx.fillStyle = '#374151';
+      ctx.fillText('Critical Risks', width - 120, 65);
+    }
+
+    function showRecommendations() {
+      const showcase = document.getElementById('data-showcase');
+      const title = document.getElementById('data-title');
+      const content = document.getElementById('data-content');
+      
+      title.textContent = 'AI-Powered Security Recommendations';
+      content.innerHTML = `
+        <div class="recommendations-view">
+          <div class="rec-category">
+            <h3>🚨 Immediate Actions (Next 7 Days)</h3>
+            <div class="rec-item critical">
+              <h4>Enable Multi-Factor Authentication</h4>
+              <p>12% of users lack MFA. Deploy company-wide MFA policy immediately.</p>
+              <div class="rec-details">
+                <span class="impact">Impact: Critical</span>
+                <span class="effort">Effort: Low</span>
+                <span class="cost">Cost: $0</span>
+              </div>
+            </div>
+            <div class="rec-item critical">
+              <h4>Patch Critical Vulnerabilities</h4>
+              <p>3 systems have critical security updates pending.</p>
+              <div class="rec-details">
+                <span class="impact">Impact: Critical</span>
+                <span class="effort">Effort: Medium</span>
+                <span class="cost">Cost: $0</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rec-category">
+            <h3>📋 Short-term Improvements (30 Days)</h3>
+            <div class="rec-item high">
+              <h4>Implement Data Loss Prevention</h4>
+              <p>Configure DLP policies for sensitive data types across Exchange and SharePoint.</p>
+              <div class="rec-details">
+                <span class="impact">Impact: High</span>
+                <span class="effort">Effort: Medium</span>
+                <span class="cost">Cost: Included in E5</span>
+              </div>
+            </div>
+            <div class="rec-item high">
+              <h4>Review External Sharing</h4>
+              <p>234 sites allow unrestricted external sharing. Implement governance policies.</p>
+              <div class="rec-details">
+                <span class="impact">Impact: High</span>
+                <span class="effort">Effort: Low</span>
+                <span class="cost">Cost: $0</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="rec-category">
+            <h3>🎯 Strategic Initiatives (90 Days)</h3>
+            <div class="rec-item medium">
+              <h4>Zero Trust Architecture</h4>
+              <p>Implement conditional access policies and device compliance requirements.</p>
+              <div class="rec-details">
+                <span class="impact">Impact: High</span>
+                <span class="effort">Effort: High</span>
+                <span class="cost">Cost: $45K implementation</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      showcase.style.display = 'block';
+      showcase.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Pretty print JSON
+    document.addEventListener('DOMContentLoaded', () => {
+      // Color code JSON when displayed
+      const observer = new MutationObserver(() => {
+        const pres = document.querySelectorAll('pre');
+        pres.forEach(pre => {
+          if (!pre.dataset.formatted) {
+            pre.innerHTML = pre.innerHTML
+              .replace(/"([^"]+)":/g, '<span class="json-key">"$1":</span>')
+              .replace(/: "([^"]+)"/g, ': <span class="json-string">"$1"</span>')
+              .replace(/: (\d+)/g, ': <span class="json-number">$1</span>')
+              .replace(/: (true|false)/g, ': <span class="json-boolean">$1</span>');
+            pre.dataset.formatted = 'true';
+          }
+        });
+      });
+      
+      observer.observe(document.body, { childList: true, subtree: true });
+    });
+  </script>
+</Layout>
