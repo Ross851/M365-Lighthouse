@@ -167,21 +167,24 @@ import Layout from '../layouts/Layout.astro';
 								<li>Click "Manage roles" to see all assigned roles</li>
 							</ol>
 
-							<h4>Method 3: PowerShell Quick Check</h4>
-							<pre><code class="language-powershell"># Connect to Azure AD
-Connect-AzureAD
-
-# Check your roles
-$userEmail = "your-email@domain.com"
-$userId = (Get-AzureADUser -Filter "userPrincipalName eq '$userEmail'").ObjectId
-$roles = Get-AzureADDirectoryRole
-$userRoles = foreach ($role in $roles) {
-    $members = Get-AzureADDirectoryRoleMember -ObjectId $role.ObjectId
-    if ($members.ObjectId -contains $userId) {
-        $role.DisplayName
-    }
-}
-$userRoles</code></pre>
+							<h4>Method 3: PowerShell Commands</h4>
+							<div class="powershell-steps">
+								<p>Run these commands in PowerShell to check your roles:</p>
+								<ol>
+									<li>First, connect to Azure AD:
+										<pre><code>Connect-AzureAD</code></pre>
+									</li>
+									<li>Get your user account:
+										<pre><code>Get-AzureADUser -Filter "userPrincipalName eq 'your-email@domain.com'"</code></pre>
+									</li>
+									<li>List all directory roles:
+										<pre><code>Get-AzureADDirectoryRole</code></pre>
+									</li>
+									<li>Check Global Admin role members:
+										<pre><code>Get-AzureADDirectoryRole | Where DisplayName -eq "Global Administrator" | Get-AzureADDirectoryRoleMember</code></pre>
+									</li>
+								</ol>
+							</div>
 						</div>
 
 						<div class="info-box warning">
@@ -594,6 +597,22 @@ $userRoles</code></pre>
 
 	code {
 		font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+	}
+
+	.powershell-steps {
+		background: #f8f9fa;
+		padding: 1rem;
+		border-radius: 8px;
+		margin-top: 1rem;
+	}
+
+	.powershell-steps ol {
+		margin-bottom: 0;
+	}
+
+	.powershell-steps pre {
+		margin: 0.5rem 0;
+		font-size: 0.8rem;
 	}
 
 	.troubleshooting {
