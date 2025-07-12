@@ -338,7 +338,7 @@ Found: 15 admin accounts without MFA</code></pre>
             <div class="finding-evidence">
               <h4>Evidence</h4>
               <div class="evidence-box">
-                <pre><code>Get-CASMailbox -ResultSize Unlimited | Where {$_.SmtpClientAuthenticationDisabled -eq $false}
+                <pre><code>Get-CASMailbox -ResultSize Unlimited | Where &#123;$_.SmtpClientAuthenticationDisabled -eq $false&#125;
 Result: 2,345 mailboxes with SMTP auth enabled
 
 Azure AD Sign-in Logs show:
