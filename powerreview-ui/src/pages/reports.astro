@@ -2,315 +2,392 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Security Assessment Reports - PowerReview">
+<Layout title="M365 Full Stack Assessment - PowerReview Advisors">
   <!-- Load Chart.js for data visualizations -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   
   <main>
-    <!-- Professional Header -->
-    <div class="reports-header">
+    <!-- PowerReview Advisors Header -->
+    <div class="advisor-header">
       <div class="header-content">
-        <h1>Microsoft 365 Security Assessment</h1>
-        <p class="subtitle">Comprehensive analysis based on Microsoft Security Best Practices and industry standards</p>
+        <div class="brand">
+          <h1>PowerReview Advisors</h1>
+          <p class="tagline">Your trusted partner in understanding and securing your Microsoft 365 environment</p>
+        </div>
+        <p class="subtitle">We help you identify issues across your entire M365 stack, understand their impact, and create a clear pathway to success</p>
       </div>
       <div class="header-actions">
         <button class="btn primary" onclick="downloadExecutiveSummary()">
           <i class="fas fa-download"></i>
           Executive Summary
         </button>
-        <button class="btn secondary" onclick="scheduleConsultation()">
-          <i class="fas fa-calendar"></i>
-          Schedule Consultation
+        <button class="btn secondary" onclick="scheduleAdvisorySession()">
+          <i class="fas fa-users"></i>
+          Schedule Advisory Session
         </button>
       </div>
     </div>
 
-    <!-- Security Score Overview -->
-    <section class="security-score-section">
-      <div class="score-container">
-        <div class="score-visual">
-          <canvas id="securityScoreChart" width="200" height="200"></canvas>
-          <div class="score-center">
-            <div class="score-value">72</div>
-            <div class="score-label">Security Score</div>
-          </div>
-        </div>
-        <div class="score-details">
-          <h2>Your Security Posture</h2>
-          <p>Based on our comprehensive assessment, your Microsoft 365 environment scores 72 out of 100, indicating room for improvement in several critical areas.</p>
-          <div class="score-breakdown">
-            <div class="breakdown-item">
-              <span class="label">Industry Average:</span>
-              <span class="value">78</span>
-            </div>
-            <div class="breakdown-item">
-              <span class="label">Best in Class:</span>
-              <span class="value">92</span>
-            </div>
-            <div class="breakdown-item">
-              <span class="label">Your Percentile:</span>
-              <span class="value">45th</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Key Findings Summary -->
-    <section class="findings-section">
-      <h2>Executive Summary of Key Findings</h2>
-      <div class="findings-grid">
-        <div class="finding-card critical">
-          <div class="finding-header">
-            <i class="fas fa-exclamation-triangle"></i>
-            <h3>Critical: Identity Protection</h3>
-          </div>
-          <div class="finding-content">
-            <p><strong>Finding:</strong> 847 users (12% of workforce) lack multi-factor authentication</p>
-            <p><strong>Risk:</strong> 99.9% of account compromise attacks target accounts without MFA</p>
-            <p><strong>Industry Context:</strong> Organizations without MFA are 5x more likely to experience a breach</p>
-            <div class="finding-impact">
-              <span class="impact-label">Financial Impact:</span>
-              <span class="impact-value">$2.3M average breach cost</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="finding-card high">
-          <div class="finding-header">
-            <i class="fas fa-shield-alt"></i>
-            <h3>High: Data Protection</h3>
-          </div>
-          <div class="finding-content">
-            <p><strong>Finding:</strong> No Data Loss Prevention (DLP) policies configured</p>
-            <p><strong>Risk:</strong> Sensitive data can be shared externally without detection</p>
-            <p><strong>Industry Context:</strong> 68% of breaches involve data exfiltration</p>
-            <div class="finding-impact">
-              <span class="impact-label">Compliance Risk:</span>
-              <span class="impact-value">GDPR fines up to €20M</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="finding-card medium">
-          <div class="finding-header">
-            <i class="fas fa-envelope"></i>
-            <h3>Medium: Email Security</h3>
-          </div>
-          <div class="finding-content">
-            <p><strong>Finding:</strong> Basic email protection only; no advanced threat detection</p>
-            <p><strong>Risk:</strong> 91% of cyberattacks start with a phishing email</p>
-            <p><strong>Industry Context:</strong> Average phishing click rate: 3.4%</p>
-            <div class="finding-impact">
-              <span class="impact-label">Productivity Loss:</span>
-              <span class="impact-value">$1.6M annually</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Implementation Roadmap -->
-    <section class="roadmap-section">
-      <h2>Your Security Implementation Roadmap</h2>
-      <p class="roadmap-intro">We've developed a phased approach to address your security gaps systematically while minimizing business disruption.</p>
+    <!-- Understanding Your Environment -->
+    <section class="environment-overview">
+      <h2><i class="fas fa-layer-group"></i> Understanding Your M365 Full Stack</h2>
+      <p class="section-intro">PowerReview Advisors has analyzed every layer of your Microsoft 365 environment to help you understand where you are today and where you need to be.</p>
       
-      <div class="roadmap-timeline">
-        <div class="phase phase-1">
-          <div class="phase-header">
-            <div class="phase-number">Phase 1</div>
-            <div class="phase-timeframe">Immediate (Week 1-2)</div>
-            <div class="phase-cost">$5,000 - $10,000</div>
+      <div class="stack-visualization">
+        <div class="stack-layer" data-score="62">
+          <div class="layer-header">
+            <i class="fas fa-users"></i>
+            <h3>Identity & Access Layer</h3>
+            <span class="layer-score">62/100</span>
           </div>
-          <h3>Critical Security Controls</h3>
-          <ul>
-            <li>Enable MFA for all administrator accounts</li>
-            <li>Implement baseline Conditional Access policies</li>
-            <li>Block legacy authentication protocols</li>
-            <li>Enable Security Defaults</li>
-          </ul>
-          <div class="phase-outcome">
-            <strong>Expected Outcome:</strong> 80% reduction in account compromise risk
+          <div class="layer-content">
+            <p><strong>What We Found:</strong> 847 users without MFA, legacy auth protocols active</p>
+            <p><strong>Why It Matters:</strong> This is your front door - if compromised, attackers access everything</p>
+            <p><strong>Business Impact:</strong> One compromised account can lead to full environment breach</p>
           </div>
         </div>
 
-        <div class="phase phase-2">
-          <div class="phase-header">
-            <div class="phase-number">Phase 2</div>
-            <div class="phase-timeframe">Short-term (Month 1-3)</div>
-            <div class="phase-cost">$25,000 - $40,000</div>
+        <div class="stack-layer" data-score="68">
+          <div class="layer-header">
+            <i class="fas fa-database"></i>
+            <h3>Data & Information Layer</h3>
+            <span class="layer-score">68/100</span>
           </div>
-          <h3>Enhanced Protection</h3>
-          <ul>
-            <li>Deploy Microsoft Defender for Office 365</li>
-            <li>Configure Data Loss Prevention policies</li>
-            <li>Implement Privileged Identity Management</li>
-            <li>Set up audit log monitoring</li>
-          </ul>
-          <div class="phase-outcome">
-            <strong>Expected Outcome:</strong> Achieve 85% security score
+          <div class="layer-content">
+            <p><strong>What We Found:</strong> No DLP policies, 156 sensitive files shared externally</p>
+            <p><strong>Why It Matters:</strong> Your intellectual property and customer data are at risk</p>
+            <p><strong>Business Impact:</strong> Data breaches lead to lost trust and regulatory fines</p>
           </div>
         </div>
 
-        <div class="phase phase-3">
-          <div class="phase-header">
-            <div class="phase-number">Phase 3</div>
-            <div class="phase-timeframe">Long-term (Month 4-6)</div>
-            <div class="phase-cost">$50,000 - $75,000</div>
+        <div class="stack-layer" data-score="71">
+          <div class="layer-header">
+            <i class="fas fa-desktop"></i>
+            <h3>Apps & Services Layer</h3>
+            <span class="layer-score">71/100</span>
           </div>
-          <h3>Advanced Security Posture</h3>
-          <ul>
-            <li>Implement Zero Trust architecture</li>
-            <li>Deploy Microsoft Sentinel for SIEM</li>
-            <li>Automate incident response</li>
-            <li>Continuous compliance monitoring</li>
-          </ul>
-          <div class="phase-outcome">
-            <strong>Expected Outcome:</strong> Industry-leading security posture (95+ score)
+          <div class="layer-content">
+            <p><strong>What We Found:</strong> Basic protection only on Exchange, Teams, SharePoint</p>
+            <p><strong>Why It Matters:</strong> These are your collaboration tools - they need advanced protection</p>
+            <p><strong>Business Impact:</strong> Malware in one app can spread to all connected services</p>
           </div>
         </div>
-      </div>
 
-      <div class="roadmap-roi">
-        <h3>Return on Investment</h3>
-        <div class="roi-metrics">
-          <div class="roi-item">
-            <span class="roi-label">Total Investment:</span>
-            <span class="roi-value">$80,000 - $125,000</span>
+        <div class="stack-layer" data-score="75">
+          <div class="layer-header">
+            <i class="fas fa-mobile-alt"></i>
+            <h3>Device & Endpoint Layer</h3>
+            <span class="layer-score">75/100</span>
           </div>
-          <div class="roi-item">
-            <span class="roi-label">Risk Reduction:</span>
-            <span class="roi-value">95%</span>
-          </div>
-          <div class="roi-item">
-            <span class="roi-label">Breach Cost Avoided:</span>
-            <span class="roi-value">$2.3M</span>
-          </div>
-          <div class="roi-item highlight">
-            <span class="roi-label">ROI:</span>
-            <span class="roi-value">1,840%</span>
+          <div class="layer-content">
+            <p><strong>What We Found:</strong> Inconsistent device compliance, no conditional access</p>
+            <p><strong>Why It Matters:</strong> Unmanaged devices are entry points for attackers</p>
+            <p><strong>Business Impact:</strong> Lost or stolen devices can expose your entire organization</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Detailed Reports Grid -->
-    <section class="reports-section">
-      <div class="section-header">
-        <h2>Detailed Assessment Reports</h2>
-        <div class="report-filters">
-          <select id="categoryFilter" onchange="filterReports()">
-            <option value="all">All Categories</option>
-            <option value="identity">Identity & Access</option>
-            <option value="data">Data Protection</option>
-            <option value="devices">Device Security</option>
-            <option value="apps">Application Security</option>
-          </select>
+    <!-- Understanding the Issues -->
+    <section class="issues-explained">
+      <h2><i class="fas fa-microscope"></i> Let's Break Down What We Found</h2>
+      <p class="section-intro">Our advisors help you understand not just what the issues are, but why they matter to your business.</p>
+      
+      <div class="issue-cards">
+        <div class="issue-card">
+          <div class="issue-icon critical">
+            <i class="fas fa-user-lock"></i>
+          </div>
+          <h3>The MFA Gap Explained</h3>
+          <div class="explanation">
+            <h4>What's happening:</h4>
+            <p>847 of your users can access M365 with just a password. That's like having 847 house keys under doormats.</p>
+            
+            <h4>Why it's critical:</h4>
+            <p>Microsoft reports that 99.9% of compromised accounts didn't use MFA. Passwords alone aren't enough anymore.</p>
+            
+            <h4>Real-world impact:</h4>
+            <p>One phished password = access to email, files, Teams, and customer data. It takes seconds to compromise, weeks to recover.</p>
+            
+            <h4>The good news:</h4>
+            <p>MFA is one of the easiest and most effective controls to implement. We'll show you how.</p>
+          </div>
+        </div>
+
+        <div class="issue-card">
+          <div class="issue-icon high">
+            <i class="fas fa-folder-open"></i>
+          </div>
+          <h3>The Data Protection Gap</h3>
+          <div class="explanation">
+            <h4>What's happening:</h4>
+            <p>Your sensitive data can leave your organization without any alerts or blocks. It's like having no security cameras at the exits.</p>
+            
+            <h4>Why it matters:</h4>
+            <p>Whether it's accidental or malicious, data loss damages your reputation and triggers compliance violations.</p>
+            
+            <h4>Business perspective:</h4>
+            <p>Your intellectual property, customer lists, and financial data are your competitive advantage. They need protection.</p>
+            
+            <h4>The solution:</h4>
+            <p>DLP policies act as smart guards, watching for and preventing unauthorized data movement. We'll design them for your needs.</p>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="reports-grid" id="reportsGrid">
-        <!-- Identity Report -->
-        <div class="report-card" data-category="identity">
-          <div class="report-header">
-            <div class="report-icon identity">
-              <i class="fas fa-user-shield"></i>
-            </div>
-            <div class="report-meta">
-              <h3>Identity & Access Management Assessment</h3>
-              <span class="report-date">Generated: January 2025</span>
-            </div>
-            <div class="report-score critical">
-              <span class="score">62</span>
-              <span class="label">Score</span>
+    <!-- Your Pathway to Success -->
+    <section class="success-pathway">
+      <h2><i class="fas fa-road"></i> Your Pathway to Success</h2>
+      <p class="section-intro">PowerReview Advisors doesn't just identify problems - we create a clear, practical roadmap tailored to your business needs and resources.</p>
+      
+      <div class="pathway-phases">
+        <div class="pathway-phase immediate">
+          <div class="phase-header">
+            <div class="phase-icon">🚨</div>
+            <div class="phase-title">
+              <h3>Immediate Actions</h3>
+              <span class="timeframe">Next 2 weeks</span>
             </div>
           </div>
-          <div class="report-summary">
-            <p>Comprehensive analysis of your identity protection controls, authentication methods, and privileged access management.</p>
-            <ul class="key-findings">
-              <li>847 users without MFA (Critical)</li>
-              <li>23 over-privileged admin accounts</li>
-              <li>Legacy authentication still enabled</li>
-              <li>No Conditional Access policies</li>
-            </ul>
-          </div>
-          <div class="report-actions">
-            <button class="btn-view" onclick="viewReport('identity-assessment')">
-              <i class="fas fa-eye"></i> View Full Report
-            </button>
-            <button class="btn-download" onclick="downloadReport('identity-assessment')">
-              <i class="fas fa-download"></i> Download PDF
-            </button>
+          
+          <div class="phase-content">
+            <h4>Quick Wins - Maximum Impact</h4>
+            <p>These actions require minimal investment but dramatically improve your security posture.</p>
+            
+            <div class="action-items">
+              <div class="action-item">
+                <div class="action-header">
+                  <i class="fas fa-shield-alt"></i>
+                  <span>Enable MFA for Administrators</span>
+                </div>
+                <div class="action-details">
+                  <p><strong>Why first:</strong> Admin accounts are the keys to your kingdom</p>
+                  <p><strong>How to do it:</strong> Azure AD > Security > MFA > Include all admin roles</p>
+                  <p><strong>Time required:</strong> 2 hours</p>
+                  <p><strong>Risk reduction:</strong> 90% for admin compromise</p>
+                </div>
+              </div>
+              
+              <div class="action-item">
+                <div class="action-header">
+                  <i class="fas fa-ban"></i>
+                  <span>Block Legacy Authentication</span>
+                </div>
+                <div class="action-details">
+                  <p><strong>Why now:</strong> Legacy protocols bypass all modern security</p>
+                  <p><strong>How to do it:</strong> Conditional Access > New Policy > Block legacy auth</p>
+                  <p><strong>Time required:</strong> 1 hour</p>
+                  <p><strong>Risk reduction:</strong> Stops 70% of breach attempts</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Data Protection Report -->
-        <div class="report-card" data-category="data">
-          <div class="report-header">
-            <div class="report-icon data">
-              <i class="fas fa-database"></i>
-            </div>
-            <div class="report-meta">
-              <h3>Data Protection & Compliance Report</h3>
-              <span class="report-date">Generated: January 2025</span>
-            </div>
-            <div class="report-score warning">
-              <span class="score">71</span>
-              <span class="label">Score</span>
+        <div class="pathway-phase short-term">
+          <div class="phase-header">
+            <div class="phase-icon">📈</div>
+            <div class="phase-title">
+              <h3>Foundation Building</h3>
+              <span class="timeframe">Month 1-3</span>
             </div>
           </div>
-          <div class="report-summary">
-            <p>Evaluation of data classification, protection policies, and compliance with regulatory requirements.</p>
-            <ul class="key-findings">
-              <li>No DLP policies configured</li>
-              <li>156 sensitive files shared externally</li>
-              <li>Retention policies not configured</li>
-              <li>GDPR compliance gaps identified</li>
-            </ul>
-          </div>
-          <div class="report-actions">
-            <button class="btn-view" onclick="viewReport('data-protection')">
-              <i class="fas fa-eye"></i> View Full Report
-            </button>
-            <button class="btn-download" onclick="downloadReport('data-protection')">
-              <i class="fas fa-download"></i> Download PDF
-            </button>
+          
+          <div class="phase-content">
+            <h4>Building Your Security Foundation</h4>
+            <p>These initiatives create lasting security improvements across your stack.</p>
+            
+            <div class="initiatives">
+              <div class="initiative">
+                <h5>Identity Security Program</h5>
+                <ul>
+                  <li>Roll out MFA to all users (phased by department)</li>
+                  <li>Implement Conditional Access based on risk</li>
+                  <li>Deploy Privileged Identity Management</li>
+                </ul>
+                <div class="initiative-outcome">
+                  <strong>Outcome:</strong> Secure identity foundation for all M365 services
+                </div>
+              </div>
+              
+              <div class="initiative">
+                <h5>Data Protection Framework</h5>
+                <ul>
+                  <li>Classify your sensitive data types</li>
+                  <li>Create DLP policies for each classification</li>
+                  <li>Train users on data handling</li>
+                </ul>
+                <div class="initiative-outcome">
+                  <strong>Outcome:</strong> Automated data protection across all platforms
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Email Security Report -->
-        <div class="report-card" data-category="apps">
-          <div class="report-header">
-            <div class="report-icon email">
-              <i class="fas fa-envelope-open-text"></i>
-            </div>
-            <div class="report-meta">
-              <h3>Email Security & Anti-Phishing Report</h3>
-              <span class="report-date">Generated: January 2025</span>
-            </div>
-            <div class="report-score warning">
-              <span class="score">68</span>
-              <span class="label">Score</span>
+        <div class="pathway-phase long-term">
+          <div class="phase-header">
+            <div class="phase-icon">🚀</div>
+            <div class="phase-title">
+              <h3>Advanced Protection</h3>
+              <span class="timeframe">Month 4-6</span>
             </div>
           </div>
-          <div class="report-summary">
-            <p>Analysis of email security controls, anti-phishing measures, and user awareness levels.</p>
-            <ul class="key-findings">
-              <li>Basic spam filtering only</li>
-              <li>No safe attachments policy</li>
-              <li>68% phishing simulation failure rate</li>
-              <li>No impersonation protection</li>
-            </ul>
+          
+          <div class="phase-content">
+            <h4>Achieving Best-in-Class Security</h4>
+            <p>Transform your M365 environment into a proactive, intelligent security platform.</p>
+            
+            <div class="advanced-items">
+              <div class="advanced-item">
+                <h5>Zero Trust Architecture</h5>
+                <p>Never trust, always verify - across every layer of your stack</p>
+              </div>
+              <div class="advanced-item">
+                <h5>AI-Powered Threat Detection</h5>
+                <p>Microsoft Sentinel watching for threats 24/7 across all services</p>
+              </div>
+              <div class="advanced-item">
+                <h5>Automated Response</h5>
+                <p>When threats are detected, your environment responds automatically</p>
+              </div>
+            </div>
           </div>
-          <div class="report-actions">
-            <button class="btn-view" onclick="viewReport('email-security')">
-              <i class="fas fa-eye"></i> View Full Report
-            </button>
-            <button class="btn-download" onclick="downloadReport('email-security')">
-              <i class="fas fa-download"></i> Download PDF
-            </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why This Approach Works -->
+    <section class="approach-explanation">
+      <h2><i class="fas fa-lightbulb"></i> Why This Approach Works</h2>
+      <div class="approach-grid">
+        <div class="approach-item">
+          <div class="approach-icon">
+            <i class="fas fa-chart-line"></i>
           </div>
+          <h3>Gradual Implementation</h3>
+          <p>We don't overwhelm your team or budget. Each phase builds on the previous, creating momentum and confidence.</p>
+        </div>
+        
+        <div class="approach-item">
+          <div class="approach-icon">
+            <i class="fas fa-users-cog"></i>
+          </div>
+          <h3>Business-Aligned</h3>
+          <p>Security measures that make sense for your industry, size, and risk tolerance. No one-size-fits-all solutions.</p>
+        </div>
+        
+        <div class="approach-item">
+          <div class="approach-icon">
+            <i class="fas fa-graduation-cap"></i>
+          </div>
+          <h3>Knowledge Transfer</h3>
+          <p>We don't just implement - we teach. Your team learns to manage and maintain these security measures.</p>
+        </div>
+        
+        <div class="approach-item">
+          <div class="approach-icon">
+            <i class="fas fa-shield-check"></i>
+          </div>
+          <h3>Proven Results</h3>
+          <p>This methodology has helped dozens of organizations achieve 90%+ security scores while maintaining productivity.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Investment and Returns -->
+    <section class="investment-section">
+      <h2><i class="fas fa-calculator"></i> Understanding the Investment</h2>
+      <p class="section-intro">Security is an investment in your business continuity. Here's what to expect:</p>
+      
+      <div class="investment-breakdown">
+        <div class="investment-phase">
+          <h3>Immediate Actions</h3>
+          <div class="investment-details">
+            <span class="cost">$5,000 - $10,000</span>
+            <span class="timeline">2 weeks</span>
+            <span class="impact">60% risk reduction</span>
+          </div>
+        </div>
+        
+        <div class="investment-phase">
+          <h3>Foundation Building</h3>
+          <div class="investment-details">
+            <span class="cost">$25,000 - $40,000</span>
+            <span class="timeline">3 months</span>
+            <span class="impact">85% risk reduction</span>
+          </div>
+        </div>
+        
+        <div class="investment-phase">
+          <h3>Advanced Protection</h3>
+          <div class="investment-details">
+            <span class="cost">$50,000 - $75,000</span>
+            <span class="timeline">6 months</span>
+            <span class="impact">95%+ risk reduction</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="roi-explanation">
+        <h3>The Return on Investment</h3>
+        <div class="roi-points">
+          <div class="roi-point">
+            <i class="fas fa-shield-alt"></i>
+            <p><strong>Breach Prevention:</strong> Average breach costs $2.3M - your investment is 5% of that</p>
+          </div>
+          <div class="roi-point">
+            <i class="fas fa-clock"></i>
+            <p><strong>Productivity:</strong> Reduce security incidents by 90%, saving 100+ hours monthly</p>
+          </div>
+          <div class="roi-point">
+            <i class="fas fa-certificate"></i>
+            <p><strong>Compliance:</strong> Meet SOC 2, ISO 27001, and industry requirements</p>
+          </div>
+          <div class="roi-point">
+            <i class="fas fa-handshake"></i>
+            <p><strong>Trust:</strong> Win more business with proven security posture</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How PowerReview Advisors Helps -->
+    <section class="advisor-value">
+      <h2><i class="fas fa-hands-helping"></i> How PowerReview Advisors Helps</h2>
+      <div class="value-props">
+        <div class="value-prop">
+          <div class="value-icon">
+            <i class="fas fa-search"></i>
+          </div>
+          <h3>Deep Discovery</h3>
+          <p>We use advanced tools and decades of experience to find issues others miss across your entire M365 stack.</p>
+        </div>
+        
+        <div class="value-prop">
+          <div class="value-icon">
+            <i class="fas fa-comments"></i>
+          </div>
+          <h3>Clear Communication</h3>
+          <p>We translate technical findings into business language, helping stakeholders understand the "why" behind each recommendation.</p>
+        </div>
+        
+        <div class="value-prop">
+          <div class="value-icon">
+            <i class="fas fa-project-diagram"></i>
+          </div>
+          <h3>Practical Roadmaps</h3>
+          <p>Our pathways are realistic, budgeted, and designed to work with your team's capabilities and constraints.</p>
+        </div>
+        
+        <div class="value-prop">
+          <div class="value-icon">
+            <i class="fas fa-life-ring"></i>
+          </div>
+          <h3>Ongoing Support</h3>
+          <p>We're not just consultants - we're advisors. We stay with you through implementation and beyond.</p>
         </div>
       </div>
     </section>
@@ -318,18 +395,19 @@ import Layout from '../layouts/Layout.astro';
     <!-- Next Steps CTA -->
     <section class="next-steps-section">
       <div class="next-steps-content">
-        <h2>Ready to Improve Your Security Posture?</h2>
-        <p>Our security experts are ready to help you implement these recommendations and achieve a best-in-class security posture.</p>
+        <h2>Ready to Secure Your M365 Environment?</h2>
+        <p>Let PowerReview Advisors guide you from uncertainty to confidence. We'll help you understand your issues, create your pathway, and achieve security excellence.</p>
         <div class="cta-buttons">
-          <button class="btn primary large" onclick="scheduleConsultation()">
+          <button class="btn primary large" onclick="scheduleAdvisorySession()">
             <i class="fas fa-calendar-check"></i>
-            Schedule Free Consultation
+            Schedule Your Advisory Session
           </button>
           <button class="btn secondary large" onclick="downloadFullReport()">
             <i class="fas fa-file-pdf"></i>
-            Download Complete Assessment
+            Download Full Assessment Report
           </button>
         </div>
+        <p class="cta-note">Our advisory sessions are collaborative workshops where we review your assessment together and start building your custom pathway to success.</p>
       </div>
     </section>
   </main>
@@ -343,40 +421,46 @@ import Layout from '../layouts/Layout.astro';
       min-height: 100vh;
     }
 
-    /* Professional Header */
-    .reports-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    /* Advisor Header */
+    .advisor-header {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      color: white;
+      border-radius: 16px;
+      padding: 3rem;
       margin-bottom: 3rem;
-      padding: 2rem;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     }
 
-    .header-content h1 {
-      font-size: 2rem;
-      color: #1e293b;
+    .brand h1 {
+      font-size: 2.5rem;
       margin: 0 0 0.5rem;
-      font-weight: 700;
+      font-weight: 800;
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: 1rem;
     }
 
     .subtitle {
-      color: #64748b;
       font-size: 1.1rem;
+      opacity: 0.8;
+      line-height: 1.6;
+      max-width: 800px;
     }
 
     .header-actions {
       display: flex;
       gap: 1rem;
+      margin-top: 2rem;
     }
 
     .btn {
-      padding: 0.75rem 1.5rem;
+      padding: 0.875rem 1.75rem;
       border-radius: 8px;
       border: none;
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
       display: flex;
@@ -386,506 +470,516 @@ import Layout from '../layouts/Layout.astro';
     }
 
     .btn.primary {
-      background: #2563eb;
-      color: white;
+      background: white;
+      color: #1e293b;
     }
 
     .btn.primary:hover {
-      background: #1d4ed8;
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
     }
 
     .btn.secondary {
-      background: white;
-      color: #2563eb;
-      border: 2px solid #2563eb;
+      background: transparent;
+      color: white;
+      border: 2px solid white;
     }
 
     .btn.secondary:hover {
-      background: #eff6ff;
+      background: rgba(255, 255, 255, 0.1);
     }
 
-    /* Security Score Section */
-    .security-score-section {
+    /* Environment Overview */
+    .environment-overview {
       background: white;
-      border-radius: 12px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    }
-
-    .score-container {
-      display: grid;
-      grid-template-columns: 250px 1fr;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .score-visual {
-      position: relative;
-    }
-
-    .score-center {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
-
-    .score-value {
-      font-size: 3rem;
-      font-weight: 700;
-      color: #2563eb;
-    }
-
-    .score-label {
-      font-size: 0.9rem;
-      color: #64748b;
-    }
-
-    .score-details h2 {
-      margin: 0 0 1rem;
-      color: #1e293b;
-    }
-
-    .score-details p {
-      color: #475569;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-
-    .score-breakdown {
-      display: flex;
-      gap: 2rem;
-    }
-
-    .breakdown-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .breakdown-item .label {
-      font-size: 0.875rem;
-      color: #64748b;
-    }
-
-    .breakdown-item .value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #1e293b;
-    }
-
-    /* Findings Section */
-    .findings-section {
+      border-radius: 16px;
+      padding: 2.5rem;
       margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
     }
 
-    .findings-section h2 {
-      font-size: 1.75rem;
+    .environment-overview h2 {
       color: #1e293b;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .section-intro {
+      color: #64748b;
+      font-size: 1.125rem;
+      line-height: 1.6;
       margin-bottom: 2rem;
     }
 
-    .findings-grid {
+    .stack-visualization {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 1.5rem;
     }
 
-    .finding-card {
-      background: white;
+    .stack-layer {
+      border: 2px solid #e5e7eb;
       border-radius: 12px;
       padding: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-      border-left: 4px solid;
+      transition: all 0.3s ease;
     }
 
-    .finding-card.critical {
-      border-left-color: #dc2626;
+    .stack-layer:hover {
+      border-color: #3b82f6;
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.1);
     }
 
-    .finding-card.high {
-      border-left-color: #f59e0b;
-    }
-
-    .finding-card.medium {
-      border-left-color: #3b82f6;
-    }
-
-    .finding-header {
+    .layer-header {
       display: flex;
       align-items: center;
       gap: 1rem;
       margin-bottom: 1rem;
     }
 
-    .finding-header i {
+    .layer-header i {
       font-size: 1.5rem;
-    }
-
-    .finding-card.critical .finding-header i {
-      color: #dc2626;
-    }
-
-    .finding-card.high .finding-header i {
-      color: #f59e0b;
-    }
-
-    .finding-card.medium .finding-header i {
       color: #3b82f6;
     }
 
-    .finding-header h3 {
+    .layer-header h3 {
+      flex: 1;
       margin: 0;
-      font-size: 1.1rem;
       color: #1e293b;
     }
 
-    .finding-content p {
-      margin: 0.75rem 0;
-      color: #475569;
-      line-height: 1.5;
-    }
-
-    .finding-content p strong {
-      color: #1e293b;
-    }
-
-    .finding-impact {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      padding-top: 1rem;
-      border-top: 1px solid #e5e7eb;
-    }
-
-    .impact-label {
-      font-size: 0.875rem;
-      color: #64748b;
-    }
-
-    .impact-value {
+    .layer-score {
+      font-size: 1.25rem;
       font-weight: 700;
       color: #dc2626;
     }
 
-    /* Roadmap Section */
-    .roadmap-section {
-      background: white;
-      border-radius: 12px;
-      padding: 2.5rem;
-      margin-bottom: 3rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    .layer-content p {
+      margin: 0.5rem 0;
+      color: #475569;
+      line-height: 1.5;
     }
 
-    .roadmap-section h2 {
-      font-size: 1.75rem;
+    .layer-content p strong {
       color: #1e293b;
+    }
+
+    /* Issues Explained */
+    .issues-explained {
+      margin-bottom: 3rem;
+    }
+
+    .issues-explained h2 {
+      color: #1e293b;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .issue-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 2rem;
+    }
+
+    .issue-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .issue-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
       margin-bottom: 1rem;
     }
 
-    .roadmap-intro {
-      color: #475569;
-      line-height: 1.6;
-      margin-bottom: 2rem;
+    .issue-icon.critical {
+      background: #fee2e2;
+      color: #dc2626;
     }
 
-    .roadmap-timeline {
+    .issue-icon.high {
+      background: #fef3c7;
+      color: #f59e0b;
+    }
+
+    .issue-card h3 {
+      color: #1e293b;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .explanation h4 {
+      color: #334155;
+      font-size: 1rem;
+      margin: 1rem 0 0.5rem;
+    }
+
+    .explanation p {
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    /* Success Pathway */
+    .success-pathway {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .success-pathway h2 {
+      color: #1e293b;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .pathway-phases {
       display: grid;
       gap: 2rem;
-      margin-bottom: 3rem;
+      margin-top: 2rem;
     }
 
-    .phase {
-      padding: 1.5rem;
-      border-radius: 8px;
-      background: #f8fafc;
+    .pathway-phase {
+      border-left: 4px solid;
+      padding-left: 2rem;
+    }
+
+    .pathway-phase.immediate {
+      border-color: #dc2626;
+    }
+
+    .pathway-phase.short-term {
+      border-color: #f59e0b;
+    }
+
+    .pathway-phase.long-term {
+      border-color: #10b981;
     }
 
     .phase-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .phase-number {
-      background: #2563eb;
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      font-weight: 700;
-    }
-
-    .phase-timeframe {
-      color: #64748b;
-      font-size: 0.875rem;
-    }
-
-    .phase-cost {
-      font-weight: 700;
-      color: #1e293b;
-    }
-
-    .phase h3 {
-      margin: 0 0 1rem;
-      color: #1e293b;
-      font-size: 1.25rem;
-    }
-
-    .phase ul {
-      margin: 0 0 1rem;
-      padding-left: 1.5rem;
-      color: #475569;
-    }
-
-    .phase-outcome {
-      padding: 1rem;
-      background: white;
-      border-radius: 6px;
-      border-left: 3px solid #10b981;
-    }
-
-    /* ROI Section */
-    .roadmap-roi {
-      padding: 2rem;
-      background: #eff6ff;
-      border-radius: 8px;
-    }
-
-    .roadmap-roi h3 {
-      margin: 0 0 1.5rem;
-      color: #1e293b;
-    }
-
-    .roi-metrics {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
-    }
-
-    .roi-item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .roi-label {
-      font-size: 0.875rem;
-      color: #64748b;
-    }
-
-    .roi-value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #1e293b;
-    }
-
-    .roi-item.highlight .roi-value {
-      color: #10b981;
-    }
-
-    /* Reports Grid */
-    .reports-section {
-      margin-bottom: 3rem;
-    }
-
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-
-    .section-header h2 {
-      font-size: 1.75rem;
-      color: #1e293b;
-    }
-
-    .report-filters select {
-      padding: 0.5rem 1rem;
-      border: 2px solid #e5e7eb;
-      border-radius: 6px;
-      background: white;
-      font-size: 0.875rem;
-    }
-
-    .reports-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .report-card {
-      background: white;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-      transition: all 0.2s ease;
-    }
-
-    .report-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    }
-
-    .report-header {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .report-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      color: white;
-    }
-
-    .report-icon.identity {
-      background: linear-gradient(135deg, #6366f1, #4f46e5);
-    }
-
-    .report-icon.data {
-      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
-    }
-
-    .report-icon.email {
-      background: linear-gradient(135deg, #06b6d4, #0891b2);
-    }
-
-    .report-meta {
-      flex: 1;
-    }
-
-    .report-meta h3 {
-      margin: 0 0 0.25rem;
-      font-size: 1.1rem;
-      color: #1e293b;
-    }
-
-    .report-date {
-      font-size: 0.875rem;
-      color: #64748b;
-    }
-
-    .report-score {
-      text-align: center;
-    }
-
-    .report-score .score {
-      display: block;
-      font-size: 2rem;
-      font-weight: 700;
-    }
-
-    .report-score.critical .score {
-      color: #dc2626;
-    }
-
-    .report-score.warning .score {
-      color: #f59e0b;
-    }
-
-    .report-score .label {
-      font-size: 0.75rem;
-      color: #64748b;
-    }
-
-    .report-summary {
       margin-bottom: 1.5rem;
     }
 
-    .report-summary p {
-      color: #475569;
-      line-height: 1.5;
-      margin-bottom: 1rem;
+    .phase-icon {
+      font-size: 2.5rem;
     }
 
-    .key-findings {
+    .phase-title h3 {
       margin: 0;
-      padding-left: 1.5rem;
+      color: #1e293b;
+      font-size: 1.5rem;
+    }
+
+    .timeframe {
       color: #64748b;
       font-size: 0.875rem;
     }
 
-    .report-actions {
-      display: flex;
+    .phase-content h4 {
+      color: #334155;
+      margin-bottom: 0.5rem;
+    }
+
+    .phase-content p {
+      color: #64748b;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .action-items {
+      display: grid;
       gap: 1rem;
     }
 
-    .btn-view,
-    .btn-download {
-      flex: 1;
-      padding: 0.625rem 1rem;
-      border-radius: 6px;
-      border: none;
-      font-size: 0.875rem;
+    .action-item {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .action-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
       font-weight: 600;
-      cursor: pointer;
+      color: #1e293b;
+    }
+
+    .action-details p {
+      margin: 0.25rem 0;
+      color: #64748b;
+      font-size: 0.875rem;
+    }
+
+    .initiatives,
+    .advanced-items {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .initiative,
+    .advanced-item {
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    .initiative h5,
+    .advanced-item h5 {
+      color: #1e293b;
+      margin: 0 0 1rem;
+    }
+
+    .initiative ul {
+      margin: 0 0 1rem;
+      padding-left: 1.5rem;
+      color: #64748b;
+    }
+
+    .initiative-outcome {
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+      color: #059669;
+      font-weight: 600;
+    }
+
+    /* Approach Explanation */
+    .approach-explanation {
+      margin-bottom: 3rem;
+    }
+
+    .approach-explanation h2 {
+      color: #1e293b;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .approach-item {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .approach-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1rem;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      transition: all 0.2s ease;
-    }
-
-    .btn-view {
-      background: #2563eb;
       color: white;
+      font-size: 2rem;
     }
 
-    .btn-view:hover {
-      background: #1d4ed8;
+    .approach-item h3 {
+      color: #1e293b;
+      margin-bottom: 0.5rem;
     }
 
-    .btn-download {
+    .approach-item p {
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    /* Investment Section */
+    .investment-section {
       background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .investment-section h2 {
+      color: #1e293b;
+      margin-bottom: 1rem;
+      font-size: 2rem;
+    }
+
+    .investment-breakdown {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .investment-phase {
+      text-align: center;
+      padding: 1.5rem;
+      background: #f8fafc;
+      border-radius: 12px;
+    }
+
+    .investment-phase h3 {
+      color: #1e293b;
+      margin-bottom: 1rem;
+    }
+
+    .investment-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .cost {
+      font-size: 1.5rem;
+      font-weight: 700;
       color: #2563eb;
-      border: 2px solid #2563eb;
     }
 
-    .btn-download:hover {
+    .timeline {
+      color: #64748b;
+    }
+
+    .impact {
+      color: #10b981;
+      font-weight: 600;
+    }
+
+    .roi-explanation {
+      margin-top: 3rem;
+      padding: 2rem;
       background: #eff6ff;
+      border-radius: 12px;
     }
 
-    /* Next Steps Section */
+    .roi-explanation h3 {
+      color: #1e293b;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .roi-points {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .roi-point {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .roi-point i {
+      font-size: 1.5rem;
+      color: #2563eb;
+      flex-shrink: 0;
+    }
+
+    .roi-point p {
+      margin: 0;
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    /* Advisor Value */
+    .advisor-value {
+      margin-bottom: 3rem;
+    }
+
+    .advisor-value h2 {
+      color: #1e293b;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .value-props {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .value-prop {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      transition: all 0.3s ease;
+    }
+
+    .value-prop:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .value-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1rem;
+      background: linear-gradient(135deg, #10b981, #059669);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .value-prop h3 {
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .value-prop p {
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    /* Next Steps */
     .next-steps-section {
       background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: white;
-      border-radius: 12px;
+      border-radius: 16px;
       padding: 3rem;
       text-align: center;
     }
 
     .next-steps-content h2 {
-      font-size: 2rem;
-      margin: 0 0 1rem;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
     }
 
     .next-steps-content p {
-      font-size: 1.125rem;
+      font-size: 1.25rem;
       margin-bottom: 2rem;
       opacity: 0.9;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .cta-buttons {
       display: flex;
       gap: 1rem;
       justify-content: center;
+      margin-bottom: 2rem;
     }
 
     .btn.large {
-      padding: 1rem 2rem;
-      font-size: 1rem;
+      padding: 1.25rem 2.5rem;
+      font-size: 1.125rem;
     }
 
     .next-steps-section .btn.secondary {
@@ -894,26 +988,26 @@ import Layout from '../layouts/Layout.astro';
       border: none;
     }
 
-    @media (max-width: 768px) {
-      .reports-header {
-        flex-direction: column;
-        gap: 1rem;
-      }
+    .cta-note {
+      font-size: 1rem;
+      opacity: 0.8;
+      font-style: italic;
+    }
 
-      .score-container {
-        grid-template-columns: 1fr;
+    @media (max-width: 768px) {
+      .advisor-header {
         text-align: center;
       }
 
-      .findings-grid {
+      .header-actions {
+        flex-direction: column;
+      }
+
+      .issue-cards {
         grid-template-columns: 1fr;
       }
 
-      .roi-metrics {
-        grid-template-columns: 1fr;
-      }
-
-      .reports-grid {
+      .investment-breakdown {
         grid-template-columns: 1fr;
       }
 
@@ -924,74 +1018,21 @@ import Layout from '../layouts/Layout.astro';
   </style>
 
   <script>
-    // Initialize security score chart
+    // Initialize charts when page loads
     document.addEventListener('DOMContentLoaded', () => {
-      const ctx = document.getElementById('securityScoreChart').getContext('2d');
-      new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          datasets: [{
-            data: [72, 28],
-            backgroundColor: ['#2563eb', '#e5e7eb'],
-            borderWidth: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          cutout: '75%',
-          plugins: {
-            legend: { display: false },
-            tooltip: { enabled: false }
-          }
-        }
-      });
+      // Add any interactive elements here
     });
 
-    function viewReport(reportId) {
-      // Navigate to report viewer with report data
-      const params = new URLSearchParams({
-        id: reportId,
-        type: 'security',
-        professional: 'true'
-      });
-      
-      localStorage.setItem('currentReport', JSON.stringify({
-        id: reportId,
-        type: 'security',
-        status: 'completed'
-      }));
-      
-      window.location.href = `/report-viewer?${params.toString()}`;
-    }
-
-    function downloadReport(reportId) {
-      alert(`Downloading ${reportId} report as PDF...`);
-    }
-
     function downloadExecutiveSummary() {
-      alert('Downloading executive summary...');
+      alert('Preparing executive summary for download...');
     }
 
-    function scheduleConsultation() {
-      alert('Opening calendar to schedule consultation...');
+    function scheduleAdvisorySession() {
+      alert('Opening calendar to schedule your advisory session with PowerReview Advisors...');
     }
 
     function downloadFullReport() {
-      alert('Preparing complete assessment report for download...');
-    }
-
-    function filterReports() {
-      const filter = document.getElementById('categoryFilter').value;
-      const cards = document.querySelectorAll('.report-card');
-      
-      cards.forEach(card => {
-        if (filter === 'all' || card.dataset.category === filter) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+      alert('Preparing your complete M365 assessment report...');
     }
   </script>
 </Layout>
