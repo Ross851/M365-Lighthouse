@@ -1,0 +1,1253 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Executive Summary - PowerReview Advisors">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <main>
+    <!-- Executive Header -->
+    <div class="executive-header">
+      <div class="header-content">
+        <div class="brand">
+          <h1>PowerReview Advisors</h1>
+          <p class="tagline">Executive Security Assessment Summary</p>
+        </div>
+        <div class="assessment-meta">
+          <p><strong>Assessment Date:</strong> January 12, 2025</p>
+          <p><strong>Organization:</strong> Contoso Corporation</p>
+          <p><strong>Environment:</strong> Microsoft 365 Enterprise</p>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button class="btn primary" onclick="downloadPDF()">
+          <i class="fas fa-file-pdf"></i>
+          Download PDF
+        </button>
+        <button class="btn secondary" onclick="scheduleReview()">
+          <i class="fas fa-calendar"></i>
+          Schedule Review
+        </button>
+      </div>
+    </div>
+
+    <!-- Executive Overview -->
+    <section class="executive-overview">
+      <h2><i class="fas fa-chart-pie"></i> Security Posture Overview</h2>
+      <div class="overview-grid">
+        <div class="overview-card critical">
+          <div class="card-header">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Critical Issues</h3>
+          </div>
+          <div class="card-content">
+            <div class="metric">4</div>
+            <p>Require immediate attention</p>
+            <button class="btn-details" onclick="toggleDetails('critical-details')">View Details</button>
+          </div>
+        </div>
+        
+        <div class="overview-card warning">
+          <div class="card-header">
+            <i class="fas fa-exclamation-circle"></i>
+            <h3>High Priority</h3>
+          </div>
+          <div class="card-content">
+            <div class="metric">7</div>
+            <p>Should be addressed soon</p>
+            <button class="btn-details" onclick="toggleDetails('high-details')">View Details</button>
+          </div>
+        </div>
+        
+        <div class="overview-card moderate">
+          <div class="card-header">
+            <i class="fas fa-info-circle"></i>
+            <h3>Medium Priority</h3>
+          </div>
+          <div class="card-content">
+            <div class="metric">12</div>
+            <p>Plan for future remediation</p>
+            <button class="btn-details" onclick="toggleDetails('medium-details')">View Details</button>
+          </div>
+        </div>
+        
+        <div class="overview-card good">
+          <div class="card-header">
+            <i class="fas fa-check-circle"></i>
+            <h3>Compliant</h3>
+          </div>
+          <div class="card-content">
+            <div class="metric">28</div>
+            <p>Meet security standards</p>
+            <button class="btn-details" onclick="toggleDetails('compliant-details')">View Details</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Critical Issues Details -->
+    <section class="details-section" id="critical-details" style="display: none;">
+      <h2><i class="fas fa-exclamation-triangle"></i> Critical Issues Requiring Immediate Action</h2>
+      
+      <div class="issue-accordion">
+        <div class="issue-item">
+          <div class="issue-header" onclick="toggleIssue('mfa-issue')">
+            <div class="issue-info">
+              <i class="fas fa-user-lock"></i>
+              <h3>847 Users Without Multi-Factor Authentication</h3>
+              <span class="severity critical">Critical</span>
+            </div>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="issue-content" id="mfa-issue">
+            <div class="issue-details">
+              <div class="justification">
+                <h4>Why This Matters</h4>
+                <p>Multi-Factor Authentication (MFA) is the single most effective control against account compromise. According to Microsoft, <strong>99.9% of account compromise attacks are stopped by MFA</strong>.</p>
+              </div>
+              
+              <div class="evidence">
+                <h4>Evidence & Analysis</h4>
+                <div class="evidence-grid">
+                  <div class="evidence-item">
+                    <h5>User Account Analysis</h5>
+                    <pre><code>Get-MsolUser -All | Where &#123;$_.StrongAuthenticationMethods.Count -eq 0&#125;
+Result: 847 of 1,200 users (70.6%) without MFA</code></pre>
+                    <a href="/evidence/mfa-analysis.csv" class="evidence-link">
+                      <i class="fas fa-download"></i> Download Full Analysis
+                    </a>
+                  </div>
+                  
+                  <div class="evidence-item">
+                    <h5>Administrator Accounts</h5>
+                    <pre><code>Get-MsolRole -RoleName "*admin*" | Get-MsolRoleMember
+Result: 15 admin accounts without MFA</code></pre>
+                    <a href="/evidence/admin-mfa-status.csv" class="evidence-link">
+                      <i class="fas fa-download"></i> Download Admin Report
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="business-impact">
+                <h4>Business Impact & Risk</h4>
+                <ul>
+                  <li><strong>Financial Risk:</strong> Average breach cost of $4.45M (IBM 2023 Report)</li>
+                  <li><strong>Compliance Risk:</strong> Violates ISO 27001, SOC 2, and industry standards</li>
+                  <li><strong>Operational Risk:</strong> Complete environment compromise possible</li>
+                  <li><strong>Reputational Risk:</strong> Customer trust and business relationships</li>
+                </ul>
+              </div>
+              
+              <div class="remediation">
+                <h4>Recommended Actions</h4>
+                <div class="action-plan">
+                  <div class="action-phase">
+                    <h5>Phase 1: Immediate (Week 1)</h5>
+                    <ul>
+                      <li>Enable MFA for all Global Administrators</li>
+                      <li>Enable MFA for all Privileged Role Administrators</li>
+                      <li>Configure emergency access accounts with alternate MFA</li>
+                    </ul>
+                    <button class="btn-script" onclick="viewScript('enable-admin-mfa')">
+                      <i class="fas fa-code"></i> View PowerShell Script
+                    </button>
+                  </div>
+                  
+                  <div class="action-phase">
+                    <h5>Phase 2: Short-term (Weeks 2-4)</h5>
+                    <ul>
+                      <li>Pilot MFA rollout to IT department</li>
+                      <li>Deploy MFA to department heads and managers</li>
+                      <li>Create user training materials</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="action-phase">
+                    <h5>Phase 3: Organization-wide (Months 2-3)</h5>
+                    <ul>
+                      <li>Department-by-department MFA rollout</li>
+                      <li>Conditional Access policy enforcement</li>
+                      <li>User support and help desk training</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="links-resources">
+                <h4>Resources & References</h4>
+                <div class="resource-links">
+                  <a href="https://docs.microsoft.com/azure/active-directory/authentication/howto-mfa-getstarted" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> Microsoft MFA Deployment Guide
+                  </a>
+                  <a href="https://www.microsoft.com/security/blog/2019/08/20/one-simple-action-you-can-take-to-prevent-99-9-percent-of-account-attacks/" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> Microsoft Security Blog: MFA Effectiveness
+                  </a>
+                  <a href="/resources/mfa-implementation-checklist.pdf">
+                    <i class="fas fa-file-pdf"></i> MFA Implementation Checklist
+                  </a>
+                  <a href="/resources/user-training-materials.zip">
+                    <i class="fas fa-download"></i> User Training Materials
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="issue-item">
+          <div class="issue-header" onclick="toggleIssue('legacy-auth-issue')">
+            <div class="issue-info">
+              <i class="fas fa-shield-alt"></i>
+              <h3>Legacy Authentication Protocols Enabled</h3>
+              <span class="severity critical">Critical</span>
+            </div>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="issue-content" id="legacy-auth-issue">
+            <div class="issue-details">
+              <div class="justification">
+                <h4>Why This Matters</h4>
+                <p>Legacy authentication protocols bypass modern security features including MFA, Conditional Access, and risk-based authentication. <strong>Legacy auth is responsible for 67% of credential stuffing attacks</strong>.</p>
+              </div>
+              
+              <div class="evidence">
+                <h4>Evidence & Analysis</h4>
+                <div class="evidence-grid">
+                  <div class="evidence-item">
+                    <h5>Legacy Protocol Detection</h5>
+                    <pre><code>Get-CASMailbox -ResultSize Unlimited | Where &#123;$_.SmtpClientAuthenticationDisabled -eq $false&#125;
+Result: 2,345 mailboxes with SMTP auth enabled</code></pre>
+                    <a href="/evidence/legacy-auth-usage.csv" class="evidence-link">
+                      <i class="fas fa-download"></i> Download Usage Report
+                    </a>
+                  </div>
+                  
+                  <div class="evidence-item">
+                    <h5>Sign-in Log Analysis</h5>
+                    <pre><code>Azure AD Sign-in Logs Analysis:
+- 156 legacy auth attempts in last 7 days
+- 89% from mobile devices using basic auth
+- 12 unique IP addresses involved</code></pre>
+                    <a href="/evidence/signin-logs-legacy.json" class="evidence-link">
+                      <i class="fas fa-download"></i> Download Log Analysis
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="business-impact">
+                <h4>Business Impact & Risk</h4>
+                <ul>
+                  <li><strong>Security Risk:</strong> Bypasses all modern authentication controls</li>
+                  <li><strong>Compliance Risk:</strong> Fails PCI-DSS, HIPAA security requirements</li>
+                  <li><strong>Audit Risk:</strong> Cannot meet SOC 2 Type II authentication controls</li>
+                  <li><strong>Breach Risk:</strong> Primary vector for credential stuffing attacks</li>
+                </ul>
+              </div>
+              
+              <div class="remediation">
+                <h4>Recommended Actions</h4>
+                <div class="action-plan">
+                  <div class="action-phase">
+                    <h5>Phase 1: Assessment (Week 1)</h5>
+                    <ul>
+                      <li>Audit all applications using legacy authentication</li>
+                      <li>Identify users and devices requiring legacy protocols</li>
+                      <li>Create migration plan for legacy applications</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="action-phase">
+                    <h5>Phase 2: Conditional Access (Week 2)</h5>
+                    <ul>
+                      <li>Create Conditional Access policy to block legacy auth</li>
+                      <li>Configure in report-only mode initially</li>
+                      <li>Monitor for impacted users and applications</li>
+                    </ul>
+                    <button class="btn-script" onclick="viewScript('block-legacy-auth')">
+                      <i class="fas fa-code"></i> View PowerShell Script
+                    </button>
+                  </div>
+                  
+                  <div class="action-phase">
+                    <h5>Phase 3: Enforcement (Weeks 3-4)</h5>
+                    <ul>
+                      <li>Migrate remaining legacy applications</li>
+                      <li>Enable enforcement of Conditional Access policy</li>
+                      <li>Monitor and address any remaining issues</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="links-resources">
+                <h4>Resources & References</h4>
+                <div class="resource-links">
+                  <a href="https://docs.microsoft.com/azure/active-directory/conditional-access/block-legacy-authentication" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> Microsoft: Block Legacy Authentication
+                  </a>
+                  <a href="https://docs.microsoft.com/exchange/clients-and-mobile-in-exchange-online/disable-basic-authentication-in-exchange-online" target="_blank">
+                    <i class="fas fa-external-link-alt"></i> Disable Basic Auth in Exchange
+                  </a>
+                  <a href="/resources/legacy-auth-migration-guide.pdf">
+                    <i class="fas fa-file-pdf"></i> Legacy Auth Migration Guide
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Implementation Roadmap -->
+    <section class="roadmap-section">
+      <h2><i class="fas fa-road"></i> Executive Implementation Roadmap</h2>
+      <div class="roadmap-timeline">
+        <div class="timeline-item immediate">
+          <div class="timeline-marker">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <div class="timeline-content">
+            <h3>Immediate Actions (Week 1-2)</h3>
+            <p><strong>Priority:</strong> Critical security gaps</p>
+            <ul>
+              <li>Enable MFA for all administrators</li>
+              <li>Block legacy authentication in report-only mode</li>
+              <li>Implement emergency access procedures</li>
+              <li>Begin DLP policy planning</li>
+            </ul>
+            <div class="timeline-metrics">
+              <span class="metric">Risk Reduction: 60%</span>
+              <span class="metric">Effort: 2-3 days</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="timeline-item short-term">
+          <div class="timeline-marker">
+            <i class="fas fa-cogs"></i>
+          </div>
+          <div class="timeline-content">
+            <h3>Foundation Building (Month 1-3)</h3>
+            <p><strong>Priority:</strong> Core security controls</p>
+            <ul>
+              <li>Organization-wide MFA rollout</li>
+              <li>Deploy Data Loss Prevention</li>
+              <li>Implement Conditional Access policies</li>
+              <li>Enable audit logging and monitoring</li>
+            </ul>
+            <div class="timeline-metrics">
+              <span class="metric">Risk Reduction: 85%</span>
+              <span class="metric">Effort: 4-6 weeks</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="timeline-item long-term">
+          <div class="timeline-marker">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="timeline-content">
+            <h3>Advanced Security (Month 4-6)</h3>
+            <p><strong>Priority:</strong> Enhanced protection</p>
+            <ul>
+              <li>Zero Trust architecture implementation</li>
+              <li>Microsoft Sentinel deployment</li>
+              <li>Automated incident response</li>
+              <li>Advanced threat protection</li>
+            </ul>
+            <div class="timeline-metrics">
+              <span class="metric">Risk Reduction: 95%</span>
+              <span class="metric">Effort: 8-12 weeks</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Business Justification -->
+    <section class="business-justification">
+      <h2><i class="fas fa-chart-line"></i> Business Justification & ROI</h2>
+      <div class="roi-grid">
+        <div class="roi-card">
+          <h3>Cost of Inaction</h3>
+          <div class="cost-breakdown">
+            <div class="cost-item">
+              <span class="cost-label">Average Breach Cost:</span>
+              <span class="cost-value">$4.45M</span>
+            </div>
+            <div class="cost-item">
+              <span class="cost-label">Regulatory Fines:</span>
+              <span class="cost-value">$2.8M - $28M</span>
+            </div>
+            <div class="cost-item">
+              <span class="cost-label">Business Disruption:</span>
+              <span class="cost-value">$1.2M annually</span>
+            </div>
+            <div class="cost-item total">
+              <span class="cost-label">Total Annual Risk:</span>
+              <span class="cost-value">$8.45M</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="roi-card">
+          <h3>Investment Required</h3>
+          <div class="investment-breakdown">
+            <div class="investment-item">
+              <span class="investment-label">PowerReview Advisory:</span>
+              <span class="investment-value">$25,000</span>
+            </div>
+            <div class="investment-item">
+              <span class="investment-label">Implementation (3 months):</span>
+              <span class="investment-value">$45,000</span>
+            </div>
+            <div class="investment-item">
+              <span class="investment-label">Microsoft Licensing:</span>
+              <span class="investment-value">$35,000</span>
+            </div>
+            <div class="investment-item total">
+              <span class="investment-label">Total Investment:</span>
+              <span class="investment-value">$105,000</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="roi-card highlight">
+          <h3>Return on Investment</h3>
+          <div class="roi-calculation">
+            <div class="roi-item">
+              <span class="roi-label">Risk Reduction:</span>
+              <span class="roi-value">95%</span>
+            </div>
+            <div class="roi-item">
+              <span class="roi-label">Annual Risk Avoided:</span>
+              <span class="roi-value">$8.0M</span>
+            </div>
+            <div class="roi-item">
+              <span class="roi-label">Net Benefit Year 1:</span>
+              <span class="roi-value">$7.9M</span>
+            </div>
+            <div class="roi-item total">
+              <span class="roi-label">ROI:</span>
+              <span class="roi-value">7,524%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next Steps -->
+    <section class="next-steps">
+      <h2><i class="fas fa-rocket"></i> Recommended Next Steps</h2>
+      <div class="next-steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Schedule Advisory Workshop</h3>
+          <p>Review findings with PowerReview Advisors team and stakeholders</p>
+          <button class="btn primary" onclick="scheduleReview()">
+            <i class="fas fa-calendar"></i> Schedule Now
+          </button>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Approve Implementation Plan</h3>
+          <p>Finalize timeline, resources, and budget for security improvements</p>
+          <button class="btn secondary" onclick="viewDetailedPlan()">
+            <i class="fas fa-file-alt"></i> View Plan
+          </button>
+        </div>
+        
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Begin Critical Remediation</h3>
+          <p>Start with immediate actions while planning broader implementation</p>
+          <button class="btn secondary" onclick="viewScripts()">
+            <i class="fas fa-code"></i> View Scripts
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    main {
+      padding: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #f8fafc;
+      min-height: 100vh;
+    }
+
+    /* Executive Header */
+    .executive-header {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      color: white;
+      border-radius: 16px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand h1 {
+      font-size: 2.5rem;
+      margin: 0 0 0.5rem;
+      font-weight: 800;
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+
+    .assessment-meta {
+      margin-top: 1rem;
+    }
+
+    .assessment-meta p {
+      margin: 0.25rem 0;
+      opacity: 0.8;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.875rem 1.75rem;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn.primary {
+      background: white;
+      color: #1e293b;
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn.secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Executive Overview */
+    .executive-overview {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .executive-overview h2 {
+      color: #1e293b;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .overview-card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      border: 2px solid;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .overview-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .overview-card.critical {
+      border-color: #dc2626;
+    }
+
+    .overview-card.warning {
+      border-color: #f59e0b;
+    }
+
+    .overview-card.moderate {
+      border-color: #3b82f6;
+    }
+
+    .overview-card.good {
+      border-color: #10b981;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-header i {
+      font-size: 1.5rem;
+    }
+
+    .overview-card.critical .card-header i {
+      color: #dc2626;
+    }
+
+    .overview-card.warning .card-header i {
+      color: #f59e0b;
+    }
+
+    .overview-card.moderate .card-header i {
+      color: #3b82f6;
+    }
+
+    .overview-card.good .card-header i {
+      color: #10b981;
+    }
+
+    .card-header h3 {
+      margin: 0;
+      color: #1e293b;
+      font-size: 1.125rem;
+    }
+
+    .metric {
+      font-size: 3rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+    }
+
+    .overview-card.critical .metric {
+      color: #dc2626;
+    }
+
+    .overview-card.warning .metric {
+      color: #f59e0b;
+    }
+
+    .overview-card.moderate .metric {
+      color: #3b82f6;
+    }
+
+    .overview-card.good .metric {
+      color: #10b981;
+    }
+
+    .card-content p {
+      color: #64748b;
+      margin-bottom: 1rem;
+    }
+
+    .btn-details {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      color: #475569;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-details:hover {
+      background: #e5e7eb;
+      color: #1e293b;
+    }
+
+    /* Details Section */
+    .details-section {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .details-section h2 {
+      color: #1e293b;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    /* Issue Accordion */
+    .issue-accordion {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .issue-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .issue-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .issue-header:hover {
+      background: #f1f5f9;
+    }
+
+    .issue-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .issue-info i {
+      font-size: 1.5rem;
+      color: #dc2626;
+    }
+
+    .issue-info h3 {
+      margin: 0;
+      color: #1e293b;
+      font-size: 1.25rem;
+    }
+
+    .severity {
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .severity.critical {
+      background: #fef2f2;
+      color: #dc2626;
+    }
+
+    .issue-content {
+      display: none;
+      padding: 2rem;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .issue-content.active {
+      display: block;
+    }
+
+    .issue-details {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .justification,
+    .evidence,
+    .business-impact,
+    .remediation,
+    .links-resources {
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    .justification {
+      background: #fefce8;
+      border-left: 4px solid #eab308;
+    }
+
+    .evidence {
+      background: #f0f9ff;
+      border-left: 4px solid #3b82f6;
+    }
+
+    .business-impact {
+      background: #fef2f2;
+      border-left: 4px solid #dc2626;
+    }
+
+    .remediation {
+      background: #f0fdf4;
+      border-left: 4px solid #10b981;
+    }
+
+    .links-resources {
+      background: #faf5ff;
+      border-left: 4px solid #8b5cf6;
+    }
+
+    .justification h4,
+    .evidence h4,
+    .business-impact h4,
+    .remediation h4,
+    .links-resources h4 {
+      margin: 0 0 1rem;
+      color: #1e293b;
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .evidence-item {
+      background: white;
+      padding: 1rem;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .evidence-item h5 {
+      margin: 0 0 0.5rem;
+      color: #1e293b;
+      font-size: 0.9rem;
+    }
+
+    .evidence-item pre {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 0.75rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      margin: 0.5rem 0;
+      overflow-x: auto;
+    }
+
+    .evidence-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #3b82f6;
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+
+    .evidence-link:hover {
+      color: #1d4ed8;
+    }
+
+    .business-impact ul,
+    .remediation ul {
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .business-impact li,
+    .remediation li {
+      margin: 0.5rem 0;
+      color: #475569;
+    }
+
+    .action-plan {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .action-phase {
+      background: white;
+      padding: 1rem;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .action-phase h5 {
+      margin: 0 0 0.5rem;
+      color: #1e293b;
+    }
+
+    .btn-script {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-script:hover {
+      background: #2563eb;
+    }
+
+    .resource-links {
+      display: grid;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .resource-links a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #8b5cf6;
+      text-decoration: none;
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    .resource-links a:hover {
+      background: rgba(139, 92, 246, 0.1);
+      color: #7c3aed;
+    }
+
+    /* Roadmap Timeline */
+    .roadmap-section {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .roadmap-section h2 {
+      color: #1e293b;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .roadmap-timeline {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .timeline-marker {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .timeline-item.immediate .timeline-marker {
+      background: #dc2626;
+    }
+
+    .timeline-item.short-term .timeline-marker {
+      background: #f59e0b;
+    }
+
+    .timeline-item.long-term .timeline-marker {
+      background: #10b981;
+    }
+
+    .timeline-content {
+      flex: 1;
+    }
+
+    .timeline-content h3 {
+      margin: 0 0 0.5rem;
+      color: #1e293b;
+    }
+
+    .timeline-content p {
+      color: #64748b;
+      margin-bottom: 1rem;
+    }
+
+    .timeline-content ul {
+      margin: 0 0 1rem;
+      padding-left: 1.5rem;
+      color: #475569;
+    }
+
+    .timeline-metrics {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .timeline-metrics .metric {
+      background: #f8fafc;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    /* Business Justification */
+    .business-justification {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .business-justification h2 {
+      color: #1e293b;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .roi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .roi-card {
+      background: #f8fafc;
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .roi-card.highlight {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+    }
+
+    .roi-card h3 {
+      margin: 0 0 1.5rem;
+      color: #1e293b;
+    }
+
+    .roi-card.highlight h3 {
+      color: white;
+    }
+
+    .cost-breakdown,
+    .investment-breakdown,
+    .roi-calculation {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .cost-item,
+    .investment-item,
+    .roi-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem;
+      background: white;
+      border-radius: 6px;
+    }
+
+    .roi-card.highlight .roi-item {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .cost-item.total,
+    .investment-item.total,
+    .roi-item.total {
+      border: 2px solid #3b82f6;
+      font-weight: 700;
+    }
+
+    .roi-card.highlight .roi-item.total {
+      border-color: white;
+    }
+
+    .cost-label,
+    .investment-label,
+    .roi-label {
+      color: #64748b;
+    }
+
+    .roi-card.highlight .roi-label {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .cost-value,
+    .investment-value,
+    .roi-value {
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .roi-card.highlight .roi-value {
+      color: white;
+    }
+
+    /* Next Steps */
+    .next-steps {
+      background: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .next-steps h2 {
+      color: #1e293b;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+    }
+
+    .next-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .step-card {
+      background: #f8fafc;
+      padding: 2rem;
+      border-radius: 12px;
+      text-align: center;
+      border: 1px solid #e5e7eb;
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      background: #3b82f6;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto 1rem;
+    }
+
+    .step-card h3 {
+      margin: 0 0 1rem;
+      color: #1e293b;
+    }
+
+    .step-card p {
+      color: #64748b;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .executive-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+      }
+
+      .header-actions {
+        flex-direction: column;
+      }
+
+      .overview-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .evidence-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .roi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .next-steps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script>
+    function toggleDetails(detailsId) {
+      // Hide all detail sections
+      const allDetails = document.querySelectorAll('.details-section');
+      allDetails.forEach(section => {
+        if (section.id !== detailsId) {
+          section.style.display = 'none';
+        }
+      });
+      
+      // Toggle the requested section
+      const section = document.getElementById(detailsId);
+      section.style.display = section.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function toggleIssue(issueId) {
+      const content = document.getElementById(issueId);
+      const header = content.previousElementSibling;
+      const chevron = header.querySelector('.fa-chevron-down');
+      
+      content.classList.toggle('active');
+      
+      if (content.classList.contains('active')) {
+        chevron.style.transform = 'rotate(180deg)';
+        content.style.display = 'block';
+      } else {
+        chevron.style.transform = 'rotate(0deg)';
+        content.style.display = 'none';
+      }
+    }
+
+    function viewScript(scriptId) {
+      // Navigate to script viewer
+      window.open(`/api/remediation-script?id=${scriptId}`, '_blank');
+    }
+
+    function downloadPDF() {
+      alert('Generating comprehensive PDF report...');
+    }
+
+    function scheduleReview() {
+      const subject = 'PowerReview Advisors - Executive Review Meeting';
+      const body = 'I would like to schedule an executive review meeting to discuss the security assessment findings and implementation roadmap.';
+      const mailto = `mailto:advisory@powerreview.io?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(mailto, '_blank');
+    }
+
+    function viewDetailedPlan() {
+      window.location.href = '/report-viewer';
+    }
+
+    function viewScripts() {
+      window.location.href = '/power-platform-tools';
+    }
+  </script>
+</Layout>
