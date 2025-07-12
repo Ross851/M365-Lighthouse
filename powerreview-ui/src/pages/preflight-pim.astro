@@ -43,14 +43,14 @@ import Layout from '../layouts/Layout.astro';
 
 						<h3>Quick Links (will update with your tenant):</h3>
 						<div class="quick-links">
-							<a id="pim-link" href="https://portal.azure.com/#blade/Microsoft_Azure_PIMCommon/ActivationMenuBlade/aadmigratedroles" target="_blank" class="pim-button">
+							<a id="pim-link" href="https://portal.azure.com/#view/Microsoft_Azure_PIMCommon/ActivationMenuBlade/~/aadmigratedroles" target="_blank" class="pim-button">
 								<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 									<path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
 									<path d="M13.73 21a2 2 0 01-3.46 0"/>
 								</svg>
 								Activate PIM Roles Now
 							</a>
-							<a id="pim-status" href="https://portal.azure.com/#blade/Microsoft_Azure_PIMCommon/ResourceMenuBlade/MyActions" target="_blank" class="status-button">
+							<a id="pim-status" href="https://portal.azure.com/#view/Microsoft_Azure_PIMCommon/ResourceMenuBlade/~/MyActions/resourceType/aadRoles" target="_blank" class="status-button">
 								Check PIM Status
 							</a>
 						</div>
@@ -103,7 +103,7 @@ import Layout from '../layouts/Layout.astro';
 							<div class="method">
 								<h4>Azure Portal Check</h4>
 								<ol>
-									<li>Go to <a id="azure-users" href="https://portal.azure.com/#blade/Microsoft_AAD_IAM/UsersManagementMenuBlade/AllUsers" target="_blank">Azure AD → Users</a></li>
+									<li>Go to <a id="azure-users" href="https://portal.azure.com/#view/Microsoft_AAD_UsersAndGroups/UsersMenuBlade/~/AllUsers" target="_blank">Azure AD → Users</a></li>
 									<li>Search for your account</li>
 									<li>Click "Assigned roles"</li>
 									<li>Verify roles show as "Active" not "Eligible"</li>
@@ -691,13 +691,10 @@ import Layout from '../layouts/Layout.astro';
 		// Extract tenant name (everything before .onmicrosoft.com)
 		const tenantName = domain.replace('.onmicrosoft.com', '');
 
-		// Update Azure portal links with tenant
-		const azureBase = `https://portal.azure.com/${domain}#`;
-		
-		// Update PIM links
-		document.getElementById('pim-link').href = `${azureBase}blade/Microsoft_Azure_PIMCommon/ActivationMenuBlade/aadmigratedroles`;
-		document.getElementById('pim-status').href = `${azureBase}blade/Microsoft_Azure_PIMCommon/ResourceMenuBlade/MyActions/provider/aadroles`;
-		document.getElementById('azure-users').href = `${azureBase}blade/Microsoft_AAD_IAM/UsersManagementMenuBlade/AllUsers`;
+		// Update PIM links - use simple, reliable format
+		document.getElementById('pim-link').href = `https://portal.azure.com/#view/Microsoft_Azure_PIMCommon/ActivationMenuBlade/~/aadmigratedroles`;
+		document.getElementById('pim-status').href = `https://portal.azure.com/#view/Microsoft_Azure_PIMCommon/ResourceMenuBlade/~/MyActions/resourceType/aadRoles`;
+		document.getElementById('azure-users').href = `https://portal.azure.com/#view/Microsoft_AAD_UsersAndGroups/UsersMenuBlade/~/AllUsers`;
 
 		// Update admin center link
 		document.getElementById('admin-center').href = `https://admin.microsoft.com/?tenant=${domain}`;
