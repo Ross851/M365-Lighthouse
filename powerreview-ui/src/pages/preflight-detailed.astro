@@ -172,8 +172,16 @@ import Layout from '../layouts/Layout.astro';
 Connect-AzureAD
 
 # Check your roles
-$userId = (Get-AzureADUser -Filter "userPrincipalName eq '$env:USERNAME@domain.com'").ObjectId
-Get-AzureADDirectoryRoleMember -ObjectId (Get-AzureADDirectoryRole | Where-Object {$_.DisplayName -like "*Global*" -or $_.DisplayName -like "*Security*"}).ObjectId | Where-Object {$_.ObjectId -eq $userId}</code></pre>
+$userEmail = "your-email@domain.com"
+$userId = (Get-AzureADUser -Filter "userPrincipalName eq '$userEmail'").ObjectId
+$roles = Get-AzureADDirectoryRole
+$userRoles = foreach ($role in $roles) {
+    $members = Get-AzureADDirectoryRoleMember -ObjectId $role.ObjectId
+    if ($members.ObjectId -contains $userId) {
+        $role.DisplayName
+    }
+}
+$userRoles</code></pre>
 						</div>
 
 						<div class="info-box warning">
