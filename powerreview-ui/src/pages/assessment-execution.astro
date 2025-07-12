@@ -582,14 +582,24 @@ import Layout from '../layouts/Layout.astro';
 
 	function loadAssessmentData() {
 		// Load customer and assessment data
+		const urlParams = new URLSearchParams(window.location.search);
 		const customerData = JSON.parse(localStorage.getItem('powerreview_customer') || '{}');
 		const assessments = JSON.parse(localStorage.getItem('powerreview_assessments') || '[]');
 		
-		document.getElementById('customer-name').textContent = customerData.organization || 'Unknown Customer';
-		document.getElementById('tenant-domain').textContent = sessionStorage.getItem('tenantDomain') || 'Unknown Tenant';
+		// Get customer info from URL params, localStorage, or defaults
+		const customerName = urlParams.get('customer') || customerData.organization || 'Demo Organization';
+		const tenantDomain = urlParams.get('tenant') || sessionStorage.getItem('tenantDomain') || 'contoso.onmicrosoft.com';
+		
+		document.getElementById('customer-name').textContent = customerName;
+		document.getElementById('tenant-domain').textContent = tenantDomain;
+		
+		// Store for later use
+		sessionStorage.setItem('current_customer', customerName);
+		sessionStorage.setItem('current_tenant', tenantDomain);
 		
 		// Create progress items for selected assessments
-		createProgressItems(assessments);
+		const selectedAssessments = assessments.length > 0 ? assessments : ['azuread', 'exchange', 'defender', 'sharepoint', 'teams', 'compliance'];
+		createProgressItems(selectedAssessments);
 	}
 
 	function createProgressItems(assessments) {
@@ -648,9 +658,16 @@ import Layout from '../layouts/Layout.astro';
 			updateOverallStatus('Starting Assessment', 'Beginning security analysis...', 25);
 		}, 2000);
 
-		// Simulate assessment progress
-		const assessments = ['azuread', 'exchange', 'defender'];
+		// Get assessments from URL or use defaults
+		const urlAssessments = getAssessmentsFromURL();
+		const assessments = urlAssessments.length > 0 ? urlAssessments : ['azuread', 'exchange', 'defender', 'sharepoint', 'teams', 'compliance'];
 		let currentAssessment = 0;
+		let completedChecks = 0;
+		const totalChecks = assessments.length;
+		
+		// Update the total checks display
+		document.getElementById('current-step').textContent = '0';
+		document.getElementById('total-steps').textContent = totalChecks.toString();
 
 		function runNextAssessment() {
 			if (currentAssessment >= assessments.length) {
@@ -661,6 +678,10 @@ import Layout from '../layouts/Layout.astro';
 			const assessment = assessments[currentAssessment];
 			runAssessment(assessment, () => {
 				currentAssessment++;
+				completedChecks++;
+				// Update progress counter
+				document.getElementById('current-step').textContent = completedChecks.toString();
+				updateOverallStatus('Assessment Progress', `Completed ${completedChecks} of ${totalChecks} checks`, Math.round((completedChecks / totalChecks) * 100));
 				setTimeout(runNextAssessment, 2000);
 			});
 		}
