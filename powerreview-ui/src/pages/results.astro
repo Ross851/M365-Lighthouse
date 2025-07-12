@@ -848,9 +848,14 @@ import Layout from '../layouts/Layout.astro';
 </style>
 
 <script>
-	// Check auth
+	// No auth required for viewing results - clients can access without login
+	// Only set demo auth if none exists to prevent other redirects
 	if (!localStorage.getItem('powerreview_auth')) {
-		window.location.href = '/login';
+		localStorage.setItem('powerreview_auth', JSON.stringify({
+			token: 'client-access',
+			role: 'client',
+			authenticated: false
+		}));
 	}
 	
 	// Get session ID from URL or localStorage

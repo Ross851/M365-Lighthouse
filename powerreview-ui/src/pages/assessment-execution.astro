@@ -847,6 +847,17 @@ import Layout from '../layouts/Layout.astro';
 		});
 
 		document.getElementById('view-results').addEventListener('click', () => {
+			// Store assessment results for the results page
+			const assessmentResults = {
+				customer: sessionStorage.getItem('current_customer') || 'Demo Organization',
+				tenant: sessionStorage.getItem('current_tenant') || 'contoso.onmicrosoft.com',
+				completedAt: new Date().toISOString(),
+				assessments: JSON.parse(localStorage.getItem('powerreview_assessments') || '[]'),
+				status: 'completed'
+			};
+			localStorage.setItem('powerreview_latest_results', JSON.stringify(assessmentResults));
+			
+			// Navigate to results
 			window.location.href = '/results';
 		});
 	}
