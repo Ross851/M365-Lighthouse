@@ -1,0 +1,1356 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Reports - PowerReview Enhanced">
+  <main>
+    <div class="reports-header">
+      <h1>📊 Security Assessment Reports</h1>
+      <p class="subtitle">Generate, view, and export comprehensive security reports with real-time data</p>
+      
+      <div class="header-actions">
+        <button class="btn primary" onclick="generateNewReport()">
+          <span class="btn-icon">📋</span>
+          Generate New Report
+        </button>
+        <button class="btn secondary" onclick="exportAllReports()">
+          <span class="btn-icon">📥</span>
+          Export All
+        </button>
+        <button class="btn secondary" onclick="scheduleReport()">
+          <span class="btn-icon">⏰</span>
+          Schedule Report
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Stats Dashboard -->
+    <section class="stats-dashboard">
+      <div class="stats-grid">
+        <div class="stat-card critical">
+          <div class="stat-icon">🔴</div>
+          <div class="stat-content">
+            <div class="stat-value" id="criticalIssues">23</div>
+            <div class="stat-label">Critical Issues</div>
+            <div class="stat-change">+3 from last week</div>
+          </div>
+        </div>
+        
+        <div class="stat-card warning">
+          <div class="stat-icon">🟡</div>
+          <div class="stat-content">
+            <div class="stat-value" id="openFindings">156</div>
+            <div class="stat-label">Open Findings</div>
+            <div class="stat-change">-12 from last week</div>
+          </div>
+        </div>
+        
+        <div class="stat-card success">
+          <div class="stat-icon">✅</div>
+          <div class="stat-content">
+            <div class="stat-value" id="complianceScore">78%</div>
+            <div class="stat-label">Compliance Score</div>
+            <div class="stat-change">+5% from last month</div>
+          </div>
+        </div>
+        
+        <div class="stat-card info">
+          <div class="stat-icon">📈</div>
+          <div class="stat-content">
+            <div class="stat-value" id="totalAssessments">42</div>
+            <div class="stat-label">Total Assessments</div>
+            <div class="stat-change">This quarter</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Report Filters -->
+    <section class="filters-section">
+      <div class="filters-container">
+        <div class="filter-group">
+          <label>Date Range</label>
+          <select id="dateFilter" onchange="filterReports()">
+            <option value="all">All Time</option>
+            <option value="today">Today</option>
+            <option value="week">Last 7 Days</option>
+            <option value="month" selected>Last 30 Days</option>
+            <option value="quarter">Last Quarter</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label>Report Type</label>
+          <select id="typeFilter" onchange="filterReports()">
+            <option value="all">All Types</option>
+            <option value="executive">Executive Summary</option>
+            <option value="technical">Technical Analysis</option>
+            <option value="compliance">Compliance Report</option>
+            <option value="security">Security Assessment</option>
+            <option value="vulnerability">Vulnerability Report</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label>Status</label>
+          <select id="statusFilter" onchange="filterReports()">
+            <option value="all">All Status</option>
+            <option value="completed">Completed</option>
+            <option value="in-progress">In Progress</option>
+            <option value="scheduled">Scheduled</option>
+            <option value="failed">Failed</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label>Organization</label>
+          <select id="orgFilter" onchange="filterReports()">
+            <option value="all">All Organizations</option>
+            <option value="contoso">Contoso Corporation</option>
+            <option value="fabrikam">Fabrikam Industries</option>
+            <option value="northwind">Northwind Traders</option>
+            <option value="tailspin">Tailspin Toys</option>
+          </select>
+        </div>
+        
+        <button class="btn secondary" onclick="resetFilters()">
+          <span class="btn-icon">🔄</span>
+          Reset Filters
+        </button>
+      </div>
+    </section>
+
+    <!-- Reports Grid -->
+    <section class="reports-section">
+      <div class="section-header">
+        <h2>Available Reports</h2>
+        <div class="view-controls">
+          <button class="view-btn active" data-view="grid" onclick="switchView('grid')">
+            <span class="btn-icon">⊞</span>
+            Grid
+          </button>
+          <button class="view-btn" data-view="list" onclick="switchView('list')">
+            <span class="btn-icon">☰</span>
+            List
+          </button>
+        </div>
+      </div>
+      
+      <div class="reports-container" id="reportsContainer">
+        <!-- Reports will be populated here -->
+      </div>
+    </section>
+
+    <!-- Report Generation Modal -->
+    <div class="modal" id="generateReportModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Generate New Report</h3>
+          <button class="modal-close" onclick="closeModal('generateReportModal')">&times;</button>
+        </div>
+        
+        <form class="report-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Report Type</label>
+              <select id="newReportType" required>
+                <option value="">Select report type...</option>
+                <option value="executive">Executive Summary</option>
+                <option value="technical">Technical Analysis</option>
+                <option value="compliance">Compliance Report</option>
+                <option value="security">Security Assessment</option>
+                <option value="vulnerability">Vulnerability Report</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Organization</label>
+              <select id="newReportOrg" required>
+                <option value="">Select organization...</option>
+                <option value="contoso">Contoso Corporation</option>
+                <option value="fabrikam">Fabrikam Industries</option>
+                <option value="northwind">Northwind Traders</option>
+                <option value="tailspin">Tailspin Toys</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label>Assessment Period</label>
+              <select id="newReportPeriod">
+                <option value="current">Current State</option>
+                <option value="week">Last 7 Days</option>
+                <option value="month">Last 30 Days</option>
+                <option value="quarter">Last Quarter</option>
+                <option value="custom">Custom Range</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Format</label>
+              <select id="newReportFormat">
+                <option value="pdf">PDF Document</option>
+                <option value="excel">Excel Spreadsheet</option>
+                <option value="powerpoint">PowerPoint Presentation</option>
+                <option value="html">HTML Report</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Include Sections</label>
+            <div class="checkbox-group">
+              <label class="checkbox">
+                <input type="checkbox" checked> Executive Summary
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" checked> Risk Assessment
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" checked> Security Findings
+              </label>
+              <label class="checkbox">
+                <input type="checkbox"> Technical Details
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" checked> Compliance Status
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" checked> Recommendations
+              </label>
+              <label class="checkbox">
+                <input type="checkbox"> Evidence Screenshots
+              </label>
+              <label class="checkbox">
+                <input type="checkbox"> PowerShell Scripts
+              </label>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Report Title</label>
+            <input type="text" id="newReportTitle" placeholder="Auto-generated based on type and organization">
+          </div>
+          
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="newReportDescription" rows="3" placeholder="Optional description for this report"></textarea>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn secondary" onclick="closeModal('generateReportModal')">Cancel</button>
+            <button type="submit" class="btn primary" onclick="startReportGeneration(event)">
+              <span class="btn-icon">🚀</span>
+              Generate Report
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Report Viewer Modal -->
+    <div class="modal large" id="reportViewerModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 id="viewerTitle">Report Viewer</h3>
+          <div class="viewer-actions">
+            <button class="btn small secondary" onclick="downloadCurrentReport()">
+              <span class="btn-icon">📥</span>
+              Download
+            </button>
+            <button class="btn small secondary" onclick="shareReport()">
+              <span class="btn-icon">🔗</span>
+              Share
+            </button>
+            <button class="modal-close" onclick="closeModal('reportViewerModal')">&times;</button>
+          </div>
+        </div>
+        
+        <div class="modal-body">
+          <div id="reportContent">
+            <!-- Report content will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <style>
+    main {
+      padding: 2rem;
+      max-width: 1600px;
+      margin: 0 auto;
+      background: #f8fafc;
+      min-height: 100vh;
+    }
+
+    .reports-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .reports-header h1 {
+      font-size: 2.5rem;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1.125rem;
+      color: #64748b;
+      margin-bottom: 2rem;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Stats Dashboard */
+    .stats-dashboard {
+      margin-bottom: 3rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .stat-card.critical {
+      border-left: 4px solid #dc2626;
+    }
+
+    .stat-card.warning {
+      border-left: 4px solid #f59e0b;
+    }
+
+    .stat-card.success {
+      border-left: 4px solid #10b981;
+    }
+
+    .stat-card.info {
+      border-left: 4px solid #3b82f6;
+    }
+
+    .stat-icon {
+      font-size: 2rem;
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: #64748b;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-change {
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    /* Filters */
+    .filters-section {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .filters-container {
+      display: flex;
+      gap: 1.5rem;
+      align-items: end;
+      flex-wrap: wrap;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      min-width: 150px;
+    }
+
+    .filter-group label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .filter-group select {
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      background: white;
+      cursor: pointer;
+    }
+
+    .filter-group select:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    /* Reports Section */
+    .reports-section {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    .view-controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .view-btn {
+      padding: 0.5rem 1rem;
+      border: 1px solid #e5e7eb;
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.875rem;
+    }
+
+    .view-btn.active,
+    .view-btn:hover {
+      background: #6366f1;
+      color: white;
+      border-color: #6366f1;
+    }
+
+    .reports-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .reports-container.list-view {
+      grid-template-columns: 1fr;
+    }
+
+    .report-card {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 2px solid #e5e7eb;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .report-card:hover {
+      border-color: #6366f1;
+      transform: translateY(-2px);
+    }
+
+    .report-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .report-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .report-icon.executive {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .report-icon.technical {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    .report-icon.compliance {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .report-icon.security {
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    }
+
+    .report-icon.vulnerability {
+      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    }
+
+    .report-meta {
+      flex: 1;
+    }
+
+    .report-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin: 0 0 0.25rem 0;
+    }
+
+    .report-subtitle {
+      font-size: 0.875rem;
+      color: #64748b;
+      margin-bottom: 0.5rem;
+    }
+
+    .report-date {
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    .report-status {
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .report-status.completed {
+      background: #d1fae5;
+      color: #059669;
+    }
+
+    .report-status.in-progress {
+      background: #dbeafe;
+      color: #1d4ed8;
+    }
+
+    .report-status.scheduled {
+      background: #fef3c7;
+      color: #f59e0b;
+    }
+
+    .report-status.failed {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .report-summary {
+      color: #64748b;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .report-metrics {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .metric {
+      text-align: center;
+      flex: 1;
+    }
+
+    .metric-value {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    .report-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      padding: 0.5rem 1rem;
+      border: 1px solid #e5e7eb;
+      background: white;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-action:hover {
+      background: #f3f4f6;
+      border-color: #6366f1;
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      font-size: 0.875rem;
+    }
+
+    .btn.primary {
+      background: #6366f1;
+      color: white;
+    }
+
+    .btn.primary:hover {
+      background: #4f46e5;
+      transform: translateY(-1px);
+    }
+
+    .btn.secondary {
+      background: #f1f5f9;
+      color: #475569;
+      border: 1px solid #e2e8f0;
+    }
+
+    .btn.secondary:hover {
+      background: #e2e8f0;
+    }
+
+    .btn.small {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+    }
+
+    .btn-icon {
+      font-size: 1rem;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal.large .modal-content {
+      max-width: 1200px;
+    }
+
+    .modal-header {
+      padding: 2rem 2rem 1rem 2rem;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      color: #1e293b;
+    }
+
+    .viewer-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #9ca3af;
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .modal-close:hover {
+      background: #f3f4f6;
+      color: #374151;
+    }
+
+    .modal-body {
+      padding: 2rem;
+    }
+
+    /* Form */
+    .report-form {
+      padding: 2rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 0.875rem;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.5rem;
+    }
+
+    .checkbox {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    .checkbox input[type="checkbox"] {
+      margin: 0;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .filters-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .filter-group {
+        min-width: auto;
+      }
+
+      .reports-container {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .header-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stat-card {
+        text-align: center;
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <script>
+    // Mock data for reports
+    const mockReports = [
+      {
+        id: 'exec-001',
+        type: 'executive',
+        title: 'Executive Security Summary - Q3 2024',
+        organization: 'contoso',
+        organizationName: 'Contoso Corporation',
+        status: 'completed',
+        date: '2024-07-11',
+        summary: 'Comprehensive executive analysis with Gold/Silver/Bronze recommendations, financial impact assessment, and evidence-based findings.',
+        metrics: {
+          riskScore: 78,
+          findings: 47,
+          compliance: 85
+        }
+      },
+      {
+        id: 'tech-002',
+        type: 'technical',
+        title: 'Technical Security Analysis',
+        organization: 'fabrikam',
+        organizationName: 'Fabrikam Industries', 
+        status: 'completed',
+        date: '2024-07-10',
+        summary: 'Deep technical analysis of security configurations, vulnerabilities, and recommended fixes with PowerShell scripts.',
+        metrics: {
+          riskScore: 65,
+          findings: 89,
+          compliance: 72
+        }
+      },
+      {
+        id: 'comp-003',
+        type: 'compliance',
+        title: 'GDPR Compliance Assessment',
+        organization: 'northwind',
+        organizationName: 'Northwind Traders',
+        status: 'in-progress',
+        date: '2024-07-12',
+        summary: 'Comprehensive GDPR compliance review covering data protection, user rights, and regulatory requirements.',
+        metrics: {
+          riskScore: 45,
+          findings: 23,
+          compliance: 91
+        }
+      },
+      {
+        id: 'vuln-004',
+        type: 'vulnerability',
+        title: 'Vulnerability Assessment Report',
+        organization: 'tailspin',
+        organizationName: 'Tailspin Toys',
+        status: 'completed',
+        date: '2024-07-09',
+        summary: 'Detailed vulnerability scan results with prioritized remediation steps and patch management recommendations.',
+        metrics: {
+          riskScore: 82,
+          findings: 156,
+          compliance: 68
+        }
+      },
+      {
+        id: 'sec-005',
+        type: 'security',
+        title: 'Security Posture Analysis',
+        organization: 'contoso',
+        organizationName: 'Contoso Corporation',
+        status: 'scheduled',
+        date: '2024-07-15',
+        summary: 'Scheduled monthly security assessment covering all Microsoft 365 services and security controls.',
+        metrics: {
+          riskScore: 0,
+          findings: 0,
+          compliance: 0
+        }
+      },
+      {
+        id: 'exec-006',
+        type: 'executive',
+        title: 'Quarterly Board Report',
+        organization: 'fabrikam',
+        organizationName: 'Fabrikam Industries',
+        status: 'failed',
+        date: '2024-07-08',
+        summary: 'Failed report generation due to authentication issues. Retry scheduled for next maintenance window.',
+        metrics: {
+          riskScore: 0,
+          findings: 0,
+          compliance: 0
+        }
+      }
+    ];
+
+    let currentView = 'grid';
+    let filteredReports = [...mockReports];
+
+    // Initialize dashboard
+    document.addEventListener('DOMContentLoaded', () => {
+      loadReports();
+      updateStats();
+    });
+
+    function loadReports() {
+      const container = document.getElementById('reportsContainer');
+      container.innerHTML = '';
+
+      filteredReports.forEach(report => {
+        const reportCard = createReportCard(report);
+        container.appendChild(reportCard);
+      });
+    }
+
+    function createReportCard(report) {
+      const card = document.createElement('div');
+      card.className = 'report-card';
+      card.onclick = () => viewReport(report.id);
+
+      const statusClass = report.status.replace('-', '');
+      const typeIcon = getTypeIcon(report.type);
+
+      card.innerHTML = `
+        <div class="report-header">
+          <div class="report-icon ${report.type}">
+            ${typeIcon}
+          </div>
+          <div class="report-meta">
+            <h3 class="report-title">${report.title}</h3>
+            <p class="report-subtitle">${report.organizationName}</p>
+            <p class="report-date">Generated: ${formatDate(report.date)}</p>
+          </div>
+          <span class="report-status ${statusClass}">${formatStatus(report.status)}</span>
+        </div>
+        
+        <p class="report-summary">${report.summary}</p>
+        
+        ${report.status === 'completed' ? `
+        <div class="report-metrics">
+          <div class="metric">
+            <div class="metric-value">${report.metrics.riskScore}%</div>
+            <div class="metric-label">Risk Score</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">${report.metrics.findings}</div>
+            <div class="metric-label">Findings</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value">${report.metrics.compliance}%</div>
+            <div class="metric-label">Compliance</div>
+          </div>
+        </div>` : ''}
+        
+        <div class="report-actions">
+          <button class="btn-action" onclick="event.stopPropagation(); viewReport('${report.id}')">
+            👁️ View
+          </button>
+          <button class="btn-action" onclick="event.stopPropagation(); downloadReport('${report.id}')">
+            📥 Download
+          </button>
+          <button class="btn-action" onclick="event.stopPropagation(); shareReport('${report.id}')">
+            🔗 Share
+          </button>
+          ${report.status === 'failed' ? `
+          <button class="btn-action" onclick="event.stopPropagation(); retryReport('${report.id}')">
+            🔄 Retry
+          </button>` : ''}
+        </div>
+      `;
+
+      return card;
+    }
+
+    function getTypeIcon(type) {
+      const icons = {
+        executive: '👔',
+        technical: '🔧',
+        compliance: '📋',
+        security: '🛡️',
+        vulnerability: '🔍'
+      };
+      return icons[type] || '📄';
+    }
+
+    function formatDate(dateString) {
+      return new Date(dateString).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+    }
+
+    function formatStatus(status) {
+      return status.split('-').map(word => 
+        word.charAt(0).toUpperCase() + word.slice(1)
+      ).join(' ');
+    }
+
+    function filterReports() {
+      const dateFilter = document.getElementById('dateFilter').value;
+      const typeFilter = document.getElementById('typeFilter').value;
+      const statusFilter = document.getElementById('statusFilter').value;
+      const orgFilter = document.getElementById('orgFilter').value;
+
+      filteredReports = mockReports.filter(report => {
+        const matchesDate = dateFilter === 'all' || checkDateFilter(report.date, dateFilter);
+        const matchesType = typeFilter === 'all' || report.type === typeFilter;
+        const matchesStatus = statusFilter === 'all' || report.status === statusFilter;
+        const matchesOrg = orgFilter === 'all' || report.organization === orgFilter;
+
+        return matchesDate && matchesType && matchesStatus && matchesOrg;
+      });
+
+      loadReports();
+    }
+
+    function checkDateFilter(reportDate, filter) {
+      const today = new Date();
+      const reportDateObj = new Date(reportDate);
+      
+      switch (filter) {
+        case 'today':
+          return reportDateObj.toDateString() === today.toDateString();
+        case 'week':
+          const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
+          return reportDateObj >= weekAgo;
+        case 'month':
+          const monthAgo = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
+          return reportDateObj >= monthAgo;
+        case 'quarter':
+          const quarterAgo = new Date(today.getTime() - 90 * 24 * 60 * 60 * 1000);
+          return reportDateObj >= quarterAgo;
+        default:
+          return true;
+      }
+    }
+
+    function resetFilters() {
+      document.getElementById('dateFilter').value = 'all';
+      document.getElementById('typeFilter').value = 'all';
+      document.getElementById('statusFilter').value = 'all';
+      document.getElementById('orgFilter').value = 'all';
+      filteredReports = [...mockReports];
+      loadReports();
+    }
+
+    function switchView(view) {
+      currentView = view;
+      const container = document.getElementById('reportsContainer');
+      const buttons = document.querySelectorAll('.view-btn');
+      
+      buttons.forEach(btn => btn.classList.remove('active'));
+      document.querySelector(`[data-view="${view}"]`).classList.add('active');
+      
+      if (view === 'list') {
+        container.classList.add('list-view');
+      } else {
+        container.classList.remove('list-view');
+      }
+    }
+
+    function updateStats() {
+      // Simulate real-time stats updates
+      const stats = {
+        criticalIssues: 23 + Math.floor(Math.random() * 5),
+        openFindings: 156 - Math.floor(Math.random() * 10),
+        complianceScore: 78 + Math.floor(Math.random() * 5),
+        totalAssessments: 42 + Math.floor(Math.random() * 3)
+      };
+
+      document.getElementById('criticalIssues').textContent = stats.criticalIssues;
+      document.getElementById('openFindings').textContent = stats.openFindings;
+      document.getElementById('complianceScore').textContent = stats.complianceScore + '%';
+      document.getElementById('totalAssessments').textContent = stats.totalAssessments;
+    }
+
+    // Report generation
+    function generateNewReport() {
+      document.getElementById('generateReportModal').classList.add('show');
+    }
+
+    function startReportGeneration(event) {
+      event.preventDefault();
+      
+      const type = document.getElementById('newReportType').value;
+      const org = document.getElementById('newReportOrg').value;
+      const period = document.getElementById('newReportPeriod').value;
+      const format = document.getElementById('newReportFormat').value;
+
+      if (!type || !org) {
+        alert('Please select report type and organization');
+        return;
+      }
+
+      // Simulate report generation
+      const reportId = 'new-' + Date.now();
+      showReportGenerationProgress(reportId, type, org);
+      
+      closeModal('generateReportModal');
+    }
+
+    function showReportGenerationProgress(reportId, type, org) {
+      // Create temporary progress report
+      const progressReport = {
+        id: reportId,
+        type: type,
+        title: `Generating ${formatStatus(type)} Report...`,
+        organization: org,
+        organizationName: getOrgName(org),
+        status: 'in-progress',
+        date: new Date().toISOString().split('T')[0],
+        summary: 'Report generation in progress. Please wait...',
+        metrics: { riskScore: 0, findings: 0, compliance: 0 }
+      };
+
+      mockReports.unshift(progressReport);
+      filterReports();
+
+      // Simulate completion after 3 seconds
+      setTimeout(() => {
+        const index = mockReports.findIndex(r => r.id === reportId);
+        if (index !== -1) {
+          mockReports[index].status = 'completed';
+          mockReports[index].title = mockReports[index].title.replace('Generating ', '').replace('...', '');
+          mockReports[index].summary = 'Report generated successfully with comprehensive analysis and recommendations.';
+          mockReports[index].metrics = {
+            riskScore: 60 + Math.floor(Math.random() * 30),
+            findings: 20 + Math.floor(Math.random() * 50),
+            compliance: 70 + Math.floor(Math.random() * 25)
+          };
+          filterReports();
+        }
+      }, 3000);
+    }
+
+    function getOrgName(orgCode) {
+      const orgs = {
+        contoso: 'Contoso Corporation',
+        fabrikam: 'Fabrikam Industries',
+        northwind: 'Northwind Traders',
+        tailspin: 'Tailspin Toys'
+      };
+      return orgs[orgCode] || orgCode;
+    }
+
+    // Report actions
+    function viewReport(reportId) {
+      const report = mockReports.find(r => r.id === reportId);
+      if (!report) return;
+
+      document.getElementById('viewerTitle').textContent = report.title;
+      
+      // Simulate report content
+      const content = generateReportContent(report);
+      document.getElementById('reportContent').innerHTML = content;
+      
+      document.getElementById('reportViewerModal').classList.add('show');
+    }
+
+    function generateReportContent(report) {
+      if (report.status !== 'completed') {
+        return `
+          <div style="text-align: center; padding: 3rem; color: #64748b;">
+            <h3>Report ${formatStatus(report.status)}</h3>
+            <p>This report is currently ${report.status.replace('-', ' ')}.</p>
+            ${report.status === 'failed' ? '<button class="btn primary" onclick="retryReport(\'' + report.id + '\')">Retry Generation</button>' : ''}
+          </div>
+        `;
+      }
+
+      return `
+        <div style="max-width: 800px; margin: 0 auto; line-height: 1.6;">
+          <div style="text-align: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid #e5e7eb;">
+            <h1 style="color: #1e293b; margin-bottom: 0.5rem;">${report.title}</h1>
+            <p style="color: #64748b; font-size: 1.125rem;">${report.organizationName}</p>
+            <p style="color: #9ca3af; font-size: 0.875rem;">Generated on ${formatDate(report.date)}</p>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem;">
+            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+              <div style="font-size: 2rem; font-weight: 700; color: #dc2626;">${report.metrics.riskScore}%</div>
+              <div style="font-size: 0.875rem; color: #64748b;">Risk Score</div>
+            </div>
+            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+              <div style="font-size: 2rem; font-weight: 700; color: #f59e0b;">${report.metrics.findings}</div>
+              <div style="font-size: 0.875rem; color: #64748b;">Findings</div>
+            </div>
+            <div style="text-align: center; padding: 1rem; background: #f8fafc; border-radius: 8px;">
+              <div style="font-size: 2rem; font-weight: 700; color: #10b981;">${report.metrics.compliance}%</div>
+              <div style="font-size: 0.875rem; color: #64748b;">Compliance</div>
+            </div>
+          </div>
+
+          <section style="margin-bottom: 2rem;">
+            <h2 style="color: #1e293b; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;">Executive Summary</h2>
+            <p>This ${report.type} report provides a comprehensive analysis of the security posture for ${report.organizationName}. Our assessment identified ${report.metrics.findings} findings across multiple categories, with a current risk score of ${report.metrics.riskScore}% and compliance rating of ${report.metrics.compliance}%.</p>
+          </section>
+
+          <section style="margin-bottom: 2rem;">
+            <h2 style="color: #1e293b; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;">Key Findings</h2>
+            <div style="background: #fef2f2; border-left: 4px solid #dc2626; padding: 1rem; margin-bottom: 1rem;">
+              <h4 style="color: #dc2626; margin: 0 0 0.5rem 0;">🔴 Critical Issues (3)</h4>
+              <ul style="margin: 0; padding-left: 1rem;">
+                <li>Multi-factor authentication not enforced for administrative accounts</li>
+                <li>Legacy authentication protocols still enabled</li>
+                <li>External sharing enabled for sensitive SharePoint sites</li>
+              </ul>
+            </div>
+            <div style="background: #fffbeb; border-left: 4px solid #f59e0b; padding: 1rem; margin-bottom: 1rem;">
+              <h4 style="color: #f59e0b; margin: 0 0 0.5rem 0;">🟡 High Priority (12)</h4>
+              <ul style="margin: 0; padding-left: 1rem;">
+                <li>Insufficient conditional access policies</li>
+                <li>Data loss prevention rules not configured</li>
+                <li>Email security policies need enhancement</li>
+              </ul>
+            </div>
+          </section>
+
+          <section style="margin-bottom: 2rem;">
+            <h2 style="color: #1e293b; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;">Recommendations</h2>
+            <div style="background: #f0fdf4; border-left: 4px solid #10b981; padding: 1rem;">
+              <h4 style="color: #10b981; margin: 0 0 0.5rem 0;">🥇 Gold Tier Recommendations</h4>
+              <ol style="margin: 0; padding-left: 1rem;">
+                <li>Implement Zero Trust architecture</li>
+                <li>Enable Microsoft Defender for Office 365</li>
+                <li>Configure comprehensive conditional access policies</li>
+              </ol>
+            </div>
+          </section>
+
+          <section>
+            <h2 style="color: #1e293b; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;">Next Steps</h2>
+            <p>We recommend prioritizing the critical findings and implementing the Gold tier recommendations within the next 30 days. Our team is available to assist with implementation and provide ongoing monitoring services.</p>
+          </section>
+        </div>
+      `;
+    }
+
+    function downloadReport(reportId) {
+      const report = mockReports.find(r => r.id === reportId);
+      if (!report) return;
+      
+      // Simulate download
+      alert(`Downloading ${report.title} as PDF...`);
+    }
+
+    function shareReport(reportId) {
+      const report = mockReports.find(r => r.id === reportId);
+      if (!report) return;
+      
+      // Simulate sharing
+      const shareUrl = `https://powerreview.com/reports/${reportId}`;
+      navigator.clipboard?.writeText(shareUrl);
+      alert(`Report link copied to clipboard: ${shareUrl}`);
+    }
+
+    function retryReport(reportId) {
+      const report = mockReports.find(r => r.id === reportId);
+      if (!report) return;
+      
+      report.status = 'in-progress';
+      report.title = report.title + ' (Retrying...)';
+      filterReports();
+      
+      // Simulate completion
+      setTimeout(() => {
+        report.status = 'completed';
+        report.title = report.title.replace(' (Retrying...)', '');
+        report.metrics = {
+          riskScore: 60 + Math.floor(Math.random() * 30),
+          findings: 20 + Math.floor(Math.random() * 50),
+          compliance: 70 + Math.floor(Math.random() * 25)
+        };
+        filterReports();
+      }, 2000);
+    }
+
+    function downloadCurrentReport() {
+      alert('Downloading current report...');
+    }
+
+    function exportAllReports() {
+      alert('Exporting all reports as ZIP archive...');
+    }
+
+    function scheduleReport() {
+      alert('Opening report scheduling interface...');
+    }
+
+    // Modal functions
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.remove('show');
+    }
+
+    // Close modal when clicking outside
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('modal')) {
+        e.target.classList.remove('show');
+      }
+    });
+
+    // Update stats periodically
+    setInterval(updateStats, 30000); // Every 30 seconds
+  </script>
+</Layout>
