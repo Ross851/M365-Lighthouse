@@ -1234,6 +1234,9 @@ import Layout from '../layouts/Layout.astro';
       // Show the modal
       modal.classList.add('show');
       
+      // Initialize charts after modal is shown
+      setTimeout(() => initializeReportCharts(report.id), 100);
+      
       // Prevent any redirects
       window.history.pushState(null, null, window.location.href);
     }
@@ -1378,55 +1381,6 @@ import Layout from '../layouts/Layout.astro';
             </div>
           </section>
           
-          <script>
-            // Initialize charts for this report
-            setTimeout(() => {
-              // Risk Distribution Chart
-              const riskCtx = document.getElementById('riskChart-${report.id}');
-              if (riskCtx) {
-                new Chart(riskCtx, {
-                  type: 'doughnut',
-                  data: {
-                    labels: ['Critical', 'High', 'Medium', 'Low'],
-                    datasets: [{
-                      data: [12, 23, 45, 34],
-                      backgroundColor: ['#dc2626', '#f59e0b', '#facc15', '#10b981']
-                    }]
-                  },
-                  options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                      legend: { position: 'right' }
-                    }
-                  }
-                });
-              }
-              
-              // Timeline Chart
-              const timelineCtx = document.getElementById('timelineChart-${report.id}');
-              if (timelineCtx) {
-                new Chart(timelineCtx, {
-                  type: 'bar',
-                  data: {
-                    labels: ['Week 1-2', 'Week 3-4', 'Month 2', 'Month 3'],
-                    datasets: [{
-                      label: 'Tasks to Complete',
-                      data: [8, 12, 6, 4],
-                      backgroundColor: '#6366f1'
-                    }]
-                  },
-                  options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                      y: { beginAtZero: true }
-                    }
-                  }
-                });
-              }
-            }, 100);
-          </script>
 
           <section style="margin-bottom: 2rem;">
             <h2 style="color: #1e293b; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem;">Key Findings</h2>
@@ -1530,6 +1484,54 @@ import Layout from '../layouts/Layout.astro';
         e.target.classList.remove('show');
       }
     });
+
+    // Initialize charts for report viewer
+    function initializeReportCharts(reportId) {
+      // Risk Distribution Chart
+      const riskCtx = document.getElementById('riskChart-' + reportId);
+      if (riskCtx && typeof Chart !== 'undefined') {
+        new Chart(riskCtx, {
+          type: 'doughnut',
+          data: {
+            labels: ['Critical', 'High', 'Medium', 'Low'],
+            datasets: [{
+              data: [12, 23, 45, 34],
+              backgroundColor: ['#dc2626', '#f59e0b', '#facc15', '#10b981']
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { position: 'right' }
+            }
+          }
+        });
+      }
+      
+      // Timeline Chart
+      const timelineCtx = document.getElementById('timelineChart-' + reportId);
+      if (timelineCtx && typeof Chart !== 'undefined') {
+        new Chart(timelineCtx, {
+          type: 'bar',
+          data: {
+            labels: ['Week 1-2', 'Week 3-4', 'Month 2', 'Month 3'],
+            datasets: [{
+              label: 'Tasks to Complete',
+              data: [8, 12, 6, 4],
+              backgroundColor: '#6366f1'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: { beginAtZero: true }
+            }
+          }
+        });
+      }
+    }
 
     // Update stats periodically
     setInterval(updateStats, 30000); // Every 30 seconds
