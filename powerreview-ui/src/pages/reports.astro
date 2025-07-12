@@ -18,11 +18,11 @@ import Layout from '../layouts/Layout.astro';
         <p class="subtitle">We help you identify issues across your entire M365 stack, understand their impact, and create a clear pathway to success</p>
       </div>
       <div class="header-actions">
-        <button class="btn primary" onclick="downloadExecutiveSummary()">
+        <button class="btn primary" id="downloadExecutiveSummary">
           <i class="fas fa-download"></i>
           Executive Summary
         </button>
-        <button class="btn secondary" onclick="scheduleAdvisorySession()">
+        <button class="btn secondary" id="scheduleAdvisorySession">
           <i class="fas fa-users"></i>
           Schedule Advisory Session
         </button>
@@ -393,11 +393,11 @@ import Layout from '../layouts/Layout.astro';
         <h2>Ready to Secure Your M365 Environment?</h2>
         <p>Let PowerReview Advisors guide you from uncertainty to confidence. We'll help you understand your issues, create your pathway, and achieve security excellence.</p>
         <div class="cta-buttons">
-          <button class="btn primary large" onclick="scheduleAdvisorySession()">
+          <button class="btn primary large" id="scheduleAdvisorySessionBottom">
             <i class="fas fa-calendar-check"></i>
             Schedule Your Advisory Session
           </button>
-          <button class="btn secondary large" onclick="downloadFullReport()">
+          <button class="btn secondary large" id="downloadFullReport">
             <i class="fas fa-file-pdf"></i>
             Download Full Assessment Report
           </button>
@@ -1013,7 +1013,11 @@ import Layout from '../layouts/Layout.astro';
   <script>
     // Initialize charts when page loads
     document.addEventListener('DOMContentLoaded', () => {
-      // Add any interactive elements here
+      // Add event listeners for buttons
+      document.getElementById('downloadExecutiveSummary')?.addEventListener('click', downloadExecutiveSummary);
+      document.getElementById('scheduleAdvisorySession')?.addEventListener('click', scheduleAdvisorySession);
+      document.getElementById('scheduleAdvisorySessionBottom')?.addEventListener('click', scheduleAdvisorySession);
+      document.getElementById('downloadFullReport')?.addEventListener('click', downloadFullReport);
     });
 
     function downloadExecutiveSummary() {
