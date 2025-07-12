@@ -187,42 +187,42 @@ import Layout from '../layouts/Layout.astro';
 
         <div class="api-auth">
           <h3>Authentication</h3>
-          <pre><code>{
+          <pre><code>&#123;
   "method": "Bearer Token",
   "header": "Authorization: Bearer YOUR_API_KEY",
   "expires": "24 hours"
-}</code></pre>
+&#125;</code></pre>
         </div>
 
         <div class="api-example">
           <h3>Sample Query</h3>
-          <pre><code>GET /v1/powerbi/data?metrics=security_score,compliance,risks&period=30d
+          <pre><code>GET /v1/powerbi/data?metrics=security_score,compliance,risks&amp;period=30d
 Authorization: Bearer YOUR_API_KEY
 
 Response:
-{
-  "data": {
-    "security_score": {
+&#123;
+  "data": &#123;
+    "security_score": &#123;
       "current": 78,
       "previous": 65,
       "trend": "improving"
-    },
-    "compliance": {
-      "frameworks": {
+    &#125;,
+    "compliance": &#123;
+      "frameworks": &#123;
         "gdpr": 85,
         "hipaa": 72,
         "soc2": 68
-      }
-    },
-    "risks": {
+      &#125;
+    &#125;,
+    "risks": &#123;
       "critical": 3,
       "high": 12,
       "medium": 28,
       "low": 45
-    }
-  },
+    &#125;
+  &#125;,
   "timestamp": "2024-01-15T10:30:00Z"
-}</code></pre>
+&#125;</code></pre>
         </div>
 
         <div class="api-actions">
