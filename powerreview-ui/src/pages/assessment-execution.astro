@@ -857,8 +857,9 @@ import Layout from '../layouts/Layout.astro';
 			};
 			localStorage.setItem('powerreview_latest_results', JSON.stringify(assessmentResults));
 			
-			// Navigate to results
-			window.location.href = '/results';
+			// For now, redirect to reports page which we know works
+			// TODO: Fix /results route deployment
+			window.location.href = '/reports?assessment=complete';
 		});
 	}
 </script>
