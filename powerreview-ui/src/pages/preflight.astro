@@ -8,6 +8,14 @@ import Layout from '../layouts/Layout.astro';
 			<div class="header">
 				<h1>Pre-flight Security Checklist</h1>
 				<p>Let's ensure you have everything ready for a successful assessment</p>
+				<a href="/preflight-detailed" class="detailed-link">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="12" cy="12" r="10"/>
+						<path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+						<line x1="12" y1="17" x2="12" y2="17"/>
+					</svg>
+					Need help? View detailed verification guide
+				</a>
 			</div>
 
 			<div class="checklist-container">
@@ -487,6 +495,69 @@ import Layout from '../layouts/Layout.astro';
 			flex-direction: column;
 			text-align: center;
 		}
+	}
+
+	/* New styles for enhanced preflight */
+	.details-link {
+		font-size: 0.875rem;
+		color: var(--color-primary);
+		text-decoration: none;
+		margin-left: auto;
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+
+	.detailed-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-top: 1rem;
+		padding: 0.75rem 1.25rem;
+		background: rgba(33, 150, 243, 0.1);
+		color: var(--color-primary);
+		text-decoration: none;
+		border-radius: 8px;
+		font-size: 0.875rem;
+		transition: all 0.2s ease;
+	}
+
+	.detailed-link:hover {
+		background: rgba(33, 150, 243, 0.2);
+		transform: translateY(-2px);
+	}
+
+	.details-link:hover {
+		text-decoration: underline;
+	}
+
+	.item-note {
+		display: block;
+		font-size: 0.875rem;
+		color: #ff6b6b;
+		margin-top: 0.25rem;
+		font-weight: 500;
+	}
+
+	.mfa-notice {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.75rem;
+		padding: 1rem;
+		background: #e3f2fd;
+		border: 1px solid #90caf9;
+		border-radius: 8px;
+		margin-top: 1rem;
+	}
+
+	.mfa-notice svg {
+		flex-shrink: 0;
+		color: #1976d2;
+		margin-top: 2px;
+	}
+
+	.mfa-notice strong {
+		color: #1976d2;
 	}
 </style>
 

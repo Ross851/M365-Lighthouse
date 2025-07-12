@@ -1,0 +1,872 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Pre-Assessment Checklist - PowerReview">
+	<main>
+		<div class="container">
+			<div class="header">
+				<h1>Pre-Assessment Checklist</h1>
+				<p>Ensure you have the correct permissions and access before starting the security assessment</p>
+			</div>
+
+			<div class="checklist-sections">
+				<!-- Step 1: Verify Tenant -->
+				<div class="checklist-section">
+					<div class="section-header">
+						<div class="step-number">1</div>
+						<h2>Verify You're in the Correct Tenant</h2>
+					</div>
+					<div class="section-content">
+						<div class="info-box warning">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+								<line x1="12" y1="9" x2="12" y2="13"/>
+								<line x1="12" y1="17" x2="12" y2="17"/>
+							</svg>
+							<div>
+								<strong>Critical:</strong> Many users have access to multiple tenants. Ensure you're signed into the correct customer tenant before proceeding.
+							</div>
+						</div>
+
+						<h3>How to Check Your Current Tenant:</h3>
+						<ol>
+							<li>Go to <a href="https://portal.azure.com" target="_blank">https://portal.azure.com</a></li>
+							<li>Click on your profile picture in the top-right corner</li>
+							<li>Look for "Directory" or "Switch directory"</li>
+							<li>Verify the tenant name matches your customer: <strong id="tenant-name">[Customer Name]</strong></li>
+						</ol>
+
+						<div class="visual-guide">
+							<img src="/images/tenant-check.png" alt="How to check tenant in Azure Portal" />
+						</div>
+
+						<h3>Alternative Method - Microsoft 365 Admin Center:</h3>
+						<ol>
+							<li>Go to <a href="https://admin.microsoft.com" target="_blank">https://admin.microsoft.com</a></li>
+							<li>Look at the top navigation bar</li>
+							<li>The tenant name appears next to "Microsoft 365 admin center"</li>
+						</ol>
+					</div>
+				</div>
+
+				<!-- Step 2: Sign In Process -->
+				<div class="checklist-section">
+					<div class="section-header">
+						<div class="step-number">2</div>
+						<h2>Complete Sign-In with MFA</h2>
+					</div>
+					<div class="section-content">
+						<div class="info-box info">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<circle cx="12" cy="12" r="10"/>
+								<line x1="12" y1="16" x2="12" y2="12"/>
+								<line x1="12" y1="8" x2="12" y2="8"/>
+							</svg>
+							<div>
+								Most organizations require Multi-Factor Authentication (MFA). Have your authentication device ready.
+							</div>
+						</div>
+
+						<h3>Expected Sign-In Flow:</h3>
+						<ol>
+							<li><strong>Enter your admin email address</strong>
+								<div class="sub-info">Format: admin@customerdomain.com</div>
+							</li>
+							<li><strong>Enter your password</strong></li>
+							<li><strong>Complete MFA verification</strong>
+								<ul>
+									<li>Microsoft Authenticator app notification</li>
+									<li>SMS code to registered phone</li>
+									<li>Phone call verification</li>
+									<li>Hardware token code</li>
+								</ul>
+							</li>
+							<li><strong>Stay signed in?</strong>
+								<div class="sub-info">Select "Yes" to avoid re-authentication during the assessment</div>
+							</li>
+						</ol>
+
+						<h3>Common MFA Issues:</h3>
+						<div class="troubleshooting">
+							<div class="issue">
+								<h4>🔴 "Approve sign-in request" notification not received</h4>
+								<p>Open Microsoft Authenticator app manually and check for pending requests</p>
+							</div>
+							<div class="issue">
+								<h4>🔴 Phone number not recognized</h4>
+								<p>Contact your IT admin to update your MFA phone number</p>
+							</div>
+							<div class="issue">
+								<h4>🔴 "Additional verification required"</h4>
+								<p>You may need to re-register MFA methods at <a href="https://aka.ms/mfasetup" target="_blank">aka.ms/mfasetup</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Step 3: Verify Permissions -->
+				<div class="checklist-section">
+					<div class="section-header">
+						<div class="step-number">3</div>
+						<h2>Verify Your Admin Permissions</h2>
+					</div>
+					<div class="section-content">
+						<h3>Required Roles (One of the following):</h3>
+						<div class="role-cards">
+							<div class="role-card recommended">
+								<h4>Global Administrator</h4>
+								<p>Full access to all features and data</p>
+								<span class="badge">Recommended</span>
+							</div>
+							<div class="role-card">
+								<h4>Global Reader</h4>
+								<p>Read-only access to all features and data</p>
+								<span class="badge">Minimum Required</span>
+							</div>
+						</div>
+
+						<h3>Additional Roles (For Complete Assessment):</h3>
+						<div class="role-cards">
+							<div class="role-card">
+								<h4>Security Administrator</h4>
+								<p>Access to Microsoft Defender and security policies</p>
+							</div>
+							<div class="role-card">
+								<h4>Security Reader</h4>
+								<p>Read access to security features</p>
+							</div>
+							<div class="role-card">
+								<h4>Compliance Administrator</h4>
+								<p>Access to compliance features and Microsoft Purview</p>
+							</div>
+						</div>
+
+						<h3>How to Check Your Current Roles:</h3>
+						<div class="verification-steps">
+							<h4>Method 1: Azure Portal</h4>
+							<ol>
+								<li>Go to <a href="https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Overview" target="_blank">Azure Active Directory</a></li>
+								<li>Click "Users" in the left menu</li>
+								<li>Search for your account</li>
+								<li>Click on your user account</li>
+								<li>Click "Assigned roles" in the left menu</li>
+								<li>Verify you see one of the required roles listed</li>
+							</ol>
+
+							<div class="visual-guide">
+								<img src="/images/check-roles-azure.png" alt="How to check roles in Azure Portal" />
+							</div>
+
+							<h4>Method 2: Microsoft 365 Admin Center</h4>
+							<ol>
+								<li>Go to <a href="https://admin.microsoft.com/Adminportal/Home#/users" target="_blank">Microsoft 365 Admin Center - Users</a></li>
+								<li>Search for your account</li>
+								<li>Click on your user name</li>
+								<li>Look for "Roles" section</li>
+								<li>Click "Manage roles" to see all assigned roles</li>
+							</ol>
+
+							<h4>Method 3: PowerShell Quick Check</h4>
+							<pre><code class="language-powershell"># Connect to Azure AD
+Connect-AzureAD
+
+# Check your roles
+$userId = (Get-AzureADUser -Filter "userPrincipalName eq '$env:USERNAME@domain.com'").ObjectId
+Get-AzureADDirectoryRoleMember -ObjectId (Get-AzureADDirectoryRole | Where-Object {$_.DisplayName -like "*Global*" -or $_.DisplayName -like "*Security*"}).ObjectId | Where-Object {$_.ObjectId -eq $userId}</code></pre>
+						</div>
+
+						<div class="info-box warning">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+								<line x1="12" y1="9" x2="12" y2="13"/>
+								<line x1="12" y1="17" x2="12" y2="17"/>
+							</svg>
+							<div>
+								<strong>No Admin Roles?</strong> Contact your Global Administrator to request the necessary permissions before proceeding.
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Step 4: Test Access -->
+				<div class="checklist-section">
+					<div class="section-header">
+						<div class="step-number">4</div>
+						<h2>Test Your Access to Key Services</h2>
+					</div>
+					<div class="section-content">
+						<h3>Click each link to verify you can access these admin centers:</h3>
+						<div class="access-checklist">
+							<label class="access-item">
+								<input type="checkbox" />
+								<a href="https://admin.microsoft.com" target="_blank">Microsoft 365 Admin Center</a>
+								<span class="url">admin.microsoft.com</span>
+							</label>
+							<label class="access-item">
+								<input type="checkbox" />
+								<a href="https://security.microsoft.com" target="_blank">Microsoft 365 Security Center</a>
+								<span class="url">security.microsoft.com</span>
+							</label>
+							<label class="access-item">
+								<input type="checkbox" />
+								<a href="https://compliance.microsoft.com" target="_blank">Microsoft Purview Compliance Portal</a>
+								<span class="url">compliance.microsoft.com</span>
+							</label>
+							<label class="access-item">
+								<input type="checkbox" />
+								<a href="https://admin.exchange.microsoft.com" target="_blank">Exchange Admin Center</a>
+								<span class="url">admin.exchange.microsoft.com</span>
+							</label>
+							<label class="access-item">
+								<input type="checkbox" />
+								<a href="https://portal.azure.com" target="_blank">Azure Portal</a>
+								<span class="url">portal.azure.com</span>
+							</label>
+							<label class="access-item">
+								<input type="checkbox" />
+								<a href="https://endpoint.microsoft.com" target="_blank">Microsoft Endpoint Manager (Intune)</a>
+								<span class="url">endpoint.microsoft.com</span>
+							</label>
+						</div>
+
+						<div class="info-box info">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<circle cx="12" cy="12" r="10"/>
+								<path d="M8 12h8M12 8v8"/>
+							</svg>
+							<div>
+								<strong>Access Denied?</strong> This might indicate missing licenses or role assignments for specific services.
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Step 5: Purview Questionnaire -->
+				<div class="checklist-section">
+					<div class="section-header">
+						<div class="step-number">5</div>
+						<h2>Microsoft Purview Readiness Questions</h2>
+					</div>
+					<div class="section-content">
+						<div class="info-box info">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+								<polyline points="14 2 14 8 20 8"/>
+							</svg>
+							<div>
+								These questions help us understand your current Purview implementation and compliance needs.
+							</div>
+						</div>
+
+						<div class="purview-questions">
+							<div class="question-group">
+								<h3>Current Implementation Status</h3>
+								<label class="question">
+									<input type="checkbox" name="purview-status" />
+									<span>Do you currently have Microsoft Purview licenses?</span>
+								</label>
+								<label class="question">
+									<input type="checkbox" name="purview-status" />
+									<span>Have you accessed the Purview compliance portal before?</span>
+								</label>
+								<label class="question">
+									<input type="checkbox" name="purview-status" />
+									<span>Are any retention policies currently active?</span>
+								</label>
+							</div>
+
+							<div class="question-group">
+								<h3>Data Governance Needs</h3>
+								<label class="question">
+									<input type="checkbox" name="governance" />
+									<span>Do you need to comply with specific regulations (GDPR, HIPAA, etc.)?</span>
+								</label>
+								<label class="question">
+									<input type="checkbox" name="governance" />
+									<span>Do you have data retention requirements?</span>
+								</label>
+								<label class="question">
+									<input type="checkbox" name="governance" />
+									<span>Do you need to track and manage sensitive information?</span>
+								</label>
+							</div>
+
+							<div class="question-group">
+								<h3>Key Stakeholders</h3>
+								<div class="text-input">
+									<label>Who is responsible for information governance in your organization?</label>
+									<input type="text" placeholder="Name and role" />
+								</div>
+								<div class="text-input">
+									<label>Who makes decisions about data retention and deletion?</label>
+									<input type="text" placeholder="Name and role" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Step 6: Final Checks -->
+				<div class="checklist-section">
+					<div class="section-header">
+						<div class="step-number">6</div>
+						<h2>Final Pre-Flight Checks</h2>
+					</div>
+					<div class="section-content">
+						<div class="final-checklist">
+							<h3>Before Starting the Assessment:</h3>
+							<label class="final-item">
+								<input type="checkbox" id="check-tenant" />
+								<span>I've verified I'm in the correct customer tenant</span>
+							</label>
+							<label class="final-item">
+								<input type="checkbox" id="check-mfa" />
+								<span>I've completed MFA authentication</span>
+							</label>
+							<label class="final-item">
+								<input type="checkbox" id="check-roles" />
+								<span>I have Global Admin or Global Reader role</span>
+							</label>
+							<label class="final-item">
+								<input type="checkbox" id="check-access" />
+								<span>I can access the required admin portals</span>
+							</label>
+							<label class="final-item">
+								<input type="checkbox" id="check-time" />
+								<span>I have sufficient time allocated for the assessment</span>
+							</label>
+							<label class="final-item">
+								<input type="checkbox" id="check-browser" />
+								<span>I'm using a supported browser (Edge, Chrome, Firefox)</span>
+							</label>
+						</div>
+
+						<div class="info-box success" id="ready-message" style="display: none;">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+								<path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+								<polyline points="22 4 12 14.01 9 11.01"/>
+							</svg>
+							<div>
+								<strong>All checks complete!</strong> You're ready to begin the security assessment.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="action-bar">
+				<button class="btn-secondary" onclick="window.location.href='/home'">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M19 12H5M12 19l-7-7 7-7"/>
+					</svg>
+					Back to Home
+				</button>
+				<button id="continue-btn" class="btn-primary" disabled onclick="window.location.href='/assessment-select'">
+					Continue to Assessment
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M5 12h14M12 5l7 7-7 7"/>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	main {
+		min-height: calc(100vh - 140px);
+		background: #f5f7fa;
+		padding: 2rem 1rem;
+	}
+
+	.container {
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	.header {
+		text-align: center;
+		margin-bottom: 3rem;
+	}
+
+	.header h1 {
+		font-size: 2.5rem;
+		color: var(--color-dark);
+		margin-bottom: 0.5rem;
+	}
+
+	.header p {
+		font-size: 1.125rem;
+		color: var(--color-gray);
+	}
+
+	.checklist-sections {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		margin-bottom: 3rem;
+	}
+
+	.checklist-section {
+		background: white;
+		border-radius: 12px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+		overflow: hidden;
+	}
+
+	.section-header {
+		background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		color: white;
+		padding: 1.5rem;
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.step-number {
+		width: 40px;
+		height: 40px;
+		background: rgba(255, 255, 255, 0.2);
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.5rem;
+		font-weight: bold;
+	}
+
+	.section-header h2 {
+		font-size: 1.5rem;
+		margin: 0;
+	}
+
+	.section-content {
+		padding: 2rem;
+	}
+
+	.info-box {
+		padding: 1rem;
+		border-radius: 8px;
+		margin-bottom: 1.5rem;
+		display: flex;
+		gap: 1rem;
+		align-items: flex-start;
+	}
+
+	.info-box.warning {
+		background: #fff3cd;
+		color: #856404;
+		border: 1px solid #ffeaa7;
+	}
+
+	.info-box.info {
+		background: #d1ecf1;
+		color: #0c5460;
+		border: 1px solid #bee5eb;
+	}
+
+	.info-box.success {
+		background: #d4edda;
+		color: #155724;
+		border: 1px solid #c3e6cb;
+	}
+
+	.info-box svg {
+		flex-shrink: 0;
+		margin-top: 2px;
+	}
+
+	h3 {
+		font-size: 1.25rem;
+		color: var(--color-dark);
+		margin-top: 1.5rem;
+		margin-bottom: 1rem;
+	}
+
+	ol, ul {
+		margin: 1rem 0;
+		padding-left: 1.5rem;
+		line-height: 1.8;
+	}
+
+	li {
+		margin-bottom: 0.5rem;
+	}
+
+	.sub-info {
+		font-size: 0.875rem;
+		color: var(--color-gray);
+		margin-top: 0.25rem;
+		font-style: italic;
+	}
+
+	.visual-guide {
+		background: #f8f9fa;
+		border: 2px dashed #dee2e6;
+		border-radius: 8px;
+		padding: 2rem;
+		text-align: center;
+		margin: 1.5rem 0;
+		min-height: 200px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #6c757d;
+		font-style: italic;
+	}
+
+	.role-cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		gap: 1rem;
+		margin: 1rem 0;
+	}
+
+	.role-card {
+		border: 1px solid #e0e0e0;
+		border-radius: 8px;
+		padding: 1.5rem;
+		background: #fafafa;
+		position: relative;
+	}
+
+	.role-card.recommended {
+		border-color: #4caf50;
+		background: #f1f8f4;
+	}
+
+	.role-card h4 {
+		font-size: 1.125rem;
+		margin-bottom: 0.5rem;
+		color: var(--color-dark);
+	}
+
+	.role-card p {
+		font-size: 0.875rem;
+		color: var(--color-gray);
+		margin: 0;
+	}
+
+	.badge {
+		position: absolute;
+		top: 0.5rem;
+		right: 0.5rem;
+		background: #2196f3;
+		color: white;
+		font-size: 0.75rem;
+		padding: 0.25rem 0.5rem;
+		border-radius: 4px;
+	}
+
+	.role-card.recommended .badge {
+		background: #4caf50;
+	}
+
+	.verification-steps {
+		margin-top: 1.5rem;
+	}
+
+	.verification-steps h4 {
+		font-size: 1.125rem;
+		color: var(--color-dark);
+		margin-top: 1.5rem;
+		margin-bottom: 0.75rem;
+	}
+
+	pre {
+		background: #1e1e1e;
+		color: #d4d4d4;
+		padding: 1rem;
+		border-radius: 8px;
+		overflow-x: auto;
+		margin: 1rem 0;
+		font-size: 0.875rem;
+	}
+
+	code {
+		font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+	}
+
+	.troubleshooting {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		margin-top: 1rem;
+	}
+
+	.issue {
+		background: #f8f9fa;
+		border-left: 4px solid #dc3545;
+		padding: 1rem;
+		border-radius: 4px;
+	}
+
+	.issue h4 {
+		font-size: 1rem;
+		margin-bottom: 0.5rem;
+		color: var(--color-dark);
+	}
+
+	.issue p {
+		font-size: 0.875rem;
+		color: var(--color-gray);
+		margin: 0;
+	}
+
+	.access-checklist {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		margin: 1rem 0;
+	}
+
+	.access-item {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding: 0.75rem;
+		border: 1px solid #e0e0e0;
+		border-radius: 8px;
+		background: #fafafa;
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+
+	.access-item:hover {
+		background: #f0f0f0;
+		border-color: #2196f3;
+	}
+
+	.access-item input[type="checkbox"] {
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+	}
+
+	.access-item a {
+		color: var(--color-primary);
+		text-decoration: none;
+		font-weight: 500;
+		flex: 1;
+	}
+
+	.access-item a:hover {
+		text-decoration: underline;
+	}
+
+	.access-item .url {
+		font-size: 0.875rem;
+		color: var(--color-gray);
+		font-family: monospace;
+	}
+
+	.purview-questions {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		margin-top: 1.5rem;
+	}
+
+	.question-group {
+		background: #f8f9fa;
+		padding: 1.5rem;
+		border-radius: 8px;
+	}
+
+	.question-group h3 {
+		font-size: 1.125rem;
+		margin-top: 0;
+		margin-bottom: 1rem;
+		color: var(--color-dark);
+	}
+
+	.question {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		margin-bottom: 0.75rem;
+		cursor: pointer;
+	}
+
+	.question input[type="checkbox"] {
+		width: 18px;
+		height: 18px;
+		cursor: pointer;
+	}
+
+	.text-input {
+		margin-bottom: 1rem;
+	}
+
+	.text-input label {
+		display: block;
+		font-size: 0.875rem;
+		color: var(--color-dark);
+		margin-bottom: 0.5rem;
+	}
+
+	.text-input input[type="text"] {
+		width: 100%;
+		padding: 0.5rem;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		font-size: 0.875rem;
+	}
+
+	.final-checklist {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		margin-top: 1rem;
+	}
+
+	.final-item {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 0.75rem;
+		border: 1px solid #e0e0e0;
+		border-radius: 8px;
+		background: #fafafa;
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+
+	.final-item:hover {
+		background: #f0f0f0;
+	}
+
+	.final-item input[type="checkbox"] {
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+	}
+
+	.final-item:has(input:checked) {
+		background: #e8f5e9;
+		border-color: #4caf50;
+	}
+
+	.action-bar {
+		background: white;
+		padding: 1.5rem;
+		border-radius: 12px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		position: sticky;
+		bottom: 1rem;
+	}
+
+	.btn-primary, .btn-secondary {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		border-radius: 8px;
+		font-size: 1rem;
+		font-weight: 500;
+		border: none;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		text-decoration: none;
+	}
+
+	.btn-primary {
+		background: var(--color-primary);
+		color: white;
+	}
+
+	.btn-primary:hover:not(:disabled) {
+		background: var(--color-primary-dark);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+	}
+
+	.btn-primary:disabled {
+		background: #ccc;
+		cursor: not-allowed;
+		opacity: 0.6;
+	}
+
+	.btn-secondary {
+		background: white;
+		color: var(--color-primary);
+		border: 1px solid var(--color-primary);
+	}
+
+	.btn-secondary:hover {
+		background: #e3f2fd;
+	}
+
+	/* Responsive design */
+	@media (max-width: 768px) {
+		.role-cards {
+			grid-template-columns: 1fr;
+		}
+
+		.action-bar {
+			flex-direction: column;
+			gap: 1rem;
+			position: relative;
+		}
+
+		.btn-primary, .btn-secondary {
+			width: 100%;
+			justify-content: center;
+		}
+	}
+</style>
+
+<script>
+	// Track final checklist completion
+	const finalChecks = document.querySelectorAll('.final-item input[type="checkbox"]');
+	const continueBtn = document.getElementById('continue-btn');
+	const readyMessage = document.getElementById('ready-message');
+
+	function checkAllComplete() {
+		const allChecked = Array.from(finalChecks).every(cb => cb.checked);
+		continueBtn.disabled = !allChecked;
+		readyMessage.style.display = allChecked ? 'flex' : 'none';
+	}
+
+	finalChecks.forEach(checkbox => {
+		checkbox.addEventListener('change', checkAllComplete);
+	});
+
+	// Auto-check tenant verification if customer name is known
+	const customerName = sessionStorage.getItem('customerName');
+	if (customerName) {
+		document.getElementById('tenant-name').textContent = customerName;
+	}
+
+	// Track access portal checks
+	const accessChecks = document.querySelectorAll('.access-item input[type="checkbox"]');
+	accessChecks.forEach(checkbox => {
+		checkbox.addEventListener('change', function() {
+			if (this.checked) {
+				this.parentElement.style.background = '#e8f5e9';
+				this.parentElement.style.borderColor = '#4caf50';
+			}
+		});
+	});
+
+	// Save Purview questionnaire responses
+	const purviewInputs = document.querySelectorAll('.purview-questions input');
+	purviewInputs.forEach(input => {
+		input.addEventListener('change', function() {
+			const purviewData = {};
+			document.querySelectorAll('.purview-questions input').forEach(inp => {
+				if (inp.type === 'checkbox') {
+					purviewData[inp.name] = purviewData[inp.name] || [];
+					if (inp.checked) purviewData[inp.name].push(inp.nextElementSibling.textContent);
+				} else {
+					purviewData[inp.previousElementSibling.textContent] = inp.value;
+				}
+			});
+			sessionStorage.setItem('purviewQuestionnaire', JSON.stringify(purviewData));
+		});
+	});
+</script>
