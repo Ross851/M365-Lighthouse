@@ -310,17 +310,17 @@ services:
             <div class="step-content">
               <h4>Configure Data Source</h4>
               <pre><code>// PowerReview InfluxDB integration
-import { InfluxDB, Point } from '@influxdata/influxdb-client';
+import &#123; InfluxDB, Point &#125; from '@influxdata/influxdb-client';
 
-const client = new InfluxDB({
+const client = new InfluxDB(&#123;
   url: 'http://localhost:8086',
   token: 'your-influxdb-token'
-});
+&#125;);
 
 const writeApi = client.getWriteApi('powerreview', 'security-metrics');
 
 // Send security metrics
-export async function sendSecurityMetrics(data) {
+export async function sendSecurityMetrics(data) &#123;
   const point = new Point('security_assessment')
     .tag('org_id', data.organizationId)
     .tag('region', data.region)
@@ -331,7 +331,7 @@ export async function sendSecurityMetrics(data) {
 
   await writeApi.writePoint(point);
   await writeApi.flush();
-}</code></pre>
+&#125;</code></pre>
             </div>
           </div>
 
@@ -863,27 +863,27 @@ docker run -d -p 3000:3000 \
       if (threatFeedPaused) return;
 
       const threats = [
-        {
+        &#123;
           type: 'CVE',
           severity: 'critical',
           title: 'CVE-2024-26167 - Microsoft Exchange Server RCE',
           source: 'CISA',
           time: new Date().toLocaleTimeString()
-        },
-        {
+        &#125;,
+        &#123;
           type: 'IOC',
           severity: 'high', 
           title: 'Malicious Office document detected',
           source: 'Abuse.ch',
           time: new Date().toLocaleTimeString()
-        },
-        {
+        &#125;,
+        &#123;
           type: 'Advisory',
           severity: 'medium',
           title: 'Microsoft Security Advisory MS24-001',
           source: 'MSRC',
           time: new Date().toLocaleTimeString()
-        }
+        &#125;
       ];
 
       const threat = threats[Math.floor(Math.random() * threats.length)];
@@ -896,15 +896,15 @@ docker run -d -p 3000:3000 \
     function addThreatToFeed(threat) {
       const container = document.getElementById('threatFeedContainer');
       const threatElement = document.createElement('div');
-      threatElement.className = `threat-item ${threat.severity}`;
+      threatElement.className = `threat-item $&#123;threat.severity&#125;`;
       threatElement.innerHTML = `
         <div class="threat-header">
-          <span class="threat-type">${threat.type}</span>
-          <span class="threat-severity ${threat.severity}">${threat.severity.toUpperCase()}</span>
-          <span class="threat-time">${threat.time}</span>
+          <span class="threat-type">$&#123;threat.type&#125;</span>
+          <span class="threat-severity $&#123;threat.severity&#125;">$&#123;threat.severity.toUpperCase()&#125;</span>
+          <span class="threat-time">$&#123;threat.time&#125;</span>
         </div>
-        <div class="threat-title">${threat.title}</div>
-        <div class="threat-source">Source: ${threat.source}</div>
+        <div class="threat-title">$&#123;threat.title&#125;</div>
+        <div class="threat-source">Source: $&#123;threat.source&#125;</div>
       `;
       
       container.insertBefore(threatElement, container.firstChild);
